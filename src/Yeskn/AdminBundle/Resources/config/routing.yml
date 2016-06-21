@@ -1,0 +1,3 @@
+yeskn_admin_homepage:
+    path:     /
+    defaults: { _controller: YesknAdminBundle:Default:index }

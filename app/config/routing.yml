@@ -1,3 +1,16 @@
+yeskn_common:
+    resource: "@YesknCommonBundle/Resources/config/routing.xml"
+    prefix:   /
+
+yeskn_admin:
+    resource: "@YesknAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+yeskn_blog:
+    resource: "@YesknBlogBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
