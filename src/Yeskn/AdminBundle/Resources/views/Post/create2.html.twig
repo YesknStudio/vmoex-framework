@@ -1,0 +1,181 @@
+{% extends '@YesknCommon/base.html.twig' %}
+
+{% block head_css_link %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/wangEditor/wangEditor.min.css') }}">
+    <style>
+        .wangEditor-txt{
+            height: 400px;
+        }
+    </style>
+{% endblock %}
+
+{% block page_wraper %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">创建新的文档</h3>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+            {{ form_start(form) }}
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-9">
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.excerpt) }}
+
+                        <div class="hidden">
+                            {{ form_row(form.content) }}
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label required" for="editor-trigger">内容</label>
+                            <div id="editor-trigger"><p></p></div>
+                            <textarea id="editor-trigger" style="display:none;">
+                            <p></p>
+                             </textarea>
+
+                        </div>
+
+                        <button type="submit" value="{{ 'submit' }}" class="btn btn-primary">提交</button>
+                        {{ form_widget(form.saveCraft, { label: '存草稿', attr: { class: 'btn btn-primary' } }) }}
+                        </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="">分类</label>
+                            <select name="select-category" id="select-category" class="form-control">
+                                {% for cat in categories %}
+                                    <option value="{{ cat.id }}">{{ cat.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                         <div class="form-group">
+                             <label for="">标签</label>
+                             <input name="input-tag" type="text" class="form-control" />
+                             <p class="hot-tags">
+                             {% for tag in tags %}
+                                 <a data-id="{{ tag.id }}" style="display: inline-block">{{ tag.name }}</a>
+                             {% endfor %}
+                             </p>
+                         </div>
+                        {{ form_row(form.isTop) }}
+                        {{ form_row(form.cover) }}
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+{% endblock %}
+
+{% block foot_js_link %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('lib/wangEditor/wangEditor.min.js') }}"></script>
+    <script type="text/javascript">
+        // 阻止输出log
+        wangEditor.config.printLog = false;
+
+        var editor = new wangEditor('editor-trigger');
+
+        // 上传图片
+        editor.config.uploadImgUrl = '/upload';
+        editor.config.uploadParams = {
+            // token1: 'abcde',
+            // token2: '12345'
+        };
+        editor.config.uploadHeaders = {
+            // 'Accept' : 'text/x-json'
+        }
+        // editor.config.uploadImgFileName = 'myFileName';
+
+        // 表情显示项
+        editor.config.emotionsShow = 'value';
+        editor.config.emotions = {
+            'default': {
+                title: '默认',
+                data: 'http://wangeditor.github.io/wangEditor/test/emotions.data'
+            },
+            'weibo': {
+                title: '微博表情',
+                data: [
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+                        value: '[草泥马]'
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+                        value: '[神马]'
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
+                        value: '[浮云]'
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
+                        value: '[给力]'
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
+                        value: '[围观]'
+                    },
+                    {
+                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
+                        value: '[威武]'
+                    }
+                ]
+            }
+        };
+
+        // 只粘贴纯文本
+        // editor.config.pasteText = true;
+
+        // 跨域上传
+        // editor.config.uploadImgUrl = 'http://localhost:8012/upload';
+
+        // 第三方上传
+        // editor.config.customUpload = true;
+
+        // editor.config.menus = [
+        //     'img',
+        //     'insertcode',
+        //     'eraser',
+        //     'fullscreen'
+        // ];
+
+        // onchange 事件
+        // editor.onchange = function () {
+        //     console.log(this.$txt.html());
+        // };
+
+        // 取消过滤js
+        // editor.config.jsFilter = false;
+
+        // 取消粘贴过来
+        // editor.config.pasteFilter = false;
+
+        // 设置 z-index
+        // editor.config.zindex = 20000;
+
+        // 语言
+        // editor.config.lang = wangEditor.langs['en'];
+
+        // 自定义菜单UI
+        // editor.UI.menus.bold = {
+        //     normal: '<button style="font-size:20px; margin-top:5px;">B</button>',
+        //     selected: '.selected'
+        // };
+        // editor.UI.menus.italic = {
+        //     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
+        //     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
+        // };
+        editor.create();
+    </script>
+    <script type="text/javascript">
+        $('form[name="post"]').submit(function(e){
+          //  e.preventDefault();
+            $('[name="post[content]"]').val(editor.$txt.html() );
+        });
+    </script>
+{% endblock %}

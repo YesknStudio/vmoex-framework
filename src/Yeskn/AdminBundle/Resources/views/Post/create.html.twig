@@ -1,0 +1,17 @@
+{% extends '@YesknAdmin/layout.html.twig' %}
+
+{% block main %}
+    <h1>{{ '创建新的文档' }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.excerpt) }}
+    {{ form_row(form.content) }}
+
+    <input type="submit" value="{{ '创建' }}" class="btn btn-primary" />
+
+    <a href="{{ path('yeskn_admin_default_index') }}" class="btn btn-link">
+        {{ '返回admin' }}
+    </a>
+    {{ form_end(form) }}
+{% endblock %}

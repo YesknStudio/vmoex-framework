@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Jake">
+    {% block title %}  <title>JetBlog Homepage</title> {% endblock %}
+    {% block head_css_link %}
+        <link rel="stylesheet" href="{{ asset('lib/bootstrap/dist/css/bootstrap.min.css') }}" >
+        <link rel="stylesheet" href="{{ asset('lib/metisMenu/dist/metisMenu.min.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/timeline.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}" >
+        <link rel="stylesheet" href="{{ asset('lib/morrisjs/morris.css') }}" >
+        <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/font-awesome.min.css') }}" >
+        <link rel="stylesheet" href="{{ asset('lib/wangEditor/wangEditor.min.css') }}" >
+        <link rel="stylesheet" href="{{ asset('lib/nprogress/nprogress.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/common.css') }}" >
+    {% endblock %}
+
+    {% block head_js_link %}
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    {% endblock %}
+</head>
+
+<body>
+<div class="container">
+
+    {% block navbar %}
+        {% include '@YesknBlog/nav.html.twig' %}
+    {% endblock %}
+
+    {% block page_wraper %}
+        <div class="" style="padding-top: 10px">
+            <div class="row">
+                <div class="col-lg-8" style="border-right: 1px solid #e7e7e7">
+                    {% block main %}
+                        {# 中心内容,此block需要被替换 #}
+                    {% endblock %}
+                </div>
+                {% block sidebar %}
+                    {% include '@YesknBlog/sidebar.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer %}
+        <div class="container footer">
+            <p class="copy" style="text-align: center;padding: 5px" data-original-title="powered by Yeskn">© 2016
+                Yeskn</p>
+        </div>
+    {% endblock %}
+</div>
+{% block foot_js_link %}
+    <script type="text/javascript" src="{{ asset('lib/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('lib/metisMenu/dist/metisMenu.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('lib/bootstrap/js/popover.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/sb-admin-2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('lib/nprogress/nprogress.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('lib/pjax/jquery.pjax.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('lib/wangEditor/wangEditor.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
+{% endblock %}
+</body>
+</html>

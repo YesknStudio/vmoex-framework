@@ -1,0 +1,176 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{{ path('yeskn_blog_homepage') }}">JetBlog</a>
+        <a style="float: left;height: 50px;padding: 15px;line-height: 25px" href="">专题</a>
+        <a style="float: left;height: 50px;padding: 15px;line-height: 25px" href="">精华</a>
+        <a style="float: left;height: 50px;padding: 15px;line-height: 25px" href="">干货</a>
+        <a style="float: left;height: 50px;padding: 15px;line-height: 25px" href="">关于</a>
+    </div>
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="nav-search hidden-xs hidden-sm">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search..." style="width: 200px">
+            </div>
+        </li>
+
+        {% if app.user %}
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+                                eleifend...
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+                                eleifend...
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                            </div>
+                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+                                eleifend...
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>Read All Messages</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-comment fa-fw"></i> New Comment
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                <span class="pull-right text-muted small">12 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-tasks fa-fw"></i> New Task
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>See All Alerts</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-alerts -->
+            </li>
+            <li class="dropdown user-dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <img src="https://static.yeskn.com/google-logo-20x20.jpg" alt="" width="25px" height="25px">
+                    <span>{{ app.user.nickname }}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a href="{{ path('yeskn_admin_default_index') }}">
+                            <i class="fa fa-user fa-fw"></i> 后台管理
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="{{ path('yeskn_user_setting_index') }}">
+                            <i class="fa fa-gear fa-fw"></i> 个人设置
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('yeskn_user_setting_index') }}">
+                            <i class="fa fa-star fa-fw"></i> 我的收藏
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ path('logout') }}">
+                            <i class="fa fa-sign-out fa-fw"></i> 退出
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path('yeskn_user_login') }}">登陆</a>
+            </li>
+            <li>
+                <a href="{{ path('user_registration') }}">注册</a>
+            </li>
+
+        {% endif %}
+    </ul>
+    <!-- /.navbar-top-links -->
+
+</nav>

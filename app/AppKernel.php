@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Yeskn\BlogBundle\YesknBlogBundle(),
             new Yeskn\AdminBundle\YesknAdminBundle(),
             new Yeskn\CommonBundle\YesknCommonBundle(),
+            new Yeskn\UserBundle\YesknUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

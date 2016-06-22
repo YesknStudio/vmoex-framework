@@ -1,9 +1,15 @@
+yeskn_user:
+    resource: "@YesknUserBundle/Controller"
+    type:     annotation
+    prefix:   /
+
 yeskn_common:
     resource: "@YesknCommonBundle/Resources/config/routing.xml"
     prefix:   /
 
 yeskn_admin:
-    resource: "@YesknAdminBundle/Resources/config/routing.yml"
+    resource: "@YesknAdminBundle/Controller"
+    type:     annotation
     prefix:   /
 
 yeskn_blog:
@@ -14,3 +20,6 @@ yeskn_blog:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+logout:
+    path: /logout

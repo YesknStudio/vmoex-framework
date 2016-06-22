@@ -1,0 +1,97 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Jake
+ * Date: 2016/6/22
+ * Time: 0:05
+ */
+
+namespace Yeskn\UserBundle\Security;
+
+
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+
+class TokenAuthenticator extends AbstractGuardAuthenticator
+{
+    private $em;
+
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    public function getCredentials(Request $request)
+    {
+        // TODO: Implement getCredentials() method.
+        if(!$token = $request->headers->get('X-AUTH-TOKEN')){
+            //no token ? return null and no methods will be called
+            return;
+        }
+        //what you return here will be passed to getUser() as $credentials
+        return array(
+            'token' => $token,
+        );
+    }
+
+    public function getUser($credentials, UserProviderInterface $userProvider)
+    {
+        // TODO: Implement getUser() method.
+        $apiKey = $credentials['token'];
+        //if null authentication will be failed
+        //if a user object ,checkCredentials() is called
+        return $this->em->getRepository('YesknBlogBundle:User')
+            ->findOneBy(array('apiKey' => $apiKey));
+    }
+
+    public function checkCredentials($credentials, UserInterface $user)
+    {
+        // check credentials - e.g. make sure the password is valid
+        // no credential check is needed in this case
+
+        // return true to cause authentication success
+        return true;
+
+    }
+
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    {
+        // on success, let the request continue
+        return null;
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+        $data = array(
+            'message' => strstr($exception->getMessageKey(),$exception->getMessageData())
+            // or to translate this message
+            // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
+        );
+        return new JsonResponse($data,403);
+
+    }
+
+    /**
+     * Called when authentication is needed, but it's not sent
+     * @inheritdoc
+     */
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        $data = array(
+            // you might translate this message
+            'message' => 'Authentication Required'
+        );
+        return new JsonResponse($data,401);
+    }
+
+    public function supportsRememberMe()
+    {
+        return false;
+    }
+}

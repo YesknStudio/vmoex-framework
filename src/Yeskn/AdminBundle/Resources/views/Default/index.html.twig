@@ -1,1 +1,10 @@
-Hello World!
+{% extends '@YesknCommon/base.html.twig' %}
+
+{% block foot_js_link %}
+    {{ parent() }}
+    <!-- Morris Charts JavaScript -->
+    <script src="/lib/raphael/raphael-min.js"></script>
+    <script src="/lib/morrisjs/morris.min.js"></script>
+    <script src="/js/morris-data.js"></script>
+
+{% endblock %}

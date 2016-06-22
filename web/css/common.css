@@ -1,0 +1,103 @@
+a{
+    color: #337ab7;
+}
+a:hover{
+    text-decoration: none;
+}
+h2{
+    font-size: 20px;
+}
+.dropdown-menu.dropdown-user{
+    margin-top: 0;
+}
+.hot-tags a{
+    padding: 4px 4px;
+    display: inline-block;
+    background: #dd4b39;
+    color: #fff;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+.hot-tags a:hover{
+    color:#dd4b39;
+    background: #fff;
+}
+.latest-posts ul{
+    padding-left: 15px;
+}
+.post-meta span{
+    padding-right: 10px;
+}
+article.main{
+    min-height: 155px;
+    border-bottom: 1px solid #e7e7e7;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+article> div > div.col-md-4 {
+    text-align: center;
+}
+article.main img{
+    max-height: 145px;
+    vertical-align: middle;
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+
+.container.footer{
+    border-top: 1px solid #e7e7e7;
+}
+.container.footer ul{
+    list-style-type: none;
+}
+.container.footer ul li{
+    float:  left;
+}
+.content{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.border-top{
+    border-top: 1px solid #e7e7e7;
+}
+.border-bottom{
+    border-bottom: 1px solid #e7e7e7;
+}
+.margin-top-10{
+    margin-top: 10px;
+}
+.float-left{
+    float: left;
+}
+.comments{
+    width: 95%;
+    margin-left: 10px;
+}
+div.comments > ul > li> span > img{
+    width: 50px;
+    height: 50px;
+}
+.fr{
+    float: right;
+    text-align: right;
+}
+.reply_content {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.cell {
+    padding: 10px;
+    font-size: 12px;
+    line-height: 120%;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+}
+.copy{
+    cursor: pointer;
+}

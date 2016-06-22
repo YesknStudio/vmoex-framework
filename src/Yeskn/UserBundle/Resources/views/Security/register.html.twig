@@ -1,0 +1,13 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}YesknUserBundle:Security:register{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Security:register page</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <input type="submit" value="Create"
+           class="btn btn-default pull-right" />
+    {{ form_end(form) }}
+{% endblock %}

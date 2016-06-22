@@ -1,1 +1,27 @@
-Hello World!
+<html>
+<head>
+    <title>hello,welcome to JetBlog!</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<h1>Hello World!</h1>
+{% if app.user %}
+    <p>your name is : {{ app.user.nickname }}</p>
+{% endif %}
+<p><a href="{{ path('logout') }}">退出</a></p>
+
+{% for post in posts %}
+<article>
+    <h2>{{ post.title }}</h2>
+    <p><span>作者：{{ post.author.nickname }}</span>,<span>发布时间：{{ post.createdAt|date("Y-m-d") }}</span></p>
+    <div class="">
+        {{ post.excerpt }}
+    </div>
+</article>
+
+{% else %}
+    <div class="well">{{ 'no post found' }}</div>
+{% endfor %}
+</body>
+
+</html>
