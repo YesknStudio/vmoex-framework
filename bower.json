@@ -1,0 +1,23 @@
+{
+  "name": "jet-blog",
+  "dependencies": {
+    "bootstrap": "*",
+    "flot":"*",
+    "pjax":"*",
+    "jquery":"*",
+    "nprogress":"*",
+    "wangEditor":"*",
+    "raphael":"*",
+    "morrisjs":"*",
+    "mocha":"*",
+    "metisMenu":"*",
+    "hoderjs":"*",
+    "font-awesome":"*",
+    "flot.tooltip":"*",
+    "flot":"*",
+    "datatables-responsive":"*",
+    "datatables-plugins":"*",
+    "datatables":"*",
+    "bootstrap-social":"*"
+  }
+}
