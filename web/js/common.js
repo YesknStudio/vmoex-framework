@@ -44,4 +44,8 @@ $(document).ready(function () {
             //  alert("error!");
         });
     }
+
+    $('.content-body').on('click', 'li.disabled a', function (e) {
+        e.preventDefault();
+    });
 });

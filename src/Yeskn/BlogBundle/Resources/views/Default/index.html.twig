@@ -55,7 +55,7 @@
 
          {% for p in 1..pageData['allPage'] %}
              {% if p == pageData['currentPage'] %}
-                 <li class="active"><a href="#">{{ p }}</a></li>
+                 <li class="active"><a href="javascript:">{{ p }}</a></li>
              {% else %}
                  <li><a href="{{ path('blog_index_paginated',{'page':p}) }}" data-pjax>{{ p }}</a></li>
              {% endif %}

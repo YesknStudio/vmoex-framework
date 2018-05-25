@@ -21,29 +21,32 @@ class DefaultController extends Controller
      * @Method("GET")
      * @param $page integer
      * @Cache(smaxage="10")
+     * @throws
      * @return Response
      */
     public function indexAction($page)
     {
         $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->findBy(
-            array( ),
+            array(),
             array('id' => 'DESC'),
             10,
             10*($page-1)
         );
+
         $count = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
             ->createQueryBuilder('a')
             ->select('COUNT(a)')
             ->where('a.isDeleted = false')
             ->getQuery()
-            ->getScalarResult();
-        $pageData['allPage'] = ceil(count($count[0][1])/10)+1;
+            ->getSingleScalarResult();
+
+        $pageData['allPage'] = ceil($count/10);
         $pageData['currentPage'] = $page;
 
         return $this->render('YesknBlogBundle:Default:index.html.twig', array(
-                'posts' => $posts,
-                'pageData' => $pageData
-            ));
+            'posts' => $posts,
+            'pageData' => $pageData
+        ));
     }
 
     /**
@@ -54,6 +57,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->find($id);
+        if (empty($post)) {
+            return $this->render('@YesknBlog/error.html.twig', [
+                'message' => '文章不存在'
+            ]);
+        }
         $post->setViews(intval($post->getViews())+1);
         $em->flush();
         return $this->render('YesknBlogBundle:Default:show.html.twig', array(

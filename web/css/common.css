@@ -117,3 +117,12 @@ div.comments > ul > li> span > img{
 .footer.container {
     margin-top: 100px;
 }
+
+.content-body {
+    padding-top: 10px
+}
+
+.content-row {
+    margin-right: 0 !important;;
+    margin-left: 0 !important;
+}
