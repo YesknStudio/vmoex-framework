@@ -2,8 +2,7 @@
 
 namespace Yeskn\BlogBundle\Repository;
 use Doctrine\ORM\EntityRepository;
-use Yeskn\BlogBundle\Entity\User;
-use Doctrine\ORM\Query;
+use Yeskn\BlogBundle\Entity\Post;
 
 /**
  * PostRepository
@@ -14,7 +13,7 @@ use Doctrine\ORM\Query;
 class PostRepository extends EntityRepository
 {
     /**
-     * @return Query
+     * @return Post[]
      */
     public function queryLatest()
     {

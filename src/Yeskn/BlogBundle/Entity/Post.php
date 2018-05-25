@@ -66,6 +66,12 @@ class Post
 
     /**
      * @var
+     * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Comment", mappedBy="post")
+     */
+    private $comments;
+
+    /**
+     * @var
      * @ORM\Column(name="views",type="integer")
      */
     private $views = 9;
@@ -108,6 +114,16 @@ class Post
      * @ORM\Column(name="status", type="string", length=10)
      */
     private $status;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
 
 
     /**
@@ -311,14 +327,6 @@ class Post
     {
         return $this->status;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tags = new ArrayCollection();
-        $this->categories = new ArrayCollection();
-    }
 
     /**
      * Add tag
@@ -386,6 +394,37 @@ class Post
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Add Comment
+     *
+     * @param Comment $comment
+     * @return $this
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove Comment
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->categories->removeElement($comment);
+    }
+
+    /**
+     * Get Comments
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 
     /**
