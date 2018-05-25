@@ -4,16 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="JetBlog Admin Panel">
+    <meta name="author" content="Jake">
     {% block title %}  <title>JetBlog Admin</title> {% endblock %}
     {% block head_css_link %}
-        <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/lib/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-        <link href="/css/timeline.css" rel="stylesheet">
-        <link href="/css/sb-admin-2.css" rel="stylesheet">
-        <link href="/lib/morrisjs/morris.css" rel="stylesheet">
-        <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ asset('lib/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('lib/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('lib/metisMenu/dist/metisMenu.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/timeline.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}">
+        <link rel="stylesheet" href="{{ asset('lib/morrisjs/morris.css') }}">
+        <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     {% endblock %}
 
@@ -25,13 +26,11 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     {% endblock %}
-
 </head>
 
 <body>
 
 <div id="wrapper">
-
     {% block navbar %}
         {% include '@YesknAdmin/nav.html.twig' %}
     {% endblock %}
@@ -45,10 +44,10 @@
 </div>
 
 {% block foot_js_link %}
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/lib/metisMenu/dist/metisMenu.min.js"></script>
-    <script src="/js/sb-admin-2.js"></script>
+    <script src="{{ asset('lib/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('lib/metisMenu/dist/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('js/sb-admin-2.js') }}"></script>
 {% endblock %}
 </body>
 </html>

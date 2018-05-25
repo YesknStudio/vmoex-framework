@@ -3,8 +3,8 @@
 {% block foot_js_link %}
     {{ parent() }}
     <!-- Morris Charts JavaScript -->
-    <script src="/lib/raphael/raphael-min.js"></script>
-    <script src="/lib/morrisjs/morris.min.js"></script>
-    <script src="/js/morris-data.js"></script>
+    <script src="{{ asset('lib/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('lib/morrisjs/morris.min.js') }}"></script>
+    {#<script src="{{ asset('js/morris-data.js') }}"></script>#}
 
 {% endblock %}

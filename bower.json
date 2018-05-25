@@ -3,8 +3,8 @@
   "dependencies": {
     "bootstrap": "*",
     "flot":"*",
-    "pjax":"*",
     "jquery":"*",
+    "jquery-pjax":"*",
     "nprogress":"*",
     "wangEditor":"v2.1.23",
     "raphael":"*",
