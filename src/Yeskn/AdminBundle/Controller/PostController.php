@@ -130,7 +130,11 @@ class PostController extends AdminCommonController
      */
     public function listAction()
     {
+        /**
+         * @var Post[] $posts
+         */
         $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->findAll();
+
         return $this->render('@YesknAdmin/Post/index.html.twig', array(
             'posts' => $posts
         ));

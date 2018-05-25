@@ -101,3 +101,19 @@ div.comments > ul > li> span > img{
 .copy{
     cursor: pointer;
 }
+
+.login-panel {
+    margin-top: 0  !important;
+}
+
+#loginForm {
+    margin: 20px 0;
+}
+
+.content-main {
+    background: #fff;
+}
+
+.footer.container {
+    margin-top: 100px;
+}

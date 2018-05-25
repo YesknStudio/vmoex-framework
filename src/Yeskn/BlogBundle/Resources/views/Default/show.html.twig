@@ -2,15 +2,12 @@
 
 {% block head_css_link %}
     {{ parent() }}
-
     <style>
         .wangEditor-txt {
             height: 150px;
         }
     </style>
-
 {% endblock %}
-
 
 {% block main %}
     <div class="content border-bottom">
@@ -31,7 +28,7 @@
             {{ post.content|raw }}
         </div>
         <div style="position: relative;bottom: 0;">
-            {% if post.tags is not null %}
+            {% if post.tags is not empty %}
                 <span><i class="fa  fa-tags"></i>
                     {% for tag in post.tags %}
                         {{ tag.name }}
@@ -42,88 +39,33 @@
     </div>
     <div class="comments">
         <h3 class="border-bottom">评论</h3>
-
-        <ul class="chat">
-            <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="https://static.yeskn.com/avatar-cat.jpg" alt="User Avatar"
-                                             class="img-circle">
-                                    </span>
-                <div class="chat-body clearfix">
-                    <div class="header">
-                        <strong class="primary-font">Jack Sparrow</strong>
-                        <small class="pull-right text-muted">
-                            <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
-                        </small>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis
-                        ullamcorper ligula sodales.
-                    </p>
-                </div>
-            </li>
-            <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="https://static.yeskn.com/avatar-cat.jpg" alt="User Avatar"
-                                             class="img-circle">
-                                    </span>
-                <div class="chat-body clearfix">
-                    <div class="header">
-                        <small class=" text-muted">
-                            <i class="fa fa-clock-o fa-fw"></i> 13 mins ago
-                        </small>
-                        <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis
-                        ullamcorper ligula sodales.
-                    </p>
-                </div>
-            </li>
-            <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="https://static.yeskn.com/avatar-cat.jpg" alt="User Avatar"
-                                             class="img-circle">
-                                    </span>
-                <div class="chat-body clearfix">
-                    <div class="header">
-                        <strong class="primary-font">Jack Sparrow</strong>
-                        <small class="pull-right text-muted">
-                            <i class="fa fa-clock-o fa-fw"></i> 14 mins ago
-                        </small>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis
-                        ullamcorper ligula sodales.
-                    </p>
-                </div>
-            </li>
-            <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="https://static.yeskn.com/avatar-cat.jpg" alt="User Avatar"
-                                             class="img-circle">
-                                    </span>
-                <div class="chat-body clearfix">
-                    <div class="header">
-                        <small class=" text-muted">
-                            <i class="fa fa-clock-o fa-fw"></i> 15 mins ago
-                        </small>
-                        <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis
-                        ullamcorper ligula sodales.
-                    </p>
-                </div>
-            </li>
-        </ul>
+        {% if post.comments is not empty %}
+            <ul class="chat">
+                {% for comment in post.comments %}
+                    <li class="left clearfix">
+                <span class="chat-img pull-left">
+                    <img src="https://static.yeskn.com/avatar-cat.jpg" alt="User Avatar" class="img-circle">
+                </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">{{ comment.user.id }}</strong>
+                                <small class="pull-right text-muted">
+                                    <i class="fa fa-clock-o fa-fw"></i> {{ comment.content|date('Y-m-d H:i:s') }}
+                                </small>
+                            </div>
+                            <p>{{ comment.content }}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>暂无评论，快来抢沙发吧~~</p>
+        {% endif %}
 
         <div class="form-group" style="margin-top: 20px">
             <label class="control-label required" for="editor-trigger">添加新的评论</label>
-            <div id="editor-trigger"><p></p></div>
-                <textarea id="editor-trigger" style="display:none;">
-                <p></p>
-                 </textarea>
+            <div id="editor-trigger"></div>
+            <textarea id="editor-trigger" style="display:none;"></textarea>
         </div>
         <div class="form-group">
             {% if app.user %}
@@ -134,126 +76,123 @@
 
         </div>
     </div>
-{% endblock %}
 
-
-{% block foot_js_link %}
-    {{ parent() }}
     <script type="text/javascript">
-        // 阻止输出log
-        wangEditor.config.printLog = false;
+      $(function () {
+          // 阻止输出log
+          wangEditor.config.printLog = false;
 
-        var editor = new wangEditor('editor-trigger');
+          var editor = new wangEditor('editor-trigger');
 
-        editor.config.menus = [
-            'source',
-            '|',     // '|' 是菜单组的分割线
-            'bold',
-            'underline',
-            'italic',
-            'strikethrough',
-            'eraser',
-            'forecolor',
-            'bgcolor'
-        ];
+          editor.config.menus = [
+              'source',
+              '|',     // '|' 是菜单组的分割线
+              'bold',
+              'underline',
+              'italic',
+              'strikethrough',
+              'eraser',
+              'forecolor',
+              'bgcolor'
+          ];
 
-        // 上传图片
-        editor.config.uploadImgUrl = '/upload';
-        editor.config.uploadParams = {
-            // token1: 'abcde',
-            // token2: '12345'
-        };
-        editor.config.uploadHeaders = {
-            // 'Accept' : 'text/x-json'
-        }
-        // editor.config.uploadImgFileName = 'myFileName';
+          // 上传图片
+          editor.config.uploadImgUrl = '/upload';
+          editor.config.uploadParams = {
+              // token1: 'abcde',
+              // token2: '12345'
+          };
+          editor.config.uploadHeaders = {
+              // 'Accept' : 'text/x-json'
+          }
+          // editor.config.uploadImgFileName = 'myFileName';
 
-        // 表情显示项
-        editor.config.emotionsShow = 'value';
-        editor.config.emotions = {
-            'default': {
-                title: '默认',
-                data: 'http://wangeditor.github.io/wangEditor/test/emotions.data'
-            },
-            'weibo': {
-                title: '微博表情',
-                data: [
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
-                        value: '[草泥马]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
-                        value: '[神马]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
-                        value: '[浮云]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
-                        value: '[给力]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
-                        value: '[围观]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
-                        value: '[威武]'
-                    }
-                ]
-            }
-        };
+          // 表情显示项
+          editor.config.emotionsShow = 'value';
+          editor.config.emotions = {
+              'default': {
+                  title: '默认',
+                  data: 'http://wangeditor.github.io/wangEditor/test/emotions.data'
+              },
+              'weibo': {
+                  title: '微博表情',
+                  data: [
+                      {
+                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
+                          value: '[草泥马]'
+                      },
+                      {
+                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
+                          value: '[神马]'
+                      },
+                      {
+                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
+                          value: '[浮云]'
+                      },
+                      {
+                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
+                          value: '[给力]'
+                      },
+                      {
+                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
+                          value: '[围观]'
+                      },
+                      {
+                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
+                          value: '[威武]'
+                      }
+                  ]
+              }
+          };
 
-        // 只粘贴纯文本
-        // editor.config.pasteText = true;
+          // 只粘贴纯文本
+          // editor.config.pasteText = true;
 
-        // 跨域上传
-        // editor.config.uploadImgUrl = 'http://localhost:8012/upload';
+          // 跨域上传
+          // editor.config.uploadImgUrl = 'http://localhost:8012/upload';
 
-        // 第三方上传
-        // editor.config.customUpload = true;
+          // 第三方上传
+          // editor.config.customUpload = true;
 
-        // editor.config.menus = [
-        //     'img',
-        //     'insertcode',
-        //     'eraser',
-        //     'fullscreen'
-        // ];
+          // editor.config.menus = [
+          //     'img',
+          //     'insertcode',
+          //     'eraser',
+          //     'fullscreen'
+          // ];
 
-        // onchange 事件
-        // editor.onchange = function () {
-        //     console.log(this.$txt.html());
-        // };
+          // onchange 事件
+          // editor.onchange = function () {
+          //     console.log(this.$txt.html());
+          // };
 
-        // 取消过滤js
-        // editor.config.jsFilter = false;
+          // 取消过滤js
+          // editor.config.jsFilter = false;
 
-        // 取消粘贴过来
-        // editor.config.pasteFilter = false;
+          // 取消粘贴过来
+          // editor.config.pasteFilter = false;
 
-        // 设置 z-index
-        // editor.config.zindex = 20000;
+          // 设置 z-index
+          // editor.config.zindex = 20000;
 
-        // 语言
-        // editor.config.lang = wangEditor.langs['en'];
+          // 语言
+          // editor.config.lang = wangEditor.langs['en'];
 
-        // 自定义菜单UI
-        // editor.UI.menus.bold = {
-        //     normal: '<button style="font-size:20px; margin-top:5px;">B</button>',
-        //     selected: '.selected'
-        // };
-        // editor.UI.menus.italic = {
-        //     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
-        //     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
-        // };
-        editor.create();
-    </script>
-    <script type="text/javascript">
-        $('form[name="post"]').submit(function (e) {
-            //  e.preventDefault();
-            $('[name="post[content]"]').val(editor.$txt.html());
-        });
+          // 自定义菜单UI
+          // editor.UI.menus.bold = {
+          //     normal: '<button style="font-size:20px; margin-top:5px;">B</button>',
+          //     selected: '.selected'
+          // };
+          // editor.UI.menus.italic = {
+          //     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
+          //     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
+          // };
+          editor.create();
+
+          $('form[name="post"]').submit(function (e) {
+              //  e.preventDefault();
+              $('[name="post[content]"]').val(editor.$txt.html());
+          });
+      })
     </script>
 {% endblock %}

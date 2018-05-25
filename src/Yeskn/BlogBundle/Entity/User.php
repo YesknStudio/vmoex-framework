@@ -103,6 +103,11 @@ class User implements UserInterface
      */
     private $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Comment", mappedBy="userId")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -438,5 +443,21 @@ class User implements UserInterface
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
     }
 }

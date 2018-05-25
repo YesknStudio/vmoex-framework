@@ -1,26 +1,77 @@
-{% extends "::base.html.twig" %}
+{% extends '@YesknBlog/base.html.twig' %}
 
-{% block title %}YesknUserBundle:Security:login{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    登录到JetBlog
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            {% if error %}
+                                <p style="color: red">{{ error.message|trans(error.messageData, 'security') }}</p>
+                            {% endif %}
+                            <form id="loginForm" action="{{ path('yeskn_login_check') }}" method="post" role="form">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="帐号或者邮箱" id="username"
+                                               name="_username" value="{{ last_username }}" autofocus>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="密码" type="password" id="password"
+                                               name="_password" value="">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="remember" type="checkbox" value="Remember Me"> 记住登录状态
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="_target_path" value="/admin"/>
+                                    <!-- Change this to a button or input when using this as a form -->
+                                    <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
+                                </fieldset>
+                            </form>
+                        </div>
 
-{% block body %}
-<h1>Welcome to the Security:login page</h1>
-    {% if error %}
-        <div>{{ error.message|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-    <form action="{{ path('yeskn_login_check') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
-
-        {#
-            If you want to control the URL the user
-            is redirected to on success (more details below)
-            <input type="hidden" name="_target_path" value="/account" />
-        #}
-        <input type="hidden" name="_target_path" value="/" />
-        <button type="submit">login</button>
-    </form>
+{% block sidebar %}
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                第三方登录
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu slidedown">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-refresh fa-fw"></i> 换一批
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-check-circle fa-fw"></i> 标签云
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body hot-tags">
+               <button class="btn btn-default btn-success">微信登录</button>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
 {% endblock %}

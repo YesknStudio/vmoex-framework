@@ -123,7 +123,7 @@
                 <i class="fa fa-user fa-fw"></i>  功能 <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i>我的资料</a>
+                <li><a href="{{ path('yeskn_user_setting_index') }}"><i class="fa fa-user fa-fw"></i>我的资料</a>
                 </li>
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i>系统设置</a>
                 </li>
@@ -179,10 +179,10 @@
                     <a href="#"><i class="fa  fa-photo"></i> 相册管理<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="{{ path('yeskn_admin_post_list') }}"> 图片列表</a>
+                            <a href="javascript:"> 图片列表</a>
                         </li>
                         <li>
-                            <a href="{{ path('yeskn_admin_post_create') }}"><i class="fa fa-upload"></i> 上传新图片</a>
+                            <a href="#"><i class="fa fa-upload"></i> 上传新图片</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

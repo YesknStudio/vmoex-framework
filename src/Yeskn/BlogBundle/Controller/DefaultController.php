@@ -40,7 +40,7 @@ class DefaultController extends Controller
         $pageData['allPage'] = ceil(count($count[0][1])/10)+1;
         $pageData['currentPage'] = $page;
 
-        return $this->render('YesknBlogBundle:Default:index2.html.twig', array(
+        return $this->render('YesknBlogBundle:Default:index.html.twig', array(
                 'posts' => $posts,
                 'pageData' => $pageData
             ));

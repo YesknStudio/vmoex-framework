@@ -1,23 +1,20 @@
-(function () {
-    var dropDown = $('li.dropdown.user-dropdown');
-    dropDown.mouseover(function () {
+$(document).ready(function () {
+    let dropDown = $('li.dropdown.user-dropdown');
+    dropDown.click(function () {
         $(this).addClass('open');
     });
-    dropDown.mouseout(function () {
+    dropDown.click(function () {
         dropDown.removeClass('open');
-    })
-})();
-$(document).ready(function () {
+    });
 
     $('.copy').popover({
         trigger: 'hover',
         placement: 'top'
     });
 
-
     if ($.support.pjax) {
-        $(document).pjax('a[data-pjax]', 'body', {        // 本页面的ID
-            fragment: 'body',                          //来源也的ID
+        $(document).pjax('a[data-pjax]', '.content-body', {        // 本页面的ID
+            fragment: '.content-body',                          //来源也的ID
             timeout: 200000000,
             show: 'fade',
             cache: true,  //是否使用缓存
