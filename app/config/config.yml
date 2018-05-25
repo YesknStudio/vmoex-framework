@@ -8,6 +8,14 @@ imports:
 parameters:
     locale: en
 
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+        uglifyjs2:
+            bin: /usr/local/bin/uglifyjs
+
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let dropDown = $('li.dropdown.user-dropdown');
+    var dropDown = $('li.dropdown.user-dropdown');
     dropDown.click(function () {
         $(this).addClass('open');
     });
