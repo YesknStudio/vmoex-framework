@@ -36,11 +36,20 @@ class GlobalValue extends \Twig_Extension
         return $posts;
     }
 
+    public function hotComments()
+    {
+        $comments = $this->em->getRepository('YesknBlogBundle:Comment')
+            ->findBy([], [], 5);
+
+        return $comments;
+    }
+
     public function getFunctions()
     {
         return array(
             new \Twig_SimpleFunction('hotPosts',array($this,'hotPosts'),array('is_safe' => 'html'),array('needs_environment' => true)),
-            new \Twig_SimpleFunction('hotTags',array($this,'hotTags'),array('is_safe' => 'html'),array('needs_environment' => true))
+            new \Twig_SimpleFunction('hotTags',array($this,'hotTags'),array('is_safe' => 'html'),array('needs_environment' => true)),
+            new \Twig_SimpleFunction('hotComments',array($this,'hotComments'),array('is_safe' => 'html'),array('needs_environment' => true))
         );
     }
 

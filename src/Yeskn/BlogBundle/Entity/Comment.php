@@ -50,7 +50,7 @@ class Comment
     /**
      * @var User
      *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="Yeskn\BlogBundle\Entity\User",inversedBy="comments")
      */
     private $user;

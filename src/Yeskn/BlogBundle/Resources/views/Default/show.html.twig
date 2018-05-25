@@ -44,13 +44,13 @@
                 {% for comment in post.comments %}
                     <li class="left clearfix">
                 <span class="chat-img pull-left">
-                    <img src="https://static.yeskn.com/avatar-cat.jpg" alt="User Avatar" class="img-circle">
+                    <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img-circle">
                 </span>
                         <div class="chat-body clearfix">
                             <div class="header">
-                                <strong class="primary-font">{{ comment.user.id }}</strong>
+                                <strong class="primary-font">{{ comment.user.nickname }}</strong>
                                 <small class="pull-right text-muted">
-                                    <i class="fa fa-clock-o fa-fw"></i> {{ comment.content|date('Y-m-d H:i:s') }}
+                                    <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|date('Y-m-d H:i:s') }}
                                 </small>
                             </div>
                             <p>{{ comment.content }}</p>
