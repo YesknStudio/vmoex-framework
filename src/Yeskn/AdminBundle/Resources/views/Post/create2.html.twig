@@ -2,7 +2,7 @@
 
 {% block head_css_link %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('lib/wangEditor/wangEditor.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/wangEditor/dist/css/wangEditor.min.css') }}">
     <style>
         .wangEditor-txt{
             height: 400px;
@@ -72,7 +72,7 @@
 {% block foot_js_link %}
     {{ parent() }}
 
-    <script type="text/javascript" src="{{ asset('lib/wangEditor/wangEditor.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('lib/wangEditor/dist/js/wangEditor.min.js') }}"></script>
     <script type="text/javascript">
         // 阻止输出log
         wangEditor.config.printLog = false;
