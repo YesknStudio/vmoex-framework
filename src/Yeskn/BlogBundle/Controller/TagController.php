@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Class tagController
  * @package Yeskn\BlogBundle\Controller
  */
-class tagController extends Controller
+class TagController extends Controller
 {
     /**
      * @Route("/tag",name="tag_homepage")

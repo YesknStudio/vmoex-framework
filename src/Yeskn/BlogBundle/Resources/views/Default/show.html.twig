@@ -13,7 +13,7 @@
     <div class="content border-bottom">
         <h2>{{ post.title }}</h2>
         <p class="post-meta">
-            <span><i class="fa fa-user"></i> {{ post.author.nickname }}</span>
+            <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
             <span><i class="fa fa-clock-o"></i> {{ post.createdAt|date("Y-m-d") }}</span>
             <span><i class="fa fa-eye"></i> {{ post.views }}</span>
             {% if post.categories is not null %}

@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  * @Route("/category")
  * @package Yeskn\BlogBundle\Controller
  */
-class categoryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * @Route("/" , name="category_homepage")
