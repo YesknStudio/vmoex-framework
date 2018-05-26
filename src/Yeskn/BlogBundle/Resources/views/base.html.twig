@@ -18,9 +18,8 @@
             'lib/wangEditor/dist/css/wangEditor.min.css'
             'lib/nprogress/nprogress.css'
             'css/common.css'
-            filter='cssrewrite'
-        %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
+            filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
     {% endblock %}
 
@@ -28,7 +27,7 @@
         {% javascripts
             'lib/jquery/dist/jquery.min.js'
             filter='uglifyjs2' %}
-        <script src="{{ asset_url }}"></script>
+            <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -44,8 +43,8 @@
         {% include '@YesknBlog/nav.html.twig' %}
     {% endblock %}
 
-    {% block page_wraper %}
-        <div class="content-body">
+    <div class="content-body">
+        {% block page_wraper %}
             <div class="row content-row">
                 <div class="col-lg-8 content-main">
                     {% block main %}{% endblock %}
@@ -54,12 +53,14 @@
                     {% include '@YesknBlog/sidebar.html.twig' %}
                 {% endblock %}
             </div>
-        </div>
-    {% endblock %}
+
+        {% endblock %}
+    </div>
 
     {% block footer %}
         <div class="container footer">
-            <p class="copy" style="text-align: center;padding: 5px" data-original-title="powered by Yeskn">© 2016 Yeskn</p>
+            <p class="copy" style="text-align: center;padding: 5px" data-original-title="powered by Yeskn">© 2016
+                Yeskn</p>
         </div>
     {% endblock %}
 </div>
