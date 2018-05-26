@@ -68,14 +68,14 @@ class User implements UserInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registerAt", type="datetimetz")
+     * @ORM\Column(name="registerAt", type="datetime")
      */
     private $registerAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="loginAt", type="datetimetz")
+     * @ORM\Column(name="loginAt", type="datetime")
      */
     private $loginAt;
 

@@ -85,14 +85,14 @@ class Post
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetimetz")
+     * @ORM\Column(name="createdAt", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedAt", type="datetimetz", nullable=true)
+     * @ORM\Column(name="updatedAt", type="datetime", nullable=true)
      */
     private $updatedAt;
 
