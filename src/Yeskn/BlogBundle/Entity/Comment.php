@@ -29,7 +29,7 @@ class Comment
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="string", length=20)
+     * @ORM\Column(name="content", type="string", length=800)
      */
     private $content;
 
