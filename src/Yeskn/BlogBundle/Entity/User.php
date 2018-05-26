@@ -343,6 +343,10 @@ class User implements UserInterface
      */
     public function getAvatar()
     {
+        if (empty($this->avatar)) {
+            $identicon = new \Identicon\Identicon();
+            $this->avatar = $identicon->getImageDataUri($this->email);
+        }
         return $this->avatar;
     }
 

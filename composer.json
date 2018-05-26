@@ -29,7 +29,8 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "symfony/assetic-bundle": "^2.8",
-        "symfony/web-server-bundle": "^3.4"
+        "symfony/web-server-bundle": "^3.4",
+        "yzalis/identicon": "^1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
