@@ -124,4 +124,14 @@ class DefaultController extends Controller
             'users' => $userResults
         ]);
     }
+
+    /**
+     * @Route("/about", name="about")
+     *
+     * @return Response
+     */
+    public function aboutAction(Request $request)
+    {
+        return $this->render('@YesknBlog/about.html.twig');
+    }
 }
