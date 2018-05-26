@@ -17,6 +17,8 @@ security:
         secured_area:
             pattern: ^/
             anonymous: true
+            logout_on_user_change: true
+            provider: my_db_provider
             logout:
                 # The route name the user can go to in order to logout
                 path: /logout
@@ -40,6 +42,7 @@ security:
             pattern:    ^/
             anonymous: ~
             logout: ~
+            logout_on_user_change: true
             # activate different ways to authenticate
 
             http_basic: ~

@@ -104,7 +104,7 @@ class User implements UserInterface
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Comment", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Comment", mappedBy="user")
      */
     private $comments;
 

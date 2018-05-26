@@ -13,8 +13,15 @@ use Doctrine\ORM\EntityManager;
 
 class GlobalValue extends \Twig_Extension
 {
+    /**
+     * @var EntityManager
+     */
     private $em;
 
+    /**
+     * GlobalValue constructor.
+     * @param EntityManager $em
+     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -51,10 +58,5 @@ class GlobalValue extends \Twig_Extension
             new \Twig_SimpleFunction('hotTags',array($this,'hotTags'),array('is_safe' => 'html'),array('needs_environment' => true)),
             new \Twig_SimpleFunction('hotComments',array($this,'hotComments'),array('is_safe' => 'html'),array('needs_environment' => true))
         );
-    }
-
-    public function getName()
-    {
-        return 'app.extension';
     }
 }

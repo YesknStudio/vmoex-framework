@@ -50,10 +50,10 @@
                     {% block main %}{% endblock %}
                 </div>
                 {% block sidebar %}
-                    {% include '@YesknBlog/sidebar.html.twig' with {sidebar_head: block('sidebar_head')} %}
+                    {% set block_loaded = block('sidebar_head') is defined  %}
+                    {% include '@YesknBlog/sidebar.html.twig' with {sidebar_head: block_loaded  ? block('sidebar_head')  : ''} %}
                 {% endblock %}
             </div>
-
         {% endblock %}
     </div>
 
