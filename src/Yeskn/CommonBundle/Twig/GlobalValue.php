@@ -39,7 +39,7 @@ class GlobalValue extends \Twig_Extension
     public function hotComments()
     {
         $comments = $this->em->getRepository('YesknBlogBundle:Comment')
-            ->findBy([], [], 5);
+            ->findBy([], ['id' => 'DESC'], 5);
 
         return $comments;
     }

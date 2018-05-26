@@ -53,7 +53,7 @@
                                     <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|date('Y-m-d H:i:s') }}
                                 </small>
                             </div>
-                            <p>{{ comment.content }}</p>
+                            <p>{{ comment.content|raw }}</p>
                         </div>
                     </li>
                 {% endfor %}
@@ -69,7 +69,7 @@
         </div>
         <div class="form-group">
             {% if app.user %}
-                <button type="button" class="btn btn-info btn-sm">添加</button>
+                <button type="button" id="addCommentToPost" class="btn btn-info btn-sm">添加</button>
             {% else %}
                 <button type="button" class="btn btn-info btn-sm disabled">请先登录</button>
             {% endif %}
@@ -188,6 +188,21 @@
           //     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
           // };
           editor.create();
+
+          $('.content-body').off('click', '#addCommentToPost');
+          $('.content-body').on('click', '#addCommentToPost', function () {
+              var content = editor.$txt.html();
+              $.ajax({
+                  method: 'POST',
+                  url: '{{ path("add_comment_to_post", {postId: post.id}) }}',
+                  data: {
+                      content: content
+                  },
+                  success: function () {
+                      alert('发布成功');
+                  }
+              })
+          });
 
           $('form[name="post"]').submit(function (e) {
               //  e.preventDefault();

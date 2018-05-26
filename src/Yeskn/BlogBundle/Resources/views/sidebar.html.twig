@@ -65,7 +65,7 @@
                                 <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|date('Y-m-d H:i:s') }}
                             </small>
                         </div>
-                        <p>{{ comment.content }}</p>
+                        <p>{{ comment.content|raw }}</p>
                     </div>
                 </li>
             {% endfor %}

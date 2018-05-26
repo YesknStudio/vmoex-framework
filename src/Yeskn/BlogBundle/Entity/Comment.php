@@ -43,7 +43,7 @@ class Comment
     /**
      * @var bool
      *
-     * @ORM\Column(name="deleted_at", type="datetimetz")
+     * @ORM\Column(name="deleted_at", type="datetimetz", nullable=true)
      */
     private $deletedAt;
 

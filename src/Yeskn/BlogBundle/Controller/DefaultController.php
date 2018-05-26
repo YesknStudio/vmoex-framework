@@ -7,9 +7,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yeskn\BlogBundle\Entity\Comment;
 use Yeskn\BlogBundle\Entity\Post;
 use Yeskn\BlogBundle\Entity\User;
 
@@ -51,7 +53,7 @@ class DefaultController extends Controller
 
     /**
      * @inheritdoc
-     * @Route("/post/{id}" , name="yeskn_blog_show")
+     * @Route("/post/{id}", name="yeskn_blog_show")
      */
     public function postShowAction($id)
     {
@@ -67,6 +69,36 @@ class DefaultController extends Controller
         return $this->render('YesknBlogBundle:Default:show.html.twig', array(
             'post' => $post
         ));
+    }
+
+    /**
+     * @Route("/post/{postId}/comment/add", name="add_comment_to_post")
+     *
+     * @param $request
+     * @param $postId
+     * @return JsonResponse
+     */
+    public function addCommentToPostAction(Request $request, $postId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->find($postId);
+        if (empty($post)) {
+            return new JsonResponse(['err' => '文章不存在']);
+        }
+
+        $comment = new Comment();
+
+        $comment->setContent($request->get('content'));
+        $comment->setCreatedAt(new \DateTime());
+        $comment->setPost($post);
+        $comment->setUser($this->getUser());
+        $comment->setReplyTo(0);
+
+        $em->persist($comment);
+
+        $em->flush();
+
+        return new JsonResponse(['ret' => 1]);
     }
 
     /**
