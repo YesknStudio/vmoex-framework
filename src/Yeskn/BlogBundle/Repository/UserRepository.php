@@ -12,15 +12,35 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository implements UserLoaderInterface
 {
+    /**
+     * @param string $username
+     * @return mixed|null|\Symfony\Component\Security\Core\User\UserInterface
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function loadUserByUsername($username)
     {
-        //die($username);
         return $this->createQueryBuilder('u')
             ->where('u.username = :username OR u.email = :email')
             ->setParameter('username',$username)
             ->setParameter('email',$username)
             ->getQuery()
             ->getOneOrNullResult();
-        // TODO: Implement loadUserByUsername() method.
+    }
+
+    /**
+     * @param $email
+     * @param $username
+     * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function checkEmailAndUsername($email, $username)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->where('p.email = :email')->setParameter('email', $email)
+            ->orWhere('p.username = :username')->setParameter('username', $username)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

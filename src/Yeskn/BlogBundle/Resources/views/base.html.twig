@@ -50,7 +50,7 @@
                     {% block main %}{% endblock %}
                 </div>
                 {% block sidebar %}
-                    {% include '@YesknBlog/sidebar.html.twig' %}
+                    {% include '@YesknBlog/sidebar.html.twig' with {sidebar_head: block('sidebar_head')} %}
                 {% endblock %}
             </div>
 

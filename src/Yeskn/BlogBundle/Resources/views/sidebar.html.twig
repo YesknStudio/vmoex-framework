@@ -1,4 +1,7 @@
 <div class="col-lg-4">
+    {% if sidebar_head is not empty %}
+        {{ sidebar_head|raw }}
+    {% endif %}
     <div class="panel panel-default">
         <div class="panel-heading">
             标签云
@@ -21,15 +24,12 @@
                 </ul>
             </div>
         </div>
-        <!-- /.panel-heading -->
         <div class="panel-body hot-tags">
             {% for tag in hotTags() %}
                 <a href="">{{ tag.name }}</a>
             {% endfor %}
         </div>
-        <!-- /.panel-body -->
     </div>
-
     <div class="panel panel-default">
         <div class="panel-heading">
             最新发布
@@ -45,7 +45,6 @@
         </div>
 
     </div>
-
     <div class="panel panel-default">
         <div class="panel-heading">
             最新评论

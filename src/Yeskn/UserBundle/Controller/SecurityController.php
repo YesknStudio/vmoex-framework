@@ -2,6 +2,7 @@
 
 namespace Yeskn\UserBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -54,17 +55,26 @@ class SecurityController extends Controller
     /**
      * @Route("/register", name="user_registration")
      * @param $request Request
-     * @return RedirectResponse
+     * @throws
+     * @return RedirectResponse|Response
      */
-    public function reg2Action(Request $request)
+    public function regAction(Request $request)
     {
         // 1) build the form
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+        $em = $this->getDoctrine()->getManager();
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $check = $em->getRepository('YesknBlogBundle:User')
+                ->checkEmailAndUsername($user->getEmail(), $user->getUsername());
+            if ($check) {
+                return $this->redirectToRoute('user_registration', [
+                    'error' => '用户名或者邮箱已经注册'
+                ]);
+            }
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
@@ -74,7 +84,7 @@ class SecurityController extends Controller
             $user->setType('user');
             $user->setApiKey(md5(uniqid()));
             // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
+
             $em->persist($user);
             $em->flush();
 

@@ -1,8 +1,17 @@
 {% extends '@YesknBlog/base.html.twig' %}
 
+{% block head_css_link %}
+    {{ parent() }}
+    <style>
+        .content-main {
+            background: #fff;
+        }
+    </style>
+{% endblock %}
+
 {% block main %}
-     {% for post in posts %}
-         <article class="main" style="position: relative">
+    {% for post in posts %}
+        <article class="main" style="position: relative">
             <div class="row">
                 <div class="col-md-8" >
                     <span class="item-title">
@@ -15,9 +24,9 @@
                         <span><i class="fa fa-commenting-o"></i> {{ post.comments.count }}</span>
                         {% if post.categories is not null %}
                             <span><i class="fa  fa-folder-o"></i>
-                            {% for cat in post.categories %}
-                                 {{ cat.name }}
-                            {% endfor %}
+                                {% for cat in post.categories %}
+                                    {{ cat.name }}
+                                {% endfor %}
                                 </span>
                         {% endif %}
                     </p>
@@ -41,33 +50,33 @@
                 </div>
 
             </div>
-         </article>
-     {% else %}
-         <div class="well">{{ '暂时没有任何文档！' }}</div>
-     {% endfor %}
-     <ul class="pagination">
-         {% if pageData['currentPage']-1 <= 0 %}
-         <li class="disabled">
-             <a href="#">&laquo;</a>
-         </li>
-         {% else %}
-             <li >
-                 <a href="{{ path('blog_index_paginated',{'page':pageData['currentPage']-1}) }}" data-pjax>&laquo;</a>
-             </li>
-         {% endif %}
+        </article>
+    {% else %}
+        <div class="well">{{ '暂时没有任何文档！' }}</div>
+    {% endfor %}
+    <ul class="pagination">
+        {% if pageData['currentPage']-1 <= 0 %}
+            <li class="disabled">
+                <a href="#">&laquo;</a>
+            </li>
+        {% else %}
+            <li >
+                <a href="{{ path('blog_index_paginated',{'page':pageData['currentPage']-1}) }}" data-pjax>&laquo;</a>
+            </li>
+        {% endif %}
 
-         {% for p in 1..pageData['allPage'] %}
-             {% if p == pageData['currentPage'] %}
-                 <li class="active"><a href="javascript:">{{ p }}</a></li>
-             {% else %}
-                 <li><a href="{{ path('blog_index_paginated',{'page':p}) }}" data-pjax>{{ p }}</a></li>
-             {% endif %}
+        {% for p in 1..pageData['allPage'] %}
+            {% if p == pageData['currentPage'] %}
+                <li class="active"><a href="javascript:">{{ p }}</a></li>
+            {% else %}
+                <li><a href="{{ path('blog_index_paginated',{'page':p}) }}" data-pjax>{{ p }}</a></li>
+            {% endif %}
 
-         {% endfor %}
-         <li {% if pageData['currentPage']+1 > pageData['allPage'] %} class="disabled" {% endif %}>
-             <a href="{{ path('blog_index_paginated',{'page':pageData['currentPage']+1}) }}" data-pjax>&raquo;
-             </a>
-         </li>
-     </ul>
+        {% endfor %}
+        <li {% if pageData['currentPage']+1 > pageData['allPage'] %} class="disabled" {% endif %}>
+            <a href="{{ path('blog_index_paginated',{'page':pageData['currentPage']+1}) }}" data-pjax>&raquo;
+            </a>
+        </li>
+    </ul>
  {% endblock %}
 

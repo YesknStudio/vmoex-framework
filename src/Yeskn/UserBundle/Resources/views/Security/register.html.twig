@@ -1,13 +1,33 @@
-{% extends "::base.html.twig" %}
+{% extends "@YesknBlog/base.html.twig" %}
 
-{% block title %}YesknUserBundle:Security:register{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    注册JetBlog
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            {% if error is defined and error is not null %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    {{ error }}
+                                </div>
+                            {% endif %}
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Security:register page</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-
-    <input type="submit" value="Create"
-           class="btn btn-default pull-right" />
-    {{ form_end(form) }}
+{% block sidebar %}
+    {% include '@YesknBlog/login-sidebar.html.twig' %}
 {% endblock %}

@@ -2,7 +2,7 @@
 namespace Yeskn\BlogBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -15,15 +15,16 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('username', TextType::class)
+            ->add('email', EmailType::class, array('label' => '邮箱'))
+            ->add('username', TextType::class, array('label' => '用户名'))
             ->add('password', RepeatedType::class, array(
                     'type' => PasswordType::class,
-                    'first_options'  => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Repeat Password'),
+                    'first_options'  => array('label' => '密码'),
+                    'second_options' => array('label' => '确认密码'),
                 )
             )
-            ->add('nickname',TextType::class)
+            ->add('nickname',TextType::class, array('label' => '昵称'))
+            ->add('submit', SubmitType::class, array('label' => '注册'))
         ;
     }
 
