@@ -1,3 +1,6 @@
+body {
+    background: url("/img/zhMoegirl18summer.jpg") no-repeat top left #f6f6f6;
+}
 a{
     color: #737373;
 }
@@ -130,12 +133,17 @@ div.comments > ul > li> span > img{
 
 .content-main {
     margin-bottom: 20px;
+    opacity: 0.9;
 }
 
 .item-tag {
     font-size: small;
     color: #666666;
     font-style: italic;
+}
+
+nav.navbar-static-top {
+    opacity: 0.9;
 }
 .nav-item {
     float: left;
