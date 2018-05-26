@@ -2,13 +2,11 @@
 
 namespace Yeskn\BlogBundle\Controller;
 
-use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Comment;
@@ -102,97 +100,28 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/test")
+     *
+     * @Route("/search")
+     * @param Request $request
+     * @return Response
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function testAction()
+    public function searchAction(Request $request)
     {
-        $post = new Post();
-        $post->setTitle('Hello,welcome to symfony!');
-        $post->setAuthor(1);
-        $post->setExcerpt('follow me and you will enjoy it !');
-        $post->setContent($post->getExcerpt());
-        $post->setCreatedAt(new \DateTime());
-        $post->setIsDeleted(false);
-        $post->setStatus('published');
+        $s = $request->get('s');
+        $c = $request->get('c');
 
         $em = $this->getDoctrine()->getManager();
 
-        $em->persist($post);
-        $em->flush();
+        $postResults = $em->getRepository('YesknBlogBundle:Post')->queryPosts($s, $c);
 
-        return new Response('saved new post with id ' . $post->getId());
-    }
+        $userResults = $em->getRepository('YesknBlogBundle:User')->queryUser($s, $c);
 
-    /**
-     * @Route("/test/show/{postId}")
-     * @param $postId integer
-     * @throws \Exception
-     */
-    public function showTestAction($postId)
-    {
-        $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
-            ->find($postId);
-        if(!$post){
-            throw $this->createNotFoundException(
-                'No product found for id' . $postId
-            );
-        }
-    }
-
-
-
-    /**
-     * @Route("/test/reg")
-     */
-    public function regTestAction()
-    {
-        $user = new User();
-        $user->setUsername('Jake');
-        $plainPassword = '123456';
-        $user->setPassword(
-            $this->container->get('security.password_encoder')
-                ->encodePassword($user,$plainPassword)
-        );
-        $user->setNickname('杰斯');
-        $user->setEmail('singviy@gmail.com');
-        $user->setRegisterAt(new \DateTime());
-        $user->setLoginAt($user->getRegisterAt());
-        $user->setType('admin');
-        $user->setApiKey('this is a api key');
-
-        $em =  $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
-        return new Response('add new user with userId ' . $user->getId());
-    }
-
-    /**
-     * @Route("/create/test")
-     */
-    public function createTestAction()
-    {
-        $user = $this->getUser();
-        $post = new Post();
-        $post->setTitle('Centos下Yum安装PHP5.5,5.6,7.0');
-        $post->setAuthor(1);
-        $post->setExcerpt('');
-        $post->setContent($post->getExcerpt());
-        $post->setCreatedAt(new \DateTime());
-        $post->setIsDeleted(false);
-        $post->setStatus('published');
-        $post->setAuthor($user);
-
-        $em = $this->getDoctrine()->getManager();
-
-        $em->persist($post);
-        $em->flush();
-
-        return new Response(
-            ' and new category with id: '.$post->getId()
-        );
-
-
-
-
+        return $this->render('@YesknBlog/search.html.twig', [
+            'word' => $s,
+            'posts' => $postResults,
+            'users' => $userResults
+        ]);
     }
 }

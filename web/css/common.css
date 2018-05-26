@@ -33,6 +33,8 @@ article.main{
 }
 article span.item-title {
     font-size: 18px;
+    display: inline-block;
+    padding: 10px 0;
 }
 article> div > div.col-md-4 {
     text-align: center;
@@ -40,7 +42,7 @@ article> div > div.col-md-4 {
 article.main img{
     max-height: 145px;
     vertical-align: middle;
-    border-radius: 4px;
+    border-radius: 2px;
     max-width: 100%;
 }
 
@@ -120,4 +122,18 @@ div.comments > ul > li> span > img{
 .content-row {
     margin-right: 0 !important;;
     margin-left: 0 !important;
+}
+
+#search-content {
+    width: 200px
+}
+
+.content-main {
+    margin-bottom: 20px;
+}
+
+.item-tag {
+    font-size: small;
+    color: #666666;
+    font-style: italic;
 }

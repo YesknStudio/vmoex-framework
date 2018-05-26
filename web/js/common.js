@@ -27,25 +27,33 @@ $(document).ready(function () {
             NProgress.start();
         });
         $(document).on('pjax:send', function () { //pjax链接点击后显示加载动画
-            // alert('sended');
         });
 
         $(document).on('pjax:success', function (data, status, xhr, options) {
-            //  alert('succeed');
             $('title').text(data.relatedTarget.innerText + ' - JetBlog');
 
         });
         $(document).on('pjax:complete', function () {
             NProgress.done();
-            //alert('complete');
         });
 
         $(document).on('pjax:error', function () {
-            //  alert("error!");
         });
     }
 
     $('.content-body').on('click', 'li.disabled a', function (e) {
         e.preventDefault();
     });
+
+    // search
+    $(document).on('keyup', '#search-content', function (e) {
+        if (e.keyCode === 13) {
+            var word = $('#search-content').val();
+            if (word.length === 0) {
+                alert('搜索内容不能为空');
+                return ;
+            }
+            $.pjax({url: '/search?s='+word, container: '.content-body'})
+        }
+    })
 });

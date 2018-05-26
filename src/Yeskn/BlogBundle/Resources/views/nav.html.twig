@@ -9,14 +9,14 @@
     <ul class="nav navbar-top-links navbar-right">
         <li class="nav-search hidden-xs hidden-sm">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search..." style="width: 200px">
+                <input type="text" id="search-content" class="form-control" placeholder="Search...">
             </div>
         </li>
 
         {% if app.user %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-envelope fa-fw"></i>  私信 <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-envelope fa-fw"></i> 私信 <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-messages">
                     <li>
@@ -66,7 +66,7 @@
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell fa-fw"></i>  通知 <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-bell fa-fw"></i> 通知 <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-alerts">
                     <li>
@@ -130,12 +130,17 @@
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a href="{{ path('yeskn_admin_default_index') }}">
+                                <i class="fa fa-user fa-fw"></i> 后台管理
+                            </a>
+                        </li>
+                    {% endif %}
                     <li>
-                        <a href="{{ path('yeskn_admin_default_index') }}">
-                            <i class="fa fa-user fa-fw"></i> 后台管理
+                        <a href="{{ path('user_home', {username: app.user.username}) }}" data-pjax>
+                            <i class="fa fa-gear fa-fw"></i> 我的主页
                         </a>
                     </li>
-                    {% endif %}
                     <li>
                         <a href="{{ path('yeskn_user_setting_index') }}" data-pjax>
                             <i class="fa fa-gear fa-fw"></i> 个人设置

@@ -1,24 +1,22 @@
 {% extends '@YesknBlog/base.html.twig' %}
 
-{% block head_css_link %}
-    {{ parent() }}
+{% block main %}
     <style>
         .content-main {
             background: #fff;
         }
     </style>
-{% endblock %}
-
-{% block main %}
     {% for post in posts %}
         <article class="main" style="position: relative">
             <div class="row">
-                <div class="col-md-8" >
+                {% set col = post.cover ? "col-md-8" : "col-md-12" %}
+                <div class="{{ col }}">
                     <span class="item-title">
                         <a data-pjax href="{{ path('yeskn_blog_show' , {'id' : post.id}) }}">{{ post.title }}</a>
                     </span>
                     <p class="post-meta">
-                        <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
+                        <span><i class="fa fa-user"></i> <a data-pjax
+                                                            href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
                         <span><i class="fa fa-clock-o"></i> {{ post.createdAt|date("Y-m-d") }}</span>
                         <span><i class="fa fa-eye"></i> {{ post.views }}</span>
                         <span><i class="fa fa-commenting-o"></i> {{ post.comments.count }}</span>
@@ -30,26 +28,26 @@
                                 </span>
                         {% endif %}
                     </p>
-                    <div class="">
-                        {{ post.excerpt|length > 78 ? post.excerpt|slice(0, 78) ~ '...' : post.excerpt  }}
+                    <div>
+                        {{ post.excerpt|length > 78 ? post.excerpt|slice(0, 78) ~ '...' : post.excerpt }}
                     </div>
-                    {#<div style="position: absolute;bottom: -20px;">
-                        {% if post.tags is not null %}
-                            <span><i class="fa  fa-tags"></i>
-                                {% for tag in post.tags %}
-                                    {{ tag.name }}
-                                {% endfor %}
-                                </span>
-                        {% endif %}
-                    </div>#}
                 </div>
-                <div class="col-md-4">
-                    {% if post.cover %}
+                {% if post.cover %}
+                    <div class="col-md-4">
                         <img src="{{ post.cover }}" alt="" height="auto" width="auto"/>
-                    {% endif %}
-                </div>
-
+                    </div>
+                {% endif %}
             </div>
+            {% if post.tags is not empty %}
+                <div style="position: relative;bottom:-10px">
+                    <p>
+                        <i class="fa  fa-tags item-tag"></i>
+                        {% for tag in post.tags %}
+                           <span class="item-tag"> {{ tag.name }} </span>
+                        {% endfor %}
+                    </p>
+                </div>
+            {% endif %}
         </article>
     {% else %}
         <div class="well">{{ '暂时没有任何文档！' }}</div>
@@ -60,7 +58,7 @@
                 <a href="#">&laquo;</a>
             </li>
         {% else %}
-            <li >
+            <li>
                 <a href="{{ path('blog_index_paginated',{'page':pageData['currentPage']-1}) }}" data-pjax>&laquo;</a>
             </li>
         {% endif %}
@@ -78,5 +76,5 @@
             </a>
         </li>
     </ul>
- {% endblock %}
+{% endblock %}
 

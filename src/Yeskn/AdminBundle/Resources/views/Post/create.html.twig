@@ -74,10 +74,11 @@
 
     <script type="text/javascript" src="{{ asset('lib/wangEditor/dist/js/wangEditor.min.js') }}"></script>
     <script type="text/javascript">
-        // 阻止输出log
-        wangEditor.config.printLog = false;
-
         var editor = new wangEditor('editor-trigger');
+
+        editor.config.printLog = false;
+
+        editor.config.
 
         // 上传图片
         editor.config.uploadImgUrl = '/upload';
