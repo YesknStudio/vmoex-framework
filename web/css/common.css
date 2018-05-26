@@ -4,9 +4,6 @@ a{
 a:hover{
     text-decoration: none;
 }
-h2{
-    font-size: 20px;
-}
 .dropdown-menu.dropdown-user{
     margin-top: 0;
 }
