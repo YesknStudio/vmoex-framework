@@ -9,8 +9,7 @@
     {% for post in posts %}
         <article class="main" style="position: relative">
             <div class="row">
-                {% set col = post.cover ? "col-md-8" : "col-md-12" %}
-                <div class="{{ col }}">
+                <div class="col-md-12">
                     <span class="item-title">
                         <a data-pjax href="{{ path('yeskn_blog_show' , {'id' : post.id}) }}">{{ post.title }}</a>
                     </span>
@@ -32,11 +31,6 @@
                         {{ post.excerpt|length > 78 ? post.excerpt|slice(0, 78) ~ '...' : post.excerpt }}
                     </div>
                 </div>
-                {% if post.cover %}
-                    <div class="col-md-4">
-                        <img src="{{ post.cover }}" alt="" height="auto" width="auto"/>
-                    </div>
-                {% endif %}
             </div>
             {% if post.tags is not empty %}
                 <div style="position: relative;bottom:-10px">

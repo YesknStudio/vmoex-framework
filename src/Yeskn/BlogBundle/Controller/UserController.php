@@ -28,7 +28,7 @@ class UserController extends Controller
         }
 
         return $this->render('@YesknBlog/user/user_home.html.twig', [
-            'username' => $user->getNickname()
+            'user' => $user
         ]);
     }
 }

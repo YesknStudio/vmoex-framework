@@ -21,8 +21,8 @@
                             {% if posts[0] %}
                                 <ul>
                                     {% for post in posts[0] %}
-                                        <li>
-                                            {{ post.title }}
+                                        <li >
+                                            <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}">{{ post.title }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>

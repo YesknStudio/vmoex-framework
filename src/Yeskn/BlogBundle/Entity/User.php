@@ -89,6 +89,13 @@ class User implements UserInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="remark", type="string", length=255, nullable=true)
+     */
+    private $remark;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="type", type="string", length=10)
      */
     private $type;
@@ -337,6 +344,22 @@ class User implements UserInterface
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRemark()
+    {
+        return $this->remark;
+    }
+
+    /**
+     * @param string $remark
+     */
+    public function setRemark($remark)
+    {
+        $this->remark = $remark;
     }
 
     /**

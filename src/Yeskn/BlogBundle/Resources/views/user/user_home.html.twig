@@ -3,12 +3,39 @@
 {% block main %}
     <div class="row">
         <div class="col-lg-12">
+            <div class="panel-body" style="background: #fff;margin: 10px 0;">
+                <ul class="chat">
+                    <li class="left clearfix user-meta">
+                          <span class="chat-img pull-left">
+                        <img src="{{ user.avatar }}" alt="User Avatar" class="img-circle" width="50" height="50">
+                    </span>
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font"><a href="{{ path('user_home', {username: user.username}) }}" data-pjax>{{ user.nickname }}</a></strong>
+                                <small class="pull-right text-muted">
+                                    <i class="fa fa-clock-o fa-fw"></i> {{ user.registerAt|date('Y-m-d H:i:s') }}
+                                </small>
+                            </div>
+                            <p>{{ user.remark|raw }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ username }}的个人主页
+                    {{ user.nickname }}发布的文章
                 </div>
                 <div class="panel-body">
-                    您好，这里是{{ username }}的个人主页
+                    最近没有发布任何文章。
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ user.nickname }}的回复
+                </div>
+                <div class="panel-body">
+                    最近没有发布任何回复。
                 </div>
             </div>
         </div>
