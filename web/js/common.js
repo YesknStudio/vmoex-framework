@@ -43,8 +43,11 @@ $(document).ready(function () {
         $(document).on('pjax:success', function (data, status, xhr, options) {
             console.log(data);
             if (data.relatedTarget) {
-                $('title').text(data.relatedTarget.innerText + ' - JetBlog');
-
+                if ($.trim(data.relatedTarget.innerText) === 'Vmoex') {
+                    $('title').text('Vmoex - 打造最美好的二次元社区');
+                } else {
+                    $('title').text(data.relatedTarget.innerText + '- Vmoex');
+                }
             }
         });
         $(document).on('pjax:complete', function () {
