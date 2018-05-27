@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Jake">
-    {% block title %}  <title>JetBlog Homepage</title> {% endblock %}
+    {% block title %}  <title>Vmoex - 努力打造最美好的二次元社区</title> {% endblock %}
     {% block head_css_link %}
-        <link rel="stylesheet" href="{{ asset('lib-man/live2d/css/live2d.css') }}">
         {% stylesheets
             'lib/bootstrap/dist/css/bootstrap.min.css'
             'lib/metisMenu/dist/metisMenu.min.css'
@@ -20,6 +19,7 @@
             'lib/nprogress/nprogress.css'
             'css/common.css'
             'lib-man/bootoast/css/bootoast.css'
+            'lib-man/live2d/css/live2d.css'
             filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -137,8 +137,6 @@
     var message_Path = '/lib-man/live2d/';//资源目录，如果目录不对请更改
     var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
 </script>
-<script type="text/javascript" src="{{ asset('lib-man/live2d/js/live2d.js') }}"></script>
-<script type="text/javascript" src="{{ asset('lib-man/live2d/js/message.js') }}"></script>
 
 {% block foot_js_link %}
     {% javascripts
@@ -151,6 +149,8 @@
         'lib/wangEditor/dist/js/wangEditor.min.js'
         'lib-man/bootoast/js/bootoast.js'
         'js/common.js'
+        'lib-man/live2d/js/live2d.js'
+        'lib-man/live2d/js/message.js'
         filter='uglifyjs2' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

@@ -17,12 +17,12 @@ use Yeskn\BlogBundle\Entity\Chat;
 class ChatController extends Controller
 {
     /**
-     * @Route("/bind-chat", name="bind_chat")
+     * @Route("/blind-chat", name="bind_chat")
      */
     public function bindChatAction()
     {
         $chats = $this->getDoctrine()->getRepository('YesknBlogBundle:Chat')
-            ->getLatestChat(15);
+            ->getLatestChat(100);
         return $this->render('@YesknBlog/chat.html.twig', [
             'chats' => $chats
         ]);
