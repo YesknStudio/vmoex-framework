@@ -121,6 +121,11 @@ class User implements UserInterface
     private $chats;
 
     /**
+     * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Active", mappedBy="user")
+     */
+    private $actives;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Yeskn\BlogBundle\Entity\User", mappedBy="following")
      */
     private $followers;
@@ -776,5 +781,39 @@ class User implements UserInterface
     public function getReceivedMessages()
     {
         return $this->receivedMessages;
+    }
+
+    /**
+     * Add active
+     *
+     * @param \Yeskn\BlogBundle\Entity\Active $active
+     *
+     * @return User
+     */
+    public function addActive(\Yeskn\BlogBundle\Entity\Active $active)
+    {
+        $this->actives[] = $active;
+
+        return $this;
+    }
+
+    /**
+     * Remove active
+     *
+     * @param \Yeskn\BlogBundle\Entity\Active $active
+     */
+    public function removeActive(\Yeskn\BlogBundle\Entity\Active $active)
+    {
+        $this->actives->removeElement($active);
+    }
+
+    /**
+     * Get actives
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActives()
+    {
+        return $this->actives;
     }
 }
