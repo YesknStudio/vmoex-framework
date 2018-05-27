@@ -1,8 +1,8 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <a class="navbar-brand" href="{{ path('yeskn_blog_homepage') }}" data-pjax>Vmoex</a>
-        <a class="nav-item" href="" data-pjax>TopClick</a>
-        <a class="nav-item" href="" data-pjax>GalGame</a>
+        <a class="nav-item" href="{{ path('top_click') }}" data-pjax>TopClick</a>
+        <a class="nav-item" href="{{ path('gal_game') }}" data-pjax>GalGame</a>
         <a class="nav-item" href="{{ path('bind_chat') }}" data-pjax>瞎聊</a>
         <a class="nav-item" href="{{ path('about') }}" data-pjax>关于</a>
     </div>
@@ -55,43 +55,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3个新的粉丝
-                                <span class="pull-right text-muted small">12分钟前</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> 消息已发送
-                                <span class="pull-right text-muted small">4分钟前</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-tasks fa-fw"></i> 新的任务
-                                <span class="pull-right text-muted small">4分钟前</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> 服务器重启
-                                <span class="pull-right text-muted small">4分钟前</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
+
                     <li>
                         <a data-pjax class="text-center" href="{{ path('my_notices') }}">
                             <strong>查看所有通知</strong>

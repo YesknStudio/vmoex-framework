@@ -40,6 +40,12 @@ article span.item-title {
     display: inline-block;
     padding: 10px 0;
 }
+
+article span.item-small-title {
+    font-size: 16px;
+    display: inline-block;
+}
+
 article> div > div.col-md-4 {
     text-align: center;
 }
@@ -220,4 +226,19 @@ ul.messages li {
 .post-info {
     margin-left: 0;
     padding-left: 0;
+}
+
+.home-name {
+    font-size: 18px;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.home-article-main {
+    margin-top: 0 !important;
+}
+
+.home-bq {
+    font-size: 14px;
+    padding-bottom: 0;
 }

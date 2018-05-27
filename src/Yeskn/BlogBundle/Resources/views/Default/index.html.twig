@@ -7,6 +7,7 @@
                 background: #fff;
             }
         </style>
+        {% if posts is not empty %}
         {% for post in posts %}
             <article class="main" style="position: relative">
                 <div class="row">
@@ -46,9 +47,10 @@
                     {#</div>#}
                 {#{% endif %}#}
             </article>
-        {% else %}
-            <div class="well">{{ '暂时没有任何文档！' }}</div>
         {% endfor %}
+        {% else %}
+        <div class="well">{{ '暂时没有任何文档！' }}</div>
+        {% endif %}
         <ul class="pagination">
             {% if pageData['currentPage']-1 <= 0 %}
                 <li class="disabled">

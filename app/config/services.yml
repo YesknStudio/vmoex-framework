@@ -13,3 +13,8 @@ services:
             $em: "@doctrine.orm.entity_manager"
         tags:
             - { name: twig.extension }
+
+#    Yeskn\BlogBundle\EventListener\RequestListener:
+#        arguments: ['@service_container']
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.controller }

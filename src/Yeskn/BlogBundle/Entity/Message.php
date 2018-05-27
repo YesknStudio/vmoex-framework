@@ -34,7 +34,7 @@ class Message
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="Yeskn\BlogBundle\Entity\User",inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="Yeskn\BlogBundle\Entity\User",inversedBy="receivedMessages")
      * @ORM\JoinColumn(name="receiver_id" , referencedColumnName="id")
      */
     private $receiver;

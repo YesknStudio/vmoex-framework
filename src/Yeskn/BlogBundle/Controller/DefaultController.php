@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,9 +86,13 @@ class DefaultController extends Controller
             return new JsonResponse(['err' => '文章不存在']);
         }
 
+        $content = $request->get('content');
+
+        $content = strip_tags($content, '<p><br><a><strong><span>');
+
         $comment = new Comment();
 
-        $comment->setContent($request->get('content'));
+        $comment->setContent($content);
         $comment->setCreatedAt(new \DateTime());
         $comment->setPost($post);
         $comment->setUser($this->getUser());
@@ -110,14 +115,14 @@ class DefaultController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $s = $request->get('s');
-        $c = $request->get('c');
+        $s = strip_tags($request->get('s'));
+        $count = $request->get('c');
 
         $em = $this->getDoctrine()->getManager();
 
-        $postResults = $em->getRepository('YesknBlogBundle:Post')->queryPosts($s, $c);
+        $postResults = $em->getRepository('YesknBlogBundle:Post')->queryPosts($s, $count);
 
-        $userResults = $em->getRepository('YesknBlogBundle:User')->queryUser($s, $c);
+        $userResults = $em->getRepository('YesknBlogBundle:User')->queryUser($s, $count);
 
         return $this->render('@YesknBlog/search.html.twig', [
             'word' => $s,
@@ -195,5 +200,22 @@ class DefaultController extends Controller
         return new JsonResponse([
             'messages' => $messageRet ?: null
         ]);
+    }
+
+    /**
+     * @Route("/test")
+     */
+    public function testAction()
+    {
+        $identicon = new \Identicon\Identicon();
+
+        $i = $identicon->getImageDataUri('singviy@gg.com');
+
+
+        $res = new Response();
+
+        $res->setContent($i);
+        //$res->headers->set('Content-Type', 'image/png');
+        return $res;
     }
 }

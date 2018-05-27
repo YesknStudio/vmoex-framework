@@ -11,19 +11,28 @@
                         </span>
                         <div class="chat-body clearfix">
                             <div class="header">
-                                <strong class="primary-font"><a href="{{ path('user_home', {username: user.username}) }}" data-pjax>{{ user.nickname }}</a></strong>
+                                <strong class="primary-font home-name"><a
+                                            href="{{ path('user_home', {username: user.username}) }}"
+                                            data-pjax>{{ user.nickname }}</a></strong>
                                 <small class="pull-right text-muted">
-                                    <i class="fa fa-clock-o fa-fw"></i> 加入于{{ user.registerAt|date('Y-m-d H:i:s') }}, 第{{ user.id }}位Vmoex用户
+                                    <i class="fa fa-clock-o fa-fw"></i> 加入于{{ user.registerAt|date('Y-m-d H:i:s') }},
+                                    第{{ user.id }}位Vmoex用户
                                 </small>
                             </div>
                             <p>{{ user.remark|raw }}</p>
                             <br/>
                             {% if app.user != user %}
-                                <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning btn-sm"><i class="fa fa-envelope"></i> 发送私信</button>
-                                <button type="button" id="follow-user" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-heart"></i> {% if app.user in user.followers %}已经关注{% else %}特别关注{% endif %}</button>
-                                <button type="button" id="block-user" class="btn btn-outline btn-warning btn-sm"><i class="fa fa-lock"></i> 屏蔽此人</button>
+                                <button type="button" data-toggle="modal" data-target="#exampleModal"
+                                        class="btn btn-warning btn-sm"><i class="fa fa-envelope"></i> 发送私信
+                                </button>
+                                <button type="button" id="follow-user" class="btn btn-outline btn-danger btn-sm"><i
+                                            class="fa fa-heart"></i> {% if app.user in user.followers %}已经关注{% else %}特别关注{% endif %}
+                                </button>
+                                <button type="button" id="block-user" class="btn btn-outline btn-warning btn-sm"><i
+                                            class="fa fa-lock"></i> 屏蔽此人
+                                </button>
                             {% endif %}
-                          </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -33,7 +42,37 @@
                     {{ user.nickname }}发布的文章
                 </div>
                 <div class="panel-body">
-                    最近没有发布任何文章。
+                    {% set posts = user.posts %}
+                    {% if posts is not empty %}
+                        {% for post in posts %}
+                            <article class="main container home-article-main" style="position: relative">
+                                <div class="row">
+                                    <div class="col-md-12 post-info">
+                                        <span class="item-small-title">
+                                            <a data-pjax href="{{ path('yeskn_blog_show' , {'id' : post.id}) }}">{{ post.title }}</a>
+                                        </span>
+                                        <p class="post-meta">
+                                            <span><i class="fa fa-clock-o"></i> {{ post.createdAt|date("Y-m-d") }}</span>
+                                            <span><i class="fa fa-eye"></i> {{ post.views }}</span>
+                                            {% if post.comments.count %}
+                                                <span><i class="fa fa-commenting-o"></i> <a data-pjax
+                                                                                            href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}</a></span>
+                                            {% endif %}
+                                            {% if post.categories is not null %}
+                                                <span><i class="fa  fa-folder-o"></i>
+                                                    {% for cat in post.categories %}
+                                                        {{ cat.name }}
+                                                    {% endfor %}
+                                </span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    {% else %}
+                        <div class="well">{{ '暂时没有任何文档！' }}</div>
+                    {% endif %}
                 </div>
             </div>
             <div class="panel panel-default">
@@ -41,7 +80,24 @@
                     {{ user.nickname }}的回复
                 </div>
                 <div class="panel-body">
-                    最近没有发布任何回复。
+                    {% set comments = user.comments %}
+                    {% if comments is not empty %}
+                        <div class="container">
+                        {% for comment in comments %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ comment.createdAt| date('Y-m-d H:i:s') }} 发表在 <a data-pjax href="{{ path('yeskn_blog_show', {id: comment.post.id}) }}">{{ comment.post.title }}</a> 上：
+                                    <blockquote class="home-bq">
+                                            {{ comment.content|raw }}
+                                    </blockquote>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ '最近没有发布任何回复。' }}
+                    {% endif %}
+
                 </div>
             </div>
 
@@ -59,8 +115,8 @@
                                 </a>
                             </li>
                         {% endfor %}
-                        {% else %}
-                            {{ user.nickname }}比较高冷😌，目前没有关注任何人。
+                    {% else %}
+                        {{ user.nickname }}比较高冷😌，目前没有关注任何人。
                     {% endif %}
                 </div>
             </div>
@@ -70,7 +126,19 @@
                     {{ user.nickname }}的粉丝
                 </div>
                 <div class="panel-body">
-                    名声不佳，没有任何粉丝╮(╯_╰)╭
+                    {% if user.followers is not empty %}
+                        {% for fo in user.followers %}
+                            <li style="list-style: none;margin: 10px 0;display: inline-block;padding-right: 10px">
+                                <a data-pjax href="{{ path('user_home', {username: fo.username}) }}">
+                                    <img src="{{ fo.avatar }}" alt="" width="25" height="25" style="border-radius: 50%">
+                                    {{ fo.nickname }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        名声不佳，没有任何粉丝╮(╯_╰)╭
+                    {% endif %}
+
                 </div>
             </div>
         </div>
@@ -111,7 +179,7 @@
             });
 
             $(document).off('click', '#send-message');
-            $(document).on('click', '#send-message', function() {
+            $(document).on('click', '#send-message', function () {
                 var $this = $(this);
                 $this.button('loading');
 

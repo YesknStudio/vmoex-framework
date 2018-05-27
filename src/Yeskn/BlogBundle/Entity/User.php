@@ -106,6 +106,23 @@ class User implements UserInterface
     private $apiKey;
 
     /**
+     * @ORM\Column(name="active_val", type="integer")
+     */
+    private $activeVal;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="gold", type="integer", options={"default":100})
+     */
+    private $gold;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="sign_day", type="integer", options={"default": 0})
+     */
+    private $signDay;
+
+    /**
      * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Post", mappedBy="author")
      */
     private $posts;
@@ -385,7 +402,7 @@ class User implements UserInterface
     {
         if (empty($this->avatar)) {
             $identicon = new \Identicon\Identicon();
-            $this->avatar = $identicon->getImageDataUri($this->email);
+            $this->avatar = $identicon->getImageDataUri($this->username);
         }
         return $this->avatar;
     }
@@ -815,5 +832,53 @@ class User implements UserInterface
     public function getActives()
     {
         return $this->actives;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActiveVal()
+    {
+        return $this->activeVal;
+    }
+
+    /**
+     * @param mixed $activeVal
+     */
+    public function setActiveVal($activeVal)
+    {
+        $this->activeVal = $activeVal;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGold()
+    {
+        return $this->gold;
+    }
+
+    /**
+     * @param int $gold
+     */
+    public function setGold($gold)
+    {
+        $this->gold = $gold;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSignDay()
+    {
+        return $this->signDay;
+    }
+
+    /**
+     * @param int $signDay
+     */
+    public function setSignDay($signDay)
+    {
+        $this->signDay = $signDay;
     }
 }
