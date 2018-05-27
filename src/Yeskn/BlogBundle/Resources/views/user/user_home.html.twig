@@ -42,7 +42,7 @@
                     {{ user.nickname }}发布的帖子
                 </div>
                 <div class="panel-body">
-                    {% set posts = user.posts %}
+                    {% set posts = user.posts|slice(0, 20) %}
                     {% if posts is not empty %}
                         {% for post in posts %}
                             <article class="main container home-article-main" style="position: relative">

@@ -28,12 +28,9 @@ class DefaultController extends Controller
      */
     public function indexAction($page)
     {
-        $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->findBy(
-            array(),
-            array('id' => 'DESC'),
-            10,
-            10*($page-1)
-        );
+        $pagesize = 25;
+        $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
+            ->findBy([], ['id' => 'DESC'], $pagesize, $pagesize*($page-1));
 
         $count = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
             ->createQueryBuilder('a')
@@ -42,7 +39,7 @@ class DefaultController extends Controller
             ->getQuery()
             ->getSingleScalarResult();
 
-        $pageData['allPage'] = ceil($count/10);
+        $pageData['allPage'] = ceil($count/$pagesize);
         $pageData['currentPage'] = $page;
 
         return $this->render('YesknBlogBundle:Default:index.html.twig', array(
