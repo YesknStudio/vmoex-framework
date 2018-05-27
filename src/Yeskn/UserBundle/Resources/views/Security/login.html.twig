@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    登录到JetBlog
+                    登录到Vmoex
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -17,7 +17,7 @@
                                     {{ error.message|trans(error.messageData, 'security') }}
                                 </div>
                             {% endif %}
-                            <form id="loginForm" action="{{ path('yeskn_login_check') }}" method="post" role="form">
+                            <form data-pjax id="loginForm" action="{{ path('yeskn_login_check') }}" method="post" role="form">
                                 <fieldset>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="帐号或者邮箱" id="username"

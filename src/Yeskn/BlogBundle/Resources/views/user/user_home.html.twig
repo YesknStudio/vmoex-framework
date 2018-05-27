@@ -84,16 +84,28 @@
                     method: 'POST',
                     url: '{{ path("follow_user") }}',
                     data: {username: '{{ user.username }}'},
-                    success: function () {
-                        $.pjax.reload('.content-body', {
-                            fragment: '.content-body',                          //来源也的ID
-                            timeout: 200000000,
-                            show: 'fade',
-                            cache: true,  //是否使用缓存
-                            push: true,
-                            replace: true
-                            //scrollTo: 250,
-                        })
+                    success: function (data) {
+                        if (!data.ret) {
+                            bootoast({
+                                message: data.msg,
+                                type: 'warning',
+                                position: 'top-center',
+                                icon: undefined,
+                                timeout: 3,
+                                animationDuration: 300,
+                                dismissable: true
+                            });
+                        } else {
+                            $.pjax.reload('.content-body', {
+                                fragment: '.content-body',                          //来源也的ID
+                                timeout: 200000000,
+                                show: 'fade',
+                                cache: true,  //是否使用缓存
+                                push: true,
+                                replace: true
+                                //scrollTo: 250,
+                            })
+                        }
                     }
                 })
             });

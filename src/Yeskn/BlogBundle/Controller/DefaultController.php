@@ -148,6 +148,14 @@ class DefaultController extends Controller
          * @var User $me
          */
         $me = $this->getUser();
+
+        if (empty($me)) {
+            return new JsonResponse([
+                'ret' => 0,
+                'msg' => '请先登录再进行操作哦'
+            ]);
+        }
+
         $ta = $this->getDoctrine()->getRepository('YesknBlogBundle:User')
             ->findOneBy(['username' => $username]);
         $em = $this->getDoctrine()->getManager();
