@@ -3,7 +3,7 @@
 {% block main %}
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel-body" style="background: #fff;margin: 10px 0;">
+            <div class="panel-body" style="background: #fff;margin-bottom: 10px">
                 <ul class="chat">
                     <li class="left clearfix user-meta">
                         <span class="chat-img pull-left">
@@ -13,7 +13,7 @@
                             <div class="header">
                                 <strong class="primary-font"><a href="{{ path('user_home', {username: user.username}) }}" data-pjax>{{ user.nickname }}</a></strong>
                                 <small class="pull-right text-muted">
-                                    <i class="fa fa-clock-o fa-fw"></i> {{ user.registerAt|date('Y-m-d H:i:s') }}
+                                    <i class="fa fa-clock-o fa-fw"></i> 加入于{{ user.registerAt|date('Y-m-d H:i:s') }}, 第{{ user.id }}位Vmoex用户
                                 </small>
                             </div>
                             <p>{{ user.remark|raw }}</p>
@@ -21,6 +21,7 @@
                             {% if app.user != user %}
                                 <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning btn-sm"><i class="fa fa-envelope"></i> 发送私信</button>
                                 <button type="button" id="follow-user" class="btn btn-outline btn-danger btn-sm"><i class="fa fa-heart"></i> {% if app.user in user.followers %}已经关注{% else %}特别关注{% endif %}</button>
+                                <button type="button" id="block-user" class="btn btn-outline btn-warning btn-sm"><i class="fa fa-lock"></i> 屏蔽此人</button>
                             {% endif %}
                           </div>
                     </li>
@@ -41,6 +42,35 @@
                 </div>
                 <div class="panel-body">
                     最近没有发布任何回复。
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ user.nickname }}的关注
+                </div>
+                <div class="panel-body">
+                    {% if user.following is not empty %}
+                        {% for fo in user.following %}
+                            <li style="list-style: none;margin: 10px 0;display: inline-block;padding-right: 10px">
+                                <a data-pjax href="{{ path('user_home', {username: fo.username}) }}">
+                                    <img src="{{ fo.avatar }}" alt="" width="25" height="25" style="border-radius: 50%">
+                                    {{ fo.nickname }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        {% else %}
+                            {{ user.nickname }}比较高冷😌，目前没有关注任何人。
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ user.nickname }}的粉丝
+                </div>
+                <div class="panel-body">
+                    名声不佳，没有任何粉丝╮(╯_╰)╭
                 </div>
             </div>
         </div>

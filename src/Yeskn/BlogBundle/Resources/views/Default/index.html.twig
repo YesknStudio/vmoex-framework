@@ -10,10 +10,10 @@
         {% for post in posts %}
             <article class="main" style="position: relative">
                 <div class="row">
-                    <div class="col-md-1 pull-left">
+                    <div class="col-md-1 post-avatar">
                         <img src="{{ post.author.avatar }}" alt="">
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-11 post-info">
                     <span class="item-title">
                         <a data-pjax href="{{ path('yeskn_blog_show' , {'id' : post.id}) }}">{{ post.title }}</a>
                     </span>
@@ -22,7 +22,9 @@
                                                             href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
                             <span><i class="fa fa-clock-o"></i> {{ post.createdAt|date("Y-m-d") }}</span>
                             <span><i class="fa fa-eye"></i> {{ post.views }}</span>
-                            <span><i class="fa fa-commenting-o"></i> {{ post.comments.count }}</span>
+                            {% if post.comments.count %}
+                                <span><i class="fa fa-commenting-o"></i> <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}</a></span>
+                            {% endif %}
                             {% if post.categories is not null %}
                                 <span><i class="fa  fa-folder-o"></i>
                                     {% for cat in post.categories %}

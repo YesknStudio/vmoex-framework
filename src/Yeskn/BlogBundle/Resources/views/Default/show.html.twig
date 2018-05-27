@@ -36,7 +36,7 @@
             {% endif %}
         </div>
     </div>
-    <div class="comments">
+    <div class="comments" id="comments">
         <h3 class="border-bottom">评论</h3>
         {% if post.comments is not empty %}
             <ul class="chat">
@@ -197,7 +197,15 @@
                       content: content
                   },
                   success: function () {
-                      $.pjax.reload('.content-body')
+                      $.pjax.reload('.content-body', {
+                          fragment: '.content-body',                          //来源也的ID
+                          timeout: 200000000,
+                          show: 'fade',
+                          cache: true,  //是否使用缓存
+                          push: true,
+                          replace: true
+                          //scrollTo: 250,
+                      })
                   }
               })
           });

@@ -50,8 +50,8 @@ class MessageController extends Controller
     {
         $messageRepository = $this->getDoctrine()->getRepository('YesknBlogBundle:Message');
 
-        $rMessages = $messageRepository->findBy(['receiver' => $this->getUser()]);
-        $sMessages = $messageRepository->findBy(['sender' => $this->getUser()]);
+        $rMessages = $messageRepository->findBy(['receiver' => $this->getUser()], ['createdAt' => 'DESC']);
+        $sMessages = $messageRepository->findBy(['sender' => $this->getUser()],['createdAt' => 'DESC']);
 
         return $this->render('@YesknBlog/messages.html.twig', [
             'rMessages' => $rMessages,
@@ -72,6 +72,7 @@ class MessageController extends Controller
             ->createQueryBuilder('p')
             ->where('p.receiver = :user')->setParameter('user', $this->getUser())
             ->andWhere('p.isRead = false')
+            ->orderBy('p.createdAt', 'DESC')
             ->getQuery()
             ->getResult(5);
 

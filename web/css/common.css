@@ -47,7 +47,7 @@ article.main img{
     max-height: 145px;
     vertical-align: middle;
     border-radius: 2px;
-    max-width: 100%;
+    max-width: 55px;
 }
 
 
@@ -71,6 +71,10 @@ article.main img{
 }
 .border-bottom{
     border-bottom: 1px solid #e7e7e7;
+}
+
+h3.border-bottom{
+    padding-bottom: 15px;
 }
 .margin-top-10{
     margin-top: 10px;
@@ -202,4 +206,18 @@ li.messages ul li div a {
 ul.messages li {
     margin: 20px 0;
 
+}
+
+.post-avatar {
+    vertical-align:middle;
+}
+
+.post-avatar, .post-info {
+    float: none;
+    display: table-cell;
+}
+
+.post-info {
+    margin-left: 0;
+    padding-left: 0;
 }

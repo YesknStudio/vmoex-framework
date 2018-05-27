@@ -37,10 +37,7 @@ class GlobalValue extends \Twig_Extension
     public function hotPosts()
     {
         $posts = $this->em->getRepository('YesknBlogBundle:Post')->findBy(
-            array(),
-            array(),
-            8
-        );
+            [], ['views' => 'DESC'], 8);
         return $posts;
     }
 
@@ -50,6 +47,11 @@ class GlobalValue extends \Twig_Extension
             ->findBy([], ['id' => 'DESC'], 5);
 
         return $comments;
+    }
+
+    public function hotUsers()
+    {
+
     }
 
     /**
