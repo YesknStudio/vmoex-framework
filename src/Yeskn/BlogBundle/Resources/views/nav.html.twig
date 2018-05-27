@@ -1,8 +1,8 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <a class="navbar-brand" href="{{ path('yeskn_blog_homepage') }}" data-pjax>Vmoex</a>
-        <a class="nav-item" href="" data-pjax>专题</a>
-        <a class="nav-item" href="" data-pjax>精华</a>
+        <a class="nav-item" href="" data-pjax>TopClick</a>
+        <a class="nav-item" href="" data-pjax>GalGame</a>
         <a class="nav-item" href="{{ path('bind_chat') }}" data-pjax>瞎聊</a>
         <a class="nav-item" href="{{ path('about') }}" data-pjax>关于</a>
     </div>
@@ -14,49 +14,27 @@
         </li>
 
         {% if app.user %}
-            <li class="dropdown">
+            <li class="dropdown messages">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-envelope fa-fw"></i> 私信 <i class="fa fa-caret-down"></i>
+                    <i class="fa fa-envelope fa-fw"></i> <span class="text">私信</span> <i class="fa fa-caret-down"></i>
                 </a>
+                <script type="text/html" id="message-item-tpl">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>@nickname@</strong>
+                                <span class="pull-right text-muted">
+                                        <em>@createdAt@</em>
+                                    </span>
+                            </div>
+                            <div>@content@</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                </script>
                 <ul class="dropdown-menu dropdown-messages">
                     <li>
-                        <a href="#">
-                            <div>
-                                <strong>南瓜</strong>
-                                <span class="pull-right text-muted">
-                                        <em>昨天</em>
-                                    </span>
-                            </div>
-                            <div>很简洁的一个博客系统.</div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <strong>星月</strong>
-                                <span class="pull-right text-muted">
-                                        <em>昨天</em>
-                                    </span>
-                            </div>
-                            <div>滋磁滋磁</div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <strong>海风</strong>
-                                <span class="pull-right text-muted">
-                                        <em>昨天</em>
-                                    </span>
-                            </div>
-                            <div>你的博客挺不错的~</div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a class="text-center" href="#">
+                        <a data-pjax class="text-center" href="{{ path('my_messages') }}">
                             <strong>查看所有私信</strong>
                             <i class="fa fa-angle-right"></i>
                         </a>

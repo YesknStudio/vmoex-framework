@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Comment;
+use Yeskn\BlogBundle\Entity\Message;
 use Yeskn\BlogBundle\Entity\Post;
 use Yeskn\BlogBundle\Entity\User;
 
@@ -133,5 +134,58 @@ class DefaultController extends Controller
     public function aboutAction(Request $request)
     {
         return $this->render('@YesknBlog/about.html.twig');
+    }
+
+    /**
+     * @Route("/follow", name="follow_user", methods={"POST"})
+     * @return Response
+     */
+    public function followAction(Request $request)
+    {
+        $username = $request->get('username');
+
+        /**
+         * @var User $me
+         */
+        $me = $this->getUser();
+        $ta = $this->getDoctrine()->getRepository('YesknBlogBundle:User')
+            ->findOneBy(['username' => $username]);
+        $em = $this->getDoctrine()->getManager();
+
+        if ($ta->followers()->contains($me)) {
+            $me->unfollow($ta);
+        } else {
+            $me->follow($ta);
+        }
+
+        $em->flush();
+
+        return new JsonResponse(['ret' => 1]);
+    }
+
+    /**
+     * @Route("/info", name="info", methods={"GET"})
+     */
+    public function infoAction()
+    {
+        $user = $this->getUser();
+
+        $messages =  $this->getDoctrine()->getRepository('YesknBlogBundle:Message')
+            ->getUnReadMessages($user);
+
+        $messageRet = [];
+
+        foreach ($messages as &$message) {
+            $messageRet[] = [
+                'createdAt' => $message->getCreatedAt()->format('Y-m-d H:i:s'),
+                'content' => $message->getContent(),
+                'sender' => $message->getSender()->getNickname(),
+                'sender_username' => $message->getSender()->getUsername()
+            ];
+        }
+
+        return new JsonResponse([
+            'messages' => $messageRet ?: null
+        ]);
     }
 }

@@ -34,8 +34,35 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <script>
+            var G_info_link = '{{ path('info') }}';
+            var G_set_message_red_link = '{{ path('set_message_red') }}';
+        </script>
     {% endblock %}
 </head>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">发送私信</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">内容:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="send-message" class="btn btn-info btn-sm" data-loading-text="<i class='fa fa-spinner fa-spin '></i> 发送中"><i class="fa fa-send"></i> 发送</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <body>
 <div class="container">
@@ -59,12 +86,18 @@
 
     {% block footer %}
         <div class="container footer">
-            <p class="copy" style="text-align: center;padding: 5px" data-original-title="powered by Yeskn">© 2016
-                Yeskn</p>
+            <div style="display: flex; justify-content:space-between;align-items: center">
+                <div>
+                    <p class="copy" style="text-align: center;padding: 5px" data-original-title="powered by Yeskn">© 2016
+                        Yeskn</p>
+                </div>
+                <div style="width: 270px;height: 300px">
+                    <img src="{{ asset('img/763552f474305423.png') }}" alt="">
+                </div>
+            </div>
         </div>
     {% endblock %}
 </div>
-
 
 <div id="landlord" style="left:5px;bottom:0px;">
     <div class="message" style="opacity:0"></div>

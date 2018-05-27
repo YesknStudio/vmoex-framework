@@ -1,3 +1,14 @@
+function render(template, parameters) {
+    for (var key in parameters) {
+        if (parameters.hasOwnProperty(key)) {
+            var reg = new RegExp('@'+key+'@', 'g');
+            template = template.replace(reg, parameters[key]);
+        }
+    }
+
+    return $(template);
+}
+
 $(document).ready(function () {
     var dropDown = $('li.dropdown.user-dropdown');
     dropDown.click(function () {
@@ -30,8 +41,11 @@ $(document).ready(function () {
         });
 
         $(document).on('pjax:success', function (data, status, xhr, options) {
-            $('title').text(data.relatedTarget.innerText + ' - JetBlog');
+            console.log(data);
+            if (data.relatedTarget) {
+                $('title').text(data.relatedTarget.innerText + ' - JetBlog');
 
+            }
         });
         $(document).on('pjax:complete', function () {
             NProgress.done();
@@ -55,5 +69,66 @@ $(document).ready(function () {
             }
             $.pjax({url: '/search?s='+word, container: '.content-body'})
         }
+    })
+
+    var a_idx = 1;
+
+    $("body").click(function(e) {
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+        // var $i = $("<span/>").text(a[a_idx]);
+        var $i = $("<span/>").text('+'+a_idx++);
+        // a_idx = (a_idx + 1) % a.length;
+        var x = e.pageX,
+            y = e.pageY;
+        $i.css({
+            "z-index": 1001,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": "#ff6651"
+        });
+        $("body").append($i);
+        $i.animate({
+                "top": y - 180,
+                "opacity": 0
+            },
+            1500,
+            function() {
+                $i.remove();
+            });
+    });
+
+    // info
+    $.ajax({
+        method: "GET",
+        url: G_info_link,
+        success: function (data) {
+            if (data.messages) {
+                var messages = data.messages;
+                $('li.messages>a span.text').text(' 私信('+messages.length+') ');
+                for (k in messages) {
+                    var message = messages[k];
+                    var html = render($('#message-item-tpl').html(), {
+                        content: message.content,
+                        username: message.sender_username,
+                        createdAt: message.createdAt,
+                        nickname: message.sender
+                    });
+                    $('li.messages ul').prepend(html);
+                }
+
+            }
+        }
+    });
+
+    $(document).on('click', 'li.messages>a', function () {
+        $.ajax({
+            method: "POST",
+            url: G_set_message_red_link,
+            success: function () {
+                $('li.messages>a span.text').text(' 私信 ');
+            }
+        });
     })
 });

@@ -1,4 +1,5 @@
 body {
+    cursor: url('/img/p.cur'), url(/img/p.cur), auto;
     background: url("/img/zhMoegirl18summer.jpg") no-repeat top left #f6f6f6;
 }
 a{
@@ -133,7 +134,7 @@ div.comments > ul > li> span > img{
 
 .content-main {
     margin-bottom: 20px;
-    opacity: 0.9;
+    opacity: 0.98;
 }
 
 .item-tag {
@@ -143,7 +144,7 @@ div.comments > ul > li> span > img{
 }
 
 nav.navbar-static-top {
-    opacity: 0.9;
+    opacity: 0.98;
 }
 .nav-item {
     float: left;
@@ -188,4 +189,17 @@ li.user-meta {
     background-color: #fff;
     border-color: #e4e4e4;
     cursor: not-allowed;
+}
+
+.modal-content {
+    border-radius: 2px;
+}
+
+li.messages ul li div a {
+    padding: 2px !important;
+}
+
+ul.messages li {
+    margin: 20px 0;
+
 }

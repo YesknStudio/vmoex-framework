@@ -7,7 +7,8 @@
                 <div class="panel-heading">
                     <i class="fa fa-comments fa-fw"></i> 瞎聊
                     <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="false">
                             <i class="fa fa-chevron-down"></i>
                         </button>
                         <ul class="dropdown-menu slidedown">
@@ -41,86 +42,77 @@
                     </div>
                 </div>
                 <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <ul class="chat">
-                        <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle">
+                <div class="panel-body" id="chat-box">
+                    {% if chats is not empty %}
+                        <ul class="chat">
+                            {% for chat in chats %}
+                                {% set loc = (app.user and chat.user.id == app.user.id) ? 'right' : 'left' %}
+                                <li class="{{ loc }} clearfix">
+                                    <span class="chat-img pull-{{ loc }}">
+                                        <img width="50" height="50" src="{{ chat.user.avatar }}" alt="User Avatar" class="img-circle">
                                     </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong>
-                                    <small class="pull-right text-muted">
-                                        <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
-                                    </small>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle">
-                                    </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <small class=" text-muted">
-                                        <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
-                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle">
-                                    </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong>
-                                    <small class="pull-right text-muted">
-                                        <i class="fa fa-clock-o fa-fw"></i> 14 mins ago</small>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle">
-                                    </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <small class=" text-muted">
-                                        <i class="fa fa-clock-o fa-fw"></i> 15 mins ago</small>
-                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="pull-{{ loc }} primary-font"><a data-pjax href="{{ path('user_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                            <small class=" text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|date('Y-m-d H:i:s') }}
+                                            </small>
+                                        </div>
+                                        <p>{{ chat.content|raw }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            抱歉，暂时没有任何内容！
+                        </div>
+                    {% endif %}
                 </div>
                 <!-- /.panel-body -->
                 <div class="panel-footer">
                     <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="请输入聊天内容...">
                         <span class="input-group-btn">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
-                                        Send
-                                    </button>
-                                </span>
+                             {% if app.user %}
+                                 <button type="button" id="sendChat" class="btn btn-warning btn-sm">发送</button>
+                             {% else %}
+                                 <button type="button" class="btn btn-warning btn-sm disabled">请先登录</button>
+                             {% endif %}
+                        </span>
                     </div>
                 </div>
                 <!-- /.panel-footer -->
             </div>
         </div>
     </div>
+
+    <script>
+        var elem = document.getElementById('chat-box');
+        elem.scrollTop = elem.scrollHeight;
+
+        $(function () {
+            $('.content-body').off('click', '#sendChat');
+            $('.content-body').on('click', '#sendChat', function () {
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ path("send_chat") }}',
+                    data: {content: $('#btn-input').val()},
+                    success: function () {
+                        $.pjax.reload('.content-body', {
+                            fragment: '.content-body',                          //来源也的ID
+                            timeout: 200000000,
+                            show: 'fade',
+                            cache: true,  //是否使用缓存
+                            push: true,
+                            replace: true
+                            //scrollTo: 250,
+                        })
+                    }
+                })
+            });
+        })
+    </script>
 {% endblock %}
 
 {% block sidebar %}
@@ -132,5 +124,5 @@
             <div class="panel-body">
                 我也不知道。
             </div>
-    </div>
+        </div>
 {% endblock %}

@@ -10,6 +10,7 @@ namespace Yeskn\CommonBundle\Twig;
 
 
 use Doctrine\ORM\EntityManager;
+use Yeskn\BlogBundle\Entity\User;
 
 class GlobalValue extends \Twig_Extension
 {
@@ -51,12 +52,23 @@ class GlobalValue extends \Twig_Extension
         return $comments;
     }
 
+    /**
+     * @param User $user
+     * @return array|\Yeskn\BlogBundle\Entity\Message[]
+     */
+    public function unReadMessages(User $user)
+    {
+        return $this->em->getRepository('YesknBlogBundle:Message')
+            ->findBy(['receiver' => $user, 'isRead' => false], ['createdAt', 'DESC']);
+    }
+
     public function getFunctions()
     {
         return array(
             new \Twig_SimpleFunction('hotPosts',array($this,'hotPosts'),array('is_safe' => 'html'),array('needs_environment' => true)),
             new \Twig_SimpleFunction('hotTags',array($this,'hotTags'),array('is_safe' => 'html'),array('needs_environment' => true)),
-            new \Twig_SimpleFunction('hotComments',array($this,'hotComments'),array('is_safe' => 'html'),array('needs_environment' => true))
+            new \Twig_SimpleFunction('hotComments',array($this,'hotComments'),array('is_safe' => 'html'),array('needs_environment' => true)),
+            new \Twig_SimpleFunction('unReadMessages',array($this,'unReadMessages'),array('is_safe' => 'html'),array('needs_environment' => true))
         );
     }
 }

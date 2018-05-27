@@ -115,9 +115,44 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Chat", mappedBy="user")
+     */
+    private $chats;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Yeskn\BlogBundle\Entity\User", mappedBy="following")
+     */
+    private $followers;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Yeskn\BlogBundle\Entity\User", inversedBy="followers")
+     * @ORM\JoinTable(name="followers",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="following_user_id", referencedColumnName="id")}
+     * )
+     */
+    private $following;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Message", mappedBy="sender")
+     */
+    private $sentMessages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Message", mappedBy="receiver")
+     */
+    private $receivedMessages;
+
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->chats = new ArrayCollection();
+        $this->followers = new ArrayCollection();
+        $this->following = new ArrayCollection();
     }
 
     /**
@@ -355,7 +390,7 @@ class User implements UserInterface
      */
     public function getRemark()
     {
-        return $this->remark;
+        return $this->remark ?: '无名人士。';
     }
 
     /**
@@ -486,5 +521,260 @@ class User implements UserInterface
     public function setComments($comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChats()
+    {
+        return $this->chats;
+    }
+
+    /**
+     * @param Chat $chat
+     * @return User
+     */
+    public function addChat(Chat $chat)
+    {
+        $this->chats[] = $chat;
+
+        return $this;
+    }
+
+    /**
+     * @param Chat $chat
+     */
+    public function removeChat(Chat $chat)
+    {
+        $this->chats->removeElement($chat);
+    }
+
+    /**
+     * Follow another User
+     *
+     * @param User $user
+     * @return void
+     */
+    public function follow(User $user)
+    {
+        $this->following[] = $user;
+
+        $user->followedBy($this);
+    }
+
+    /**
+     * Set followed by User
+     *
+     * @param User $user
+     * @return void
+     */
+    private function followedBy(User $user)
+    {
+        $this->followers[] = $user;
+    }
+
+    /**
+     * Return the Users this User is following
+     *
+     * @return ArrayCollection
+     */
+    public function following()
+    {
+        return $this->following;
+    }
+
+    /**
+     * Return the User’s followers
+     *
+     * @return ArrayCollection
+     */
+    public function followers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * Unfollow a User
+     *
+     * @param User $user
+     * @return void
+     */
+    public function unfollow(User $user)
+    {
+        $this->following->removeElement($user);
+
+        $user->unfollowedBy($this);
+    }
+
+    /**
+     * Set unfollowed by a User
+     *
+     * @param User $user
+     * @return void
+     */
+    private function unfollowedBy(User $user)
+    {
+        $this->followers->removeElement($user);
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Yeskn\BlogBundle\Entity\Comment $comment
+     *
+     * @return User
+     */
+    public function addComment(\Yeskn\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Yeskn\BlogBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Yeskn\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Add follower
+     *
+     * @param \Yeskn\BlogBundle\Entity\User $follower
+     *
+     * @return User
+     */
+    public function addFollower(\Yeskn\BlogBundle\Entity\User $follower)
+    {
+        $this->followers[] = $follower;
+
+        return $this;
+    }
+
+    /**
+     * Remove follower
+     *
+     * @param \Yeskn\BlogBundle\Entity\User $follower
+     */
+    public function removeFollower(\Yeskn\BlogBundle\Entity\User $follower)
+    {
+        $this->followers->removeElement($follower);
+    }
+
+    /**
+     * Get followers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * Add following
+     *
+     * @param \Yeskn\BlogBundle\Entity\User $following
+     *
+     * @return User
+     */
+    public function addFollowing(\Yeskn\BlogBundle\Entity\User $following)
+    {
+        $this->following[] = $following;
+
+        return $this;
+    }
+
+    /**
+     * Remove following
+     *
+     * @param \Yeskn\BlogBundle\Entity\User $following
+     */
+    public function removeFollowing(\Yeskn\BlogBundle\Entity\User $following)
+    {
+        $this->following->removeElement($following);
+    }
+
+    /**
+     * Get following
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowing()
+    {
+        return $this->following;
+    }
+
+    /**
+     * Add sentMessage
+     *
+     * @param \Yeskn\BlogBundle\Entity\Message $sentMessage
+     *
+     * @return User
+     */
+    public function addSentMessage(\Yeskn\BlogBundle\Entity\Message $sentMessage)
+    {
+        $this->sentMessages[] = $sentMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove sentMessage
+     *
+     * @param \Yeskn\BlogBundle\Entity\Message $sentMessage
+     */
+    public function removeSentMessage(\Yeskn\BlogBundle\Entity\Message $sentMessage)
+    {
+        $this->sentMessages->removeElement($sentMessage);
+    }
+
+    /**
+     * Get sentMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSentMessages()
+    {
+        return $this->sentMessages;
+    }
+
+    /**
+     * Add receivedMessage
+     *
+     * @param \Yeskn\BlogBundle\Entity\Message $receivedMessage
+     *
+     * @return User
+     */
+    public function addReceivedMessage(\Yeskn\BlogBundle\Entity\Message $receivedMessage)
+    {
+        $this->receivedMessages[] = $receivedMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove receivedMessage
+     *
+     * @param \Yeskn\BlogBundle\Entity\Message $receivedMessage
+     */
+    public function removeReceivedMessage(\Yeskn\BlogBundle\Entity\Message $receivedMessage)
+    {
+        $this->receivedMessages->removeElement($receivedMessage);
+    }
+
+    /**
+     * Get receivedMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReceivedMessages()
+    {
+        return $this->receivedMessages;
     }
 }
