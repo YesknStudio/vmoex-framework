@@ -106,21 +106,21 @@ class User implements UserInterface
     private $apiKey;
 
     /**
-     * @ORM\Column(name="active_val", type="integer")
+     * @ORM\Column(name="active_val", type="integer", options={"default":0})
      */
-    private $activeVal;
+    private $activeVal = 0;
 
     /**
      * @var integer
      * @ORM\Column(name="gold", type="integer", options={"default":100})
      */
-    private $gold;
+    private $gold = 100;
 
     /**
      * @var integer
      * @ORM\Column(name="sign_day", type="integer", options={"default": 0})
      */
-    private $signDay;
+    private $signDay = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Post", mappedBy="author")

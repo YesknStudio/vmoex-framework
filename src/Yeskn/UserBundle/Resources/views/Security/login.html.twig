@@ -17,6 +17,9 @@
                                     {{ error.message|trans(error.messageData, 'security') }}
                                 </div>
                             {% endif %}
+
+                            {% include '@YesknBlog/_flash_messages.html.twig' %}
+
                             <form data-pjax id="loginForm" action="{{ path('yeskn_login_check') }}" method="post" role="form">
                                 <fieldset>
                                     <div class="form-group">

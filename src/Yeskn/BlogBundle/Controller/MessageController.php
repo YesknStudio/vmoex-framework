@@ -23,6 +23,7 @@ class MessageController extends Controller
     public function sendMessage(Request $request)
     {
         $content = $request->get('content');
+        $content = strip_tags($content);
         $to = $request->get('to');
 
         $em = $this->getDoctrine()->getManager();

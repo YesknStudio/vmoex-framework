@@ -11,12 +11,8 @@
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            {% if error is defined and error is not null %}
-                                <div class="alert alert-danger alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    {{ error }}
-                                </div>
-                            {% endif %}
+                            {% include '@YesknBlog/_flash_messages.html.twig' %}
+
                             {{ form_start(form) }}
                             {{ form_widget(form) }}
                             {{ form_end(form) }}

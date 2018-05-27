@@ -71,9 +71,8 @@ class SecurityController extends Controller
             $check = $em->getRepository('YesknBlogBundle:User')
                 ->checkEmailAndUsername($user->getEmail(), $user->getUsername());
             if ($check) {
-                return $this->redirectToRoute('user_registration', [
-                    'error' => '用户名或者邮箱已经注册'
-                ]);
+                $this->addFlash('error', '用户名或者邮箱已经注册');
+                return $this->redirectToRoute('user_registration');
             }
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $this->get('security.password_encoder')
@@ -90,6 +89,8 @@ class SecurityController extends Controller
 
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
+
+            $this->addFlash('success', '注册成功，请使用账号名"' . $user->getUsername().'"登录');
 
             return $this->redirectToRoute('yeskn_user_login');
         }

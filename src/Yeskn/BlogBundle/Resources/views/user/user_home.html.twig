@@ -39,7 +39,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ user.nickname }}发布的文章
+                    {{ user.nickname }}发布的帖子
                 </div>
                 <div class="panel-body">
                     {% set posts = user.posts %}
@@ -71,7 +71,7 @@
                             </article>
                         {% endfor %}
                     {% else %}
-                        <div class="well">{{ '暂时没有任何文档！' }}</div>
+                        {{ '暂时没有发布任何帖子。' }}
                     {% endif %}
                 </div>
             </div>
