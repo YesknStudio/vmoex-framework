@@ -236,6 +236,8 @@ ul.messages li {
 
 .home-article-main {
     margin-top: 0 !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 10px;
 }
 
 .home-bq {

@@ -79,6 +79,7 @@ class SecurityController extends Controller
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $user->setRegisterAt(new \DateTime());
+            $user->setNickname($user->getUsername());
             $user->setLoginAt(new \DateTime());
             $user->setType('user');
             $user->setApiKey(md5(uniqid()));

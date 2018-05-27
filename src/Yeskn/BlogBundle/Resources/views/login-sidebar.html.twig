@@ -4,7 +4,7 @@
             第三方登录
         </div>
         <div class="panel-body">
-            <button class="btn btn-default btn-success"><i class="fa fa-wechat"></i> 微信登录</button>
+            <button class="btn login-wechat btn-default btn-success"><i class="fa fa-wechat"></i> 微信登录</button>
         </div>
     </div>
     <div class="panel panel-default">
@@ -16,3 +16,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $(document).off('click', '.login-wechat');
+        $(document).on('click', '.login-wechat', function () {
+            bootoast({
+                message: '微信登录暂时没有开通哦',
+                type: 'warning',
+                position: 'top-center',
+                icon: undefined,
+                timeout: 2,
+                animationDuration: 300,
+                dismissable: true
+            });
+        })
+    })
+</script>

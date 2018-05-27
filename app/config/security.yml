@@ -27,6 +27,8 @@ security:
             form_login:
                 login_path: yeskn_user_login
                 check_path: yeskn_login_check
+                always_use_default_target_path: true
+                default_target_path: /
             remember_me:
                 secret: '%secret%'
                 name: _token
