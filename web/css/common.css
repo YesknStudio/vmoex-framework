@@ -3,6 +3,7 @@ body {
     background: url("/img/zhMoegirl18summer.jpg") no-repeat top left #f6f6f6;
     /*padding-top: 70px;*/
 }
+html,body{overflow:hidden;overflow-y:auto;}
 a{
     color: #737373;
 }
