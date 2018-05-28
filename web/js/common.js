@@ -37,11 +37,11 @@ $(document).ready(function () {
         $(document).on('pjax:start', function () {
             NProgress.start();
         });
-        $(document).on('pjax:send', function () { //pjax链接点击后显示加载动画
+
+        $(document).on('pjax:send', function () {
         });
 
         $(document).on('pjax:success', function (data, status, xhr, options) {
-            console.log(data);
             if (data.relatedTarget) {
                 if ($.trim(data.relatedTarget.innerText) === 'Vmoex') {
                     $('title').text('Vmoex - 打造最美好的二次元社区');
@@ -50,12 +50,12 @@ $(document).ready(function () {
                 }
             }
         });
+
         $(document).on('pjax:complete', function () {
             NProgress.done();
         });
 
-        $(document).on('pjax:error', function () {
-        });
+        $(document).on('pjax:error', function () {});
     }
 
     $('.content-body').on('click', 'li.disabled a', function (e) {

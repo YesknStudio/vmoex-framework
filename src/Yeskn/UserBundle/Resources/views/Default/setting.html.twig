@@ -1,7 +1,5 @@
 {% extends '@YesknBlog/base.html.twig' %}
 
-{#{% block sidebar %}{% endblock %}#}
-
 {% block main %}
     <div>
         <div class="row">
@@ -48,22 +46,13 @@
                                             <div class="form-group">
                                                 <label for="avatar" class="col-sm-2 control-label">头像</label>
                                                 <div class="col-sm-2">
-                                                    <img src="{{ app.user.avatar }}" alt="">
+                                                    <img src="{{ app.user.avatar }}" alt="" width="75">
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <input type="file" id="avatar" class="form-control">
                                                     <p class="help-block">支持jpg、png、gif格式.</p>
                                                 </div>
                                             </div>
-                                            {#<div class="form-group">#}
-                                                {#<div class="col-sm-offset-2 col-sm-10">#}
-                                                    {#<div class="checkbox">#}
-                                                        {#<label>#}
-                                                            {#<input type="checkbox"> Remember me#}
-                                                        {#</label>#}
-                                                    {#</div>#}
-                                                {#</div>#}
-                                            {#</div>#}
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <button type="submit" class="btn btn-default btn-sm">保存</button>

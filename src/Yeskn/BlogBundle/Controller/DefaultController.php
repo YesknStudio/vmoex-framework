@@ -6,13 +6,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Comment;
-use Yeskn\BlogBundle\Entity\Message;
-use Yeskn\BlogBundle\Entity\Post;
 use Yeskn\BlogBundle\Entity\User;
 
 class DefaultController extends Controller
@@ -85,7 +82,7 @@ class DefaultController extends Controller
 
         $content = $request->get('content');
 
-        $content = strip_tags($content, '<p><br><a><strong><span>');
+        $content = strip_tags($content, '<p><br><a><strong><span><i><u><strike><b><font>');
 
         $comment = new Comment();
 

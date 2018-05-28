@@ -244,3 +244,23 @@ ul.messages li {
     font-size: 14px;
     padding-bottom: 0;
 }
+
+.progress {
+    height: 10px;
+    margin-bottom: 10px;
+}
+
+.navbar-left {
+    display: flex;
+}
+.navbar-left li{
+
+}
+nav.navbar {
+    margin-bottom: 0;
+
+}
+
+.navbar-header {
+    width: 100%;
+}

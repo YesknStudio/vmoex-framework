@@ -1,4 +1,4 @@
-<div class="col-lg-4">
+<div class="col-lg-4 col-sm-12">
     {% if sidebar_head is not empty %}
         {{ sidebar_head|raw }}
     {% endif %}
@@ -37,7 +37,7 @@
                     <strong>今日活跃度</strong>
                 </p>
                 <div class="progress active">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="1000" style="width: {{ app.user.activeVal/10 }}%">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ app.user.activeVal }}" aria-valuemin="0" aria-valuemax="520" style="width: {{ (app.user.activeVal/520)*100 }}%">
                         <span class="sr-only">{{ app.user.activeVal }}</span>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
         });
     </script>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default hidden-xs hidden-sm">
         <div class="panel-heading">
             <i class="fa  fa-fire"></i> 活跃用户
         </div>
@@ -114,7 +114,7 @@
 
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default hidden-xs hidden-sm">
         <div class="panel-heading">
             <span class="glyphicon glyphicon-fire"></span> 今日热门话题
         </div>
@@ -129,7 +129,7 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default hidden-xs hidden-sm">
         <div class="panel-heading">
             <i class="fa fa-comments-o"></i> 最新评论
         </div>
