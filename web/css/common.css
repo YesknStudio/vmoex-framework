@@ -145,6 +145,11 @@ div.comments > ul > li> span > img{
     opacity: 0.98;
 }
 
+.content-main .content img {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
 .item-tag {
     font-size: small;
     color: #666666;
