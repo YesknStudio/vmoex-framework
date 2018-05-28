@@ -238,3 +238,10 @@ ul.messages li {
     height: 10px;
     margin-bottom: 10px;
 }
+
+@media (max-width: 767px) {
+    .container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}

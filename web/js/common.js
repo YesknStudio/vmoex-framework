@@ -75,7 +75,7 @@ $(document).ready(function () {
         $.pjax({
             url: '/search?s='+word,
             container: '.content-body',
-            fragment: '.content-body',                          //来源也的ID
+            fragment: '.content-body',
             timeout: 200000000,
             show: 'fade',
             cache: true,  //是否使用缓存
@@ -141,5 +141,23 @@ $(document).ready(function () {
                 $('li.messages>a span.text').text(' 私信 ');
             }
         });
+    })
+
+    $('nav.navbar-static-top a').click(function (e) {
+        e.preventDefault();
+
+        $.pjax({
+            url: $(this).attr('href'),
+            container: '.content-body',
+            fragment: '.content-body',
+            timeout: 200000000,
+            show: 'fade',
+            cache: true,  //是否使用缓存
+            push: true,
+            replace: true
+            //scrollTo: 250,
+        });
+
+        $('#navbar-collapse').collapse('hide')
     })
 });
