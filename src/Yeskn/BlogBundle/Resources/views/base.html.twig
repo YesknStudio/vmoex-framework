@@ -67,38 +67,35 @@
 </div>
 
 <body>
-<div class="container">
-    {% block navbar %}
-        {% include '@YesknBlog/nav.html.twig' %}
-    {% endblock %}
+{% block navbar %}
+    {% include '@YesknBlog/nav.html.twig' %}
+{% endblock %}
 
-    <div class="content-body">
-        {% block page_wraper %}
-            <div class="row content-row">
-                <div class="col-lg-8 content-main">
-                    {% block main %}{% endblock %}
-                </div>
+<div class="content-body container">
+    {% block page_wraper %}
+        <div class="row content-row">
+            <div class="col-lg-8 content-main" role="main">
+                {% block main %}{% endblock %}
+            </div>
+            <div class="col-md-4" role="complementary">
                 {% block sidebar %}
                     {% set block_loaded = block('sidebar_head') is defined  %}
                     {% include '@YesknBlog/sidebar.html.twig' with {sidebar_head: block_loaded  ? block('sidebar_head')  : ''} %}
                 {% endblock %}
             </div>
-        {% endblock %}
-    </div>
-
-    {% block footer %}
-        <div class="container footer">
-            <div style="display: flex; justify-content:space-between;align-items: center">
-                <div>
-                    <p class="copy" style="text-align: center;padding: 5px" data-original-title="powered by Yeskn">© 2018 Vmoex - 打造最美好的二次元社区</p>
-                </div>
-                <div style="width: 270px;height: 300px">
-                    <img src="{{ asset('img/763552f474305423.png') }}" alt="">
-                </div>
-            </div>
         </div>
     {% endblock %}
 </div>
+
+{% block footer %}
+    <footer style="display: flex;height: 301px;background: url('{{ asset('img/763552f474305423.png') }}');background-position: bottom right;background-repeat: no-repeat">
+        <div class="container">
+            <div style="">
+                <p class="copy" style="text-align: center;padding: 5px" data-original-title="powered by Yeskn">© 2018 Vmoex - 打造最美好的二次元社区</p>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
 
 <div id="landlord" style="left:5px;bottom:0px;">
     <div class="message" style="opacity:0"></div>

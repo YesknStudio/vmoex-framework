@@ -63,27 +63,26 @@ $(document).ready(function () {
     });
 
     // search
-    $(document).off('keyup', '#search-content');
-    $(document).on('keyup', '#search-content', function (e) {
-        if (e.keyCode === 13) {
-            var word = $('#search-content').val();
-            if (word.length === 0) {
-                alert('搜索内容不能为空');
-                return ;
-            }
-
-            $.pjax({
-                url: '/search?s='+word,
-                container: '.content-body',
-                fragment: '.content-body',                          //来源也的ID
-                timeout: 200000000,
-                show: 'fade',
-                cache: true,  //是否使用缓存
-                push: true,
-                replace: true
-                //scrollTo: 250,
-            })
+    $(document).off('submit', '#site-search');
+    $(document).on('submit', '#site-search', function (e) {
+        e.preventDefault();
+        var word = $('#search-content').val();
+        if (word.length === 0) {
+            alert('搜索内容不能为空');
+            return ;
         }
+
+        $.pjax({
+            url: '/search?s='+word,
+            container: '.content-body',
+            fragment: '.content-body',                          //来源也的ID
+            timeout: 200000000,
+            show: 'fade',
+            cache: true,  //是否使用缓存
+            push: true,
+            replace: true
+            //scrollTo: 250,
+        })
     });
 
     var a_idx = 1;

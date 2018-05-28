@@ -1,159 +1,157 @@
-<div class="col-lg-4 col-sm-12">
-    {% if sidebar_head is not empty %}
-        {{ sidebar_head|raw }}
-    {% endif %}
+{% if sidebar_head is not empty %}
+    {{ sidebar_head|raw }}
+{% endif %}
 
-    {% if app.user is empty %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa  fa-quote-left"></i> 网站公告
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"
-                            aria-expanded="false">
-                        <i class="fa fa-chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu slidedown">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-check fa-fw"></i> 我知道了
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="panel-body">
-                如果你喜欢Vmoex，请记得注册或者保存网址哦~
-            </div>
-        </div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-user"></i> 我的状态
-            </div>
-            <div class="panel-body">
-                <p>
-                    <strong>今日活跃度</strong>
-                </p>
-                <div class="progress active">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ app.user.activeVal }}" aria-valuemin="0" aria-valuemax="520" style="width: {{ (app.user.activeVal/520)*100 }}%">
-                        <span class="sr-only">{{ app.user.activeVal }}</span>
-                    </div>
-                </div>
-                <div style="padding: 10px 0">
-                    {% if app.user|signed %}
-                        <button type="button" class="btn btn-default btn-sm" style="color: yellowgreen"><i class="fa fa-flag"></i> 已连续签到{{ app.user.signDay }}天！</button>
-                    {% else %}
-                        <button type="button" id="sign-remark" class="btn btn-warning btn-sm"><i class="fa fa-gift"></i> 签到领取奖励</button>
-                    {% endif %}
-                    <button class="btn btn-default btn-sm pull-right"><span class="gold-amount">{{ app.user.gold }}</span> <img src="{{ asset('img/gold@2x.png') }}" height="16" alt="gold" border="0"></button>
-
-                </div>
-                <div class="alert alert-warning" style="margin-bottom: 0">
-                    你的邮箱尚未激活，<a href="javascript:" class="alert-link">点此激活</a>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-
-    <script>
-        $(document).off('click', '#sign-remark');
-        $(document).on('click', '#sign-remark', function () {
-            $.ajax({
-                method: 'POST',
-                url: G_sign_link,
-                success: function (data) {
-                    if (data.ret) {
-                        bootoast({
-                            message: data.msg,
-                            type: 'warning',
-                            position: 'top-center',
-                            icon: undefined,
-                            timeout: 3,
-                            animationDuration: 300,
-                            dismissable: true
-                        });
-                        // and reload
-                        $.pjax.reload('.content-body', {
-                            fragment: '.content-body',                          //来源也的ID
-                            timeout: 200000000,
-                            show: 'fade',
-                            cache: true,  //是否使用缓存
-                            push: true,
-                            replace: true
-                            //scrollTo: 250,
-                        })
-                    }
-                }
-            })
-        });
-    </script>
-
-    <div class="panel panel-default hidden-xs hidden-sm">
+{% if app.user is empty %}
+    <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa  fa-fire"></i> 活跃用户
-        </div>
-        <div class="panel-body">
-            {% set hotUsers = hotUsers() %}
-            {% if hotUsers is not empty %}
-                <ul style="padding-left: 10px">
-                    {% for active in hotUsers %}
-                        <li style="list-style: none;margin: 10px 0;">
-                            <a data-pjax href="{{ path('user_home', {username: active.user.username}) }}">
-                                <img src="{{ active.user.avatar }}" alt="" width="25" height="25">
-                                {{ active.user.nickname }}
-                            </a>
-                            <span class="pull-right">{{ active.val }}活跃度</span>
-                        </li>
-                    {% endfor %}
+            <i class="fa  fa-quote-left"></i> 网站公告
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"
+                        aria-expanded="false">
+                    <i class="fa fa-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu slidedown">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-check fa-fw"></i> 我知道了
+                        </a>
+                    </li>
                 </ul>
-            {% endif %}
+            </div>
         </div>
-
-    </div>
-
-    <div class="panel panel-default hidden-xs hidden-sm">
-        <div class="panel-heading">
-            <span class="glyphicon glyphicon-fire"></span> 今日热门话题
-        </div>
-        <div class="panel-body latest-posts">
-            <ol>
-            {% for post in hotPosts() %}
-                <li>
-                    <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}">{{ post.title }}</a>
-                </li>
-                {% endfor %}
-            </ol>
-        </div>
-    </div>
-
-    <div class="panel panel-default hidden-xs hidden-sm">
-        <div class="panel-heading">
-            <i class="fa fa-comments-o"></i> 最新评论
-        </div>
-        <!-- /.panel-heading -->
         <div class="panel-body">
-            <ul class="chat">
-            {% for comment in hotComments() %}
-                <li class="left clearfix">
-                    <span class="chat-img pull-left">
-                        <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img" width="50" height="50">
-                    </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
-                            <small class="pull-right text-muted">
-                                <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|date('Y-m-d H:i:s') }}
-                            </small>
-                        </div>
-                        <p>{{ comment.content|raw }}</p>
-                    </div>
-                </li>
-            {% endfor %}
-            </ul>
+            如果你喜欢Vmoex，请记得注册或者保存网址哦~
         </div>
-        <!-- /.panel-body -->
     </div>
+{% endif %}
+
+{% if app.user %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-user"></i> 我的状态
+        </div>
+        <div class="panel-body">
+            <p>
+                <strong>今日活跃度</strong>
+            </p>
+            <div class="progress active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ app.user.activeVal }}" aria-valuemin="0" aria-valuemax="128" style="width: {{ (app.user.activeVal/128)*100 }}%">
+                    <span class="sr-only">{{ app.user.activeVal }}</span>
+                </div>
+            </div>
+            <div style="padding: 10px 0">
+                {% if app.user|signed %}
+                    <button type="button" class="btn btn-default btn-sm" style="color: yellowgreen"><i class="fa fa-flag"></i> 已连续签到{{ app.user.signDay }}天！</button>
+                {% else %}
+                    <button type="button" id="sign-remark" class="btn btn-warning btn-sm"><i class="fa fa-gift"></i> 签到领取奖励</button>
+                {% endif %}
+                <button class="btn btn-default btn-sm pull-right"><span class="gold-amount">{{ app.user.gold }}</span> <img src="{{ asset('img/gold@2x.png') }}" height="16" alt="gold" border="0"></button>
+
+            </div>
+            <div class="alert alert-warning" style="margin-bottom: 0">
+                你的邮箱尚未激活，<a href="javascript:" class="alert-link">点此激活</a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+<script>
+    $(document).off('click', '#sign-remark');
+    $(document).on('click', '#sign-remark', function () {
+        $.ajax({
+            method: 'POST',
+            url: G_sign_link,
+            success: function (data) {
+                if (data.ret) {
+                    bootoast({
+                        message: data.msg,
+                        type: 'warning',
+                        position: 'top-center',
+                        icon: undefined,
+                        timeout: 3,
+                        animationDuration: 300,
+                        dismissable: true
+                    });
+                    // and reload
+                    $.pjax.reload('.content-body', {
+                        fragment: '.content-body',                          //来源也的ID
+                        timeout: 200000000,
+                        show: 'fade',
+                        cache: true,  //是否使用缓存
+                        push: true,
+                        replace: true
+                        //scrollTo: 250,
+                    })
+                }
+            }
+        })
+    });
+</script>
+
+<div class="panel panel-default hidden-xs hidden-sm">
+    <div class="panel-heading">
+        <i class="fa  fa-fire"></i> 活跃用户
+    </div>
+    <div class="panel-body">
+        {% set hotUsers = hotUsers() %}
+        {% if hotUsers is not empty %}
+            <ul style="padding-left: 10px">
+                {% for active in hotUsers %}
+                    <li style="list-style: none;margin: 10px 0;">
+                        <a data-pjax href="{{ path('user_home', {username: active.user.username}) }}">
+                            <img src="{{ active.user.avatar }}" alt="" width="25" height="25">
+                            {{ active.user.nickname }}
+                        </a>
+                        <span class="pull-right">{{ active.val }}活跃度</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+</div>
+
+<div class="panel panel-default hidden-xs hidden-sm">
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-fire"></span> 今日热门话题
+    </div>
+    <div class="panel-body latest-posts">
+        <ol>
+        {% for post in hotPosts() %}
+            <li>
+                <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}">{{ post.title }}</a>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+
+<div class="panel panel-default hidden-xs hidden-sm">
+    <div class="panel-heading">
+        <i class="fa fa-comments-o"></i> 最新评论
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <ul class="chat">
+        {% for comment in hotComments() %}
+            <li class="left clearfix">
+                <span class="chat-img pull-left">
+                    <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img" width="50" height="50">
+                </span>
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
+                        <small class="pull-right text-muted">
+                            <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|date('Y-m-d H:i:s') }}
+                        </small>
+                    </div>
+                    <p>{{ comment.content|raw }}</p>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <!-- /.panel-body -->
 </div>
