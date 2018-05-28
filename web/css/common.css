@@ -39,6 +39,7 @@ article.main{
 .home-content-main {
     padding-left:15px;
     background: #fff;
+    border-radius: 3px;
 }
 article span.item-title {
     font-size: 18px;
@@ -96,6 +97,7 @@ h3.border-bottom{
 .comments{
     width: 95%;
     margin-left: 10px;
+    padding-bottom: 10px;
 }
 div.comments > ul > li> span > img{
     width: 50px;
@@ -245,4 +247,30 @@ ul.messages li {
         padding-left: 5px;
         padding-right: 5px;
     }
+    article.main img {
+        max-height: 30px
+    }
+
+    article span.item-title {
+        font-size: 14px;
+    }
+    .post-avatar {
+        vertical-align: text-top;
+    }
+
+}
+
+.content > h2 {
+    margin-top: 0;
+    padding-top: 10px;
+}
+
+.user-home .user-meta {
+    background: #fff;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.user-home .user-meta .btn-sm {
+    margin-bottom: 5px;
 }

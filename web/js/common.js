@@ -82,7 +82,9 @@ $(document).ready(function () {
             push: true,
             replace: true
             //scrollTo: 250,
-        })
+        });
+
+        $('#navbar-collapse').collapse('hide')
     });
 
     var a_idx = 1;
@@ -144,20 +146,21 @@ $(document).ready(function () {
     })
 
     $('nav.navbar-static-top a').click(function (e) {
-        e.preventDefault();
+        if ($(this).attr('href') !== '#') {
+            e.preventDefault();
+            $.pjax({
+                url: $(this).attr('href'),
+                container: '.content-body',
+                fragment: '.content-body',
+                timeout: 200000000,
+                show: 'fade',
+                cache: true,  //是否使用缓存
+                push: true,
+                replace: true
+                //scrollTo: 250,
+            });
 
-        $.pjax({
-            url: $(this).attr('href'),
-            container: '.content-body',
-            fragment: '.content-body',
-            timeout: 200000000,
-            show: 'fade',
-            cache: true,  //是否使用缓存
-            push: true,
-            replace: true
-            //scrollTo: 250,
-        });
-
-        $('#navbar-collapse').collapse('hide')
+            $('#navbar-collapse').collapse('hide')
+        }
     })
 });
