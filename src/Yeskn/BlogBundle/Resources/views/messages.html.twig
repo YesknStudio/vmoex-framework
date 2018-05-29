@@ -9,14 +9,28 @@
                 </div>
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#send" data-toggle="tab">我发出的</a>
+                        <li class="active"><a href="#receive" data-toggle="tab">我接收的</a>
                         </li>
-                        <li><a href="#receive" data-toggle="tab">我接收的</a>
+                        <li><a href="#send" data-toggle="tab">我发出的</a>
                         </li>
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="send">
+                        <div class="tab-pane fade in active" id="receive">
+                            {% if rMessages is not empty %}
+                                <ul class="messages">
+                                    {% for message in rMessages %}
+                                        <li><a data-pjax href="{{ path('user_home', {username: message.sender.username}) }}">{{ message.sender.nickname }}</a>对你说：{{ message.content }} <span class="pull-right">{{ message.createdAt|date('Y-m-d H:i:s') }}</span></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    抱歉，暂时没有任何内容！
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="tab-pane fade" id="send">
                             {% if sMessages is not empty %}
                                 <ul class="messages">
                                     {% for message in sMessages %}
@@ -27,19 +41,6 @@
                                 <div class="alert alert-warning">
                                     抱歉，暂时没有任何内容！
                                 </div>
-                            {% endif %}
-                        </div>
-                        <div class="tab-pane fade" id="receive">
-                            {% if rMessages is not empty %}
-                                <ul class="messages">
-                                    {% for message in rMessages %}
-                                        <li><a data-pjax href="{{ path('user_home', {username: message.sender.username}) }}">{{ message.sender.nickname }}</a>对你说：{{ message.content }} <span class="pull-right">{{ message.createdAt|date('Y-m-d H:i:s') }}</span></li>
-                                    {% endfor %}
-                                </ul>
-                                {% else %}
-                                    <div class="alert alert-warning">
-                                        抱歉，暂时没有任何内容！
-                                    </div>
                             {% endif %}
                         </div>
                     </div>
