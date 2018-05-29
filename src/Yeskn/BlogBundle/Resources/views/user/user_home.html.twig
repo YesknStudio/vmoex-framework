@@ -44,7 +44,7 @@
                 <div class="panel-body">
                     {% set posts = user.posts|slice(0, 20) %}
                     {% if posts is not empty %}
-                        {% for post in posts %}
+                        {% for post in posts|reverse %}
                             <article class="main home-article-main" style="position: relative">
                                 <div class="col-md-12 post-info">
                                         <span class="item-small-title">
@@ -82,7 +82,7 @@
                     {% set comments = user.comments %}
                     {% if comments is not empty %}
                         <div class="container">
-                            {% for comment in comments %}
+                            {% for comment in comments|reverse %}
                                 <div class="row">
                                     <div class="col-md-12">
                                         {{ comment.createdAt| date('Y-m-d H:i:s') }} 发表在 <a data-pjax
