@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Yeskn\BlogBundle\Entity\Chat;
+use Yeskn\BlogBundle\Utils\HtmlPurer;
 
 class ChatController extends Controller
 {
@@ -36,6 +37,18 @@ class ChatController extends Controller
         $content = $request->get('content');
 
         $chat = new Chat();
+
+        $content = strip_tags($content, '<p><br><a><strong><span><i><u><strike><b><font>');
+
+        $htmlPurer  = new HtmlPurer();
+        $content = $htmlPurer->pure($content);
+
+        if (mb_strlen($content) >= 200) {
+            return new JsonResponse([
+                'ret' => 0,
+                'msg' => 'data too long'
+            ]);
+        }
 
         $chat->setUser($this->getUser());
         $chat->setCreatedAt(new \DateTime());

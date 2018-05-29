@@ -14,7 +14,7 @@ assetic:
     filters:
         cssrewrite: ~
         uglifyjs2:
-            bin: /usr/local/bin/uglifyjs
+            bin: '%uglifyjs2_path%'
 
 framework:
     #esi:             ~

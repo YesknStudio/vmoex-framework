@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Comment;
 use Yeskn\BlogBundle\Entity\User;
+use Yeskn\BlogBundle\Utils\HtmlPurer;
 
 class DefaultController extends Controller
 {
@@ -83,6 +84,13 @@ class DefaultController extends Controller
         $content = $request->get('content');
 
         $content = strip_tags($content, '<p><br><a><strong><span><i><u><strike><b><font>');
+
+        $htmlPurer  = new HtmlPurer();
+        $content = $htmlPurer->pure($content);
+
+        if (mb_strlen($content) > 500) {
+            return new JsonResponse(['ret' => 0, 'msg' => 'data too long']);
+        }
 
         $comment = new Comment();
 
