@@ -146,7 +146,7 @@ $(document).ready(function () {
     })
 
     $('nav.navbar-static-top a').click(function (e) {
-        if ($(this).attr('href') !== '#') {
+        if ($(this).attr('href') !== '#' && $(this).attr('href') !== '/logout') {
             e.preventDefault();
             $.pjax({
                 url: $(this).attr('href'),
