@@ -86,10 +86,19 @@ class DefaultController extends Controller
         $content = strip_tags($content, '<p><br><a><strong><span><i><u><strike><b><font>');
 
         $htmlPurer  = new HtmlPurer();
-        $content = $htmlPurer->pure($content);
+        $content = $htmlPurer->pure($content)->getResult();
 
-        if (empty($content) or mb_strlen($content) > 500) {
+        if (empty(strip_tags($content)) or mb_strlen($content) > 500) {
             return new JsonResponse(['ret' => 0, 'msg' => 'data too long or too short']);
+        }
+
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+
+        if ($user->getGold() <= 0) {
+            return new JsonResponse(['ret' => 0, 'msg' => 'no gold']);
         }
 
         $comment = new Comment();
@@ -101,6 +110,14 @@ class DefaultController extends Controller
         $comment->setReplyTo(0);
 
         $em->persist($comment);
+
+        $cost = 1;
+
+        if ($htmlPurer->hasColor()) {
+            $cost = 5;
+        }
+
+        $user->setGold($user->getGold()-$cost);
 
         $em->flush();
 

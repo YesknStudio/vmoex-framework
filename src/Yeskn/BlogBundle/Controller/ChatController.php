@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Yeskn\BlogBundle\Entity\Chat;
+use Yeskn\BlogBundle\Entity\User;
 use Yeskn\BlogBundle\Utils\HtmlPurer;
 
 class ChatController extends Controller
@@ -41,17 +42,34 @@ class ChatController extends Controller
         $content = strip_tags($content, '<p><br><a><strong><span><i><u><strike><b><font>');
 
         $htmlPurer  = new HtmlPurer();
-        $content = $htmlPurer->pure($content);
+        $content = $htmlPurer->pure($content)->getResult();
 
-        if (empty($content) or mb_strlen($content) >= 200) {
+        if (empty(strip_tags($content)) or mb_strlen($content) >= 200) {
             return new JsonResponse(['ret' => 0, 'msg' => 'data too long or too short']);
         }
 
-        $chat->setUser($this->getUser());
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+
+        if ($user->getGold() <= 0) {
+            return new JsonResponse(['ret' => 0, 'msg' => 'no gold']);
+        }
+
+        $chat->setUser($user);
         $chat->setCreatedAt(new \DateTime());
         $chat->setContent($content);
 
         $em = $this->getDoctrine()->getManager();
+
+          $cost = 1;
+
+        if ($htmlPurer->hasColor()) {
+            $cost = 5;
+        }
+
+        $user->setGold($user->getGold()-$cost);
 
         $em->persist($chat);
         $em->flush();

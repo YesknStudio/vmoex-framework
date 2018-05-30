@@ -13,6 +13,10 @@ use PHPHtmlParser\Dom;
 
 class HtmlPurer
 {
+    private $result = '';
+
+    private $hasColor = false;
+
     /**
      * @var Dom $handler
      */
@@ -20,7 +24,7 @@ class HtmlPurer
 
     /**
      * @param $html
-     * @return string
+     * @return HtmlPurer
      */
     public function pure($html)
     {
@@ -32,7 +36,8 @@ class HtmlPurer
 
         $this->clearDOM($dom);
 
-        return $dom->root->outerHtml();
+        $this->result = $dom->root->outerHtml();
+        return $this;
     }
 
     /**
@@ -65,10 +70,12 @@ class HtmlPurer
                 }
 
                 if (!empty($bgColor)) {
+                    $this->hasColor = true;
                     $node->setAttribute('style', 'background-color:'.$bgColor);
                 }
 
                 if (!empty($fontColor)) {
+                    $this->hasColor = true;
                     $node->setAttribute('color', $fontColor);
                 }
             }
@@ -106,6 +113,15 @@ class HtmlPurer
         foreach ($dom->root->getIterator() as $key => &$item) {
             $this->clearNode($item);
         }
+    }
+
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    public function hasColor() {
+        return $this->hasColor;
     }
 
 }
