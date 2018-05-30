@@ -24,13 +24,13 @@ $(document).ready(function () {
     });
 
     if ($.support.pjax) {
-        $(document).pjax('a[data-pjax]', '.content-body', {        // 本页面的ID
-            fragment: '.content-body',                          //来源也的ID
+        $(document).pjax('a[data-pjax]', '.content-body', {
+            fragment: '.content-body',
             timeout: 200000000,
             show: 'fade',
-            cache: true,  //是否使用缓存
+            cache: true,
             push: true,
-            replace: true
+            replace:false,
             //scrollTo: 250,
         });
 
@@ -42,20 +42,26 @@ $(document).ready(function () {
         });
 
         $(document).on('pjax:success', function (data, status, xhr, options) {
-            if (data.relatedTarget) {
-                if ($.trim(data.relatedTarget.innerText) === 'Vmoex') {
-                    $('title').text('Vmoex - 打造最美好的二次元社区');
-                } else {
-                    $('title').text(data.relatedTarget.innerText + '- Vmoex');
-                }
-            }
+            // if (data.relatedTarget) {
+            //     if ($.trim(data.relatedTarget.innerText) === 'Vmoex') {
+            //         $('title').text('Vmoex - 打造最美好的二次元社区');
+            //     } else {
+            //         $('title').text(data.relatedTarget.innerText + '- Vmoex');
+            //     }
+            // }
         });
 
         $(document).on('pjax:complete', function () {
             NProgress.done();
         });
 
-        $(document).on('pjax:error', function () {});
+        $(document).on('pjax:error', function () {
+            NProgress.done();
+        });
+
+        $(document).on('pjax:end', function () {
+            NProgress.done();
+        });
     }
 
     $('.content-body').on('click', 'li.disabled a', function (e) {
