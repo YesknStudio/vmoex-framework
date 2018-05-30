@@ -88,6 +88,7 @@ class GlobalValue extends \Twig_Extension
             ->createQueryBuilder('p')
             ->where('p.createdAt >= :yd')->setParameter('yd', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
             ->orderBy('p.val', 'DESC')
+            ->groupBy('p.user')
             ->setMaxResults(8)
             ->getQuery()
             ->getResult();
