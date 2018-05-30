@@ -247,6 +247,16 @@ ul.messages li {
     margin-bottom: 10px;
 }
 
+@media (min-width: 767px) {
+    .navbar-avatar-mobile {
+        display: none !important;
+    }
+
+    #navbar-collapse-user {
+        display: none !important;
+    }
+}
+
 @media (max-width: 767px) {
     .container {
         padding-left: 5px;
@@ -262,7 +272,56 @@ ul.messages li {
     .post-avatar {
         vertical-align: text-top;
     }
+    .navbar-form .form-group {
+        display: inline-block;
+    }
 
+    .navbar-form {
+        text-align: center;
+    }
+
+    ul.navbar-left li {
+        text-align: center;
+    }
+
+    .navbar-avatar-mobile {
+        display: block;
+        padding: 0;
+        border: none;
+        position: relative;
+        float: right;
+        margin-top: 8px;
+        margin-right: 10px;
+    }
+    .navbar-avatar-mobile:focus {
+        background: #ddd;
+    }
+    .navbar-avatar-mobile img {
+        width: 33px;
+        height: 33px;
+    }
+    .navbar-right {
+        display: none;
+    }
+    .navbar-item-custom {
+        border: none;
+        margin-left: 0;
+        padding-left: 5px;
+        margin-right: 5px;
+        padding-right: 5px;
+    }
+    .navbar-item-custom:focus {
+        background-color: #f8f8f8 !important;
+    }
+    .navbar-item-alert {
+        margin-right: 0;
+    }
+    .navbar-item-custom span.badge {
+        background: #FFC125;
+    }
+    .navbar-item-custom a {
+        text-decoration: none;
+    }
 }
 
 .content > h2 {

@@ -160,7 +160,8 @@ $(document).ready(function () {
                 //scrollTo: 250,
             });
 
-            $('#navbar-collapse').collapse('hide')
+            $('#navbar-collapse').collapse('hide');
+            $('#navbar-collapse-user').collapse('hide')
         }
     })
 });
