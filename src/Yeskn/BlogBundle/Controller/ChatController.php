@@ -43,11 +43,8 @@ class ChatController extends Controller
         $htmlPurer  = new HtmlPurer();
         $content = $htmlPurer->pure($content);
 
-        if (mb_strlen($content) >= 200) {
-            return new JsonResponse([
-                'ret' => 0,
-                'msg' => 'data too long'
-            ]);
+        if (empty($content) or mb_strlen($content) >= 200) {
+            return new JsonResponse(['ret' => 0, 'msg' => 'data too long or too short']);
         }
 
         $chat->setUser($this->getUser());
