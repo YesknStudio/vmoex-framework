@@ -86,7 +86,7 @@ $(document).ready(function () {
             show: 'fade',
             cache: true,  //是否使用缓存
             push: true,
-            replace: true
+            replace: false
             //scrollTo: 250,
         });
 
@@ -162,7 +162,7 @@ $(document).ready(function () {
                 show: 'fade',
                 cache: true,  //是否使用缓存
                 push: true,
-                replace: true
+                replace: false
                 //scrollTo: 250,
             });
 
