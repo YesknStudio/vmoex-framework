@@ -6,3 +6,4 @@ web/bundles/
 web/lib
 web/js/*.js
 web/css/*.css
+web/avatar/

@@ -121,9 +121,6 @@ div.comments > ul > li> span > img{
     text-align: left;
     border-bottom: 1px solid #e2e2e2;
 }
-.copy{
-    cursor: pointer;
-}
 
 .login-panel {
     margin-top: 0  !important;
@@ -337,4 +334,29 @@ ul.messages li {
 
 .user-home .user-meta .btn-sm {
     margin-bottom: 5px;
+}
+
+footer {
+    display: flex;
+    height: 301px;
+    background: url('/img/763552f474305423.png');
+    background-position: bottom right;
+    background-repeat: no-repeat
+}
+
+footer .copy {
+    cursor: pointer;
+    text-align: center;
+    padding: 5px
+}
+
+footer .power {
+    color: rgb(138, 138, 138);
+    text-align: center;
+    padding: 5px
+}
+
+footer .power span {
+    color: #e27575;
+    font-size: 14px;
 }

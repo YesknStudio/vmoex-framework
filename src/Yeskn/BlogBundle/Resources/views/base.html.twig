@@ -4,22 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Jake">
-    {% block title %}  <title>Vmoex - 努力打造最美好的二次元社区</title> {% endblock %}
+    <meta name="description" content="Vmoex - 努力打造最美好的二次元社区">
+    <meta name="author" content="Vmoex">
+    {% block title %} <title>Vmoex - 努力打造最美好的二次元社区</title> {% endblock %}
     {% block head_css_link %}
         {% stylesheets
             'lib/bootstrap/dist/css/bootstrap.min.css'
-            'lib/metisMenu/dist/metisMenu.min.css'
-            'css/timeline.css'
-            'css/sb-admin-2.css'
-            'lib/morrisjs/morris.css'
             'lib/font-awesome/css/font-awesome.min.css'
             'lib/wangEditor/dist/css/wangEditor.min.css'
             'lib/nprogress/nprogress.css'
-            'css/common.css'
             'lib-man/bootoast/css/bootoast.css'
             'lib-man/live2d/css/live2d.css'
+            'css/common.css'
             filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -37,9 +33,9 @@
         <![endif]-->
 
         <script>
-            var G_info_link = '{{ path('info') }}';
-            var G_set_message_red_link = '{{ path('set_message_red') }}';
-            var G_sign_link = '{{ path('sign') }}';
+            let G_info_link = '{{ path('info') }}';
+            let G_set_message_red_link = '{{ path('set_message_red') }}';
+            let G_sign_link = '{{ path('sign') }}';
         </script>
     {% endblock %}
 </head>
@@ -88,71 +84,26 @@
 </div>
 
 {% block footer %}
-    <footer style="display: flex;height: 301px;background: url('{{ asset('img/763552f474305423.png') }}');background-position: bottom right;background-repeat: no-repeat">
+    <footer>
         <div class="container">
-            <div style="">
-                <p class="copy" style="text-align: center;padding: 5px" data-original-title="powered by Yeskn">© 2018 Vmoex - 打造最美好的二次元社区</p>
-                <p style="color: rgb(138, 138, 138);text-align: center;padding: 5px">Designed by <span style="color: #e27575;font-size: 14px;">❤</span> 彩虹の恋しい</p>
-            </div>
+            <p class="copy" {#data-original-title="给你一个么么哒~"#}>© 2018 Vmoex - 打造最美好的二次元社区</p>
+            <p class="power" >Designed with <span>❤</span> 彩虹の恋しい</p>
         </div>
     </footer>
 {% endblock %}
 
-<div id="landlord" style="left:5px;bottom:0px;">
-    <div class="message" style="opacity:0"></div>
-    <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
-    <div class="live_talk_input_body">
-        <div class="live_talk_input_name_body">
-            <input name="name" type="text" class="live_talk_name white_input" id="AIuserName" autocomplete="off" placeholder="你的名字" />
-        </div>
-        <div class="live_talk_input_text_body">
-            <input name="talk" type="text" class="live_talk_talk white_input" id="AIuserText" autocomplete="off" placeholder="要和我聊什么呀？"/>
-            <button type="button" class="live_talk_send_btn" id="talk_send">发送</button>
-        </div>
-    </div>
-    <input name="live_talk" id="live_talk" value="1" type="hidden" />
-    <div class="live_ico_box">
-        <div class="live_ico_item type_info" id="showInfoBtn"></div>
-        <div class="live_ico_item type_talk" id="showTalkBtn"></div>
-        <div class="live_ico_item type_music" id="musicButton"></div>
-        <div class="live_ico_item type_youdu" id="youduButton"></div>
-        <div class="live_ico_item type_quit" id="hideButton"></div>
-        <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
-        <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
-
-        <input name="live2dBGM" value="https://t1.aixinxi.net/o_1c56a1k361lh93t14ha1cmi238a.mp3" type="hidden">
-        <input name="live2dBGM" value="https://t1.aixinxi.net/o_1c56a3tc42tka7q52q1jksik3a.mp3" type="hidden">
-        <input name="live2dBGM" value="https://t1.aixinxi.net/o_1c56a30tn12gp1ptp6o10hm10gsa.mp3" type="hidden">
-        <input name="live2dBGM" value="https://t1.aixinxi.net/o_1c56a58rn1m0e89q1kht1l1hctja.mp3" type="hidden">
-
-        <input id="duType" value="douqilai,l2d_caihong" type="hidden">
-    </div>
-</div>
-<div id="open_live2d">召唤伊斯特瓦尔</div>
-
-<script>
-    var message_Path = '/lib-man/live2d/';//资源目录，如果目录不对请更改
-    var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
-
-    var l2dHidden = localStorage.getItem('live2dhidden');
-    if (l2dHidden === null) {
-        localStorage.setItem('live2dhidden', 0);
-    }
-</script>
+{% include '@YesknBlog/landlord.html.twig' %}
 
 {% block foot_js_link %}
     {% javascripts
         'lib/bootstrap/dist/js/bootstrap.min.js'
-        'lib/metisMenu/dist/metisMenu.min.js'
-        'lib/bootstrap/js/popover.js'
-        'js/sb-admin-2.js'
         'lib/nprogress/nprogress.js'
         'lib/jquery-pjax/jquery.pjax.js'
         'lib/wangEditor/dist/js/wangEditor.min.js'
         'lib-man/bootoast/js/bootoast.js'
-        'js/common.js'
         'lib-man/live2d/js/live2d.js'
         'lib-man/live2d/js/message.js'
+        'js/common.js'
         filter='uglifyjs2' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
