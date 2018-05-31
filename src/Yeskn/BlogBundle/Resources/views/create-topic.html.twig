@@ -1,0 +1,94 @@
+{% extends '@YesknBlog/base.html.twig' %}
+
+{% block main %}
+
+    <style>
+        .wangEditor-txt{
+            height: 400px;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    创建新主题
+                </div>
+                <div class="panel-body">
+                    <form action="{{ path('create_topic') }}" method="post" id="createTopic">
+                        <div class="form-group">
+                            <label class="control-label required" for="post_title">标题</label>
+                            <input type="text" id="post_title" name="title" required="required" maxlength="100" autofocus="autofocus" class="form-control">
+                        </div>
+
+
+                        <div class="hidden">
+                            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label required" for="editor-trigger">内容</label>
+                            <div id="editor-trigger"><p></p></div>
+                            <textarea id="editor-trigger" style="display:none;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="select-node">选择节点</label>
+                            <select name="node" id="select-node" class="form-control">
+                                <option value="1">手办</option>
+                                <option value="2">追剧</option>
+                                <option value="3">日漫</option>
+                                <option value="4">日漫</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" value="submit" class="btn btn-info">提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       $(function () {
+           let editor = new wangEditor('editor-trigger');
+
+           editor.config.printLog = false;
+
+           editor.config.menus = [
+               'source',
+               '|',
+               'bold',
+               'quote',
+               'underline',
+               'italic',
+               'strikethrough',
+               'eraser',
+               'forecolor',
+               'bgcolor',
+               'insertcode'
+           ];
+
+           editor.create();
+
+           $(document).off('submit', 'form#createTopic');
+           $(document).on('submit', 'form#createTopic', function () {
+               $('[name="content"]').val(editor.$txt.html() );
+           });
+       })
+    </script>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            创建主题指南
+        </div>
+        <div class="panel-body">
+            <ol>
+                <li>遵守相关法律</li>
+                <li>不允许多次发布主题相似的帖子</li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}

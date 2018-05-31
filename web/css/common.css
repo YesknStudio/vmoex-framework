@@ -360,3 +360,12 @@ footer .power span {
     color: #e27575;
     font-size: 14px;
 }
+
+.post-meta {
+    color: #9d9d9d;
+}
+
+.post-meta a {
+    font-weight: bold;
+    color: #778087;
+}

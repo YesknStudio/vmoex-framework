@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Comment;
+use Yeskn\BlogBundle\Entity\Post;
 use Yeskn\BlogBundle\Entity\User;
 use Yeskn\BlogBundle\Utils\HtmlPurer;
 
@@ -28,7 +29,7 @@ class DefaultController extends Controller
     {
         $pagesize = 25;
         $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
-            ->findBy([], ['id' => 'DESC'], $pagesize, $pagesize*($page-1));
+            ->findBy([], ['updatedAt' => 'DESC'], $pagesize, $pagesize*($page-1));
 
         $count = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
             ->createQueryBuilder('a')
@@ -48,7 +49,7 @@ class DefaultController extends Controller
 
     /**
      * @inheritdoc
-     * @Route("/post/{id}", name="yeskn_blog_show")
+     * @Route("/topic/{id}", name="yeskn_blog_show", requirements={"id": "[1-9]\d*"})
      */
     public function postShowAction($id)
     {
@@ -67,7 +68,55 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/post/{postId}/comment/add", name="add_comment_to_post")
+     * 创建主题
+     *
+     * @Route("/topic/create", name="create_topic")
+     */
+    public function createPost(Request $request)
+    {
+        if ($request->isMethod('GET')) {
+            return $this->render('@YesknBlog/create-topic.html.twig');
+        }
+
+        $title = strip_tags($request->get('title'));
+        $content = $request->get('content');
+
+        $content = strip_tags($content, '<blockquote><code><p><br><a><strong><span><i><u><strike><b><font>');
+
+        $htmlPurer  = new HtmlPurer();
+        $content = $htmlPurer->pure($content)->getResult();
+
+        if (empty($title) or empty(strip_tags($content))) {
+            return new JsonResponse(['ret' => 0, 'msg' => '内容为空!']);
+        }
+
+        $post = new Post();
+
+        $post->setTitle($title);
+        $post->setContent($content);
+        $post->setViews(mt_rand(1, 3));
+        $post->setIsTop(false);
+        $post->setAuthor($this->getUser());
+        $post->setIsDeleted(false);
+        $post->setExcerpt('');
+        $post->setCover('');
+        $post->setStatus('published');
+
+        $date = new \DateTime();
+
+        $post->setCreatedAt($date);
+        $post->setUpdatedAt($date);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($post);
+        $em->flush();
+
+        return $this->redirectToRoute('yeskn_blog_show', ['id' => $post->getId()]);
+    }
+
+    /**
+     * @Route("/topic/{postId}/comment/add", name="add_comment_to_post")
      *
      * @param $request
      * @param $postId
@@ -118,6 +167,8 @@ class DefaultController extends Controller
         }
 
         $user->setGold($user->getGold()-$cost);
+
+        $post->setUpdatedAt(new \DateTime());
 
         $em->flush();
 
