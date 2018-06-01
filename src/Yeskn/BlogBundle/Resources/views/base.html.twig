@@ -7,7 +7,8 @@
     <meta name="description" content="Vmoex - 努力打造最美好的二次元社区">
     <meta name="author" content="Vmoex">
     {% block title %} <title>Vmoex - 努力打造最美好的二次元社区</title> {% endblock %}
-    {% block head_css_link %}
+    {% if app.request.get('_pjax') is empty %}
+        {% block head_css_link %}
         {% stylesheets
             'lib/bootstrap/dist/css/bootstrap.min.css'
             'lib/font-awesome/css/font-awesome.min.css'
@@ -19,15 +20,15 @@
             'lib-man/live2d/css/live2d.css'
             'css/common.css'
             filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}"/>
+    <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
-    {% endblock %}
+        {% endblock %}
 
-    {% block head_js_link %}
+        {% block head_js_link %}
         {% javascripts
             'lib/jquery/dist/jquery.min.js'
             filter='uglifyjs2' %}
-            <script src="{{ asset_url }}"></script>
+        <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -39,7 +40,8 @@
             let G_set_message_red_link = '{{ path('set_message_red') }}';
             let G_sign_link = '{{ path('sign') }}';
         </script>
-    {% endblock %}
+        {% endblock %}
+    {% endif %}
 </head>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -65,9 +67,12 @@
 </div>
 
 <body>
-{% block navbar %}
-    {% include '@YesknBlog/nav.html.twig' %}
-{% endblock %}
+
+{% if app.request.get('_pjax') is empty %}
+    {% block navbar %}
+        {% include '@YesknBlog/nav.html.twig' %}
+    {% endblock %}
+{% endif %}
 
 <div class="content-body container">
     {% block page_wraper %}
@@ -85,18 +90,19 @@
     {% endblock %}
 </div>
 
-{% block footer %}
+{% if app.request.get('_pjax') is empty %}
+    {% block footer %}
     <footer>
         <div class="container">
             <p class="copy" {#data-original-title="给你一个么么哒~"#}>© 2018 Vmoex - 打造最美好的二次元社区</p>
             <p class="power" >Designed with <span>❤</span> 彩虹の恋しい</p>
         </div>
     </footer>
-{% endblock %}
+    {% endblock %}
 
-{% include '@YesknBlog/landlord.html.twig' %}
+    {% include '@YesknBlog/landlord.html.twig' %}
 
-{% block foot_js_link %}
+    {% block foot_js_link %}
     {% javascripts
         'lib/bootstrap/dist/js/bootstrap.min.js'
         'lib/nprogress/nprogress.js'
@@ -107,8 +113,9 @@
         'lib-man/live2d/js/message.js'
         'js/common.js'
         filter='uglifyjs2' %}
-        <script src="{{ asset_url }}"></script>
+    <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-{% endblock %}
+    {% endblock %}
+{% endif %}
 </body>
 </html>

@@ -260,11 +260,12 @@ ul.messages li {
         padding-right: 5px;
     }
     article.main img {
-        max-height: 30px
+        height: 30px;
+        width: 30px;
     }
 
     article span.item-title {
-        font-size: 14px;
+        font-size: 16px;
     }
     .post-avatar {
         vertical-align: text-top;
