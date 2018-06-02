@@ -60,18 +60,14 @@
                                                href="{{ path('yeskn_blog_show' , {'id' : post.id}) }}">{{ post.title }}</a>
                                         </span>
                                     <div class="post-meta">
+                                         <span class="category">
+                                             <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name }}</a>
+                                         </span>
                                         <span><i class="fa fa-clock-o"></i> {{ post.createdAt|date("Y-m-d") }}</span>
                                         <span><i class="fa fa-eye"></i> {{ post.views }}</span>
                                         {% if post.comments.count %}
                                             <span><i class="fa fa-commenting-o"></i> <a data-pjax
                                                                                         href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}</a></span>
-                                        {% endif %}
-                                        {% if post.categories is not null %}
-                                            <span><i class="fa  fa-folder-o"></i>
-                                                {% for cat in post.categories %}
-                                                    {{ cat.name }}
-                                                {% endfor %}
-                                </span>
                                         {% endif %}
                                     </div>
                                 </div>

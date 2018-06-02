@@ -33,12 +33,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="select-node">选择节点</label>
-                            <select name="node" id="select-node" class="form-control">
-                                <option value="1">手办</option>
-                                <option value="2">追剧</option>
-                                <option value="3">日漫</option>
-                                <option value="4">日漫</option>
+                            <label for="select-node">选择板块</label>
+                            <select name="tab" id="select-tab" class="form-control">
+                                {% for tab in tabs %}
+                                    <option value="{{ tab.alias }}">{{ tab.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
 

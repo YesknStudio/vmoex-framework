@@ -138,7 +138,12 @@ class DefaultController extends Controller
     public function createPost(Request $request)
     {
         if ($request->isMethod('GET')) {
-            return $this->render('@YesknBlog/create-topic.html.twig');
+
+            $tabs = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')->findAll();
+
+            return $this->render('@YesknBlog/create-topic.html.twig', [
+                'tabs' => $tabs
+            ]);
         }
 
         $title = strip_tags($request->get('title'));
@@ -153,6 +158,8 @@ class DefaultController extends Controller
             return new JsonResponse(['ret' => 0, 'msg' => '内容为空!']);
         }
 
+        $tab = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
+            ->findOneBy(['alias' => $request->get('tab')]);
         $post = new Post();
 
         $post->setTitle($title);
@@ -164,6 +171,7 @@ class DefaultController extends Controller
         $post->setExcerpt('');
         $post->setCover('');
         $post->setStatus('published');
+        $post->setTab($tab);
 
         $date = new \DateTime();
 
