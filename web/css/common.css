@@ -442,3 +442,23 @@ article.main span.category a, .post-meta span.category a{
 ul.pagination {
    padding: 0 15px;
 }
+
+.mod-text {
+    background-color: #66A3DF;
+    font-size: xx-small;
+    padding: 1px 5px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.author-label {
+    background-color: #4cae4c;
+    font-size: xx-small;
+    padding: 1px 5px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 4px;
+}
