@@ -143,7 +143,7 @@
                     <div class="header">
                         <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
                         <small class="pull-right text-muted">
-                            <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|date('Y-m-d H:i:s') }}
+                            <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|ago }}
                         </small>
                     </div>
                     <p>{{ comment.content|raw }}</p>

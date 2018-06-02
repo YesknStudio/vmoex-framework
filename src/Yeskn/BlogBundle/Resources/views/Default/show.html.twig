@@ -13,7 +13,7 @@
         <h2>{{ post.title }}</h2>
         <p class="post-meta">
             <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
-            <span><i class="fa fa-clock-o"></i> {{ post.createdAt|date("Y-m-d") }}</span>
+            <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
             <span><i class="fa fa-eye"></i> {{ post.views }}</span>
             {% if post.categories is not null %}
                 <span><i class="fa  fa-folder-o"></i>
@@ -49,10 +49,19 @@
                             <div class="header">
                                 <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
                                 <small class="pull-right text-muted">
-                                    <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|date('Y-m-d H:i:s') }}
+
                                 </small>
                             </div>
                             <p>{{ comment.content|raw }}</p>
+
+                            <div class="comment-footer">
+                                #{{ loop.index }} 来自哪里？
+                                <span><i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|ago }}</span>
+                                <span class="thumb thumb-up"><i class="fa fa-thumbs-o-up"></i> 23</span>
+                                <span class="thumb thumb-down"><i class="fa fa-thumbs-o-down"></i> 1</span>
+
+                                <span class="pull-right">功能</span>
+                            </div>
                         </div>
                     </li>
                 {% endfor %}

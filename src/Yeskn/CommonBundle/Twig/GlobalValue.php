@@ -55,6 +55,29 @@ class GlobalValue extends \Twig_Extension
         }
     }
 
+    public function ago(\DateTime $dateTime)
+    {
+        $current = time();
+        $ts = $dateTime->getTimestamp();
+
+        $diff = $current - $ts;
+
+        if ($diff < 60) {
+            return (intval($diff) ?: 1).'秒前';
+        } else if ($diff < 60*60){
+            $m = intval($diff/60);
+            $s = intval($diff%60);
+            return $m.'分钟' . ($s ? $s.'秒' : '') . '前';
+        } else if ($diff < 24*60*60){
+            $h = intval($diff/(60*60));
+            $m = intval($diff%(60*60));
+            return $h . '小时' . $m . '分钟前';
+        } else {
+            $d = intval($diff/(24*60*60));
+            return $d . '天前';
+        }
+    }
+
     public function hotTags()
     {
         $tags = $this->em->getRepository('YesknBlogBundle:Tag')->findAll();
@@ -110,6 +133,7 @@ class GlobalValue extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('signed', array($this,'signed')),
+            new \Twig_SimpleFilter('ago', array($this,'ago')),
         );
     }
 

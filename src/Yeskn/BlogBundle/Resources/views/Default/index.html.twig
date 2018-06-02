@@ -16,18 +16,20 @@
                             <p class="post-meta">
                         <span><i class="fa fa-user"></i>
                             <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
-                                <span><i class="fa fa-clock-o"></i> {{ post.createdAt|date("Y-m-d") }}</span>
+
+                                {% if post.categories is not null %}
+                                    <span class="category">
+                                        {% for cat in post.categories %}
+                                            <a href="#" class="badge">{{ cat.name }}</a>
+                                        {% endfor %}
+                                    </span>
+                                {% endif %}
+
+                                <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
                                 <span><i class="fa fa-eye"></i> {{ post.views }}</span>
                                 {% if post.comments.count %}
                                     <span><i class="fa fa-commenting-o"></i> <a data-pjax
                                                                                 href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}</a></span>
-                                {% endif %}
-                                {% if post.categories is not null %}
-                                    <span><i class="fa  fa-folder-o"></i>
-                                        {% for cat in post.categories %}
-                                            {{ cat.name }}
-                                        {% endfor %}
-                                </span>
                                 {% endif %}
                             </p>
                         </div>

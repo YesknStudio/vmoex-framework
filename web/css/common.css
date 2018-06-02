@@ -370,3 +370,25 @@ footer .power span {
     font-weight: bold;
     color: #778087;
 }
+
+.comment-footer {
+    margin-top: 5px;
+    font-size: 12px;
+    color: darkgray;
+}
+
+.comment-footer span {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.comment-footer span.thumb {
+    cursor: pointer;
+}
+
+article.main span.category a{
+    font-weight: normal;
+    background-color: #f5f5f5;
+    color: #999;
+
+}
