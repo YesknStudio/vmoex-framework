@@ -388,11 +388,10 @@ footer .power span {
     cursor: pointer;
 }
 
-article.main span.category a{
+article.main span.category a, .post-meta span.category a{
     font-weight: normal;
     background-color: #f5f5f5;
     color: #999;
-
 }
 
 .post-actions {
@@ -407,6 +406,8 @@ article.main span.category a{
 }
 .post-actions span.last {
     margin-right: 0;
+   color: darkgray;
+    font-size: 12px;
 }
 
 .user-home .user-online {
@@ -418,4 +419,8 @@ article.main span.category a{
     background: rgb(76, 175, 80);
     color: white;
     border-radius: 4px;
+}
+
+.user-meta small {
+    display: inline-block;
 }

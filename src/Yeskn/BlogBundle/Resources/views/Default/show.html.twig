@@ -8,15 +8,16 @@
             <h2>{{ post.title }}</h2>
             <p class="post-meta">
                 <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
-                <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
-                <span><i class="fa fa-eye"></i> {{ post.views }}</span>
                 {% if post.categories is not null %}
-                    <span><i class="fa  fa-folder-o"></i>
+                    <span class="category">
                         {% for cat in post.categories %}
-                            {{ cat.name }}
+                            <a href="#" class="badge">{{ cat.name }}</a>
                         {% endfor %}
                 </span>
                 {% endif %}
+                <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
+                <span><i class="fa fa-eye"></i> {{ post.views }}</span>
+
             </p>
             <div class="post-content">
                 {{ post.content|raw }}
@@ -38,7 +39,7 @@
             <span><a href="">屏蔽</a></span>
             <span><a href="">举报</a></span>
 
-            <span class="pull-right last">30次感谢</span>
+            <span class="pull-right last">12次收藏 / 30次感谢</span>
         </div>
         <div class="comments" id="comments">
             <h3 class="border-bottom">评论</h3>
@@ -59,12 +60,15 @@
                                 <p>{{ comment.content|raw }}</p>
 
                                 <div class="comment-footer">
-                                    #{{ loop.index }} 来自哪里？
-                                    <span><i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|ago }}</span>
+                                    #{{ loop.index }}
+                                    {% if comment.user.remark %}
+                                        <span>[ {{ comment.user.remark }} ]</span>
+                                    {% endif %}
+                                    <span> {{ comment.createdAt|ago }}</span>
                                     <span class="thumb thumb-up"><i class="fa fa-thumbs-o-up"></i> 23</span>
                                     <span class="thumb thumb-down"><i class="fa fa-thumbs-o-down"></i> 1</span>
 
-                                    <span class="pull-right">功能</span>
+                                    <span class="pull-right"> <i class="fa fa-ellipsis-h"></i></span>
                                 </div>
                             </div>
                         </li>
@@ -100,13 +104,16 @@
           editor.config.menus = [
               'source',
               '|',     // '|' 是菜单组的分割线
+              'link',
+              'unlink',
               'bold',
               'underline',
               'italic',
               'strikethrough',
-              'eraser',
               'forecolor',
-              'bgcolor'
+              'bgcolor',
+              '|',
+              'eraser'
           ];
 
           // 上传图片
