@@ -50,7 +50,7 @@
             <div class="well">{{ '暂时没有任何文档！' }}</div>
         {% endif %}
         <ul class="pagination">
-            {% if pageData['currentPage']-1 <= 0 %}
+            {% if pageData.currentPage -1 <= 0 %}
                 <li class="disabled">
                     <a href="#">&laquo;</a>
                 </li>
@@ -60,15 +60,38 @@
                 </li>
             {% endif %}
 
-            {% for p in 1..pageData['allPage'] %}
-                {% if p == pageData['currentPage'] %}
+            {% if pageData.currentPage > 3 %}
+                <li class="disabled">
+                    <a href="#">...</a>
+                </li>
+            {% endif %}
+
+            {% for p in 1..pageData.allPage %}
+                {% if p < pageData.currentPage - 2 %}
+                {% endif %}
+
+                {% if p == pageData.currentPage %}
                     <li class="active"><a href="javascript:">{{ p }}</a></li>
-                {% else %}
+                {% endif %}
+
+
+                {% if p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage+2 %}
                     <li><a href="{{ path('blog_index_paginated',{'page':p}) }}" data-pjax>{{ p }}</a></li>
                 {% endif %}
 
+
+                {% if p > pageData.currentPage+2 %}
+                {% endif %}
             {% endfor %}
-            <li {% if pageData['currentPage']+1 > pageData['allPage'] %} class="disabled" {% endif %}>
+
+            {% if pageData.allPage > pageData.currentPage+2 %}
+                <li class="disabled">
+                    <a href="#">...</a>
+                </li>
+            {% endif %}
+
+
+            <li {% if pageData.currentPage == pageData.allPage %} class="disabled" {% endif %}>
                 <a href="{{ path('blog_index_paginated',{'page':pageData['currentPage']+1}) }}" data-pjax>&raquo;
                 </a>
             </li>
