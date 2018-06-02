@@ -42,7 +42,7 @@ article.main{
     border-radius: 3px;
 }
 article span.item-title {
-    font-size: 18px;
+    font-size: 16px;
     display: inline-block;
     padding: 10px 0;
 }
@@ -407,4 +407,15 @@ article.main span.category a{
 }
 .post-actions span.last {
     margin-right: 0;
+}
+
+.user-home .user-online {
+    vertical-align: super ;
+    margin-left: 10px;
+    padding: 0 4px;
+    display: inline-block;
+    font-size: 12px;
+    background: rgb(76, 175, 80);
+    color: white;
+    border-radius: 4px;
 }

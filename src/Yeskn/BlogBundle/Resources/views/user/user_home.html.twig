@@ -13,11 +13,22 @@
                             <div class="header">
                                 <strong class="primary-font home-name"><a
                                             href="{{ path('user_home', {username: user.username}) }}"
-                                            data-pjax>{{ user.nickname }}</a></strong>
+                                            data-pjax>{{ user.nickname }}</a>
+                                </strong>
+                                {% if online %}
+                                    <span class="user-online" aria-hidden="false">在线可撩</span>
+                                {% endif %}
+                                {% if userActive %}
+                                    <small class="pull-right text-muted">
+                                        最后在线时间：{{ userActive.updatedAt|ago }}
+                                    </small>
+                                {% endif %}
+
                                 <small class="pull-right text-muted">
-                                    <i class="fa fa-clock-o fa-fw"></i> 加入于{{ user.registerAt|date('Y-m-d H:i:s') }},
-                                    第{{ user.id }}位Vmoex用户
+                                    <i class="fa fa-clock-o fa-fw"></i> 加入于{{ user.registerAt|date('Y-m-d H:i:s') }}，
+                                    第{{ user.id }}位Vmoex用户，
                                 </small>
+
                             </div>
                             <p>{{ user.remark|raw }}</p>
                             <br/>

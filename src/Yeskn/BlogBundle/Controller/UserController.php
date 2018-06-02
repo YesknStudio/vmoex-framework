@@ -27,8 +27,19 @@ class UserController extends Controller
             ]);
         }
 
+        $userActive = $this->getDoctrine()->getRepository('YesknBlogBundle:Active')
+            ->findOneBy(['user' => $user], ['id' => 'DESC']);
+
+        $online = false;
+
+        if ($userActive and $userActive->getUpdatedAt()->getTimestamp() >= time() - 15*60) {
+            $online = true;
+        }
+
         return $this->render('@YesknBlog/user/user_home.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'online' => $online,
+            'userActive' => $userActive
         ]);
     }
 }
