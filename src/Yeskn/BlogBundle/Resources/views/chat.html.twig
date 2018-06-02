@@ -29,14 +29,22 @@
                                 {% set loc = (app.user and chat.user.id == app.user.id) ? 'right' : 'left' %}
                                 <li class="{{ loc }} clearfix">
                                     <span class="chat-img pull-{{ loc }}">
-                                        <img width="50" height="50" src="{{ chat.user.avatar }}" alt="User Avatar" class="img-circle">
+                                        <img style="border-radius: 5px" width="50" height="50" src="{{ chat.user.avatar }}" alt="User Avatar">
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
-                                            <strong class="pull-{{ loc }} primary-font"><a data-pjax href="{{ path('user_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|date('Y-m-d H:i:s') }}
-                                            </small>
+                                            {% if loc == 'right' %}
+                                                <small class="text-muted">
+                                                    <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|date('Y-m-d H:i:s') }}
+                                                </small>
+                                                <strong class="pull-right primary-font"><a data-pjax href="{{ path('user_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                                {% else %}
+                                                    <strong class="primary-font"><a data-pjax href="{{ path('user_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                                    <small class="pull-right text-muted">
+                                                        <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|date('Y-m-d H:i:s') }}
+                                                    </small>
+                                            {% endif %}
+
                                         </div>
                                         <p>{{ chat.content|raw }}</p>
                                     </div>

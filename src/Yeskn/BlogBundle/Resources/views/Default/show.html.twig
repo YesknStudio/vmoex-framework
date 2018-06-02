@@ -104,8 +104,7 @@
           editor.config.menus = [
               'source',
               '|',     // '|' 是菜单组的分割线
-              'link',
-              'unlink',
+              'emotion',
               'bold',
               'underline',
               'italic',
@@ -130,36 +129,38 @@
           // 表情显示项
           editor.config.emotionsShow = 'value';
           editor.config.emotions = {
-              'default': {
-                  title: '默认',
-                  data: 'http://wangeditor.github.io/wangEditor/test/emotions.data'
-              },
-              'weibo': {
-                  title: '微博表情',
+              'default' : {
+                  title: '颜表情',
                   data: [
                       {
-                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
-                          value: '[草泥马]'
+                          icon: null,
+                          text: 'OωO',
+                          value: 'OωO'
                       },
                       {
-                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
-                          value: '[神马]'
+                          icon: null,
+                          text: '|´・ω・)ノ',
+                          value: '|´・ω・)ノ'
                       },
                       {
-                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
-                          value: '[浮云]'
+                          icon: null,
+                          text: '⌇●﹏●⌇',
+                          value: '⌇●﹏●⌇'
                       },
                       {
-                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
-                          value: '[给力]'
+                          icon: null,
+                          text: '(ฅ´ω`ฅ)',
+                          value: '(ฅ´ω`ฅ)'
                       },
                       {
-                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
-                          value: '[围观]'
+                          icon: null,
+                          text: '→_→',
+                          value: '→_→'
                       },
                       {
-                          icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
-                          value: '[威武]'
+                          icon: null,
+                          text: '＞﹏＜',
+                          value: '＞﹏＜'
                       }
                   ]
               }
