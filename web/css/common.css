@@ -468,7 +468,7 @@ ul.pagination {
     border-radius: 4px;
 }
 
-blockquote {
+.post-content blockquote {
     display: block;
     border-left: 8px solid #d0e5f2;
     padding: 5px 10px;
@@ -484,7 +484,7 @@ blockquote {
     border-radius: 3px 3px 0 0;
 }
 .tab-list a {
-    margin: 0 10px;
+    margin: 0 4px;
     color: #80bd01;
     padding: 3px 4px;
     border-radius: 3px;
