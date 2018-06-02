@@ -8,13 +8,9 @@
             <h2>{{ post.title }}</h2>
             <p class="post-meta">
                 <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
-                {% if post.categories is not null %}
-                    <span class="category">
-                        {% for cat in post.categories %}
-                            <a href="#" class="badge">{{ cat.name }}</a>
-                        {% endfor %}
+                <span class="category">
+                     <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name }}</a>
                 </span>
-                {% endif %}
                 <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
                 <span><i class="fa fa-eye"></i> {{ post.views }}</span>
 
@@ -58,16 +54,21 @@
                                        {% elseif comment.user == post.author %}
                                            <span class="author-label" data-content="author" title="author">author</span>
                                    {% endif %}
+
+                                    {% if comment.user.remark %}
+                                        <span class="text-small-gray">[ {{ comment.user.remark }} ]</span>
+                                    {% endif %}
+
+                                    <span class="text-small-gray pull-right">#{{ loop.index }}</span>
                                 </div>
                                 <p>{{ comment.content|raw }}</p>
 
                                 <div class="comment-footer">
-                                    #{{ loop.index }}
-                                    {% if comment.user.remark %}
-                                        <span>[ {{ comment.user.remark }} ]</span>
-                                    {% endif %}
+
                                     <span><i class="fa fa-clock-o"></i> {{ comment.createdAt|ago }}</span>
-                                    <span class="thumb thumb-up"><i class="fa fa-thumbs-o-up"></i> 23</span>
+                                    {% set hasThumb = comment.thumbUpUsers.contains(app.user) %}
+                                    {% set open = hasThumb ? '' : '-o' %}
+                                    <span class="thumb thumb-up" data-cid="{{ comment.id }}"><i class="fa fa-thumbs{{ open }}-up {{ hasThumb ? 'text-success' : '' }}"></i> <b class="thumb-count">{{ comment.thumbUpUsers|length ?: '' }}</b></span>
 
                                     <span class="pull-right"> <i class="fa fa-ellipsis-h"></i></span>
                                 </div>
@@ -191,10 +192,33 @@
               })
           });
 
-          $('form[name="post"]').submit(function (e) {
-              //  e.preventDefault();
-              $('[name="post[content]"]').val(editor.$txt.html());
-          });
+          $('.content-body').off('click', '.thumb-up');
+          $('.content-body').on('click', '.thumb-up', function () {
+              var $this = $(this);
+              $.ajax({
+                  method:  'POST',
+                  url: '{{ path('thumbup_comment', {tid: post.id}) }}',
+                  data: {
+                      cid: $this.attr('data-cid')
+                  },
+                  success: function (data) {
+                        if (data.ret) {
+                            let count = $this.find('.thumb-count').text();
+                            count = parseInt(count ? count : 0);
+                            let res = data.info ? count+1 : count-1;
+                            $this.find('.thumb-count').text(res);
+
+                            if (data.info) {
+                                $this.find('i.fa').removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up').addClass('text-success');
+                            } else {
+                                $this.find('i.fa').removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up').removeClass('text-success');
+                            }
+                        } else {
+                            error(data.msg);
+                        }
+                  }
+              })
+          })
       })
     </script>
 {% endblock %}

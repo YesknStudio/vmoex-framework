@@ -10,6 +10,32 @@ function render(template, parameters) {
 }
 
 $(document).ready(function () {
+
+    function error(msg) {
+        bootoast({
+            message:msg,
+            type: 'error',
+            position: 'top-center',
+            icon: undefined,
+            timeout: 3,
+            animationDuration: 300,
+            dismissable: true
+        });
+    }
+
+    function warning(msg) {
+        bootoast({
+            message:msg,
+            type: 'warning',
+            position: 'top-center',
+            icon: undefined,
+            timeout: 3,
+            animationDuration: 300,
+            dismissable: true
+        });
+    }
+
+
     var dropDown = $('li.dropdown.user-dropdown');
     dropDown.click(function () {
         $(this).addClass('open');

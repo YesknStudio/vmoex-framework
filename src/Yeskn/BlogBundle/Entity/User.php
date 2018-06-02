@@ -133,6 +133,11 @@ class User implements UserInterface
     private $comments;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Yeskn\BlogBundle\Entity\Comment", mappedBy="thumbUpUsers")
+     */
+    private $thumbUpComments;
+
+    /**
      * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Chat", mappedBy="user")
      */
     private $chats;
@@ -413,7 +418,7 @@ class User implements UserInterface
      */
     public function getRemark()
     {
-        return $this->remark ?: '无名人士。';
+        return $this->remark;
     }
 
     /**

@@ -18,31 +18,59 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", defaults={"page": 1},name="yeskn_blog_homepage")
+     * @Route("/tab/{tab}", defaults={"page":1}, name="home_tab")
+     * @Route("/tab/{tab}/{page}", defaults={"page":1}, name="home_tab_paged")
      * @Route("/page/{page}", requirements={"page": "[1-9]\d*"}, name="blog_index_paginated")
      * @Method("GET")
      * @param $page integer
      * @Cache(smaxage="10")
+     * @param Request $request
      * @throws
      * @return Response
      */
-    public function indexAction($page)
+    public function indexAction(Request $request, $page)
     {
+        $tab = $request->attributes->get('tab', 'all');
         $pagesize = 25;
-        $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
-            ->findBy([], ['updatedAt' => 'DESC'], $pagesize, $pagesize*($page-1));
 
-        $count = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
+        $sort = ['updatedAt' => 'DESC'];
+
+        if ($tab == 'hot') {
+            $sort = ['views' => 'DESC'];
+        }
+
+        $condition = [];
+
+        if ($tab and $tab != 'all' and $tab != 'hot') {
+            $tabObj = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
+                ->findOneBy(['alias' => $tab]);
+            if (empty($tabObj)) {
+                return new JsonResponse('tab not exists');
+            }
+            $condition = ['tab' => $tabObj];
+        }
+
+        $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
+            ->findBy($condition, $sort, $pagesize, $pagesize*($page-1));
+
+        $countQuery = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
             ->createQueryBuilder('a')
             ->select('COUNT(a)')
-            ->where('a.isDeleted = false')
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->where('a.isDeleted = false');
+
+        if (!empty($tabObj)) {
+            $countQuery->andWhere('a.tab = :tab')->setParameter('tab', $tabObj);
+
+        }
+
+        $count = $countQuery->getQuery()->getSingleScalarResult();
 
         $pageData['allPage'] = ceil($count/$pagesize);
         $pageData['currentPage'] = $page;
 
         return $this->render('YesknBlogBundle:Default:index.html.twig', array(
             'posts' => $posts,
+            'tab' => $tab,
             'pageData' => $pageData
         ));
     }
@@ -65,6 +93,41 @@ class DefaultController extends Controller
         return $this->render('YesknBlogBundle:Default:show.html.twig', array(
             'post' => $post
         ));
+    }
+
+    /**
+     * @Route("/topic/{tid}/comment/thumb_up", name="thumbup_comment", requirements={
+     *     "cid": "[1-9]\d*",
+     *     "tid": "[1-9]\d*"
+     * })
+     */
+    public function thumbPostComment(Request $request)
+    {
+        $comment = $this->getDoctrine()->getRepository('YesknBlogBundle:Comment')
+            ->findOneBy(['id' => $request->get('cid')]);
+
+        if (empty($comment)) {
+            return new JsonResponse(['ret' => 0, 'msg' => 'comment not exits']);
+        }
+
+        $user = $this->getUser();
+
+        if (empty($user)) {
+            return new JsonResponse(['ret' => 0, 'msg' => 'no login']);
+        }
+
+        if ($comment->getThumbUpUsers()->contains($user)) {
+            $comment->removeThumbUpUser($user);
+            $action = 0;
+        } else {
+            $comment->addThumbUpUser($user);
+            $action = 1;
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return new JsonResponse(['ret' => 1, 'info' => $action]);
     }
 
     /**

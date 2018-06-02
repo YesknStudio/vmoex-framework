@@ -53,6 +53,11 @@ class Post
     private $author;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Yeskn\BlogBundle\Entity\Tab", inversedBy="posts")
+     */
+    private $tab;
+
+    /**
      * @var
      * @ORM\ManyToMany(targetEntity="Yeskn\BlogBundle\Entity\Tag",inversedBy="posts")
      */
@@ -505,5 +510,29 @@ class Post
     public function getIsTop()
     {
         return $this->isTop;
+    }
+
+    /**
+     * Set tab
+     *
+     * @param \Yeskn\BlogBundle\Entity\Tab $tab
+     *
+     * @return Post
+     */
+    public function setTab(\Yeskn\BlogBundle\Entity\Tab $tab = null)
+    {
+        $this->tab = $tab;
+
+        return $this;
+    }
+
+    /**
+     * Get tab
+     *
+     * @return \Yeskn\BlogBundle\Entity\Tab
+     */
+    public function getTab()
+    {
+        return $this->tab;
     }
 }

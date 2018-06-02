@@ -163,15 +163,7 @@
                     data: {username: '{{ user.username }}'},
                     success: function (data) {
                         if (!data.ret) {
-                            bootoast({
-                                message: data.msg,
-                                type: 'warning',
-                                position: 'top-center',
-                                icon: undefined,
-                                timeout: 3,
-                                animationDuration: 300,
-                                dismissable: true
-                            });
+                            warning(data.msg);
                         } else {
                             $.pjax.reload('.content-body', {
                                 fragment: '.content-body',                          //来源也的ID

@@ -34,6 +34,13 @@ class Comment
     private $content;
 
     /**
+     * @var integer
+     * @ORM\ManyToMany(targetEntity="Yeskn\BlogBundle\Entity\User", inversedBy="thumbUpComments")
+     * @ORM\JoinTable(name="user_thumbup_comment")
+     */
+    private $thumbUpUsers;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -189,5 +196,46 @@ class Comment
     public function getDeletedAt()
     {
         return $this->deletedAt;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->thumbUpUsers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add thumbUpUser
+     *
+     * @param \Yeskn\BlogBundle\Entity\User $thumbUpUser
+     *
+     * @return Comment
+     */
+    public function addThumbUpUser(\Yeskn\BlogBundle\Entity\User $thumbUpUser)
+    {
+        $this->thumbUpUsers[] = $thumbUpUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove thumbUpUser
+     *
+     * @param \Yeskn\BlogBundle\Entity\User $thumbUpUser
+     */
+    public function removeThumbUpUser(\Yeskn\BlogBundle\Entity\User $thumbUpUser)
+    {
+        $this->thumbUpUsers->removeElement($thumbUpUser);
+    }
+
+    /**
+     * Get thumbUpUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getThumbUpUsers()
+    {
+        return $this->thumbUpUsers;
     }
 }
