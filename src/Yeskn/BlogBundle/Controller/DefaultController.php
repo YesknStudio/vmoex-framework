@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Comment;
+use Yeskn\BlogBundle\Entity\Notice;
 use Yeskn\BlogBundle\Entity\Post;
 use Yeskn\BlogBundle\Entity\User;
 use Yeskn\BlogBundle\Utils\HtmlPurer;
@@ -217,7 +218,13 @@ class DefaultController extends Controller
          */
         $user = $this->getUser();
 
-        if ($user->getGold() <= 0) {
+        $cost = 1;
+
+        if ($htmlPurer->hasColor()) {
+            $cost = 5;
+        }
+
+        if ($user->getGold() < $cost) {
             return new JsonResponse(['ret' => 0, 'msg' => 'no gold']);
         }
 
@@ -231,15 +238,24 @@ class DefaultController extends Controller
 
         $em->persist($comment);
 
-        $cost = 1;
-
-        if ($htmlPurer->hasColor()) {
-            $cost = 5;
-        }
-
         $user->setGold($user->getGold()-$cost);
 
         $post->setUpdatedAt(new \DateTime());
+
+        $em->flush();
+
+        if ($user->getId() != $post->getAuthor()->getId()) {
+            $notice = new Notice();
+            $notice->setObject($post);
+            $notice->setCreatedAt(new \DateTime());
+            $notice->setType(Notice::TYPE_COMMENT_POST);
+            $notice->setIsRead(false);
+            $notice->setPushTo($post->getAuthor());
+            $notice->setCreatedBy($user);
+            $notice->setContent($comment);
+
+            $em->persist($notice);
+        }
 
         $em->flush();
 

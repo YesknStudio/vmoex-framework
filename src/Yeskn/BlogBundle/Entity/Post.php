@@ -46,7 +46,7 @@ class Post
     private $content;
 
     /**
-     * @var int
+     * @var User
      * @ORM\ManyToOne(targetEntity="Yeskn\BlogBundle\Entity\User",inversedBy="posts")
      * @ORM\JoinColumn(name="authorId" , referencedColumnName="id")
      */
@@ -230,7 +230,7 @@ class Post
     /**
      * Get author
      *
-     * @return int
+     * @return User
      */
     public function getAuthor()
     {

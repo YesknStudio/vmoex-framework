@@ -502,3 +502,7 @@ ul.pagination {
     color: #fff;
     background-color: #80bd01;
 }
+.notifications-panel .notifications-list {
+    list-style-type: none;
+    padding: 0;
+}
