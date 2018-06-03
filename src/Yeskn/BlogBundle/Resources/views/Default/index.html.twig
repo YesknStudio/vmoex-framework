@@ -29,10 +29,10 @@
                                       <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name }}</a>
                                 </span>
                                 <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
-                                <span><i class="fa fa-eye"></i> {{ post.views }}</span>
+                                <span><i class="fa fa-eye"></i> {{ post.views }}点击</span>
                                 {% if post.comments.count %}
-                                    <span><i class="fa fa-commenting-o"></i> <a data-pjax
-                                                                                href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}</a></span>
+                                    <span><i class="fa fa-commenting-o"></i>
+                                        <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}评论</a></span>
                                 {% endif %}
                             </p>
                         </div>

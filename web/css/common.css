@@ -56,10 +56,10 @@ article> div > div.col-md-4 {
     text-align: center;
 }
 article.main img{
-    max-height: 145px;
+    height: 55px;
+    width: 55px;
     vertical-align: middle;
     border-radius: 2px;
-    max-width: 55px;
 }
 
 
