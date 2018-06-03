@@ -5,10 +5,10 @@
         <div class="tab-list">
             <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="/">全部</a>
             <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: 'hot'}) }}">热门</a>
-            <a data-pjax class="{{ tab == 'tv' ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: 'tv'}) }}">追剧</a>
-            <a data-pjax class="{{ tab == 'pic' ? 'current-tab':'' }}" href="{{ path('home_tab', {tab: 'pic'}) }}">插画</a>
-            <a data-pjax class="{{ tab == 'fuli' ? 'current-tab':'' }}" href="{{ path('home_tab', {tab: 'fuli'}) }}">福利</a>
-            <a data-pjax class="{{ tab == 'game' ? 'current-tab':'' }}" href="{{ path('home_tab', {tab: 'game'}) }}">游戏</a>
+
+            {% for tabItem in tabs %}
+                <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: tabItem.alias}) }}">{{ tabItem.name }}</a>
+            {% endfor %}
         </div>
         {% if posts is not empty %}
             {% for post in posts %}

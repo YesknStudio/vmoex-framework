@@ -66,12 +66,16 @@ class DefaultController extends Controller
 
         $count = $countQuery->getQuery()->getSingleScalarResult();
 
+        $allTabs = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
+            ->findAll();
+
         $pageData['allPage'] = ceil($count/$pagesize);
         $pageData['currentPage'] = $page;
 
         return $this->render('YesknBlogBundle:Default:index.html.twig', array(
             'posts' => $posts,
             'tab' => $tab,
+            'tabs' => $allTabs,
             'pageData' => $pageData
         ));
     }

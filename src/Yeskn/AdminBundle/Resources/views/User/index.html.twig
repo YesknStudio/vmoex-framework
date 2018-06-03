@@ -2,7 +2,7 @@
 
 {% block head_css_link %}
     {{ parent() }}
-    <link href="/lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('lib/datatables/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block page_wraper %}
@@ -62,7 +62,7 @@
                         {{ user.username }}
                     </td>
                     <td class="center">
-                        {{ user.avatar }}
+                        <img src="{{ user.avatar }}" alt="" width="25" height="25">
                     </td>
                     <td class="center">
                         {{ user.nickname }}
@@ -77,7 +77,7 @@
                         {{ user.registerAt|date('Y-m-d') }}
                     </td>
                     <td class="center">
-                        {{ user.signature }}
+                        {{ user.remark }}
                     </td>
                     <td class="center">
                         {{ user.site }}
@@ -86,8 +86,8 @@
                         {{ user.type }}
                     </td>
                     <td class="center">
-                        <a href="{{ path('yeskn_admin_post_edit') }}">编辑</a>
-                        <a href="{{ path('yeskn_admin_post_delete') }}">删除</a>
+                        {#<a href="{{ path('yeskn_admin_post_edit') }}">编辑</a>#}
+                        {#<a href="{{ path('yeskn_admin_post_delete') }}">删除</a>#}
                     </td>
                 </tr>
             {% endfor %}
