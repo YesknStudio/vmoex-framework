@@ -37,59 +37,49 @@ class PostController extends AdminCommonController
             $post->setCreatedAt(new \DateTime());
             $post->setUpdatedAt(new \DateTime());
             $post->setIsDeleted(false);
-            $post->setAuthor($this->getUser());
             $post->setStatus('published');
             $post->setExcerpt('');
 
-            $post->setTab($this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
-            ->findOneBy(['alias' => $request->get('tab')]));
-
-            $requestTags = trim($request->get('input-tag'));
-            if ($requestTags) {
-                $_tags = explode(',', $requestTags);
-                foreach ($_tags as $_tag) {
-                    if ($currentTag = $this->getDoctrine()->getRepository('YesknBlogBundle:Tag')
-                        ->findOneBy(array('name' => $_tag))
-                    ) {
-                        $post->addTag($currentTag);
-                    } else {
-                        $currentTag = new Tag();
-                        $currentTag->setName($_tag);
-                        $currentTag->setStatus(1);
-                        $currentTag->setSlug(uniqid());
-                        $currentTag->setCreatedAt(new \DateTime());
-                        $post->addTag($currentTag);
-                        $entityManager->persist($currentTag);
-                    }
-                }
-            }
             $entityManager->persist($post);
             $entityManager->flush();
 
-            $this->addFlash('success', 'post.created_successfully');
+            $this->addFlash('success', '创建文章成功');
             return $this->redirectToRoute('yeskn_admin_post_list');
         }
-
-        $tags = $this->getDoctrine()->getRepository('YesknBlogBundle:Tag')->findBy([], [
-            'id' => 'DESC'
-        ], 5);
-
-        $allTabs = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')->findAll();
 
         return $this->render('@YesknAdmin/Post/create.html.twig', array(
             'post' => $post,
             'form' => $form->createView(),
-            'tags' => $tags,
-            'tabs' => $allTabs
         ));
     }
 
     /**
      * @Route("/edit")
      */
-    public function editAction()
+    public function editAction(Request $request)
     {
+        $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
+            ->find($request->get('id'));
 
+        $form = $this->createForm('Yeskn\BlogBundle\Form\PostType', $post)
+            ->add('saveCraft', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $post->setUpdatedAt(new \DateTime());
+
+            $entityManager->flush();
+
+            $this->addFlash('success', '编辑文章成功');
+            return $this->redirectToRoute('yeskn_admin_post_list');
+        }
+
+        return $this->render('@YesknAdmin/Post/create.html.twig', array(
+            'post' => $post,
+            'form' => $form->createView(),
+        ));
     }
 
     /**
@@ -129,7 +119,7 @@ class PostController extends AdminCommonController
         /**
          * @var Post[] $posts
          */
-        $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->findAll();
+        $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->findBy([], ['updatedAt' => 'DESC']);
 
         return $this->render('@YesknAdmin/Post/index.html.twig', array(
             'posts' => $posts

@@ -30,35 +30,18 @@
 
                         <div class="form-group">
                             <label class="control-label required" for="editor-trigger">内容</label>
-                            <div id="editor-trigger"><p></p></div>
-                            <textarea id="editor-trigger" style="display:none;">
-                            <p></p>
-                             </textarea>
-
+                            <div id="editor-trigger">{{ post.content|raw }}</div>
+                            <textarea id="editor-trigger" style="display:none;"></textarea>
                         </div>
 
                         <button type="submit" value="{{ 'submit' }}" class="btn btn-primary">提交</button>
                         {{ form_widget(form.saveCraft, { label: '存草稿', attr: { class: 'btn btn-primary' } }) }}
                         </div>
                     <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="">板块</label>
-                            <select name="tab" id="select-category" class="form-control">
-                                {% for tab in tabs %}
-                                    <option value="{{ tab.alias }}">{{ tab.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        {{ form_row(form.tab) }}
+                        {{ form_row(form.tags) }}
+                        {{ form_row(form.author) }}
 
-                         <div class="form-group">
-                             <label for="">标签</label>
-                             <input name="input-tag" type="text" class="form-control" />
-                             <p class="hot-tags">
-                             {% for tag in tags %}
-                                 <a data-id="{{ tag.id }}" style="display: inline-block">{{ tag.name }}</a>
-                             {% endfor %}
-                             </p>
-                         </div>
                         {{ form_row(form.isTop) }}
                         {{ form_row(form.cover) }}
                     </div>
@@ -87,44 +70,6 @@
             // 'Accept' : 'text/x-json'
         }
         // editor.config.uploadImgFileName = 'myFileName';
-
-        // 表情显示项
-        editor.config.emotionsShow = 'value';
-        editor.config.emotions = {
-            'default': {
-                title: '默认',
-                data: 'http://wangeditor.github.io/wangEditor/test/emotions.data'
-            },
-            'weibo': {
-                title: '微博表情',
-                data: [
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif',
-                        value: '[草泥马]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif',
-                        value: '[神马]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif',
-                        value: '[浮云]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif',
-                        value: '[给力]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif',
-                        value: '[围观]'
-                    },
-                    {
-                        icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif',
-                        value: '[威武]'
-                    }
-                ]
-            }
-        };
 
         // 只粘贴纯文本
         // editor.config.pasteText = true;

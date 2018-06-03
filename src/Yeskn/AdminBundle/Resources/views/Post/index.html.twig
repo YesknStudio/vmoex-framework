@@ -65,12 +65,12 @@
                             </a>
                         </td>
                         <td>{{ post.author.username }}</td>
-                        <td class="center">{{ post.createdAt|date('Y-m-d H:i:s') }}</td>
-                        <td class="center">{{ post.updatedAt|date('Y-m-d H:i:s') }}</td>
+                        <td class="center">{{ post.createdAt|ago }}</td>
+                        <td class="center">{{ post.updatedAt ? post.updatedAt|ago : '' }}</td>
                         <td class="center">{{ post.views }}</td>
                         <td class="center">{{ post.status }}</td>
                         <td class="center">
-                            <a href="{{ path('yeskn_admin_post_edit') }}">编辑</a>
+                            <a href="{{ path('yeskn_admin_post_edit', {id:post.id}) }}">编辑</a>
                             <a href="{{ path('yeskn_admin_post_delete',{id:post.id}) }}">删除</a>
                         </td>
                     </tr>
