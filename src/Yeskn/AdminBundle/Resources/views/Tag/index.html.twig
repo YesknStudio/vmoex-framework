@@ -26,10 +26,10 @@
                         <td>{{ tag.id }}</td>
                         <td>{{ tag.name }}</td>
                         <td>{{ tag.slug }}</td>
-                        <td>{{ tag.createdAt|date('Y-m-d H:i:s') }}</td>
+                        <td>{{ tag.createdAt|ago }}</td>
                         <td>{{ tag.status }}</td>
                         <td>
-                            <a href="{{ path('yeskn_admin_tag_edit') }}">编辑</a>
+                            <a href="{{ path('yeskn_admin_tag_edit', {id:tag.id}) }}">编辑</a>
                             <a href="{{ path('yeskn_admin_tag_delete',{id:tag.id}) }}">删除</a>
                         </td>
                     </tr>

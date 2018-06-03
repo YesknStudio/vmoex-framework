@@ -53,9 +53,29 @@ class TagController extends Controller
     /**
      * @Route("/edit")
      */
-    public function editAction()
+    public function editAction(Request $request)
     {
+        $tag = $this->getDoctrine()->getRepository('YesknBlogBundle:Tag')
+            ->find($request->get('id'));
 
+        $form = $this->createFormBuilder($tag)
+            ->add('name' , TextType::class,array('label' => '标签名'))
+            ->add('slug',TextType::class,array('label' => '别名'))
+            ->add('submit',SubmitType::class , array('label' => '提交'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->flush();
+            $this->addFlash('success', '修改标签成功');
+            return $this->redirectToRoute('yeskn_admin_tag_new');
+        }
+        return  $this->render('@YesknAdmin/Tag/new.html.twig',array(
+            'form' => $form->createView(),
+        ));
     }
 
     /**
