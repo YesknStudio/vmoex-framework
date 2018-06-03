@@ -1,6 +1,14 @@
 {% extends '@YesknBlog/base.html.twig' %}
 
 {% block main %}
+    <style>
+        body {
+            background-image: url("https://ww2.sinaimg.cn/large/0060lm7Tgy1fi01a6qd26j31hc0u0dmg.jpg");
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
     <div class="row user-home">
         <div class="col-lg-12">
             <div class="panel-body user-meta">
@@ -63,11 +71,11 @@
                                          <span class="category">
                                              <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name }}</a>
                                          </span>
-                                        <span><i class="fa fa-clock-o"></i> {{ post.createdAt|date("Y-m-d") }}</span>
-                                        <span><i class="fa fa-eye"></i> {{ post.views }}</span>
+                                        <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
+                                        <span><i class="fa fa-eye"></i> {{ post.views }}点击</span>
                                         {% if post.comments.count %}
-                                            <span><i class="fa fa-commenting-o"></i> <a data-pjax
-                                                                                        href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}</a></span>
+                                            <span><i class="fa fa-commenting-o"></i>
+                                                <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}评论</a></span>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -85,20 +93,18 @@
                 <div class="panel-body">
                     {% set comments = user.comments %}
                     {% if comments is not empty %}
-                        <div class="container">
-                            {% for comment in comments|reverse %}
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {{ comment.createdAt| date('Y-m-d H:i:s') }} 发表在 <a data-pjax
-                                                                                            href="{{ path('yeskn_blog_show', {id: comment.post.id}) }}">{{ comment.post.title }}</a>
-                                        上：
-                                        <blockquote class="home-bq">
-                                            {{ comment.content|raw }}
-                                        </blockquote>
-                                    </div>
+                        {% for comment in comments|reverse %}
+                            <div class="row border-bottom" style="padding: 10px 0;margin: 0 10px">
+                                <div class="col-md-12">
+                                    {{ comment.createdAt|ago }} 发表在
+                                    <a data-pjax href="{{ path('yeskn_blog_show', {id: comment.post.id}) }}">{{ comment.post.title }}</a>
+                                    上：
+                                    <blockquote class="home-bq">
+                                        {{ comment.content|raw }}
+                                    </blockquote>
                                 </div>
-                            {% endfor %}
-                        </div>
+                            </div>
+                        {% endfor %}
                     {% else %}
                         {{ '最近没有发布任何回复。' }}
                     {% endif %}

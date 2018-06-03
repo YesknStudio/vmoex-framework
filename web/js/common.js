@@ -144,7 +144,8 @@ $(document).ready(function () {
         $('#navbar-collapse-user').collapse('hide');
     });
 
-    var a_idx = 1;
+    var tc = sessionStorage.getItem('topClick');
+    var a_idx = parseInt(tc) || 1;
 
     $("body").click(function(e) {
         var $i = $("<span/>").text('+'+a_idx+++'♥');
@@ -167,6 +168,7 @@ $(document).ready(function () {
             function() {
                 $i.remove();
             });
+        sessionStorage.setItem('topClick', a_idx);
     });
 
     // info

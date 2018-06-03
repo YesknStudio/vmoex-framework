@@ -1,5 +1,6 @@
 body {
     cursor: url('/img/p.cur'), url(/img/p.cur), auto;
+    /*background: url("https://ww2.sinaimg.cn/large/0060lm7Tgy1fi01a616erj31hc0u0q7g.jpg") no-repeat top left #f6f6f6;*/
     background: url("/img/zhMoegirl18summer.jpg") no-repeat top left #f6f6f6;
     /*padding-top: 70px;*/
 }
@@ -505,4 +506,9 @@ ul.pagination {
 .notifications-panel .notifications-list {
     list-style-type: none;
     padding: 0;
+}
+
+.txt-toolbar .panel-tab .content-container .content a, .wangEditor-drop-panel .panel-tab .content-container .content a {
+    padding: 5px;
+    margin: 5px;
 }
