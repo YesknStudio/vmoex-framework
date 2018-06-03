@@ -35,13 +35,14 @@ class PostController extends AdminCommonController
             $entityManager = $this->getDoctrine()->getManager();
 
             $post->setCreatedAt(new \DateTime());
+            $post->setUpdatedAt(new \DateTime());
             $post->setIsDeleted(false);
             $post->setAuthor($this->getUser());
             $post->setStatus('published');
+            $post->setExcerpt('');
 
-            $post->addCategory($this->getDoctrine()->getRepository('YesknBlogBundle:Category')
-                ->find($request->get('select-category'))
-            );
+            $post->setTab($this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
+            ->findOneBy(['alias' => $request->get('tab')]));
 
             $requestTags = trim($request->get('input-tag'));
             if ($requestTags) {
@@ -69,16 +70,17 @@ class PostController extends AdminCommonController
             return $this->redirectToRoute('yeskn_admin_post_list');
         }
 
-        $categories = $this->getDoctrine()->getRepository('YesknBlogBundle:Category')->findAll();
         $tags = $this->getDoctrine()->getRepository('YesknBlogBundle:Tag')->findBy([], [
             'id' => 'DESC'
         ], 5);
 
+        $allTabs = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')->findAll();
+
         return $this->render('@YesknAdmin/Post/create.html.twig', array(
             'post' => $post,
             'form' => $form->createView(),
-            'categories' => $categories,
-            'tags' => $tags
+            'tags' => $tags,
+            'tabs' => $allTabs
         ));
     }
 

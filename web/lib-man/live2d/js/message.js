@@ -22,7 +22,7 @@ if(!norunFlag){
 	var liveTlakTimer = null;
 	var sleepTimer_ = null;
 	var AITalkFlag = false;
-	var talkNum = 0;
+
 	(function (){
 		function renderTip(template, context) {
 			var tokenReg = /(\\)?\{([^\{\}\\]+)(\\)?\}/g;
@@ -147,6 +147,7 @@ if(!norunFlag){
 				text = '欢迎阅读<span style="color:#0099cc;">「 ' + document.title.split(' - ')[0] + ' 」</span>';
 			}
 		}
+
 		showMessage(text, 12000);
 	})();
 	
@@ -192,6 +193,7 @@ if(!norunFlag){
 		//if (timeout === null) timeout = 5000;
 		//hideMessage(timeout);
 	}
+
 	function talkValTimer(){
 		$('#live_talk').val('1');
 	}
@@ -443,6 +445,7 @@ if(!norunFlag){
 			};
 		};
 	}
+
 	$(document).ready(function() {
 		var AIimgSrc = [
 			home_Path + message_Path + "model/histoire/histoire.1024/texture_00.png",

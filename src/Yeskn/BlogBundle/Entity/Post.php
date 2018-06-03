@@ -79,7 +79,7 @@ class Post
      * @var
      * @ORM\Column(name="views",type="integer")
      */
-    private $views = 9;
+    private $views = 1;
 
     /**
      * @var string

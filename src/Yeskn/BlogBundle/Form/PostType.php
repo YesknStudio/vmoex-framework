@@ -16,7 +16,6 @@ class PostType extends AbstractType
     {
        $builder
            ->add('title',null,array('attr' => array('autofocus' => true), 'label' => '标题',))
-           ->add('excerpt',TextareaType::class,array('label' => '摘要'))
            ->add('content',null,array('attr' => array('rows' => 15), 'label' => '内容','required'=>false))
 //           ->add('categories',CollectionType::class,array(
 //               'label' => '分类',

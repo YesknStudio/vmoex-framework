@@ -23,7 +23,6 @@
                 <div class="row">
                     <div class="col-lg-9">
                         {{ form_row(form.title) }}
-                        {{ form_row(form.excerpt) }}
 
                         <div class="hidden">
                             {{ form_row(form.content) }}
@@ -43,10 +42,10 @@
                         </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="">分类</label>
-                            <select name="select-category" id="select-category" class="form-control">
-                                {% for cat in categories %}
-                                    <option value="{{ cat.id }}">{{ cat.name }}</option>
+                            <label for="">板块</label>
+                            <select name="tab" id="select-category" class="form-control">
+                                {% for tab in tabs %}
+                                    <option value="{{ tab.alias }}">{{ tab.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>

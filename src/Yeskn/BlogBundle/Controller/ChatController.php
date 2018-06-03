@@ -45,7 +45,7 @@ class ChatController extends Controller
         $content = $htmlPurer->pure($content)->getResult();
 
         if (empty(strip_tags($content)) or mb_strlen($content) >= 200) {
-            return new JsonResponse(['ret' => 0, 'msg' => 'data too long or too short']);
+            return new JsonResponse(['ret' => 0, 'msg' => '内个啥...长度好像不合适哦！']);
         }
 
         /**

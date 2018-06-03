@@ -189,6 +189,14 @@
 
           $('.content-body').off('click', '#addCommentToPost');
           $('.content-body').on('click', '#addCommentToPost', function () {
+              var $this = $(this);
+
+              if ($this.hasClass('disabled')) {
+                  warning('好可怕，速度太快了！');
+                  return ;
+              }
+
+              $this.addClass('disabled');
               var content = editor.$txt.html();
               $.ajax({
                   method: 'POST',
@@ -201,6 +209,7 @@
                          reload();
                       } else {
                           error(data.msg);
+                          $this.removeClass('disabled');
                       }
 
                   }

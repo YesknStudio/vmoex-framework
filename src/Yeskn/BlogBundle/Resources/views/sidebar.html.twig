@@ -101,7 +101,7 @@
         <span class="glyphicon glyphicon-fire"></span> 今日热门话题
     </div>
     <div class="panel-body latest-posts">
-        <ol>
+        <ol style="padding-left: 25px">
         {% for post in hotPosts() %}
             <li>
                 <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}">{{ post.title }}</a>
