@@ -18,6 +18,9 @@
                         <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}评论</a>
                     </span>
                 {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('yeskn_admin_post_edit', {id:post.id}) }}">编辑</a>
+                {% endif %}
             </p>
             <div class="post-content">
                 {{ post.content|raw }}

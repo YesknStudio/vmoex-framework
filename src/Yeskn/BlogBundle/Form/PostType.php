@@ -41,6 +41,7 @@ class PostType extends AbstractType
                'choice_value' => 'id',
                'label' => '作者'
            ])
+           ->add('views', TextType::class, ['label' => '点击'])
            ->add('isTop',CheckboxType::class,array('label' => '置顶','required'=>false))
            ->add('cover',TextType::class,array('label' => '封面图'))
        ;
