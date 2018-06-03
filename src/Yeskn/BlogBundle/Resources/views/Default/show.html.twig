@@ -186,15 +186,13 @@
                   data: {
                       content: content
                   },
-                  success: function () {
-                      $.pjax.reload('.content-body', {
-                          fragment: '.content-body',                          //来源也的ID
-                          timeout: 200000000,
-                          show: 'fade',
-                          cache: true,  //是否使用缓存
-                          push: true,
-                          //scrollTo: 250,
-                      })
+                  success: function (data) {
+                      if (data.ret) {
+                         reload();
+                      } else {
+                          error(data.msg);
+                      }
+
                   }
               })
           });
@@ -253,7 +251,7 @@
             </div>
         </div>
         <div class="panel-body ">
-            <a href="{{ path('user_home', {username: post.author.username}) }}" data-pjax>{{ post.author.nickname }}</a>
+                                <a href="{{ path('user_home', {username: post.author.username}) }}" data-pjax>{{ post.author.nickname }}</a>
         </div>
     </div>
 {% endblock %}

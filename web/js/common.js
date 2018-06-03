@@ -9,31 +9,66 @@ function render(template, parameters) {
     return $(template);
 }
 
+function error(msg) {
+    bootoast({
+        message:msg,
+        type: 'danger',
+        position: 'top-center',
+        icon: undefined,
+        timeout: 3,
+        animationDuration: 300,
+        dismissable: true
+    });
+}
+
+function warning(msg) {
+    bootoast({
+        message:msg,
+        type: 'warning',
+        position: 'top-center',
+        icon: undefined,
+        timeout: 3,
+        animationDuration: 300,
+        dismissable: true
+    });
+}
+
+function success(msg) {
+    bootoast({
+        message:msg,
+        type: 'success',
+        position: 'top-center',
+        icon: undefined,
+        timeout: 3,
+        animationDuration: 300,
+        dismissable: true
+    });
+}
+
+function reload() {
+    $.pjax.reload('.content-body', {
+        fragment: '.content-body',
+        timeout: 200000000,
+        show: 'fade',
+        cache: true,
+        push: true,
+    })
+}
+
+function go(url) {
+    $.pjax({
+        url: url,
+        container: '.content-body',
+        fragment: '.content-body',
+        timeout: 200000000,
+        show: 'fade',
+        cache: true,
+        push: true,
+        replace: false
+    });
+}
+
 $(document).ready(function () {
-
-    function error(msg) {
-        bootoast({
-            message:msg,
-            type: 'error',
-            position: 'top-center',
-            icon: undefined,
-            timeout: 3,
-            animationDuration: 300,
-            dismissable: true
-        });
-    }
-
-    function warning(msg) {
-        bootoast({
-            message:msg,
-            type: 'warning',
-            position: 'top-center',
-            icon: undefined,
-            timeout: 3,
-            animationDuration: 300,
-            dismissable: true
-        });
-    }
 
 
     var dropDown = $('li.dropdown.user-dropdown');
@@ -57,7 +92,6 @@ $(document).ready(function () {
             cache: true,
             push: true,
             replace:false,
-            //scrollTo: 250,
         });
 
         $(document).on('pjax:start', function () {
@@ -100,23 +134,14 @@ $(document).ready(function () {
         e.preventDefault();
         var word = $('#search-content').val();
         if (word.length === 0) {
-            alert('搜索内容不能为空');
+            error('搜索内容不能为空');
             return ;
         }
 
-        $.pjax({
-            url: '/search?s='+word,
-            container: '.content-body',
-            fragment: '.content-body',
-            timeout: 200000000,
-            show: 'fade',
-            cache: true,  //是否使用缓存
-            push: true,
-            replace: false
-            //scrollTo: 250,
-        });
+        go('/search?s='+word);
 
-        $('#navbar-collapse').collapse('hide')
+        $('#navbar-collapse').collapse('hide');
+        $('#navbar-collapse-user').collapse('hide');
     });
 
     var a_idx = 1;
@@ -175,22 +200,12 @@ $(document).ready(function () {
                 $('li.messages>a span.text').text(' 私信 ');
             }
         });
-    })
+    });
 
     $('nav.navbar-static-top a').click(function (e) {
         if ($(this).attr('href') !== '#' && $(this).attr('href') !== '/logout') {
             e.preventDefault();
-            $.pjax({
-                url: $(this).attr('href'),
-                container: '.content-body',
-                fragment: '.content-body',
-                timeout: 200000000,
-                show: 'fade',
-                cache: true,  //是否使用缓存
-                push: true,
-                replace: false
-                //scrollTo: 250,
-            });
+            go($(this).attr('href'));
 
             $('#navbar-collapse').collapse('hide');
             $('#navbar-collapse-user').collapse('hide')

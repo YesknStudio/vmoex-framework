@@ -86,29 +86,15 @@
                     method: 'POST',
                     url: '{{ path("send_chat") }}',
                     data: {content: $('#btn-input').val()},
-                    success: function () {
-                        $.pjax.reload('.content-body', {
-                            fragment: '.content-body',                          //来源也的ID
-                            timeout: 200000000,
-                            show: 'fade',
-                            cache: true,  //是否使用缓存
-                            push: true,
-                            //scrollTo: 250,
-                        })
+                    success: function (data) {
+                       data.ret ? reload() : error(data.msg);
                     }
                 })
             });
 
             $('.content-body').off('click', '#refresh-chat');
             $('.content-body').on('click', '#refresh-chat', function () {
-                $.pjax.reload('.content-body', {
-                    fragment: '.content-body',                          //来源也的ID
-                    timeout: 200000000,
-                    show: 'fade',
-                    cache: true,  //是否使用缓存
-                    push: true,
-                    //scrollTo: 250,
-                });
+               reload();
             });
         })
     </script>

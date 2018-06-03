@@ -65,25 +65,9 @@
             url: G_sign_link,
             success: function (data) {
                 if (data.ret) {
-                    bootoast({
-                        message: data.msg,
-                        type: 'warning',
-                        position: 'top-center',
-                        icon: undefined,
-                        timeout: 3,
-                        animationDuration: 300,
-                        dismissable: true
-                    });
-                    // and reload
-                    $.pjax.reload('.content-body', {
-                        fragment: '.content-body',                          //来源也的ID
-                        timeout: 200000000,
-                        show: 'fade',
-                        cache: true,  //是否使用缓存
-                        push: true,
-                        //scrollTo: 250,
-                    })
+                    reload();
                 }
+                success(data.msg);
             }
         })
     });
@@ -137,7 +121,7 @@
         {% for comment in hotComments() %}
             <li class="left clearfix">
                 <span class="chat-img pull-left">
-                    <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img" width="50" height="50">
+                    <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img img-rounded" width="50" height="50">
                 </span>
                 <div class="chat-body clearfix">
                     <div class="header">
