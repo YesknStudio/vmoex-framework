@@ -35,15 +35,15 @@
                 {% endif %}
             </div>
         </div>
-        <div class="post-actions border-bottom">
-            <span><a href="">收藏</a></span>
-            <span><a href="">感谢</a></span>
-            <span><a href="">分享</a></span>
-            <span><a href="">屏蔽</a></span>
-            <span><a href="">举报</a></span>
+        {#<div class="post-actions border-bottom">#}
+            {#<span><a href="">收藏</a></span>#}
+            {#<span><a href="">感谢</a></span>#}
+            {#<span><a href="">分享</a></span>#}
+            {#<span><a href="">屏蔽</a></span>#}
+            {#<span><a href="">举报</a></span>#}
 
-            <span class="pull-right last">12次收藏 / 30次感谢</span>
-        </div>
+            {#<span class="pull-right last">12次收藏 / 30次感谢</span>#}
+        {#</div>#}
         <div class="comments" id="comments">
             <h3 class="border-bottom">评论</h3>
             {% if post.comments is not empty %}
@@ -53,7 +53,7 @@
                 <span class="chat-img pull-left">
                     <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img">
                 </span>
-                            <div class="chat-body clearfix">
+                            <div class="chat-body clearfix" style="margin-left: 55px">
                                 <div class="header">
                                     <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
                                    {% if comment.user.type == 'admin' %}

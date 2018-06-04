@@ -220,6 +220,14 @@ ul.messages li {
 .post-info {
     margin-left: 0;
     padding-left: 0;
+    padding-right: 0;
+}
+
+.home-post-info {
+    margin-left: 0;
+    padding-left: 0;
+    float: none;
+    display: table-cell;
 }
 
 .home-name {

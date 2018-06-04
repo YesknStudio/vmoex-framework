@@ -18,21 +18,22 @@
                         <div class="tab-pane fade in active" id="not_read">
                             {% if notices is not empty %}
                                 <ul class="notifications-list">
-                                    {% for notice in notices %}
-                                        <li>
+                                    {% for notice in notices|reverse %}
+                                        {% if notice.isRead == false %}
+                                            <li>
+                                                <div>
+                                                    {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
+                                                    <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
+                                                    <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
+                                                    {{ notice.createdAt|ago }}回复了你的帖子 <a data-pjax href="{{ path('yeskn_blog_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+                                                </div>
 
-                                            <div style="margin: 10px 0">
-                                                {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
-                                                <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
-                                                <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
-                                                回复了你的帖子 <a data-pjax href="{{ path('yeskn_blog_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
-                                            </div>
-
-                                            <blockquote class="home-bq">
-                                                {{ notice.content.content|raw }}
-                                            </blockquote>
-                                            {% endif %}
-                                        </li>
+                                                <blockquote class="home-bq">
+                                                    {{ notice.content.content|raw }}
+                                                </blockquote>
+                                                {% endif %}
+                                            </li>
+                                        {% endif %}
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -45,21 +46,22 @@
                         <div class="tab-pane fade" id="read">
                             {% if notices is not empty %}
                                 <ul class="notifications-list">
-                                    {% for notice in notices %}
-                                        <li>
+                                    {% for notice in notices|reverse %}
+                                      {% if notice.isRead == true %}
+                                          <li>
+                                              <div>
+                                                  {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
+                                                  <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
+                                                  <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
+                                                  {{ notice.createdAt|ago }}回复了你的帖子 <a data-pjax href="{{ path('yeskn_blog_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+                                              </div>
 
-                                            <div style="margin: 10px 0">
-                                                {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
-                                                <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
-                                                <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
-                                                回复了你的帖子 <a data-pjax href="{{ path('yeskn_blog_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
-                                            </div>
-
-                                            <blockquote class="home-bq">
-                                                {{ notice.content.content|raw }}
-                                            </blockquote>
-                                            {% endif %}
-                                        </li>
+                                              <blockquote class="home-bq">
+                                                  {{ notice.content.content|raw }}
+                                              </blockquote>
+                                              {% endif %}
+                                          </li>
+                                      {% endif %}
                                     {% endfor %}
                                 </ul>
                             {% else %}

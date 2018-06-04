@@ -61,7 +61,7 @@
                     {% set posts = user.posts|slice(0, 20) %}
                     {% if posts is not empty %}
                         {% for post in posts|reverse %}
-                            <article class="main home-article-main" style="position: relative">
+                            <article class="main home-article-main" style="position: relative;padding-left: 0">
                                 <div class="col-md-12 post-info">
                                         <span class="item-small-title">
                                             <a data-pjax
@@ -94,7 +94,7 @@
                     {% set comments = user.comments %}
                     {% if comments is not empty %}
                         {% for comment in comments|reverse %}
-                            <div class="row border-bottom" style="padding: 10px 0;margin: 0 10px">
+                            <div class="row border-bottom" style="margin-bottom: 10px">
                                 <div class="col-md-12">
                                     {{ comment.createdAt|ago }} 发表在
                                     <a data-pjax href="{{ path('yeskn_blog_show', {id: comment.post.id}) }}">{{ comment.post.title }}</a>
