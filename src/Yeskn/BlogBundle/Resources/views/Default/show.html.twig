@@ -56,7 +56,7 @@
                             <div class="chat-body clearfix">
                                 <div class="header">
                                     <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
-                                   {% if is_granted('ROLE_ADMIN') %}
+                                   {% if comment.user.type == 'admin' %}
                                        <span class="mod-text" data-content="管理员" title="MOD">mod</span>
                                        {% elseif comment.user == post.author %}
                                            <span class="author-label" data-content="author" title="author">author</span>
@@ -112,6 +112,7 @@
           var editor = new wangEditor('editor-trigger');
 
           editor.config.printLog = false;
+          editor.config.menuFixed = false;
 
           editor.config.menus = [
               'source',
