@@ -53,7 +53,7 @@
                 <span class="chat-img pull-left">
                     <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img">
                 </span>
-                            <div class="chat-body clearfix" style="margin-left: 55px">
+                            <div class="comment-main chat-body clearfix">
                                 <div class="header">
                                     <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
                                    {% if comment.user.type == 'admin' %}

@@ -96,7 +96,10 @@ h3.border-bottom{
     float: left;
 }
 .comments{
-    padding: 0 5px 10px 5px;
+    padding: 0 10px 10px 10px;
+}
+.comment-main {
+    margin-left: 60px;
 }
 div.comments > ul > li> span > img{
     width: 50px;
@@ -262,6 +265,7 @@ ul.messages li {
     }
 }
 
+/************************** 手机 ***************/
 @media (max-width: 767px) {
     .container {
         padding-left: 5px;
@@ -328,6 +332,13 @@ ul.messages li {
     }
     .navbar-item-custom a {
         text-decoration: none;
+    }
+    .comments {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .comment-main {
+        margin-left: 55px !important;
     }
 }
 
