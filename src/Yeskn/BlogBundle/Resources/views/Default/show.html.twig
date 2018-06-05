@@ -54,7 +54,7 @@
                     <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img">
                 </span>
                             <div class="comment-main chat-body clearfix">
-                                <div class="header">
+                                <div class="comment-user-info">
                                     <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
                                    {% if comment.user.type == 'admin' %}
                                        <span class="mod-text" data-content="管理员" title="MOD">mod</span>

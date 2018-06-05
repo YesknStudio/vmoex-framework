@@ -95,17 +95,6 @@ h3.border-bottom{
 .float-left{
     float: left;
 }
-.comments{
-    padding: 0 10px 10px 10px;
-}
-.comment-main {
-    margin-left: 60px;
-}
-div.comments > ul > li> span > img{
-    width: 50px;
-    height: 50px;
-    border-radius: 2px;
-}
 .fr{
     float: right;
     text-align: right;
@@ -255,11 +244,23 @@ ul.messages li {
     height: 10px;
     margin-bottom: 10px;
 }
-
+.comments{
+    padding: 0 10px 10px 10px;
+}
+.comment-main {
+    margin-left: 60px;
+}
+.comments > ul > li> span > img{
+    width: 50px;
+    height: 50px;
+    border-radius: 2px;
+}
 .comments li.comment-item {
     padding-bottom: 0;
 }
-
+.comments .comment-user-info {
+    padding-bottom: 5px;
+}
 @media (min-width: 767px) {
     .navbar-avatar-mobile {
         display: none !important;
@@ -345,7 +346,7 @@ ul.messages li {
     .comment-main {
         margin-left: 35px !important;
     }
-    div.comments > ul > li> span > img {
+    .comments > ul > li> span > img {
         width: 30px;
         height: 30px;
     }
