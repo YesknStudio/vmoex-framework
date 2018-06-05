@@ -256,6 +256,10 @@ ul.messages li {
     margin-bottom: 10px;
 }
 
+.comments li.comment-item {
+    padding-bottom: 0;
+}
+
 @media (min-width: 767px) {
     .navbar-avatar-mobile {
         display: none !important;
@@ -409,7 +413,6 @@ footer .power span {
 
 .comment-footer span {
     display: inline-block;
-    margin-right: 5px;
 }
 
 .text-small-gray {
