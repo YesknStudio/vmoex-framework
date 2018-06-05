@@ -7,9 +7,6 @@ framework:
         strict_requirements: true
     profiler: { only_exceptions: false }
 
-assetic:
-     use_controller: false
-
 web_profiler:
     toolbar: false
     intercept_redirects: false

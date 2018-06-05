@@ -104,6 +104,7 @@ h3.border-bottom{
 div.comments > ul > li> span > img{
     width: 50px;
     height: 50px;
+    border-radius: 2px;
 }
 .fr{
     float: right;
@@ -338,7 +339,17 @@ ul.messages li {
         padding-right: 5px;
     }
     .comment-main {
-        margin-left: 55px !important;
+        margin-left: 35px !important;
+    }
+    div.comments > ul > li> span > img {
+        width: 30px;
+        height: 30px;
+    }
+    .comments span.comment-user-avatar {
+        display: block;
+    }
+    .post-meta span {
+        padding-right: 5px;
     }
 }
 
@@ -413,7 +424,7 @@ footer .power span {
 article.main span.category a, .post-meta span.category a{
     font-weight: normal;
     background-color: #f5f5f5;
-    color: #999;
+    color: #778087;
 }
 
 .post-actions {
