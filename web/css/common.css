@@ -194,12 +194,6 @@ li.user-meta {
 li.messages ul li div a {
     padding: 2px !important;
 }
-
-ul.messages li {
-    margin: 20px 0;
-
-}
-
 .post-avatar {
     padding: 10px;
     vertical-align:middle;
@@ -260,6 +254,14 @@ ul.messages li {
 }
 .comments .comment-user-info {
     padding-bottom: 5px;
+}
+.my-messages ul.messages li {
+    margin: 20px 0;
+
+}
+.my-messages ul.messages {
+    list-style-type: none;
+    padding-left: 0;
 }
 @media (min-width: 767px) {
     .navbar-avatar-mobile {
@@ -533,10 +535,6 @@ ul.pagination {
     text-decoration: none;
     color: #fff;
     background-color: #80bd01;
-}
-.notifications-panel .notifications-list {
-    list-style-type: none;
-    padding: 0;
 }
 
 .txt-toolbar .panel-tab .content-container .content a, .wangEditor-drop-panel .panel-tab .content-container .content a {

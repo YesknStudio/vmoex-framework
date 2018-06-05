@@ -17,10 +17,10 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="not_read">
                             {% if notices is not empty %}
-                                <ul class="notifications-list">
+                                <ul class="notifications-list list-group">
                                     {% for notice in notices|reverse %}
                                         {% if notice.isRead == false %}
-                                            <li>
+                                            <li class="list-group-item">
                                                 <div>
                                                     {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
                                                     <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
