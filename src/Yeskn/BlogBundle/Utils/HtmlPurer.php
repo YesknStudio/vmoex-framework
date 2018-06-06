@@ -117,6 +117,9 @@ class HtmlPurer
 
     public function getResult()
     {
+        $this->result = trim($this->result);
+        $this->result = preg_replace('#<p *><br */*></p>$#', '', $this->result);
+        $this->result = preg_replace('#<p> *</p>$#', '', $this->result);
         return $this->result;
     }
 

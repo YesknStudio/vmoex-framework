@@ -49,7 +49,7 @@
                 你的邮箱尚未激活，<a href="javascript:" class="alert-link">点此激活</a>
             </div>
 
-            <div style="padding: 5px 0;text-align: center">
+            <div style="padding-top: 10px;text-align: center">
                 <a data-pjax class="btn btn-success btn-block" href="{{ path('create_topic') }}"><i class="fa fa-edit"></i> 创作新主题</a>
             </div>
         </div>
@@ -80,9 +80,9 @@
     <div class="panel-body">
         {% set hotUsers = hotUsers() %}
         {% if hotUsers is not empty %}
-            <ul style="padding-left: 0">
+            <ul class="hot-user-list">
                 {% for active in hotUsers %}
-                    <li style="list-style: none;margin: 10px 0;">
+                    <li class="hot-user-item">
                         <a data-pjax href="{{ path('user_home', {username: active.username}) }}">
                             <img src="{{ active.avatar }}" alt="" width="25" height="25" class="img-rounded">
                             {{ active.nickname }}
@@ -101,9 +101,9 @@
         <span class="glyphicon glyphicon-fire"></span> 今日热门话题
     </div>
     <div class="panel-body latest-posts">
-        <ul style="padding-left: 0;list-style-type: none">
+        <ul class="hot-topic-list">
         {% for post in hotPosts() %}
-            <li style="padding: 0;margin: 10px 0">
+            <li class="hot-topic-item">
                 <div class="row">
                     <div class="col-md-1">
                         <img style="display: block" src="{{ post.author.avatar }}" alt="" width="25" height="25" class="img-rounded">
@@ -140,7 +140,9 @@
                             <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|ago }}
                         </small>
                     </div>
-                    <p>{{ comment.content|raw }}</p>
+                    <div style="margin-top: 5px">
+                        <a data-pjax href="{{ path('yeskn_blog_show', {id:comment.post.id}) }}#comments">{{ comment.content|raw }}</a>
+                    </div>
                 </div>
             </li>
         {% endfor %}

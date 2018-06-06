@@ -18,6 +18,9 @@ a:hover{
     background-color: #f5f5f5;
     color: #778087;
 }
+.chat li {
+    border-bottom: 1px solid #e7e7e7;
+}
 .hot-tags a{
     padding: 4px 4px;
     display: inline-block;
@@ -60,11 +63,7 @@ article> div > div.col-md-4 {
 article.main img{
     height: 55px;
     width: 55px;
-    vertical-align: middle;
-    border-radius: 2px;
 }
-
-
 .container.footer{
     border-top: 1px solid #e7e7e7;
 }
@@ -546,4 +545,35 @@ ul.pagination {
 }
 .text-underline {
     text-decoration: underline;
+}
+
+/** sidebar --------------------- **/
+
+.hot-topic-list {
+    padding-left: 0;
+    list-style-type: none;
+    margin-bottom: 0;
+}
+
+.hot-topic-item {
+    padding: 0;
+    margin-top: 10px;
+}
+
+.hot-topic-item:first-child {
+    margin: 0;
+}
+
+.hot-user-list {
+    padding-left: 0
+}
+.hot-user-list {
+    margin-bottom: 0;
+}
+.hot-user-item {
+    list-style: none;
+    margin-top: 10px;
+}
+.hot-user-item:first-child {
+    margin-top: 0;
 }
