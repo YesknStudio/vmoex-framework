@@ -110,8 +110,8 @@ class GlobalValue extends \Twig_Extension
         $datetime = new \DateTime('-2 day');
         $actives = $this->em->getRepository('YesknBlogBundle:Active')
             ->createQueryBuilder('p')
-            ->select('p')
-            ->addSelect('u')
+            ->select('p.date', 'p.createdAt', 'MAX(p.val) as val')
+            ->addSelect('u.username', 'u.avatar', 'u.nickname')
             ->leftJoin('p.user', 'u')
             ->where('p.createdAt >= :yd')->setParameter('yd', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
             ->orderBy('p.createdAt', 'DESC')
@@ -120,7 +120,7 @@ class GlobalValue extends \Twig_Extension
             ->getQuery()
             ->getArrayResult();
 
-        array_multisort($actives, SORT_ASC, SORT_REGULAR, array_column($actives, 'val'));
+        array_multisort(array_column($actives, 'val'), SORT_DESC, SORT_REGULAR, $actives);
 
         return $actives;
     }

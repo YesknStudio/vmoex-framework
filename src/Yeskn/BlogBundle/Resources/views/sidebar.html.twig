@@ -83,9 +83,9 @@
             <ul style="padding-left: 10px">
                 {% for active in hotUsers %}
                     <li style="list-style: none;margin: 10px 0;">
-                        <a data-pjax href="{{ path('user_home', {username: active.user.username}) }}">
-                            <img src="{{ active.user.avatar }}" alt="" width="25" height="25">
-                            {{ active.user.nickname }}
+                        <a data-pjax href="{{ path('user_home', {username: active.username}) }}">
+                            <img src="{{ active.avatar }}" alt="" width="25" height="25">
+                            {{ active.nickname }}
                         </a>
                         <span class="pull-right">{{ active.val }}活跃度</span>
                     </li>
