@@ -12,6 +12,7 @@ namespace Yeskn\CommonBundle\Twig;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\Expr\Join;
 use Yeskn\BlogBundle\Entity\User;
 
 class GlobalValue extends \Twig_Extension
@@ -109,12 +110,17 @@ class GlobalValue extends \Twig_Extension
         $datetime = new \DateTime('-2 day');
         $actives = $this->em->getRepository('YesknBlogBundle:Active')
             ->createQueryBuilder('p')
+            ->select('p')
+            ->addSelect('u')
+            ->leftJoin('p.user', 'u')
             ->where('p.createdAt >= :yd')->setParameter('yd', $datetime, \Doctrine\DBAL\Types\Type::DATETIME)
-            ->orderBy('p.val', 'DESC')
+            ->orderBy('p.createdAt', 'DESC')
             ->groupBy('p.user')
             ->setMaxResults(8)
             ->getQuery()
-            ->getResult();
+            ->getArrayResult();
+
+        array_multisort($actives, SORT_ASC, SORT_REGULAR, array_column($actives, 'val'));
 
         return $actives;
     }
