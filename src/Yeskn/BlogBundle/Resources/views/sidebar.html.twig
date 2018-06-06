@@ -80,11 +80,11 @@
     <div class="panel-body">
         {% set hotUsers = hotUsers() %}
         {% if hotUsers is not empty %}
-            <ul style="padding-left: 10px">
+            <ul style="padding-left: 0">
                 {% for active in hotUsers %}
                     <li style="list-style: none;margin: 10px 0;">
                         <a data-pjax href="{{ path('user_home', {username: active.username}) }}">
-                            <img src="{{ active.avatar }}" alt="" width="25" height="25">
+                            <img src="{{ active.avatar }}" alt="" width="25" height="25" class="img-rounded">
                             {{ active.nickname }}
                         </a>
                         <span class="pull-right">{{ active.val }}活跃度</span>
@@ -101,13 +101,23 @@
         <span class="glyphicon glyphicon-fire"></span> 今日热门话题
     </div>
     <div class="panel-body latest-posts">
-        <ol style="padding-left: 25px">
+        <ul style="padding-left: 0;list-style-type: none">
         {% for post in hotPosts() %}
-            <li>
-                <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}">{{ post.title }}</a>
+            <li style="padding: 0;margin: 10px 0">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img style="display: block" src="{{ post.author.avatar }}" alt="" width="25" height="25" class="img-rounded">
+                    </div>
+                    <div class="col-md-9">
+                        <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}">{{ post.title }}</a>
+                    </div>
+                    <div class="col-md-1"><span class="badge">{{ post.comments.count }}</span></div>
+                </div>
+
+
             </li>
             {% endfor %}
-        </ol>
+        </ul>
     </div>
 </div>
 

@@ -21,7 +21,7 @@
                                     {% for notice in notices|reverse %}
                                         {% if notice.isRead == false %}
                                             <li class="list-group-item">
-                                                <div>
+                                                <div style="padding-bottom: 10px">
                                                     {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
                                                     <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
                                                     <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
