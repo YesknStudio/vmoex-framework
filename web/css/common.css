@@ -18,6 +18,9 @@ a:hover{
     background-color: #f5f5f5;
     color: #778087;
 }
+.navbar {
+    margin-bottom: 10px;
+}
 .chat li {
     border-bottom: 1px solid #e7e7e7;
 }
@@ -137,8 +140,13 @@ h3.border-bottom{
 }
 
 .content-main .content img {
-    width: 100%;
+    max-width: 100%;
+    text-align: center;
     margin-bottom: 5px;
+}
+
+.content-main .panel.panel-default:last-child {
+    margin-bottom: 0;
 }
 
 .item-tag {
@@ -375,6 +383,7 @@ li.messages ul li div a {
 .user-home .user-meta .btn-sm {
     margin-bottom: 5px;
 }
+
 
 footer {
     display: flex;
