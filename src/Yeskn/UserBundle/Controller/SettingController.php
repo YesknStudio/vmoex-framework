@@ -8,8 +8,7 @@
 
 namespace Yeskn\UserBundle\Controller;
 
-
-use Identicon\Identicon;
+use Intervention\Image\ImageManagerStatic as Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
@@ -71,9 +70,15 @@ class SettingController extends Controller
 
             $fileName = md5($user->getUsername()) . '.'.$ext;
 
-            $fs->copy($path, $this->container->getParameter('kernel.root_dir') . '/../web/avatar/' . $fileName);
+            $targetPath = $this->container->getParameter('kernel.project_dir') . '/web/avatar/' . $fileName;
+            $fs->copy($path, $targetPath);
 
             $avatarPath = $request->getSchemeAndHttpHost() . '/avatar/' . $fileName;
+
+            Image::configure(array('driver' => 'gd'));
+
+            $image = Image::make($targetPath);
+            $image->resize(100, 100)->save();
         }
 
         $user->setNickname($request->get('nickname'));
