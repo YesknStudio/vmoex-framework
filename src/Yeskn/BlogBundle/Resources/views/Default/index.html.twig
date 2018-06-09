@@ -3,11 +3,11 @@
 {% block main %}
     <div class="home-content-main">
         <div class="tab-list">
-            <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="/">全部</a>
-            <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: 'hot'}) }}">热门</a>
+            <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="/">{{ '全部'|trans }}</a>
+            <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: 'hot'}) }}">{{ '热门'|trans }}</a>
 
             {% for tabItem in tabs %}
-                <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: tabItem.alias}) }}">{{ tabItem.name }}</a>
+                <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
             {% endfor %}
         </div>
         {% if posts is not empty %}
@@ -26,13 +26,13 @@
                             <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
 
                                 <span class="category">
-                                      <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name }}</a>
+                                      <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
                                 </span>
                                 <span><i class="fa fa-clock-o"></i> {{ post.updatedAt ? post.updatedAt|ago : post.createdAt|ago }}</span>
-                                <span><i class="fa fa-eye"></i> {{ post.views }}点击</span>
+                                <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                                 {% if post.comments.count %}
                                     <span><i class="fa fa-commenting-o"></i>
-                                        <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}评论</a></span>
+                                        <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a></span>
                                 {% endif %}
                             </p>
                         </div>

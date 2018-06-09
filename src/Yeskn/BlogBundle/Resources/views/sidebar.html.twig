@@ -5,7 +5,7 @@
 {% if app.user is empty %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa  fa-quote-left"></i> 您好，陌生人！
+            <i class="fa  fa-quote-left"></i> {{ 'hello_stranger'|trans }}
             <div class="btn-group pull-right">
                 <ul class="dropdown-menu slidedown">
                     <li>
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="panel-body">
-            如果你喜欢Vmoex，请记得注册或者保存网址哦~
+            {{ 'hello_stranger_detail'|trans }}
         </div>
     </div>
 {% endif %}
@@ -38,7 +38,7 @@
             </div>
             <div style="padding: 10px 0">
                 {% if app.user|signed %}
-                    <button type="button" class="btn btn-default btn-sm" style="color: yellowgreen"><i class="fa fa-flag"></i> 已连续签到{{ app.user.signDay }}天！</button>
+                    <button type="button" class="btn btn-default btn-sm" style="color: yellowgreen"><i class="fa fa-flag"></i> {{ 'continuous_signed count day'|trans({count:app.user.signDay}) }} ！</button>
                 {% else %}
                     <button type="button" id="sign-remark" class="btn btn-warning btn-sm"><i class="fa fa-gift"></i> 签到领取奖励</button>
                 {% endif %}
@@ -50,7 +50,7 @@
             </div>
 
             <div style="padding-top: 10px;text-align: center">
-                <a data-pjax class="btn btn-success btn-block" href="{{ path('create_topic') }}"><i class="fa fa-edit"></i> 创作新主题</a>
+                <a data-pjax class="btn btn-success btn-block" href="{{ path('create_topic') }}"><i class="fa fa-edit"></i> {{ 'create_new_topic'|trans }}</a>
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@
                             <img src="{{ asset(active.avatar) }}" alt="" width="25" height="25" class="img-rounded">
                             {{ active.nickname }}
                         </a>
-                        <span class="pull-right">{{ active.val }}活跃度</span>
+                        <span class="pull-right">{{ active.val }}{{ 'activity'|trans }}</span>
                     </li>
                 {% endfor %}
             </ul>

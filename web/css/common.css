@@ -419,14 +419,15 @@ footer {
     background-repeat: no-repeat
 }
 
-footer ul.footer-links {
-    font-weight: bold;
-    color: rgb(128, 128, 128);
+footer a.set-locale-link {
+    display: inline-block;
 }
 
 footer .copy {
     cursor: pointer;
-    padding: 5px
+    padding: 5px;
+    margin: 0;
+    margin-top: 20px;
 }
 
 footer .power {
@@ -437,6 +438,14 @@ footer .power {
 footer .power span {
     color: #e27575;
     font-size: 14px;
+}
+
+footer .language-box {
+    padding: 5px;
+}
+
+footer .brand {
+    padding: 5px;
 }
 
 .post-meta {
@@ -614,4 +623,8 @@ ul.pagination {
 }
 .hot-user-item:first-child {
     margin-top: 0;
+}
+
+.snow {
+    color: #e2e2e2
 }

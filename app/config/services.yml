@@ -11,6 +11,7 @@ services:
         class: Yeskn\CommonBundle\Twig\GlobalValue
         arguments:
             $em: "@doctrine.orm.entity_manager"
+            $translator: "@translator"
         tags:
             - { name: twig.extension }
 

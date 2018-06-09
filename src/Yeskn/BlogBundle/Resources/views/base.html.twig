@@ -94,15 +94,28 @@
     {% block footer %}
     <footer>
         <div class="container">
-            <ul class="footer-links">
-                <li><a href="javascript:">{{ 'about.vmoex'|trans }}</a></li>
-                <li><a href="javascript:" class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a></li>
-                <li><a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a></li>
-                <li><a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a></li>
-                <li><a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a></li>
-                <li>当前： {{ app.request.locale }}</li>
-            </ul>
-            <p class="copy" {#data-original-title="给你一个么么哒~"#}>© 2018 Vmoex - 打造最美好的二次元社区</p>
+
+
+            <div class="brand">
+                <b><a href="{{ path('about') }}">{{ 'about.vmoex'|trans }}</a></b>
+            </div>
+
+            <br>
+
+            <div class="language-box">
+                {{ 'vmoex_available_with'|trans }}
+
+                <a data-pjax href="javascript:" class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a>
+                <span class="snow">·</span>
+                <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a>
+                <span class="snow">·</span>
+                <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a>
+                <span class="snow">·</span>
+                <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a>
+
+            </div>
+
+            <p class="copy" {#data-original-title="给你一个么么哒~"#}>© 2018 Vmoex - {{ 'vmoex_slogan'|trans }}</p>
             <p class="power" >Designed with <span>❤</span> 彩虹の恋しい</p>
         </div>
     </footer>

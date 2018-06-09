@@ -107,7 +107,7 @@ class SettingController extends Controller
         $locale = $request->get('locale');
 
         if (in_array($locale, ['en', 'zh_CN', 'zh_TW', 'jp'])) {
-            $response = new JsonResponse(['ret' => 1, 'msg' => 'ok']);
+            $response = new JsonResponse(['ret' => 1, 'msg' => $this->get('translator')->trans('success')]);
             $response->headers->setCookie(new Cookie('_locale', $locale));
 
             return $response;

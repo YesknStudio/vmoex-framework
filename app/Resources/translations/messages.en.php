@@ -7,22 +7,62 @@
  */
 
 return [
+    // global
     'about.vmoex' => 'About Vmoex',
     'chinese' => 'Simplified Chinese',
     'english' => 'English',
     'chinese.tw' => 'Traditional Chinese',
     'japanese' => 'Japanese',
+    'click' => ' click',
+    'ago' => ' ago',
+    'second' => 'sec',
+    'day' => 'day',
+    'hour' => 'hour',
+    'minute' => 'min',
+    'login' => 'Login',
+    'logout' => 'Logout',
+    'register' => 'Register',
+    'success' => 'success',
+    'fail' => 'fail',
+    'vmoex_slogan' => 'Build the best two yuan community',
+
+    //header
+    'banner.copyright' => 'The content of this site may be infringed on your rights, Vmoex use your articles (or pictures, etc.) only for testing the real line, if you do not allow, please mail: support@vmoex.com.',
+
+    'trends' => 'Trends',
+    'activity' => ' Activity',
+    'blind.chat' => 'BlandChat',
+    'about' => 'About',
+
+    'comment' => 'comments',
 
     // header
     'search' => 'Search',
-    'about' => 'About',
     'messages' => 'Messages',
     'notifications' => 'Notifications',
 
     // sidebar
+    'hello_stranger' => 'Hello, Stranger !',
+    'hello_stranger_detail' => 'If you like Vmoex, remember to register or add this site to  your bookmark.',
     'my.status' => 'My Status',
     'hot.users' => 'Activist Users',
     'today.hot.topics' => 'Hot Topics Today',
     'newly.comments' => 'Latest Comments ',
     'today.activity' => 'Today Activity',
+    'continuous_signed count day' => 'continuous signed count day',
+    'create_new_topic' => 'Create New Topic',
+
+    // footer
+    'vmoex_available_with' => 'Vmoex available with: ',
+
+    //tabs
+    '全部' => 'All',
+    '热门' => 'Hot',
+    '追剧' => 'Tv',
+    '福利' => 'Wel',
+    '插画' => 'Picture',
+    '歌姬' => 'Hawayi Music',
+    '游戏' => 'Game',
+    '站务公告' => 'Announce',
+    '漫展' => 'ComicDis',
 ];

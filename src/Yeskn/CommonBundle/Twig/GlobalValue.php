@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Component\Translation\Translator;
 use Yeskn\BlogBundle\Entity\User;
 
 class GlobalValue extends \Twig_Extension
@@ -23,12 +24,18 @@ class GlobalValue extends \Twig_Extension
     private $em;
 
     /**
+     * @var Translator
+     */
+    private $translator;
+
+    /**
      * GlobalValue constructor.
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, $translator)
     {
         $this->em = $em;
+        $this->translator = $translator;
     }
 
     /**
@@ -63,19 +70,27 @@ class GlobalValue extends \Twig_Extension
 
         $diff = $current - $ts;
 
+        static $ago, $second, $minute, $hour, $day;
+
+        $ago = $ago ?: $this->translator->trans('ago');
+        $second = $second ?: $this->translator->trans('second');
+        $minute = $minute ?: $this->translator->trans('minute');
+        $hour = $hour ?: $this->translator->trans('hour');
+        $day = $day ?: $this->translator->trans('day');
+
         if ($diff < 60) {
-            return (intval($diff) ?: 1).'秒前';
+            return (intval($diff) ?: 1).$second.$ago;
         } else if ($diff <= 60*60){
             $m = intval($diff/60);
             $s = intval($diff%60);
-            return $m.'分钟' . ($s ? $s.'秒' : '') . '前';
+            return $m. $minute . ($s ? $s. $second : '') . $ago;
         } else if ($diff <= 24*60*60){
             $h = intval($diff/(60*60));
             $m = intval(($diff - $h*(60*60))/60);
-            return $h . '小时' . ($m ? $m . '分钟' : '') .'前';
+            return $h . $hour . ($m ? $m . $minute : '') . $ago;
         } else {
             $d = intval($diff/(24*60*60));
-            return $d . '天前';
+            return $d . $day . $ago;
         }
     }
 
