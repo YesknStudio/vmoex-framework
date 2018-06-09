@@ -140,6 +140,11 @@ class GlobalValue extends \Twig_Extension
         return $actives;
     }
 
+    public function onlineUserCount()
+    {
+        return 23 + mt_rand(0, 3);
+    }
+
     /**
      * @param User $user
      * @return array|\Yeskn\BlogBundle\Entity\Message[]
@@ -165,7 +170,8 @@ class GlobalValue extends \Twig_Extension
             new \Twig_SimpleFunction('hotTags',array($this,'hotTags'),array('is_safe' => 'html'),array('needs_environment' => true)),
             new \Twig_SimpleFunction('hotComments',array($this,'hotComments'),array('is_safe' => 'html'),array('needs_environment' => true)),
             new \Twig_SimpleFunction('unReadMessages',array($this,'unReadMessages'),array('is_safe' => 'html'),array('needs_environment' => true)),
-            new \Twig_SimpleFunction('hotUsers',array($this,'hotUsers'),array('is_safe' => 'html'),array('needs_environment' => true))
+            new \Twig_SimpleFunction('hotUsers',array($this,'hotUsers'),array('is_safe' => 'html'),array('needs_environment' => true)),
+            new \Twig_SimpleFunction('onlineUserCount',array($this,'onlineUserCount'),array('is_safe' => 'html'),array('needs_environment' => true))
         );
     }
 }

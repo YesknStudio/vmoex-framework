@@ -97,24 +97,29 @@
 
 
             <div class="brand">
-                <b><a href="{{ path('about') }}">{{ 'about.vmoex'|trans }}</a></b>
+                <b><a data-pjax href="{{ path('about') }}">{{ 'about.vmoex'|trans }}</a></b>
+                <span class="snow">·</span>
+                <b><a data-pjax href="{{ path('buy_beer') }}">{{ 'buy_beer'|trans }} ｡◕‿◕｡</a></b>
             </div>
 
             <br>
 
             <div class="language-box">
-                {{ 'vmoex_available_with'|trans }}
 
-                <a data-pjax href="javascript:" class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a>
+                <span style="display: inline-block;margin-right: 10px">{{ 'vmoex_available_with'|trans }}</span>
+
+                <img class="footer-flag" src="{{ asset('img/flags/zh_CN.png') }}" alt="zh_CN"> <a data-pjax href="javascript:" class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a>
                 <span class="snow">·</span>
-                <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a>
+                <img class="footer-flag" src="{{ asset('img/flags/en.png') }}" alt="en"><a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a>
                 <span class="snow">·</span>
-                <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a>
+                <img class="footer-flag" src="{{ asset('img/flags/zh_TW.png') }}" alt="zh_TW"><a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a>
                 <span class="snow">·</span>
-                <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a>
+                <img class="footer-flag" src="{{ asset('img/flags/jp.png') }}" alt="jp"><a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a>
 
             </div>
 
+            {% set userCount = onlineUserCount() %}
+            <p style="margin: 20px 5px">{{ '当前在线count人'|trans({count:userCount}) }}，{{ '历史最高'|trans }} 393</p>
             <p class="copy" {#data-original-title="给你一个么么哒~"#}>© 2018 Vmoex - {{ 'vmoex_slogan'|trans }}</p>
             <p class="power" >Designed with <span>❤</span> 彩虹の恋しい</p>
         </div>

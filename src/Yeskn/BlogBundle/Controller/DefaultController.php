@@ -379,4 +379,20 @@ class DefaultController extends Controller
         //$res->headers->set('Content-Type', 'image/png');
         return $res;
     }
+
+    /**
+     * @Route("/buy-beer", methods={"GET"}, name="buy_beer")
+     */
+    public function buyBeerAction()
+    {
+        return $this->render('@YesknBlog/buy-beer.html.twig');
+    }
+
+    /**
+     * @Route("/thanks", name="thanks")
+     */
+    public function thanks()
+    {
+        return $this->render('@YesknBlog/thanks.html.twig');
+    }
 }

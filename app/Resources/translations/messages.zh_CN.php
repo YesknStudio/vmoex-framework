@@ -39,7 +39,7 @@ return [
 
     // sidebar
     'hello_stranger' => ' 您好，陌生人！',
-    'hello_stranger_detail' => '如果你喜歡Vmoex，請記得注册或者保存網址哦~',
+    'hello_stranger_detail' => '如果你喜欢Vmoex，请记得注册或者保存网址哦~',
     'my.status' => '我的状态',
     'hot.users' => '活跃用户',
     'today.hot.topics' => '今日活跃用户',
@@ -51,4 +51,6 @@ return [
 
     // footer
     'vmoex_available_with' => 'Vmoex 可用于: ',
+    'buy_beer' => '请彩虹之恋喝🍻啤酒啦~'
+
 ];

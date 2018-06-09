@@ -55,6 +55,10 @@ return [
 
     // footer
     'vmoex_available_with' => 'Vmoex available with: ',
+    '当前在线count人' => 'Current Online count Users',
+    '历史最高' => 'The highest in history',
+    '致谢' => 'Thanks',
+    'buy_beer' => 'Buy Me 🍻 Beers ~',
 
     //tabs
     '全部' => 'All',

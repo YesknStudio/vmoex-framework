@@ -448,6 +448,12 @@ footer .brand {
     padding: 5px;
 }
 
+footer .footer-flag {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
 .post-meta {
     color: #9d9d9d;
 }
@@ -626,5 +632,6 @@ ul.pagination {
 }
 
 .snow {
-    color: #e2e2e2
+    color: #e2e2e2;
+    padding: 0 5px;
 }
