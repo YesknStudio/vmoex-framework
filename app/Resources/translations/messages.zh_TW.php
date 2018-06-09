@@ -42,6 +42,7 @@ return [
     'today.hot.topics' => '今日熱門話題',
     'newly.comments' => '最新評論',
     'activity' => '活躍度',
+    'create_new_topic' =>'創建新主題',
 
      // footer
     'vmoex_available_with' => 'Vmoex 可用於: ',
