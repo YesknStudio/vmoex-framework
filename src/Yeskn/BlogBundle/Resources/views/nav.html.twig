@@ -10,7 +10,7 @@
 
             <div class="navbar-toggle collapsed navbar-avatar-mobile" data-toggle="collapse" data-target="#navbar-collapse-user">
                 {% set avatar = app.user ? app.user.avatar : 'https://static.yeskn.com/avatar.png' %}
-                <img src="{{ avatar }}" alt="" width="25px" height="25px" class="img-circle">
+                <img src="{{ asset(app.user.avatar) }}" alt="" width="25px" height="25px" class="img-circle">
             </div>
 
             {% if app.user %}
@@ -87,7 +87,7 @@
                     </li>
                     <li class="dropdown user-actions">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <img src="{{ app.user.avatar }}" alt="" width="25px" height="25px">
+                            <img src="{{ asset(app.user.avatar) }}" alt="" width="25px" height="25px">
                             <span>{{ app.user.nickname }}</span>
                             <i class="fa fa-caret-down"></i>
                         </a>

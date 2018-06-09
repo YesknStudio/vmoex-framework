@@ -84,7 +84,7 @@
                 {% for active in hotUsers %}
                     <li class="hot-user-item">
                         <a data-pjax href="{{ path('user_home', {username: active.username}) }}">
-                            <img src="{{ active.avatar }}" alt="" width="25" height="25" class="img-rounded">
+                            <img src="{{ asset(active.avatar) }}" alt="" width="25" height="25" class="img-rounded">
                             {{ active.nickname }}
                         </a>
                         <span class="pull-right">{{ active.val }}活跃度</span>
@@ -106,7 +106,7 @@
             <li class="hot-topic-item">
                 <div class="row">
                     <div class="col-md-1">
-                        <img style="display: block" src="{{ post.author.avatar }}" alt="" width="25" height="25" class="img-rounded">
+                        <img style="display: block" src="{{ asset(post.author.avatar) }}" alt="" width="25" height="25" class="img-rounded">
                     </div>
                     <div class="col-md-9">
                         <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}">{{ post.title }}</a>
@@ -131,7 +131,7 @@
         {% for comment in hotComments() %}
             <li class="left clearfix">
                 <span class="chat-img pull-left">
-                    <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img img-rounded" width="50" height="50">
+                    <img src="{{ asset(comment.user.avatar) }}" alt="User Avatar" class="img img-rounded" width="50" height="50">
                 </span>
                 <div class="chat-body clearfix">
                     <div class="header">

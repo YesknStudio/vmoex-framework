@@ -73,7 +73,7 @@ class SettingController extends Controller
             $targetPath = $this->container->getParameter('kernel.project_dir') . '/web/avatar/' . $fileName;
             $fs->copy($path, $targetPath);
 
-            $avatarPath = $request->getSchemeAndHttpHost() . '/avatar/' . $fileName;
+            $avatarPath = 'avatar/' . $fileName;
 
             Image::configure(array('driver' => 'gd'));
 

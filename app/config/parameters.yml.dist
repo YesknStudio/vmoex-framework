@@ -21,3 +21,4 @@ parameters:
 
     uglifyjs2_path: ~
     redis-dsn: ~
+    assets_base_url: 'https://static.yeskn.com/vmoex/'

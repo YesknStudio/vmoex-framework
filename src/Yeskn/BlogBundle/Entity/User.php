@@ -408,7 +408,7 @@ class User implements UserInterface
         if (empty($this->avatar)) {
 //            $identicon = new \Identicon\Identicon();
 //            $this->avatar = $identicon->getImageDataUri($this->username);
-            $this->avatar = 'https://static.yeskn.com/avatar@1x.png';
+            $this->avatar = 'avatar@1x.png';
         }
         return $this->avatar;
     }

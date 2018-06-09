@@ -51,7 +51,7 @@
                     {% for comment in post.comments %}
                         <li class="left clearfix comment-item">
                 <span class="chat-img pull-left comment-user-avatar">
-                    <img src="{{ comment.user.avatar }}" alt="User Avatar" class="img">
+                    <img src="{{ asset(comment.user.avatar) }}" alt="User Avatar" class="img">
                 </span>
                             <div class="comment-main chat-body clearfix">
                                 <div class="comment-user-info">

@@ -37,7 +37,7 @@
                                 {% set loc = (app.user and chat.user.id == app.user.id) ? 'right' : 'left' %}
                                 <li class="{{ loc }} clearfix">
                                     <span class="chat-img pull-{{ loc }}">
-                                        <img style="border-radius: 5px" width="50" height="50" src="{{ chat.user.avatar }}" alt="User Avatar">
+                                        <img style="border-radius: 5px" width="50" height="50" src="{{ asset(chat.user.avatar) }}" alt="User Avatar">
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">

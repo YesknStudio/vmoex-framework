@@ -1,6 +1,6 @@
 body {
-    cursor: url('/img/p.cur'), url(/img/p.cur), auto;
-    background: url("/img/zhMoegirl18summer.jpg") no-repeat top left #f6f6f6;
+    cursor: url('https://static.yeskn.com/vmoex/img/p.cur'), url(https://static.yeskn.com/vmoex/img/p.cur), auto;
+    background: url("https://static.yeskn.com/vmoex/img/zhMoegirl18summer.jpg") no-repeat top left #f6f6f6;
 }
 html,body{overflow:hidden;overflow-y:auto;}
 a{
@@ -388,7 +388,7 @@ li.messages ul li div a {
 footer {
     display: flex;
     height: 301px;
-    background: url('/img/763552f474305423.png');
+    background: url('https://static.yeskn.com/vmoex/img/763552f474305423.png');
     background-position: bottom right;
     background-repeat: no-repeat
 }
@@ -585,4 +585,17 @@ ul.pagination {
 }
 .hot-user-item:first-child {
     margin-top: 0;
+}
+ul.chat {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+ul.chat li {
+    margin-bottom: 10px;
+}
+.chat-panel .panel-body {
+    height: 400px;
+    overflow-y: scroll;
 }
