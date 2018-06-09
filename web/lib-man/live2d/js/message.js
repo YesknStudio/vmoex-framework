@@ -59,7 +59,7 @@ if(!norunFlag){
 		function initTips(){
 			$.ajax({
 				cache: true,
-				url: message_Path+'message.json',
+				url: home_Path + message_Path+'message.json',
 				dataType: "json",
 				success: function (result){
 					$.each(result.mouseover, function (index, tips){
@@ -473,7 +473,7 @@ if(!norunFlag){
 						},1300);
 					}
 					setTimeout(function(){
-						loadlive2d("live2d", message_Path+"model/histoire/model.json");
+						loadlive2d("live2d", home_Path + message_Path+"model/histoire/model.json");
 					},1000);
 					initLive2d ();
 					images = null;

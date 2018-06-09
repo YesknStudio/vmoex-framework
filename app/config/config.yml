@@ -38,7 +38,7 @@ framework:
     fragments:       ~
     http_method_override: true
     assets:
-        version: 'v9ikd0sd'
+        version: 'v9ikd0sdjd09d'
         base_urls: "%assets_base_url%"
 
 # Twig Configuration
