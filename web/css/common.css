@@ -410,7 +410,7 @@ li.messages ul li div a {
 
 footer {
     display: flex;
-    height: 301px;
+    min-height: 301px;
     padding-top: 60px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
