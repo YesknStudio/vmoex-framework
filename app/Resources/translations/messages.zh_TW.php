@@ -29,7 +29,7 @@ return [
 
     // header
     'trends' => '動態',
-    'search' => '蒐索',
+    'search' => '搜尋',
     'about' => '關於',
     'messages' => '私信',
     'notifications' => '通知',
