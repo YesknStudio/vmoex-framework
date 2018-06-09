@@ -25,11 +25,11 @@
 {% if app.user %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-user"></i> 我的状态
+            <i class="fa fa-user"></i> {{ 'my.status'|trans }}
         </div>
         <div class="panel-body">
             <p>
-                <strong>今日活跃度</strong>
+                <strong>{{ "today.activity"|trans }}</strong>
             </p>
             <div class="progress active">
                 <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ app.user.activeVal }}" aria-valuemin="0" aria-valuemax="128" style="width: {{ (app.user.activeVal/128)*100 }}%">
@@ -75,7 +75,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <i class="fa  fa-fire"></i> 活跃用户
+        <i class="fa  fa-fire"></i> {{ "hot.users"|trans }}
     </div>
     <div class="panel-body">
         {% set hotUsers = hotUsers() %}
@@ -98,7 +98,7 @@
 
 <div class="panel panel-default hidden-xs hidden-sm">
     <div class="panel-heading">
-        <span class="glyphicon glyphicon-fire"></span> 今日热门话题
+        <span class="glyphicon glyphicon-fire"></span> {{ 'today.hot.topics'|trans }}
     </div>
     <div class="panel-body latest-posts">
         <ul class="hot-topic-list">
@@ -123,7 +123,7 @@
 
 <div class="panel panel-default hidden-xs hidden-sm">
     <div class="panel-heading">
-        <i class="fa fa-comments-o"></i> 最新评论
+        <i class="fa fa-comments-o"></i> {{ 'newly.comments'|trans }}
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body">

@@ -15,6 +15,10 @@ services:
             - { name: twig.extension }
 
     Yeskn\BlogBundle\EventListener\RequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 50 }
+
+    Yeskn\BlogBundle\EventListener\ControllerListener:
         arguments: ['@service_container']
         tags:
             - { name: kernel.event_listener, event: kernel.controller }

@@ -212,5 +212,19 @@ $(document).ready(function () {
             $('#navbar-collapse').collapse('hide');
             $('#navbar-collapse-user').collapse('hide')
         }
-    })
+    });
+
+    $('.set-locale-link').click(function (e) {
+        e.preventDefault();
+        var locale = $(this).attr('data-locale');
+
+        $.post(G_set_locale_link, {locale:locale}, function (data) {
+            if (data.ret) {
+                success(data.msg);
+                window.location.reload();
+            } else {
+                error(data.msg);
+            }
+        });
+    });
 });

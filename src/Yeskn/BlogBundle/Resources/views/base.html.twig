@@ -38,6 +38,7 @@
             let G_set_message_red_link = '{{ path('set_message_red') }}';
             let G_sign_link = '{{ path('sign') }}';
             let G_cdn__Path = '{{ assets_base_url }}';
+            let G_set_locale_link = '{{ path('set_locale') }}';
         </script>
         {% endblock %}
     {% endif %}
@@ -93,6 +94,14 @@
     {% block footer %}
     <footer>
         <div class="container">
+            <ul class="footer-links">
+                <li><a href="javascript:">{{ 'about.vmoex'|trans }}</a></li>
+                <li><a href="javascript:" class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a></li>
+                <li><a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a></li>
+                <li><a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a></li>
+                <li><a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a></li>
+                <li>当前： {{ app.request.locale }}</li>
+            </ul>
             <p class="copy" {#data-original-title="给你一个么么哒~"#}>© 2018 Vmoex - 打造最美好的二次元社区</p>
             <p class="power" >Designed with <span>❤</span> 彩虹の恋しい</p>
         </div>

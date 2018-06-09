@@ -21,11 +21,26 @@ a:hover{
 .navbar {
     margin-bottom: 10px;
 }
-.chat li {
+ul.chat {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+ul.chat li.left .chat-body {
+    margin-left: 60px;
+}
+.chat li.right .chat-body {
+    margin-right: 60px;
+}
+ul.chat li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
     border-bottom: 1px solid #e7e7e7;
 }
-.chat li.left .chat-body {
-    margin-left: 60px;
+
+.chat-panel .panel-body {
+    height: 400px;
+    overflow-y: scroll;
 }
 .hot-tags a{
     padding: 4px 4px;
@@ -163,7 +178,8 @@ nav.navbar-static-top {
 }
 
 li.user-meta {
-    border: none;
+    margin-bottom: 0 !important;
+    border: none !important;
 }
 .tab-content{
     padding: 10px;
@@ -283,6 +299,10 @@ li.messages ul li div a {
     #navbar-collapse-user {
         display: none !important;
     }
+
+    footer {
+        background: url('https://static.yeskn.com/vmoex/img/763552f474305423.png');
+    }
 }
 
 /************************** 手机 ***************/
@@ -391,20 +411,26 @@ li.messages ul li div a {
 footer {
     display: flex;
     height: 301px;
-    background: url('https://static.yeskn.com/vmoex/img/763552f474305423.png');
+    padding-top: 60px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #fff;
     background-position: bottom right;
     background-repeat: no-repeat
 }
 
+footer ul.footer-links {
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+}
+
 footer .copy {
     cursor: pointer;
-    text-align: center;
     padding: 5px
 }
 
 footer .power {
     color: rgb(138, 138, 138);
-    text-align: center;
     padding: 5px
 }
 
@@ -588,17 +614,4 @@ ul.pagination {
 }
 .hot-user-item:first-child {
     margin-top: 0;
-}
-ul.chat {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-}
-
-ul.chat li {
-    margin-bottom: 10px;
-}
-.chat-panel .panel-body {
-    height: 400px;
-    overflow-y: scroll;
 }

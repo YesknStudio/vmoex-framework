@@ -1,56 +1,27 @@
 <?php
 /**
- * This file is part of project JetBlog.
+ * This file is part of project Vmoex.
  *
  * Author: Jake
- * Create: 2018-05-27 15:38:34
+ * Create: 2018-06-09 20:14:51
  */
 
 namespace Yeskn\BlogBundle\EventListener;
 
-
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Yeskn\BlogBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class RequestListener
 {
-    private $container;
-
-    public function __construct(ContainerInterface $container)
+    public function onKernelRequest(GetResponseEvent $event)
     {
-        $this->container = $container;
-    }
+        $locale = $event->getRequest()->cookies->get('_locale');
+        $defaultLocale = 'zh_CN';
 
-    public function onKernelController(FilterControllerEvent $event)
-    {
-        $user = $this->getUser();
-
-        if ($user) {
-            $activeRepository = $this->container->get('doctrine')
-                ->getRepository('YesknBlogBundle:Active');
-            $activeRepository->increaseTodayActive($user);
-        }
-    }
-
-    /**
-     * @return User|void
-     */
-    protected function getUser()
-    {
-        if (!$this->container->has('security.token_storage')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".');
+        if (!in_array($locale, ['en', 'zh_CN', 'jp', 'zh_TW'])) {
+            $locale = $defaultLocale;
         }
 
-        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
-            return;
-        }
-
-        if (!is_object($user = $token->getUser())) {
-            // e.g. anonymous authentication
-            return;
-        }
-
-        return $user;
+        $event->getRequest()->setLocale($locale);
     }
 }

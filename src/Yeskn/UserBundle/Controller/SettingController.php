@@ -12,6 +12,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +34,7 @@ class SettingController extends Controller
     }
 
     /**
-     * @Route("/modify_info", name="modify_user_info")
+     * @Route("/modify-info", name="modify_user_info")
      */
     public function modifyUserInfo(Request $request)
     {
@@ -93,5 +94,25 @@ class SettingController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('user_setting');
+    }
+
+    /**
+     * @Route("/set-locale", name="set_locale", methods={"POST"})
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function setLocale(Request $request)
+    {
+        $locale = $request->get('locale');
+
+        if (in_array($locale, ['en', 'zh_CN', 'zh_TW', 'jp'])) {
+            $response = new JsonResponse(['ret' => 1, 'msg' => 'ok']);
+            $response->headers->setCookie(new Cookie('_locale', $locale));
+
+            return $response;
+        }
+
+        return new JsonResponse(['ret' => 0, 'msg' => 'locale invalid']);
     }
 }
