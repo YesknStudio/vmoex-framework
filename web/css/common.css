@@ -24,6 +24,9 @@ a:hover{
 .chat li {
     border-bottom: 1px solid #e7e7e7;
 }
+.chat li.left .chat-body {
+    margin-left: 60px;
+}
 .hot-tags a{
     padding: 4px 4px;
     display: inline-block;
