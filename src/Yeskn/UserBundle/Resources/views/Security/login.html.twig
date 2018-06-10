@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
-                    登录到Vmoex
+                    {{ 'login'|trans }} Vmoex
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -23,11 +23,11 @@
                             <form data-pjax id="loginForm" action="{{ path('yeskn_login_check') }}" method="post" role="form">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="帐号或者邮箱" id="username"
+                                        <input type="text" class="form-control" placeholder="{{ '用户名'|trans }} or {{ '邮箱'|trans }}" id="username"
                                                name="_username" value="{{ last_username }}" autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="密码" type="password" id="password"
+                                        <input class="form-control" placeholder="{{ '密码'|trans }}" type="password" id="password"
                                                name="_password" value="">
                                     </div>
                                     <div class="checkbox">
@@ -37,7 +37,7 @@
                                     </div>
                                     <input type="hidden" name="_target_path" value="/admin"/>
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
+                                    <button type="submit" class="btn btn-lg btn-success btn-block">{{ 'login'|trans }}</button>
                                 </fieldset>
                             </form>
                         </div>

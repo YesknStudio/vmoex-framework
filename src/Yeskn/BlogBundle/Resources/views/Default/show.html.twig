@@ -45,7 +45,7 @@
             {#<span class="pull-right last">12次收藏 / 30次感谢</span>#}
         {#</div>#}
         <div class="comments" id="comments">
-            <h3 class="border-bottom">{{ 'comment'|trans }}</h3>
+            <h3 class="border-bottom">{{ 'comment'|trans|upper }}</h3>
             {% if post.comments is not empty %}
                 <ul class="chat">
                     {% for comment in post.comments %}

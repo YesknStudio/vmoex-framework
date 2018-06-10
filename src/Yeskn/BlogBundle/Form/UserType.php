@@ -15,17 +15,17 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, array('label' => '用户名'))
-            ->add('email', EmailType::class, array('label' => '邮箱'))
-            ->add('password', PasswordType::class,['label' => '密码'])
-            ->add('submit', SubmitType::class, array('label' => '注册'))
+            ->add('username', TextType::class, ['label' => '用户名', 'translation_domain' => 'messages'])
+            ->add('email', EmailType::class, ['label' => '邮箱', 'translation_domain' => 'messages'])
+            ->add('password', PasswordType::class,['label' => '密码', 'translation_domain' => 'messages'])
+            ->add('submit', SubmitType::class, ['label' => 'register', 'translation_domain' => 'messages'])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Yeskn\BlogBundle\Entity\User',
-        ));
+        ]);
     }
 }
