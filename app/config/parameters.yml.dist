@@ -24,3 +24,4 @@ parameters:
     assets_base_url: 'https://static.yeskn.com/vmoex/'
     assets_version: v0.
     socket_host: http://localhost:2120
+    socket_push_host: http://localhost:2121
