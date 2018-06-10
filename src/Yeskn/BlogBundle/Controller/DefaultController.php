@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,8 +32,16 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request, $page)
     {
-        $tab = $request->attributes->get('tab', 'all');
+        $tab = $request->attributes->get('tab');
         $pagesize = 25;
+
+        if (empty($tab)) {
+            $tab = $request->cookies->get('_tab');
+        }
+
+        if (empty($tab)) {
+            $tab = 'all';
+        }
 
         $sort = ['updatedAt' => 'DESC'];
 
@@ -72,12 +81,16 @@ class DefaultController extends Controller
         $pageData['allPage'] = ceil($count/$pagesize);
         $pageData['currentPage'] = $page;
 
-        return $this->render('YesknBlogBundle:Default:index.html.twig', array(
+        $response = $this->render('YesknBlogBundle:Default:index.html.twig', array(
             'posts' => $posts,
             'tab' => $tab,
             'tabs' => $allTabs,
             'pageData' => $pageData
         ));
+
+        $response->headers->setCookie(new Cookie('_tab', $tab));
+
+        return $response;
     }
 
     /**

@@ -41,3 +41,5 @@ buy_beer: "请彩虹之恋喝\U0001F37B啤酒啦~"
 用户名: 用户名
 邮箱: 邮箱
 密码: 密码
+verify_email: >
+  你的邮箱尚未激活，<a href="javascript:" class="alert-link">点此激活</a>

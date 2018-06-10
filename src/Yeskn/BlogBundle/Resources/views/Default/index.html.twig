@@ -3,7 +3,7 @@
 {% block main %}
     <div class="home-content-main">
         <div class="tab-list">
-            <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="/">{{ '全部'|trans }}</a>
+            <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('home_tab', {tab: 'all'}) }}">{{ '全部'|trans }}</a>
             <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: 'hot'}) }}">{{ '热门'|trans }}</a>
 
             {% for tabItem in tabs %}

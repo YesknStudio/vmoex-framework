@@ -35,7 +35,7 @@ Vmoex当前板块数量: Vmoex Current Plate Count
 comment: comment
 search: Search
 messages: Msg
-notifications: Notes
+notifications: Notice
 hello_stranger: Hello, Stranger !
 hello_stranger_detail: If you like Vmoex, remember to register or add this site to your bookmark.
 my.status: My Status
@@ -62,3 +62,20 @@ buy_beer: "Buy Me \U0001F37B Beers ~"
 用户名: Username
 邮箱: Email
 密码: Password
+查看所有通知: All Notifications
+查看所有私信: All Messages
+我的主页: My Homepage
+个人设置: Setting
+verify_email: >
+  Your Email is not activated，<a href="javascript:" class="alert-link">Click to Activate</a>
+添加新的评论: Add new Comment
+发表有颜色的评论将消耗5金币哦: A color comment will consume 5 gold coins.
+好可怕，速度太快了: It's awful, the speed is too fast
+关于作者: the author
+拉黑: Block
+昵称: Nickname
+状态: Status
+头像: Avatar
+保存: Save
+修改: Modity
+修改密码: Modity Password

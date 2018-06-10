@@ -15,8 +15,17 @@ class RequestListener
 {
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $locale = $event->getRequest()->cookies->get('_locale');
         $defaultLocale = 'zh_CN';
+
+        $locale = $event->getRequest()->query->get('_locale');
+
+        if (empty($locale)) {
+            $locale = $event->getRequest()->cookies->get('_locale');
+        }
+
+        if (empty($locale)) {
+            $locale = $defaultLocale;
+        }
 
         if (!in_array($locale, ['en', 'zh_CN', 'jp', 'zh_TW'])) {
             $locale = $defaultLocale;

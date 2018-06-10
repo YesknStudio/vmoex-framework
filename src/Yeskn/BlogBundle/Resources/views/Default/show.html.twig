@@ -15,7 +15,7 @@
                 <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                 {% if post.comments.count %}
                     <span><i class="fa fa-commenting-o"></i>
-                        <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}评论</a>
+                        <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a>
                     </span>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
@@ -88,14 +88,14 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>暂无评论，快来抢沙发吧~~</p>
+                <p>{{ '暂无评论，快来抢沙发吧'|trans }}~~</p>
             {% endif %}
 
             <div class="form-group" style="margin-top: 20px">
-                <label class="control-label required" for="editor-trigger">添加新的评论</label>
+                <label class="control-label required" for="editor-trigger">{{ '添加新的评论'|trans }}</label>
                 <div id="editor-trigger"></div>
                 <textarea id="editor-trigger" style="display:none;"></textarea>
-                <p class="help-block">发表有颜色的评论将消耗5金币哦~</p>
+                <p class="help-block">{{ '发表有颜色的评论将消耗5金币哦'|trans }}~</p>
             </div>
             <div class="form-group">
                 {% if app.user %}
@@ -197,7 +197,7 @@
               var $this = $(this);
 
               if ($this.hasClass('disabled')) {
-                  warning('好可怕，速度太快了！');
+                  warning('{{ '好可怕，速度太快了'|trans }}！');
                   return ;
               }
 
@@ -259,7 +259,7 @@
 {% block sidebar_head %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            关于作者
+            {{ '关于作者'|trans }}
             <div class="btn-group pull-right">
                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false">
@@ -268,7 +268,7 @@
                 <ul class="dropdown-menu slidedown">
                     <li>
                         <a href="#">
-                            <i class="fa fa-check-circle fa-fw"></i> 拉黑
+                            <i class="fa fa-check-circle fa-fw"></i> {{ '拉黑'|trans }}
                         </a>
                     </li>
                 </ul>

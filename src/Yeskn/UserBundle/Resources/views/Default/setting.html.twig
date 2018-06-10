@@ -30,26 +30,26 @@
                                     <div class="col-md-5">
                                         <form action="{{ path('modify_user_info') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label">用户名</label>
+                                                <label for="username" class="col-sm-2 control-label">{{ '用户名'|trans }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" value="{{ app.user.username }}" class="form-control" id="username" disabled>
                                                     <span id="helpBlock" class="help-block">用户名不能被修改</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="nickname" class="col-sm-2 control-label">昵称</label>
+                                                <label for="nickname" class="col-sm-2 control-label">{{ '昵称'|trans }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" value="{{ app.user.nickname }}" class="form-control" id="nickname" name="nickname" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="remark" class="col-sm-2 control-label">状态</label>
+                                                <label for="remark" class="col-sm-2 control-label">{{ '状态'|trans }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" value="{{ app.user.remark }}" class="form-control" id="remark" name="remark" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="avatar" class="col-sm-2 control-label">头像</label>
+                                                <label for="avatar" class="col-sm-2 control-label">{{ '头像'|trans }}</label>
                                                 <div class="col-sm-2">
                                                     <img src="{{ asset(app.user.avatar) }}" alt="" width="75">
                                                 </div>
@@ -60,8 +60,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
-                                                    <span class="help-block">昵称和头像180天内只能修改一次，<a class="text-underline" href=""><small class="text-muted">为什么会这样？</small></a></span>
-                                                    <button type="submit" class="btn btn-default btn-sm">保存</button>
+                                                    <span class="help-block">昵称和头像180天内只能修改一次，<a class="text-underline" href="">
+                                                            <small class="text-muted">{{ '为什么会这样？'|trans }}</small></a>
+                                                    </span>
+                                                    <button type="submit" class="btn btn-default btn-sm">{{ '保存'|trans }}</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -75,16 +77,16 @@
                                     <div class="col-md-1"></div>
                                     <div class="col-md-5">
                                         <div class="row">
-                                            <label for="email" class="col-sm-2 control-label">邮箱</label>
+                                            <label for="email" class="col-sm-2 control-label">{{ '邮箱'|trans }}</label>
                                             <div class="col-sm-10">
-                                                {{ app.user.email }} <a href="javascript:"><i class="fa fa-pencil"></i> 修改</a>
+                                                {{ app.user.email }} <a href="javascript:"><i class="fa fa-pencil"></i> {{ '修改'|trans }}</a>
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <label for="password" class="col-sm-2 control-label">密码</label>
+                                            <label for="password" class="col-sm-2 control-label">{{ '密码'|trans }}</label>
                                             <div class="col-sm-10">
-                                                <a href="javascript:"><i class="fa fa-pencil"></i> 修改密码</a>
+                                                <a href="javascript:"><i class="fa fa-pencil"></i> {{ '修改密码'|trans }}</a>
                                             </div>
                                         </div>
                                     </div>

@@ -65,7 +65,7 @@
                         <img src="{{ user.avatar }}" alt="" width="25" height="25">
                     </td>
                     <td class="center">
-                        {{ user.nickname }}
+                        <a href="{{ path('user_home', {username: user.username}) }}">{{ user.nickname }}</a>
                     </td>
                     <td class="center">
                         {{ user.email }}
