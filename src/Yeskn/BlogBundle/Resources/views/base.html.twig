@@ -39,6 +39,15 @@
             let G_sign_link = '{{ path('sign') }}';
             let G_cdn__Path = '{{ assets_base_url }}';
             let G_set_locale_link = '{{ path('set_locale') }}';
+            window.vmoex = {
+                host: '{{ app.request.getSchemeAndHttpHost() }}',
+                socketHost: '{{ socket_host }}',
+                user: {
+                    mode: 1,
+                    type: '{{ app.user ? app.user.type : 'guest' }}',
+                    username: '{{ app.user ? app.user.username : '' }}' || Date.parse(new Date())
+                }
+            }
         </script>
         {% endblock %}
     {% endif %}
@@ -140,6 +149,8 @@
         'js/common.js'
         filter='uglifyjs2' %}
     <script src="{{ asset_url }}"></script>
+
+    <script src="//cdn.bootcss.com/socket.io/1.3.7/socket.io.js"></script>
     {% endjavascripts %}
     {% endblock %}
 {% endif %}

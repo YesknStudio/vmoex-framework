@@ -115,7 +115,7 @@ class Notice
     /**
      * Set objectId
      *
-     * @param integer $object
+     * @param Post $object
      *
      * @return Notice
      */

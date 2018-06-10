@@ -23,3 +23,4 @@ parameters:
     redis-dsn: ~
     assets_base_url: 'https://static.yeskn.com/vmoex/'
     assets_version: v0.
+    socket_host: http://localhost:2120

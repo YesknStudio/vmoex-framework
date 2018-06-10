@@ -45,11 +45,13 @@
                 {% if app.user %}
                     <li class="dropdown messages ">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope fa-fw"></i> <span class="text">{{ 'messages'|trans }}</span> <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <span class="text nav-message-label">{{ 'messages'|trans }}</span>
+                            <i class="fa fa-caret-down"></i>
                         </a>
                         <script type="text/html" id="message-item-tpl">
                             <li>
-                                <a href="#">
+                                <a data-pjax href="{{ path('my_messages') }}">
                                     <div>
                                         <strong>@nickname@</strong>
                                         <span class="pull-right text-muted">
@@ -73,10 +75,19 @@
                     </li>
                     <li class="dropdown notifications">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <span class="text">{{ 'notifications'|trans }}</span> <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-bell fa-fw"></i> <span class="text notification-label" data-origin="{{ 'notifications'|trans }}">{{ 'notifications'|trans }}</span> <i class="fa fa-caret-down"></i>
                         </a>
+                        <script type="text/html" id="NewFollowerItemTpl">
+                            <li class="new-follower-item">
+                            <a href="{{ path('my_notices') }}">
+                                <div>
+                                <i class="fa fa-twitter fa-fw"></i> <span class="follower-count">@followerCount@</span>{{ '个新的粉丝'|trans }}
+                                <span class="pull-right text-muted small">@createdAt@</span>
+                            </div>
+                            </a>
+                            </li>
+                        </script>
                         <ul class="dropdown-menu dropdown-notifications">
-
                             <li>
                                 <a data-pjax class="text-center" href="{{ path('my_notices') }}">
                                     <strong>{{ '查看所有通知'|trans }}</strong>

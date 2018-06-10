@@ -45,13 +45,25 @@ function success(msg) {
     });
 }
 
+function info(msg) {
+    bootoast({
+        message: msg,
+        type: 'info',
+        position: 'bottom-left',
+        icon: 'info-sign',
+        timeout: 5,
+        animationDuration: 300,
+        dismissable: true
+    });
+}
+
 function reload() {
     $.pjax.reload('.content-body', {
         fragment: '.content-body',
         timeout: 200000000,
         show: 'fade',
         cache: true,
-        push: true,
+        push: true
     })
 }
 
@@ -66,6 +78,47 @@ function go(url) {
         push: true,
         replace: false
     });
+}
+
+/**
+ *
+ * @param data
+ */
+function handleNewMessage(data) {
+    info(data.msg);
+
+    var message  = data.data;
+    var $messageCount = $('#MyMessageCount');
+
+    if ($messageCount.length) {
+        var originCount = parseInt($messageCount.text());
+        if (originCount > 10) {
+            return ;
+        }
+        $messageCount.text( + 1);
+    } else {
+        var $messageLabel = $('.nav-message-label');
+        var messageLabel = $messageLabel.text();
+        var newMessageLabel = messageLabel + '(<b id="MyMessageCount"></b>)';
+        $messageLabel.html(newMessageLabel);
+        $('b#MyMessageCount').text(1);
+    }
+
+    var html = render($('#message-item-tpl').html(), {
+        content: message.content,
+        username: message.sender_username,
+        createdAt: message.createdAt,
+        nickname: message.sender
+    });
+
+    $('li.messages ul').prepend(html);
+}
+
+function handleNewFollower(data) {
+    info(data.msg);
+    var $label = $('.notification-label');
+    var text = $label.attr('data-origin');
+    $label.html(text + '(<b style="color: red">new</b>)');
 }
 
 $(document).ready(function () {
@@ -178,7 +231,12 @@ $(document).ready(function () {
         success: function (data) {
             if (data.messages) {
                 var messages = data.messages;
-                $('li.messages>a span.text').text(' 私信('+messages.length+') ');
+                var $messageLabel = $('.nav-message-label');
+                var messageLabel = $messageLabel.text();
+                var newMessageLabel = messageLabel + '(<b id="MyMessageCount"></b>)';
+                $messageLabel.html(newMessageLabel);
+                $('#MyMessageCount').text(messages.length);
+
                 for (k in messages) {
                     var message = messages[k];
                     var html = render($('#message-item-tpl').html(), {
@@ -227,4 +285,21 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('.dropdown-notifications a').click(function () {
+        var $label = $('.notification-label');
+        var text = $label.attr('data-origin');
+        $label.text(text);
+    });
+
+    // 连接服务端
+    var socket = io(window.vmoex.socketHost);
+
+    socket.on('connect', function(){
+        socket.emit('login', window.vmoex.user.username);
+    });
+
+    socket.on('new_message', handleNewMessage);
+    socket.on('new_follower', handleNewFollower);
+
 });

@@ -8,11 +8,9 @@
 
 namespace Yeskn\BlogBundle\Controller;
 
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Yeskn\BlogBundle\Entity\Notice;
 
 class NoticeController extends Controller
 {

@@ -43,6 +43,7 @@ twig:
     debug:            "%kernel.debug%"
     globals:
         assets_base_url: "%assets_base_url%"
+        socket_host: '%socket_host%'
     strict_variables: "%kernel.debug%"
     form_themes:
         - "bootstrap_3_layout.html.twig"

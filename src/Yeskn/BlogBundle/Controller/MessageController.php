@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Yeskn\BlogBundle\Entity\Message;
+use Yeskn\BlogBundle\Entity\User;
 
 class MessageController extends Controller
 {
@@ -22,6 +23,15 @@ class MessageController extends Controller
      */
     public function sendMessage(Request $request)
     {
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+
+        if (empty($user)) {
+            return new JsonResponse(['ret' => 0, 'msg' => 'nologin']);
+        }
+
         $content = $request->get('content');
         $content = strip_tags($content);
         $to = $request->get('to');
@@ -34,12 +44,14 @@ class MessageController extends Controller
 
         $message->setReceiver($receiver);
         $message->setContent($content);
-        $message->setSender($this->getUser());
+        $message->setSender($user);
         $message->setIsRead(false);
         $message->setCreatedAt(new \DateTime());
 
         $em->persist($message);
         $em->flush();
+
+        $this->get('socket.push')->pushNewMessage($message);
 
         return new JsonResponse(['ret' => 1]);
     }

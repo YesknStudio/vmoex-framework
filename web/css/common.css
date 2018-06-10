@@ -186,6 +186,10 @@ nav.navbar-static-top {
     opacity: 0.98;
 }
 
+nav .dropdown-messages, nav .dropdown-notifications {
+    width: 310px;
+    min-width: 0;
+}
 li.user-meta {
     margin-bottom: 0 !important;
     border: none !important;

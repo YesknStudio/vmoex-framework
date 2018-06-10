@@ -33,7 +33,9 @@
         "yzalis/identicon": "^1.2",
         "paquettg/php-html-parser": "^1.7",
         "predis/predis": "^1.1",
-        "snc/redis-bundle": "^2.1"
+        "snc/redis-bundle": "^2.1",
+        "workerman/phpsocket.io": "^1.1",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

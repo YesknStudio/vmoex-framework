@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Comment;
 use Yeskn\BlogBundle\Entity\Notice;
+use Yeskn\BlogBundle\Entity\Notification;
 use Yeskn\BlogBundle\Entity\Post;
 use Yeskn\BlogBundle\Entity\User;
 use Yeskn\BlogBundle\Utils\HtmlPurer;
@@ -341,11 +342,17 @@ class DefaultController extends Controller
 
         if ($ta->followers()->contains($me)) {
             $me->unfollow($ta);
+            $action = 0;
         } else {
             $me->follow($ta);
+            $action = 1;
         }
 
         $em->flush();
+
+        if ($action) {
+            $this->get('socket.push')->pushNewFollowerNotification($me, $ta);
+        }
 
         return new JsonResponse(['ret' => 1]);
     }
