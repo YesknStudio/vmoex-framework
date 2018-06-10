@@ -9,3 +9,4 @@ web/css/*.css
 web/avatar/
 .env
 src/Yeskn/BlogBundle/Entity/*.php~
+bin/socket-param.php

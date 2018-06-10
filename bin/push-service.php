@@ -13,13 +13,11 @@ $last_online_count = 0;
 // 记录最后一次广播的在线页面数
 $last_online_page_count = 0;
 
+$param = require_once __DIR__ . '/socket-param.php';
+
 // ssl context
 $context = array(
-    'ssl' => array(
-        'local_cert'  => getenv('CERT_PATH'),
-        'local_pk'    => getenv('KEY_PATH'),
-        'verify_peer' => false,
-    )
+    'ssl' => $param
 );
 
 // PHPSocketIO服务
