@@ -34,6 +34,9 @@ return [
     'messages' => '私信',
     'notifications' => '通知',
 
+    '板块' => '板塊',
+    'Vmoex当前板块数量' => 'Vmoex當前板塊數量',
+
     // sidebar
     'hello_stranger' => '你好，陌生人',
     'hello_stranger_detail' => '如果你喜歡Vmoex，請記得注册或者保存網址哦~',

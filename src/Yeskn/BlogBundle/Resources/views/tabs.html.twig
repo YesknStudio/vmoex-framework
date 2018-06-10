@@ -1,0 +1,37 @@
+{% extends '@YesknBlog/base.html.twig' %}
+
+{% block main %}
+    <style>
+        body {
+            background-image: url("https://ww1.sinaimg.cn/large/0060lm7Tgy1fi01aberdkj31hc0u0tdy.jpg");
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ '板块'|trans }} STATE
+                </div>
+                <div class="panel-body center-block">
+                    <h3 style="text-align: center;">{{ 'Vmoex当前板块数量'|trans }} <b>{{ tab_count }}</b></h3>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ '板块'|trans }} ALL
+                </div>
+                <div class="panel-body">
+                        {% for tab in tabs %}
+                            <a data-pjax class="btn btn-default btn-sm tabs-item-button" href="{{ path('home_tab', {tab:tab.alias}) }}" role="button">{{ tab.name|trans }}</a>
+                        {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

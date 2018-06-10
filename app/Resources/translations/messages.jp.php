@@ -27,6 +27,16 @@ return [
     'fail' => '操作に失敗する',
     'comment' => 'コメント',
     'vmoex_slogan' => '最も美しい2次元のコミュニティを作ります',
+    '添加' => '追加',
+    '请先登录' => '先に登録してください',
+
+    'trends_description' => 'このプレートは、あなたが注目しているユーザー、プレート、またはテーマを展示するために使用されています。',
+
+    // blind chat
+
+    '什么是瞎聊' => '何が雑談だ',
+
+    'blind_description' => '「雑談」は、Vmexコミュニティで提供されたオンライン即時チャットの機能であり、「雑談」を送るごとに金貨1枚が消費される。',
 
     // nav
     'search' => '検索',
@@ -36,6 +46,9 @@ return [
     'trends' => '傾向',
     'blind.chat' => '雑談をする',
 
+    '板块' => 'のプレート',
+    'Vmoex当前板块数量' => 'Vmex現在のプレートの数',
+
     // sidebar
     'hello_stranger' => 'こんにちは、知らない人',
     'hello_stranger_detail' => 'もしあなたがVmexが好きなら、登録や保存サイトを覚えてください。',
@@ -44,6 +57,9 @@ return [
     'today.hot.topics' => '本日の活躍',
     'newly.comments' => '最新のコメント',
     'activity' => '活発度',
+    'create_new_topic' => '新しいテーマを作成',
+    'today.activity' => '今日の活躍度',
+    'continuous_signed count day' => 'count日までの署名',
 
     'vmoex_available_with' => 'Vmoex 利用可能な: ',
 

@@ -26,14 +26,22 @@ return [
     'fail' => 'fail',
     'vmoex_slogan' => 'Build the best two yuan community',
     'vmoex_description' => 'Vmoex is inspired by the V2EX creative workers community, and most of the V2EX is the Internet /IT topic, so Vmoex hopes for anime, two, and Opera (and Meng\'s [w Omega]) enthusiasts to join, share, discover, and create more beauty in life.',
+    '刷新' => 'refresh',
 
     //header
     'banner.copyright' => 'The content of this site may be infringed on your rights, Vmoex use your articles (or pictures, etc.) only for testing the real line, if you do not allow, please mail: support@vmoex.com.',
 
+    'trends_description' => 'This section is used to display the user, plate or theme you are interested in, and this function is being developed.',
+
     'trends' => 'Trends',
     'activity' => ' Activity',
-    'blind.chat' => 'BlandChat',
+    'blind.chat' => 'BlindChat',
     'about' => 'About',
+
+    // tabs
+
+    '板块' => 'Tabs',
+    'Vmoex当前板块数量' => 'Vmoex Current Plate Count',
 
     'comment' => 'comments',
 

@@ -9,10 +9,10 @@
             <p class="post-meta">
                 <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
                 <span class="category">
-                     <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name }}</a>
+                     <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
                 </span>
                 <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
-                <span><i class="fa fa-eye"></i> {{ post.views }}点击</span>
+                <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                 {% if post.comments.count %}
                     <span><i class="fa fa-commenting-o"></i>
                         <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}评论</a>
@@ -45,7 +45,7 @@
             {#<span class="pull-right last">12次收藏 / 30次感谢</span>#}
         {#</div>#}
         <div class="comments" id="comments">
-            <h3 class="border-bottom">评论</h3>
+            <h3 class="border-bottom">{{ 'comment'|trans }}</h3>
             {% if post.comments is not empty %}
                 <ul class="chat">
                     {% for comment in post.comments %}
@@ -99,9 +99,9 @@
             </div>
             <div class="form-group">
                 {% if app.user %}
-                    <button type="button" id="addCommentToPost" class="btn btn-info btn-sm">添加</button>
+                    <button type="button" id="addCommentToPost" class="btn btn-info btn-sm">{{ '添加'|trans }}</button>
                 {% else %}
-                    <button type="button" class="btn btn-info btn-sm disabled">请先登录</button>
+                    <button type="button" class="btn btn-info btn-sm disabled">{{ '请先登录'|trans }}</button>
                 {% endif %}
 
             </div>

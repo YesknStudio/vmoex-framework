@@ -27,6 +27,11 @@ return [
 
     'banner.copyright' => '本网站的内容可能侵犯了您的权益，当前Vmoex使用您的文章（或者图片等）仅用于测试真实上线情况，如您不允许，请致邮：support@vmoex.com。',
 
+    // trends
+    'trends_description' => '此板块用于展示你关注的用户、板块、或者主题，此功能正在开发中。',
+
+    'blind_description' => '“瞎聊”是Vmoex社区提供的一个在线即时聊天的功能，每发送一条“瞎聊”将消耗一枚金币。',
+
     // nav
     'trends' => '动态',
     'blind.chat' => '瞎聊',

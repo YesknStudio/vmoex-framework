@@ -6,6 +6,14 @@ html,body{overflow:hidden;overflow-y:auto;}
 a{
     color: #737373;
 }
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 100%;
+    margin: 15px 0 15px 0;
+    padding: 0 0 8px 0;
+    border-bottom: 1px solid #e2e2e2;
+}
 a:hover{
     color: #737373;
     text-decoration: underline;
@@ -13,6 +21,7 @@ a:hover{
 .dropdown-menu.dropdown-user{
     margin-top: 0;
 }
+
 .badge {
     font-weight: normal;
     background-color: #f5f5f5;
@@ -634,4 +643,8 @@ ul.pagination {
 .snow {
     color: #e2e2e2;
     padding: 0 5px;
+}
+
+.tabs-item-button {
+    border-radius: 10px;
 }
