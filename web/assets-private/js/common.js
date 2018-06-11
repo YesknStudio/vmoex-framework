@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     $.ajax({
         method: "GET",
         url: window.vmoex.links.G_info_link,
