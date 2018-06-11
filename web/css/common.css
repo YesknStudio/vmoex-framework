@@ -18,6 +18,18 @@ a:hover{
     color: #737373;
     text-decoration: underline;
 }
+.push-notifications-count {
+    position: absolute;
+    bottom: 50%;
+    right: 0;
+    font-size: 11px;
+    color: #fff;
+    background-color: #f1403c;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
 .dropdown-menu.dropdown-user{
     margin-top: 0;
 }
@@ -181,15 +193,6 @@ h3.border-bottom{
     color: #666666;
     font-style: italic;
 }
-
-nav.navbar-static-top {
-    opacity: 0.98;
-}
-
-nav .dropdown-messages, nav .dropdown-notifications {
-    width: 310px;
-    min-width: 0;
-}
 li.user-meta {
     margin-bottom: 0 !important;
     border: none !important;
@@ -304,6 +307,14 @@ li.messages ul li div a {
     list-style-type: none;
     padding-left: 0;
 }
+nav.navbar-static-top {
+    opacity: 0.98;
+}
+
+nav .dropdown-messages, nav .dropdown-notifications {
+    width: 310px;
+    min-width: 0;
+}
 @media (min-width: 767px) {
     .navbar-avatar-mobile {
         display: none !important;
@@ -380,8 +391,14 @@ li.messages ul li div a {
     .navbar-item-alert {
         margin-right: 0;
     }
-    .navbar-item-custom span.badge {
+    nav .nav-warn-dot {
+        font-weight: bold;
         background: #FFC125;
+        color: #fff;
+    }
+    nav .nav-common-dot {
+        font-weight: normal;
+        background: #CCCCCC;
         color: #fff;
     }
     .navbar-item-custom a {

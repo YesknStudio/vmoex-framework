@@ -98,7 +98,7 @@ class DefaultController extends Controller
      * @inheritdoc
      * @Route("/topic/{id}", name="yeskn_blog_show", requirements={"id": "[1-9]\d*"})
      */
-    public function postShowAction($id)
+    public function postShowAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->find($id);
@@ -109,9 +109,14 @@ class DefaultController extends Controller
         }
         $post->setViews(intval($post->getViews())+1);
         $em->flush();
-        return $this->render('YesknBlogBundle:Default:show.html.twig', array(
+
+        $response = $this->render('YesknBlogBundle:Default:show.html.twig', array(
             'post' => $post
         ));
+
+        $response->headers->set('X-PJAX-URL', $request->getUri());
+
+        return $response;
     }
 
     /**

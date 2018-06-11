@@ -14,12 +14,11 @@
             </div>
 
             {% if app.user %}
-                <div class="navbar-toggle collapsed navbar-item-custom" data-toggle="collapse" data-target="#message-navbar-collapse">
-                    <a data-pjax href="{{ path('my_messages') }}"><i class="fa fa-envelope fa-fw"></i> <span class="text badge">4</span></a>
-                </div>
-
                 <div class="navbar-toggle collapsed navbar-item-custom navbar-item-alert" data-toggle="collapse" data-target="#notification-navbar-collapse">
-                    <a data-pjax href="{{ path('my_notices') }}"><i class="fa fa-bell fa-fw"></i> <span class="text badge">9</span></a>
+                    <a data-pjax href="{{ path('my_notices') }}"><i class="fa fa-bell fa-fw"></i> <span class="text badge nav-warn-dot">9</span></a>
+                </div>
+                <div class="navbar-toggle collapsed navbar-item-custom navbar-item-message" data-toggle="collapse" data-target="#message-navbar-collapse">
+                    <a data-pjax href="{{ path('my_messages') }}"><i class="fa fa-envelope fa-fw"></i> <span class="text badge nav-warn-dot">4</span></a>
                 </div>
             {% endif %}
 
@@ -32,7 +31,7 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a data-pjax href="{{ path('trends_index') }}">{{ 'trends'|trans }}</a></li>
                 <li><a data-pjax href="{{ path('tabs_index') }}">{{ '板块'|trans }}</a></li>
-                <li><a data-pjax href="{{ path('bind_chat') }}">{{ 'blind.chat'|trans }}</a></li>
+                <li class="nav-chat-item"><a data-pjax href="{{ path('bind_chat') }}">{{ 'blind.chat'|trans }}</a><div class="nav-chat-dot push-notifications-count"></div></li>
                 <li><a data-pjax href="{{ path('about') }}">{{ 'about'|trans }}</a></li>
             </ul>
             <form class="navbar-form navbar-left" id="site-search">

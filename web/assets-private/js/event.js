@@ -1,7 +1,7 @@
-var tc = sessionStorage.getItem('topClick');
-var a_idx = parseInt(tc) || 1;
+$(document).on('click', 'body', function(e) {
+    var tc = sessionStorage.getItem('topClick');
+    var a_idx = parseInt(tc) || 1;
 
-$("body").click(function(e) {
     var $i = $("<span/>").text('+'+a_idx+++'♥');
     var x = e.pageX,
         y = e.pageY;
@@ -25,6 +25,10 @@ $("body").click(function(e) {
     sessionStorage.setItem('topClick', a_idx);
 });
 
+$(document).on('click', 'li.disabled a', function (e) {
+    e.preventDefault();
+});
+
 $(document).on('click', 'li.messages>a', function () {
     $.ajax({
         method: "POST",
@@ -35,7 +39,7 @@ $(document).on('click', 'li.messages>a', function () {
     });
 });
 
-$('nav.navbar-static-top a').click(function (e) {
+$(document).on('click', 'nav.navbar-static-top a', function (e) {
     if ($(this).attr('href') !== '#' && $(this).attr('href') !== '/logout') {
         e.preventDefault();
         go($(this).attr('href'));
@@ -45,7 +49,7 @@ $('nav.navbar-static-top a').click(function (e) {
     }
 });
 
-$('.set-locale-link').click(function (e) {
+$(document).on('click', '.set-locale-link', function (e) {
     e.preventDefault();
     var locale = $(this).attr('data-locale');
 
@@ -59,7 +63,7 @@ $('.set-locale-link').click(function (e) {
     });
 });
 
-$('.dropdown-notifications a').click(function () {
+$(document).on('click', '.dropdown-notifications a', function () {
     var $label = $('.notification-label');
     var text = $label.attr('data-origin');
     $label.text(text);
@@ -79,6 +83,10 @@ $(document).on('submit', '#site-search', function (e) {
     $('#navbar-collapse-user').collapse('hide');
 });
 
-$('.content-body').on('click', 'li.disabled a', function (e) {
-    e.preventDefault();
+$(document).on('click', '.nav-chat-item', function () {
+    $('.nav-chat-dot').removeClass('push-notifications-count');
+});
+
+$(document).on('click', '.navbar-item-alert, .navbar-item-message', function () {
+    $(this).find('span').addClass('nav-common-dot').removeClass('nav-warn-dot').text(0);
 });
