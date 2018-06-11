@@ -1,25 +1,18 @@
 if ($.support.pjax) {
-    $(document).on('submit', 'form[data-pjax]', function(event) {
-        $.pjax.submit(event, '.content-body', {
-            fragment:'.content-body', timeout:6000
-        })
-    });
-
     $(document).pjax('a[data-pjax]', '.content-body', {
         fragment: '.content-body',
         timeout: 200000000,
         show: 'fade',
         cache: true,
         push: true,
-        replace:false,
+        replace:false
     });
 
     $(document).on('pjax:start', function () {
         NProgress.start();
     });
 
-    $(document).on('pjax:send', function () {
-    });
+    $(document).on('pjax:send', function () {});
 
     $(document).on('pjax:success', function (data, status, xhr, options) {});
 
