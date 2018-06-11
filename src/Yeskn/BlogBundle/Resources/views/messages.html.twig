@@ -21,7 +21,7 @@
                                 <ul class="messages list-group">
                                     {% for message in rMessages %}
                                         <li class="list-group-item">
-                                            <img src="{{ message.sender.avatar }}" alt="" width="30" height="30" class="img-rounded">
+                                            <img src="{{ asset(message.sender.avatar) }}" alt="" width="30" height="30" class="img-rounded">
                                             <a data-pjax href="{{ path('user_home', {username: message.sender.username}) }}">{{ message.sender.nickname }}</a>
                                             {{ message.createdAt|ago }}
                                             对你说：{{ message.content }}
