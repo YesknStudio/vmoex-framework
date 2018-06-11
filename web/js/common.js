@@ -227,7 +227,7 @@ $(document).ready(function () {
     // info
     $.ajax({
         method: "GET",
-        url: G_info_link,
+        url: window.vmoex.links.G_info_link,
         success: function (data) {
             if (data.messages) {
                 var messages = data.messages;
@@ -255,7 +255,7 @@ $(document).ready(function () {
     $(document).on('click', 'li.messages>a', function () {
         $.ajax({
             method: "POST",
-            url: G_set_message_red_link,
+            url: window.vmoex.links.G_set_message_red_link,
             success: function () {
                 $('li.messages>a span.text').text(' 私信 ');
             }
@@ -276,7 +276,7 @@ $(document).ready(function () {
         e.preventDefault();
         var locale = $(this).attr('data-locale');
 
-        $.post(G_set_locale_link, {locale:locale}, function (data) {
+        $.post(window.vmoex.links.G_set_locale_link, {locale:locale}, function (data) {
             if (data.ret) {
                 success(data.msg);
                 window.location.reload();

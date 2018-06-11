@@ -38,7 +38,7 @@
     $(document).on('click', '#sign-remark', function () {
         $.ajax({
             method: 'POST',
-            url: G_sign_link,
+            url: window.vmoex.links.G_sign_link,
             success: function (data) {
                 if (data.ret) {
                     reload();

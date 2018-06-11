@@ -1,4 +1,4 @@
-var home_Path = G_cdn__Path || '/';
+var home_Path = window.vmoex.links.G_cdn__Path || '/';
 
 var userAgent = window.navigator.userAgent.toLowerCase();
 var norunAI = [ "android", "iphone", "ipod", "ipad", "windows phone", "mqqbrowser" ,"msie","trident/7.0"];

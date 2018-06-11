@@ -34,18 +34,19 @@
         <![endif]-->
 
         <script>
-            let G_info_link = '{{ path('info') }}';
-            let G_set_message_red_link = '{{ path('set_message_red') }}';
-            let G_sign_link = '{{ path('sign') }}';
-            let G_cdn__Path = '{{ assets_base_url }}';
-            let G_set_locale_link = '{{ path('set_locale') }}';
             window.vmoex = {
                 host: '{{ app.request.getSchemeAndHttpHost() }}',
                 socketHost: '{{ socket_host }}',
                 user: {
-                    mode: 1,
-                    type: '{{ app.user ? app.user.type : 'guest' }}',
-                    username: '{{ app.user ? app.user.username : '' }}' || Date.parse(new Date())
+                    username: '{{ app.user ? app.user.username : '' }}' || 'guest_'+Date.parse(new Date()),
+                    socketToken: ''
+                },
+                links: {
+                     G_info_link : '{{ path('info') }}',
+                     G_set_message_red_link : '{{ path('set_message_red') }}',
+                     G_sign_link : '{{ path('sign') }}',
+                     G_cdn__Path : '{{ assets_base_url }}',
+                     G_set_locale_link : '{{ path('set_locale') }}'
                 }
             }
         </script>
@@ -107,6 +108,8 @@
 
             <div class="brand">
                 <b><a data-pjax href="{{ path('about') }}">{{ 'about.vmoex'|trans }}</a></b>
+                <span class="snow">·</span>
+                <b><a data-pjax href="{{ path('buy_beer') }}">{{ '支持我们'|trans }}</a></b>
                 <span class="snow">·</span>
                 <b><a data-pjax href="{{ path('buy_beer') }}">{{ 'buy_beer'|trans }} ｡◕‿◕｡</a></b>
             </div>

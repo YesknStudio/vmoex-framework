@@ -15,11 +15,14 @@ $last_online_page_count = 0;
 
 $param = require_once __DIR__ . '/socket-param.php';
 
-// ssl context
-$context = array(
-    'ssl' => $param
-);
-
+if ($param['local_cert']) {
+    // ssl context
+    $context = array(
+        'ssl' => $param
+    );
+} else {
+    $context = [];
+}
 // PHPSocketIO服务
 $sender_io = new SocketIO(2120, $context);
 // 客户端发起连接事件时，设置连接socket的各种事件回调
