@@ -47,7 +47,8 @@
                      G_sign_link : '{{ path('sign') }}',
                      G_cdn__Path : '{{ assets_base_url }}',
                      G_set_locale_link : '{{ path('set_locale') }}'
-                }
+                },
+                disableLog: true
             }
         </script>
         {% endblock %}
@@ -104,8 +105,6 @@
     {% block footer %}
     <footer>
         <div class="container">
-
-
             <div class="brand">
                 <b><a data-pjax href="{{ path('about') }}">{{ 'about.vmoex'|trans }}</a></b>
                 <span class="snow">·</span>
@@ -132,8 +131,8 @@
 
             {% set userCount = onlineUserCount() %}
             <p style="margin: 20px 5px">{{ '当前在线count人'|trans({count:userCount}) }}，{{ '历史最高'|trans }} 393</p>
-            <p class="copy" {#data-original-title="给你一个么么哒~"#}>© 2018 Vmoex - {{ 'vmoex_slogan'|trans }}</p>
-            <p class="power" >Designed with <span>❤</span> 彩虹の恋しい at Shanghai, China</p>
+            <p class="copy">© 2018 Vmoex - {{ 'vmoex_slogan'|trans }}</p>
+            <p class="power">Designed with <span>❤</span> 彩虹の恋しい at Shanghai, China</p>
         </div>
     </footer>
     {% endblock %}
@@ -149,11 +148,15 @@
         'lib-man/bootoast/js/bootoast.js'
         'lib-man/live2d/js/live2d.js'
         'lib-man/live2d/js/message.js'
-        'js/common.js'
+        'assets-private/js/functions.js'
+        'assets-private/js/event.js'
+        'assets-private/js/socket.js'
+        'assets-private/js/pjax.js'
+        'assets-private/js/common.js'
         filter='uglifyjs2' %}
     <script src="{{ asset_url }}"></script>
 
-    <script src="//cdn.bootcss.com/socket.io/1.3.7/socket.io.js"></script>
+    <script src="https://cdn.bootcss.com/socket.io/1.3.7/socket.io.min.js"></script>
     {% endjavascripts %}
     {% endblock %}
 {% endif %}
