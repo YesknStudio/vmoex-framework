@@ -15,7 +15,6 @@ if ($.support.pjax) {
     });
 
     $(document).on('pjax:start', function () {
-        alert('start');
         NProgress.start();
     });
 
