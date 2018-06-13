@@ -120,9 +120,8 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/topic/{tid}/comment/thumb_up", name="thumbup_comment", requirements={
+     * @Route("/topic/comment/thumb_up", name="thumbup_comment", requirements={
      *     "cid": "[1-9]\d*",
-     *     "tid": "[1-9]\d*"
      * })
      */
     public function thumbPostComment(Request $request)

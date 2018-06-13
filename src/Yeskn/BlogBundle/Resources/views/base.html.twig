@@ -46,7 +46,13 @@
                      G_set_message_red_link : '{{ path('set_message_red') }}',
                      G_sign_link : '{{ path('sign') }}',
                      G_cdn__Path : '{{ assets_base_url }}',
-                     G_set_locale_link : '{{ path('set_locale') }}'
+                     G_set_locale_link : '{{ path('set_locale') }}',
+                     G_thumb_up__link: '{{ path('thumbup_comment') }}',
+                     add_comment_to_post: '{{ path('add_comment_to_post', {postId: 1}) }}'
+                },
+                trans: {
+                    thumbup: '{{ '赞'|trans }}',
+                    action_too_quick: '{{ '好可怕，速度太快了'|trans }}！'
                 },
                 disableLog: true
             }

@@ -71,17 +71,20 @@
                                 <p>{{ comment.content|raw }}</p>
 
                                 <div class="comment-footer">
+                                    {% set hasThumb = comment.thumbUpUsers.contains(app.user) %}
+                                    {% set open = hasThumb ? '' : '-o' %}
+                                    <span class="thumb thumb-up" data-cid="{{ comment.id }}">
+                                        <b>
+                                          <i class="fa fa-thumbs{{ open }}-up {{ hasThumb ? 'text-success' : '' }}"></i>
+                                        </b>
+                                        <b class="thumb-count">{{ comment.thumbUpUsers.count ?: '赞' }}</b>
+                                    </span>
+
+                                    <span class="snow">·</span>
 
                                     <span><i class="fa fa-clock-o"></i> {{ comment.createdAt|ago }}</span>
 
                                     {#<span class="pull-right"> <i class="fa fa-ellipsis-h"></i></span>#}
-
-                                    {% set hasThumb = comment.thumbUpUsers.contains(app.user) %}
-                                    {% set open = hasThumb ? '' : '-o' %}
-                                    <span class="thumb thumb-up pull-right" data-cid="{{ comment.id }}">
-                                      <b>  <i class="fa fa-thumbs{{ open }}-up {{ hasThumb ? 'text-success' : '' }}"></i></b>
-                                        <b class="thumb-count">{{ comment.thumbUpUsers.count ?: '' }}</b>
-                                    </span>
                                 </div>
                             </div>
                         </li>
@@ -99,7 +102,7 @@
             </div>
             <div class="form-group">
                 {% if app.user %}
-                    <button type="button" id="addCommentToPost" class="btn btn-info btn-sm">{{ '添加'|trans }}</button>
+                    <button type="button" data-postId="{{ post.id }}" id="addCommentToPost" class="btn btn-info btn-sm">{{ '添加'|trans }}</button>
                 {% else %}
                     <button type="button" class="btn btn-info btn-sm disabled">{{ '请先登录'|trans }}</button>
                 {% endif %}
@@ -191,63 +194,7 @@
           };
 
           editor.create();
-
-          $('.content-body').off('click', '#addCommentToPost');
-          $('.content-body').on('click', '#addCommentToPost', function () {
-              var $this = $(this);
-
-              if ($this.hasClass('disabled')) {
-                  warning('{{ '好可怕，速度太快了'|trans }}！');
-                  return ;
-              }
-
-              $this.addClass('disabled');
-              var content = editor.$txt.html();
-              $.ajax({
-                  method: 'POST',
-                  url: '{{ path("add_comment_to_post", {postId: post.id}) }}',
-                  data: {
-                      content: content
-                  },
-                  success: function (data) {
-                      if (data.ret) {
-                         reload();
-                      } else {
-                          error(data.msg);
-                          $this.removeClass('disabled');
-                      }
-
-                  }
-              })
-          });
-
-          $('.content-body').off('click', '.thumb-up');
-          $('.content-body').on('click', '.thumb-up', function () {
-              var $this = $(this);
-              $.ajax({
-                  method:  'POST',
-                  url: '{{ path('thumbup_comment', {tid: post.id}) }}',
-                  data: {
-                      cid: $this.attr('data-cid')
-                  },
-                  success: function (data) {
-                        if (data.ret) {
-                            let count = $this.find('.thumb-count').text();
-                            count = parseInt(count ? count : 0);
-                            let res = data.info ? count+1 : count-1;
-                            $this.find('.thumb-count').text(res);
-
-                            if (data.info) {
-                                $this.find('i.fa').removeClass('fa-thumbs-o-up').addClass('fa-thumbs-up').addClass('text-success');
-                            } else {
-                                $this.find('i.fa').removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up').removeClass('text-success');
-                            }
-                        } else {
-                            error(data.msg);
-                        }
-                  }
-              })
-          })
+          window.editor = editor;
       })
     </script>
 {% endblock %}

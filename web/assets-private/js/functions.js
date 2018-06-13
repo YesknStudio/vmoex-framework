@@ -120,3 +120,12 @@ function handleNewFollower(data) {
 function handleNewChat(data) {
     $('.nav-chat-dot').addClass('push-notifications-count');
 }
+
+function path(route, parameters) {
+    for (var k in parameters) {
+        if (parameters.hasOwnProperty(k)) {
+            route = route.replace(k, parameters[k]);
+        }
+    }
+    return route;
+}

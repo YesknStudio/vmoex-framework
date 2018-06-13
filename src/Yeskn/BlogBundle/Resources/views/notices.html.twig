@@ -5,13 +5,20 @@
         <div class="col-lg-12">
             <div class="panel panel-default notifications-panel">
                 <div class="panel-heading">
-                    {{ app.user.nickname }}的通知
+                    {{ 'name的通知'|trans({name:app.user.nickname}) }}
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success btn-xs ">
+                                {{ '设为已读'|trans }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#not_read" data-toggle="tab">未读</a>
+                        <li class="active"><a href="#not_read" data-toggle="tab">{{ '未读'|trans }}</a>
                         </li>
-                        <li><a href="#read" data-toggle="tab">已读</a>
+                        <li><a href="#read" data-toggle="tab">{{ '已读'|trans }}</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -25,7 +32,7 @@
                                                     {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
                                                     <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
                                                     <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
-                                                    {{ notice.createdAt|ago }}回复了你的帖子 <a data-pjax href="{{ path('yeskn_blog_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+                                                    {{ notice.createdAt|ago }}{{ '回复了你的帖子'|trans }} <a data-pjax href="{{ path('yeskn_blog_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
                                                 </div>
 
                                                 <blockquote class="home-bq">
@@ -38,7 +45,7 @@
                                 </ul>
                             {% else %}
                                 <div class="alert alert-warning">
-                                    抱歉，暂时没有任何内容！
+                                    {{ '抱歉，暂时没有任何内容！'|trans }}
                                 </div>
                             {% endif %}
                         </div>
@@ -53,7 +60,7 @@
                                                   {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
                                                   <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
                                                   <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
-                                                  {{ notice.createdAt|ago }}回复了你的帖子 <a data-pjax href="{{ path('yeskn_blog_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+                                                  {{ notice.createdAt|ago }}{{ '回复了你的帖子'|trans }} <a data-pjax href="{{ path('yeskn_blog_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
                                               </div>
 
                                               <blockquote class="home-bq">
@@ -66,7 +73,7 @@
                                 </ul>
                             {% else %}
                                 <div class="alert alert-warning">
-                                    抱歉，暂时没有任何内容！
+                                    {{ '抱歉，暂时没有任何内容！'|trans }}
                                 </div>
                             {% endif %}
                         </div>
