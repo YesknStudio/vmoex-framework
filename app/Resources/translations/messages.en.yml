@@ -1,4 +1,3 @@
----
 about.vmoex: About Vmoex
 chinese: Simplified Chinese
 english: English
@@ -32,7 +31,7 @@ blind.chat: BlindChat
 about: About
 板块: Tabs
 Vmoex当前板块数量: Vmoex Current Plate Count
-comment: comment
+comment: ' comment'
 search: Search
 messages: Msg
 notifications: Notice
@@ -91,3 +90,6 @@ time 发表在: time posted at
 name的关注: name's following
 name的粉丝: name' followers
 发送成功: 'send success'
+赞: Like
+什么是瞎聊: What's Blind Chat ?
+blind_description: '"Blind Chat" is an online chat function provided by the Vmoex community. Each sending a "chatting" will consume a gold coin.'

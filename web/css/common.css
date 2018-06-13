@@ -42,6 +42,17 @@ a:hover{
 .navbar {
     margin-bottom: 10px;
 }
+nav span.vmoex-version {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    font-style:  italic;
+    font-size: 12px;
+    color: #ddd;
+}
+nav .navbar-brand {
+    position: relative;
+}
 ul.chat {
     padding: 0;
     margin: 0;

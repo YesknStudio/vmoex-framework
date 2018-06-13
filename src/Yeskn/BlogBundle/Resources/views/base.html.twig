@@ -48,10 +48,12 @@
                      G_cdn__Path : '{{ assets_base_url }}',
                      G_set_locale_link : '{{ path('set_locale') }}',
                      G_thumb_up__link: '{{ path('thumbup_comment') }}',
-                     add_comment_to_post: '{{ path('add_comment_to_post', {postId: 1}) }}'
+                     add_comment_to_post: '{{ path('add_comment_to_post', {postId: 1}) }}',
+                    send_chat: '{{ path("send_chat") }}'
                 },
                 trans: {
                     thumbup: '{{ '赞'|trans }}',
+                    message: '{{ 'messages'|trans }}',
                     action_too_quick: '{{ '好可怕，速度太快了'|trans }}！'
                 },
                 disableLog: true

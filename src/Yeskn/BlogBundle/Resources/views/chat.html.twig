@@ -61,19 +61,19 @@
                         </ul>
                     {% else %}
                         <div class="alert alert-warning">
-                            抱歉，暂时没有任何内容！
+                            {{ '抱歉，暂时没有任何内容！'|trans }}
                         </div>
                     {% endif %}
                 </div>
                 <!-- /.panel-body -->
                 <div class="panel-footer">
                     <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="请输入聊天内容...">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="{{ '请输入聊天内容...'|trans }}">
                         <span class="input-group-btn">
                              {% if app.user %}
-                                 <button type="button" id="sendChat" class="btn btn-warning btn-sm">发送</button>
+                                 <button type="button" id="sendChat" class="btn btn-warning btn-sm">{{ '发送'|trans }}</button>
                              {% else %}
-                                 <button type="button" class="btn btn-warning btn-sm disabled">请先登录</button>
+                                 <button type="button" class="btn btn-warning btn-sm disabled">{{ '请先登录'|trans }}</button>
                              {% endif %}
                         </span>
                     </div>
@@ -86,25 +86,8 @@
     <script>
         var elem = document.getElementById('chat-box');
         elem.scrollTop = elem.scrollHeight;
-
-        $(function () {
-            $('.content-body').off('click', '#sendChat');
-            $('.content-body').on('click', '#sendChat', function () {
-                $.ajax({
-                    method: 'POST',
-                    url: '{{ path("send_chat") }}',
-                    data: {content: $('#btn-input').val()},
-                    success: function (data) {
-                       data.ret ? reload() : error(data.msg);
-                    }
-                })
-            });
-
-            $('.content-body').off('click', '#refresh-chat');
-            $('.content-body').on('click', '#refresh-chat', function () {
-               reload();
-            });
-        })
+        $('#btn-input').focus();
+        $('.nav-chat-dot').removeClass('push-notifications-count');
     </script>
 {% endblock %}
 

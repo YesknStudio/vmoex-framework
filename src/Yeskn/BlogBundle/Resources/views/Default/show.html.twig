@@ -15,7 +15,7 @@
                 <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                 {% if post.comments.count %}
                     <span><i class="fa fa-commenting-o"></i>
-                        <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a>
+                        <a href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a>
                     </span>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
@@ -77,7 +77,7 @@
                                         <b>
                                           <i class="fa fa-thumbs{{ open }}-up {{ hasThumb ? 'text-success' : '' }}"></i>
                                         </b>
-                                        <b class="thumb-count">{{ comment.thumbUpUsers.count ?: '赞' }}</b>
+                                        <b class="thumb-count">{{ comment.thumbUpUsers.count ?: '赞'|trans }}</b>
                                     </span>
 
                                     <span class="snow">·</span>

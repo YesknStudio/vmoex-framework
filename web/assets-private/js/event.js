@@ -34,7 +34,7 @@ $(document).on('click', 'li.messages>a', function () {
         method: "POST",
         url: window.vmoex.links.G_set_message_red_link,
         success: function () {
-            $('li.messages>a span.text').text(' 私信 ');
+            $('li.messages>a span.text').text(window.vmoex.trans.message);
         }
     });
 });
@@ -81,10 +81,6 @@ $(document).on('submit', '#site-search', function (e) {
 
     $('#navbar-collapse').collapse('hide');
     $('#navbar-collapse-user').collapse('hide');
-});
-
-$(document).on('click', '.nav-chat-item', function () {
-    $('.nav-chat-dot').removeClass('push-notifications-count');
 });
 
 $(document).on('click', '.navbar-item-alert, .navbar-item-message', function () {
@@ -149,4 +145,25 @@ $(document).on('click', '#addCommentToPost', function () {
 
         }
     })
+});
+
+$(document).on('keydown', '.chat-panel input#btn-input', function (e) {
+    if (e.keyCode === 13) {
+        $('#sendChat').trigger('click');
+    }
+});
+
+$(document).on('click', '#sendChat', function () {
+    $.ajax({
+        method: 'POST',
+        url: window.vmoex.links.send_chat,
+        data: {content: $('#btn-input').val()},
+        success: function (data) {
+            data.ret ? reload() : error(data.msg);
+        }
+    })
+});
+
+$(document).on('click', '#refresh-chat', function () {
+    reload();
 });
