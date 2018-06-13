@@ -167,3 +167,18 @@ $(document).on('click', '#sendChat', function () {
 $(document).on('click', '#refresh-chat', function () {
     reload();
 });
+
+$(document).on('click', '#sign-remark', function () {
+    $.ajax({
+        method: 'POST',
+        url: window.vmoex.links.G_sign_link,
+        success: function (data) {
+            if (data.ret) {
+                success(data.msg);
+                reload();
+            } else {
+                warning(data.msg);
+            }
+        }
+    })
+});
