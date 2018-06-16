@@ -98,7 +98,7 @@ article.main{
     background: #fff;
     border-radius: 3px;
 }
-article span.item-title {
+article div.item-title {
     font-size: 16px;
     display: inline-block;
     padding: 10px 0;
@@ -346,17 +346,38 @@ nav .dropdown-messages, nav .dropdown-notifications {
         padding-left: 5px;
         padding-right: 5px;
     }
+    .content-row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .content-main {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    article.main {
+        padding-top: 10px;
+        padding-left: 0;
+    }
+    article.main .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
     article.main img {
+        padding-top: 0;
         height: 30px;
         width: 30px;
     }
-
-    article span.item-title {
+    article .home-post-info {
+        vertical-align: top;
+    }
+    article div.item-title {
+        line-height: 16px;
+        padding-top: 0;
         font-size: 16px;
     }
     .post-avatar {
         vertical-align: text-top;
-        padding: 5px;
+        padding: 0 5px 0 5px;
     }
     .navbar-form .form-group {
         display: inline-block;
@@ -430,8 +451,17 @@ nav .dropdown-messages, nav .dropdown-notifications {
     .comments span.comment-user-avatar {
         display: block;
     }
+    .post-meta {
+        margin-bottom: 2px;
+    }
     .post-meta span {
+        font-size: 12px;
         padding-right: 5px;
+    }
+
+    #sidebar {
+        padding-right: 0;
+        padding-left: 0;
     }
 }
 
@@ -448,7 +478,6 @@ nav .dropdown-messages, nav .dropdown-notifications {
 .user-home .user-meta .btn-sm {
     margin-bottom: 5px;
 }
-
 
 footer {
     display: flex;
@@ -680,4 +709,8 @@ ul.pagination {
 
 .tabs-item-button {
     border-radius: 10px;
+}
+
+.site-state-panel .state-item {
+    margin-bottom: 0;
 }

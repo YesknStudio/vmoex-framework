@@ -82,11 +82,19 @@ class DefaultController extends Controller
         $pageData['allPage'] = ceil($count/$pagesize);
         $pageData['currentPage'] = $page;
 
+        $site = [
+            'startedAt' => new \DateTime('2018-05-25'),
+            'topicCount' => $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->countPost(),
+            'userCount' => $this->getDoctrine()->getRepository('YesknBlogBundle:User')->countUser(),
+            'commentCount' => $this->getDoctrine()->getRepository('YesknBlogBundle:Comment')->countComment()
+        ];
+
         $response = $this->render('YesknBlogBundle:Default:index.html.twig', array(
             'posts' => $posts,
             'tab' => $tab,
             'tabs' => $allTabs,
-            'pageData' => $pageData
+            'pageData' => $pageData,
+            'site' => $site
         ));
 
         $response->headers->setCookie(new Cookie('_tab', $tab));

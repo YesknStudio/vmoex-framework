@@ -69,4 +69,17 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
 
         return [$results, $total];
     }
+
+    /**
+     * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countUser()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('MAX(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

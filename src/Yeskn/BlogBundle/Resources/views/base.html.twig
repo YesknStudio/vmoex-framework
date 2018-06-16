@@ -102,7 +102,7 @@
             <div class="col-lg-8 content-main" role="main">
                 {% block main %}{% endblock %}
             </div>
-            <div class="col-md-4" role="complementary">
+            <div id="sidebar" class="col-md-4" role="complementary">
                 {% block sidebar %}
                     {% set block_loaded = block('sidebar_head') is defined %}
                     {% include '@YesknBlog/sidebar.html.twig' with {sidebar_head: block_loaded  ? block('sidebar_head')  : ''} %}
@@ -127,26 +127,19 @@
             <br>
 
             <div class="language-box">
-
                 <span style="display: inline-block;margin-right: 10px">{{ 'vmoex_available_with'|trans }}</span>
 
-                <img class="footer-flag" src="{{ asset('img/flags/zh_CN.png') }}" alt="zh_CN"> <a data-pjax
-                                                                                                  href="javascript:"
-                                                                                                  class="set-locale-link"
-                                                                                                  data-locale="zh_CN">{{ 'chinese'|trans }}</a>
+                <img class="footer-flag" src="{{ asset('img/flags/zh_CN.png') }}" alt="zh_CN">
+                <a data-pjax href="javascript:"   class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a>
                 <span class="snow">·</span>
-                <img class="footer-flag" src="{{ asset('img/flags/en.png') }}" alt="en"><a href="javascript:"
-                                                                                           class="set-locale-link"
-                                                                                           data-locale="en">{{ 'english'|trans }}</a>
+                <img class="footer-flag" src="{{ asset('img/flags/en.png') }}" alt="en">
+                <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a>
                 <span class="snow">·</span>
-                <img class="footer-flag" src="{{ asset('img/flags/zh_TW.png') }}" alt="zh_TW"><a href="javascript:"
-                                                                                                 class="set-locale-link"
-                                                                                                 data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a>
+                <img class="footer-flag" src="{{ asset('img/flags/zh_TW.png') }}" alt="zh_TW">
+                <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a>
                 <span class="snow">·</span>
-                <img class="footer-flag" src="{{ asset('img/flags/jp.png') }}" alt="jp"><a href="javascript:"
-                                                                                           class="set-locale-link"
-                                                                                           data-locale="jp">{{ 'japanese'|trans }}</a>
-
+                <img class="footer-flag" src="{{ asset('img/flags/jp.png') }}" alt="jp">
+                <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a>
             </div>
 
             {% set userCount = onlineUserCount() %}

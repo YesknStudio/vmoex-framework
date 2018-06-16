@@ -18,9 +18,9 @@
                             <img src="{{ asset(post.author.avatar) }}" class="img-rounded">
                         </div>
                         <div class="col-md-11 home-post-info">
-                    <span class="item-title">
+                    <div class="item-title">
                         <a data-pjax href="{{ path('yeskn_blog_show' , {'id' : post.id}) }}">{{ post.title }}</a>
-                    </span>
+                    </div>
                             <p class="post-meta">
                         <span><i class="fa fa-user"></i>
                             <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
