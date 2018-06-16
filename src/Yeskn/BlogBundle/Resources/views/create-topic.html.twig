@@ -23,13 +23,12 @@
 
 
                         <div class="hidden">
-                            <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                            <textarea name="content" id="content" cols="30" rows="10" title=""></textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label required" for="editor-trigger">内容</label>
                             <div id="editor-trigger"><p></p></div>
-                            <textarea id="editor-trigger" style="display:none;"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -50,13 +49,13 @@
 
     <script>
        $(function () {
-           let editor = new wangEditor('editor-trigger');
+           var editor = new WangEditor('editor-trigger');
 
            editor.config.printLog = false;
+           editor.config.menuFixed = false;
 
            editor.config.menus = [
-               'source',
-               '|',
+               'emotion',
                'bold',
                'quote',
                'underline',
@@ -67,6 +66,8 @@
                'bgcolor',
                'insertcode'
            ];
+           editor.config.emotionsShow = 'value';
+           editor.config.emotions = window.vmoex.emotions;
 
            editor.create();
 

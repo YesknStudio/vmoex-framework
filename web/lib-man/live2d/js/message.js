@@ -170,7 +170,6 @@ if(!norunFlag){
 					checkSleep();
 				},200);
 			}
-			console.log(sleepTimer_);
 		}
 	}
 	
@@ -186,7 +185,6 @@ if(!norunFlag){
 	
 	function showMessage(text, timeout){
 		if(Array.isArray(text)) text = text[Math.floor(Math.random() * text.length + 1)-1];
-		//console.log('showMessage', text);
 		$('.message').stop();
 		$('.message').html(text);
 		$('.message').fadeTo(200, 1);
@@ -301,7 +299,6 @@ if(!norunFlag){
 							talkValTimer();
 							showMessage(res.text,0);
 						}
-						console.log(res);
 						$('#AIuserText').val("");
 						sessionStorage.setItem("live2duser", userid_);
 					}

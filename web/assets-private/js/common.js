@@ -1,3 +1,50 @@
+window.vmoex.emotions = {
+    'default' : {
+        title: '(●′ω`●) 颜文字',
+        data: [
+            {
+                icon: null,
+                text: 'OωO',
+                value: 'OωO'
+            },
+            {
+                icon: null,
+                text: '|´・ω・)ノ',
+                value: '|´・ω・)ノ'
+            },
+            {
+                icon: null,
+                text: '⌇●﹏●⌇',
+                value: '⌇●﹏●⌇'
+            },
+            {
+                icon: null,
+                text: '(ฅ´ω`ฅ)',
+                value: '(ฅ´ω`ฅ)'
+            },
+            {
+                icon: null,
+                text: '→_→',
+                value: '→_→'
+            },
+            {
+                icon: null,
+                text: '＞﹏＜',
+                value: '＞﹏＜'
+            },
+            {
+                icon: null,
+                text: '￣へ￣',
+                value: '￣へ￣'
+            },
+            {
+                icon: null,
+                text: '（づ￣３￣）づ',
+                value: '（づ￣３￣）づ'
+            }
+        ]
+    }
+};
 $(function () {
     $.ajax({
         method: "GET",

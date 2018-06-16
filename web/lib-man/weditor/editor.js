@@ -35,7 +35,7 @@
 
     // 定义扩展函数
     var _e = function (fn) {
-        var E = window.wangEditor;
+        var E = window.WangEditor;
         if (E) {
             // 执行传入的函数
             fn(E, $);
@@ -91,7 +91,7 @@
         E.docsite = 'http://www.kancloud.cn/wangfupeng/wangeditor2/113961';
 
         // 暴露给全局对象
-        window.wangEditor = E;
+        window.WangEditor = E;
 
         // 注册 plugin 事件，用于用户自定义插件
         // 用户在引用 wangEditor.js 之后，还可以通过 E.plugin() 注入自定义函数，
@@ -3070,7 +3070,7 @@
                 E[value] = function (info) {
                     // 通过配置来控制打印输出
                     if (E.config && E.config.printLog) {
-                        console[value]('wangEditor提示: ' + info);
+                       // console[value]('wangEditor提示: ' + info);
                     }
                 };
             }
