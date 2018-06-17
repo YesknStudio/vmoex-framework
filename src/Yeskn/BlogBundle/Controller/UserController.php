@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class UserController extends Controller
 {
     /**
-     * @Route("/user/{username}", name="user_home")
+     * @Route("/member/{username}", name="user_home")
      */
     public function userHomeAction($username)
     {

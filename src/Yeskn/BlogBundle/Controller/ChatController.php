@@ -74,6 +74,8 @@ class ChatController extends Controller
         $em->persist($chat);
         $em->flush();
 
+        $this->get('socket.push')->pushAll('new_chat');
+
         return new JsonResponse(['ret' => 1]);
     }
 }

@@ -31,6 +31,17 @@ class SocketPushService
         $this->container = $container;
     }
 
+    public function pushAll($event, $data = [])
+    {
+        $this->client->post($this->container->getParameter('socket_push_host') , [
+            'form_params' => [
+                'type' => 'publish',
+                'event' => $event,
+                'data' => $data
+            ]
+        ]);
+    }
+
     public function pushNewMessage(Message $message)
     {
         $this->client->post($this->container->getParameter('socket_push_host') , [

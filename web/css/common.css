@@ -41,6 +41,7 @@ a:hover{
 }
 .navbar {
     margin-bottom: 10px;
+    box-shadow:0 1px 5px rgba(0,0,0,0.15);
 }
 nav span.vmoex-version {
     position: absolute;
@@ -95,6 +96,7 @@ article.main{
     border-bottom: 1px solid #e7e7e7;
 }
 .home-content-main {
+    box-shadow: 0 1px 5px rgba(0,0,0,0.15);
     background: #fff;
     border-radius: 3px;
 }
@@ -127,11 +129,14 @@ article.main img{
     float:  left;
 }
 .content{
-    padding: 15px;
     margin-bottom: 10px;
     text-align: justify;
 }
+.content .topic-header {
+    padding: 15px;
+}
 .content .post-content {
+    padding: 0 15px;
     font-size: 16px;
 }
 .border-top{
@@ -139,6 +144,12 @@ article.main img{
 }
 .border-bottom{
     border-bottom: 1px solid #e7e7e7;
+}
+
+/** topic content */
+.content .title-avatar {
+    width: 55px;
+    height: 55px;
 }
 
 h3.border-bottom{
@@ -186,7 +197,7 @@ h3.border-bottom{
 
 .content-main {
     margin-bottom: 20px;
-    opacity: 0.98;
+    opacity: 0.95;
 }
 
 .content-main .content img {
@@ -298,7 +309,7 @@ li.messages ul li div a {
     margin-bottom: 10px;
 }
 .comments{
-    padding: 0 10px 10px 10px;
+    padding: 0 15px 10px 15px;
 }
 .comment-main {
     margin-left: 60px;
@@ -382,7 +393,13 @@ nav .dropdown-messages, nav .dropdown-notifications {
     .navbar-form .form-group {
         display: inline-block;
     }
-
+    .content .title-avatar {
+        width: 50px;
+        height: 50px;
+    }
+    .home-content-main .content {
+        padding: 10px 5px 5px 5px;
+    }
     .navbar-form {
         text-align: center;
     }
@@ -465,7 +482,10 @@ nav .dropdown-messages, nav .dropdown-notifications {
     }
 }
 
-.content > h2 {
+.content .topic-header > h2 {
+    text-align: left;
+    font-weight: normal;
+    font-size: 24px;
     margin-top: 0;
 }
 
@@ -480,6 +500,7 @@ nav .dropdown-messages, nav .dropdown-notifications {
 }
 
 footer {
+    box-shadow: 4px 1px 5px rgba(0,0,0,0.15);
     display: flex;
     min-height: 301px;
     padding-top: 60px;
@@ -663,7 +684,8 @@ ul.pagination {
     background-color: #80bd01;
 }
 
-.txt-toolbar .panel-tab .content-container .content a, .wangEditor-drop-panel .panel-tab .content-container .content a {
+.txt-toolbar .panel-tab .content-container .content a,
+.wangEditor-drop-panel .panel-tab .content-container .content a {
     padding: 5px;
     margin: 5px;
 }

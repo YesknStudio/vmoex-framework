@@ -6,14 +6,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ app.user.nickname }}的私信
-
-                    <div class="pull-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-xs ">
-                                {{ '设为已读'|trans }}
-                            </button>
-                        </div>
-                    </div>
                 </div>
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
@@ -28,7 +20,7 @@
                             {% if rMessages is not empty %}
                                 <ul class="messages list-group">
                                     {% for message in rMessages %}
-                                        <li class="list-group-item">
+                                        <li class="list-group-item {{ message.isRead ? '' : 'list-group-item-warning' }}">
                                             <img src="{{ asset(message.sender.avatar) }}" alt="" width="30" height="30" class="img-rounded">
                                             <a data-pjax href="{{ path('user_home', {username: message.sender.username}) }}">{{ message.sender.nickname }}</a>
                                             {{ message.createdAt|ago }}
