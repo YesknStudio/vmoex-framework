@@ -7,6 +7,7 @@ web/lib
 web/js/*.js
 web/css/*.css
 web/avatar/
+web/tavatar/
 .env
 src/Yeskn/BlogBundle/Entity/*.php~
 bin/socket-param.php

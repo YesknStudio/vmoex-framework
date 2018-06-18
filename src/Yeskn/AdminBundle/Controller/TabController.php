@@ -8,13 +8,20 @@
 
 namespace Yeskn\AdminBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Tab;
+use Yeskn\BlogBundle\Form\TabType;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * Class TabController
@@ -27,10 +34,16 @@ class TabController extends Controller
     /**
      * @Route("/index", name="admin_tab_index")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $tabs = $this->container->get('doctrine')->getRepository('YesknBlogBundle:Tab')
-            ->findAll();
+        $qb = $this->container->get('doctrine')->getRepository('YesknBlogBundle:Tab');
+
+        if ($request->get('level')) {
+            $tabs = $qb->findBy(['level' => $request->get('level')]);
+        } else {
+            $tabs = $qb->findAll();
+        }
+
         return $this->render('@YesknAdmin/Tab/index.html.twig',array(
             'tabs' => $tabs
         ));
@@ -43,14 +56,30 @@ class TabController extends Controller
     public function addAction(Request $request)
     {
         $tab = new Tab();
-        $form = $this->createFormBuilder($tab)
-            ->add('name', TextType::class,array('label' => '板块名'))
-            ->add('alias',TextType::class,array('label' => '别名'))
-            ->add('submit',SubmitType::class,array('label' => '提交'))
-            ->getForm();
+        $form = $this->createForm(TabType::class, $tab);
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var UploadedFile $avatar
+             */
+            $avatar = $request->files->get('avatar');
+            if ($avatar) {
+                $extension = $avatar->guessExtension();
+                $fileName = $tab->getAlias() . mt_rand(1000, 9999) . '.' . $extension;
+                $targetPath = $this->getParameter('kernel.project_dir') . '/web/tavatar/' . $fileName;
+
+                $fs = new Filesystem();
+                $fs->copy($avatar->getRealPath(), $targetPath);
+
+                Image::configure(array('driver' => 'gd'));
+
+                $image = Image::make($targetPath);
+                $image->resize(100, 100)->save();
+
+                $tab->setAvatar('tavatar/'.$fileName);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($tab);
             $em->flush();
@@ -73,14 +102,14 @@ class TabController extends Controller
         $tab = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
             ->findOneBy(['alias' => $tabAlias]);
 
-        $form = $this->createFormBuilder($tab)
-            ->add('name', TextType::class,array('label' => '板块名'))
-            ->add('alias',TextType::class,array('label' => '别名'))
-            ->add('submit',SubmitType::class,array('label' => '提交'))
-            ->getForm();
+        $form = $this->createForm(TabType::class, $tab);
+        $avatar = $tab->getAvatar();
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            if (empty($tab->getAvatar())) {
+                $tab->setAvatar($avatar);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($tab);
             $em->flush();

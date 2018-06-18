@@ -28,3 +28,12 @@ services:
         arguments: ~
         tags:
           - { name: kernel.event_listener, event: kernel.response }
+
+    form.string2image.transformer:
+        class: Yeskn\BlogBundle\Form\DataTransformer\StringToImageTransformer
+        arguments: ['@service_container']
+
+    Yeskn\BlogBundle\Form\TabType:
+        arguments: ['@service_container', '@form.string2image.transformer']
+        tags: [form.type]
+

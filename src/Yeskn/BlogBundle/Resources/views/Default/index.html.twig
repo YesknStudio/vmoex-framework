@@ -2,14 +2,28 @@
 
 {% block main %}
     <div class="home-content-main">
-        <div class="tab-list">
-            <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('home_tab', {tab: 'all'}) }}">{{ '全部'|trans }}</a>
-            <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: 'hot'}) }}">{{ '热门'|trans }}</a>
+        {% if currentTab and currentTab.level == 2 %}
+            <div class="tab-header">
+                <div class="tab-avatar">
+                    <img class=" img-rounded" src="{{ asset(currentTab.avatar) }}" alt="">
+                </div>
+                <div class="tab-info">
+                    <b><a href="{{ path('yeskn_blog_homepage') }}">Vmoex</a> <i class="fa  fa-angle-right"></i> <a data-pjax href="{{ path('home_tab', {tab:currentTab.alias}) }}">{{ currentTab.parent.name }}</a> <i class="fa fa-angle-right"></i> {{ currentTab.name }}</b>
+                    <div style="padding: 10px 0">
+                        {{ currentTab.description }}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="tab-list">
+                    <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('home_tab', {tab: 'all'}) }}">{{ '全部'|trans }}</a>
+                    <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: 'hot'}) }}">{{ '热门'|trans }}</a>
 
-            {% for tabItem in tabs %}
-                <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
-            {% endfor %}
-        </div>
+                    {% for tabItem in tabs %}
+                        <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
+                    {% endfor %}
+                </div>
+        {% endif %}
         {% if posts is not empty %}
             {% for post in posts %}
                 <article class="main" style="position: relative">
@@ -19,6 +33,7 @@
                         </div>
                         <div class="col-md-11 home-post-info">
                     <div class="item-title">
+                        {% if post.isTop %}  <span class="warning-label x-small-font">{{ '置顶'|trans }}</span> {% endif %}
                         <a data-pjax href="{{ path('yeskn_blog_show' , {'id' : post.id}) }}">{{ post.title }}</a>
                     </div>
                             <p class="post-meta">

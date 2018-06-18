@@ -38,9 +38,31 @@ class Tab
     private $alias;
 
     /**
+     * @ORM\Column(name="level", type="smallint", options={"default":1})
+     */
+    private $level;
+
+    /**
+     * @var Tab
+     * @ORM\ManyToOne(targetEntity="Yeskn\BlogBundle\Entity\Tab", inversedBy="id")
+     */
+    private $parent;
+
+    /**
+     * @ORM\Column(name="description", type="text", options={"default":""})
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(name="avatar", type="string", length=200)
+     */
+    private $avatar;
+
+    /**
      * @ORM\OneToMany(targetEntity="Yeskn\BlogBundle\Entity\Post", mappedBy="tab")
      */
     private $posts;
+
     /**
      * Constructor
      */
@@ -139,5 +161,69 @@ class Tab
     public function getAlias()
     {
         return $this->alias;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param mixed $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @return Tab
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param Tab $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
     }
 }

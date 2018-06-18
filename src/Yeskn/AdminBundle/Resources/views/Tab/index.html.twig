@@ -12,6 +12,7 @@
                 <thead>
                 <tr>
                     <th class="row">id</th>
+                    <th class="row">层级</th>
                     <th class="row">名字</th>
                     <th class="row">别名</th>
                     <th class="row">操作</th>
@@ -21,7 +22,8 @@
                 {% for tab in tabs %}
                     <tr role="row">
                         <td>{{ tab.id }}</td>
-                        <td>{{ tab.name }}</td>
+                        <td>{{ tab.level }}</td>
+                        <td><a href="{{ path('home_tab',{tab:tab.alias}) }}">{{ tab.name }}</a></td>
                         <td>{{ tab.alias }}</td>
                         <td>
                             <a href="{{ path('yeskn_admin_tab_edit', {tab:tab.alias}) }}">修改</a>

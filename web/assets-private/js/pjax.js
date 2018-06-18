@@ -1,11 +1,7 @@
 if ($.support.pjax) {
     $(document).pjax('a[data-pjax]', '.content-body', {
         fragment: '.content-body',
-        timeout: 200000000,
-        show: 'fade',
-        cache: true,
-        push: true,
-        replace:false
+        timeout: 650
     });
 
     $(document).on('pjax:start', function () {
@@ -14,7 +10,8 @@ if ($.support.pjax) {
 
     $(document).on('pjax:send', function () {});
 
-    $(document).on('pjax:success', function (data, status, xhr, options) {});
+    $(document).on('pjax:success', function (data, status, xhr, options) {
+    });
 
     $(document).on('pjax:complete', function () {
         NProgress.done();

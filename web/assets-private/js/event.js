@@ -185,3 +185,8 @@ $(document).on('keydown', '#editor-comment', function (e) {
         $this.height($this.height()+$this.scrollTop()+18);
     }
 });
+
+// 搜索
+$(document).on('click', 'nav .nav-search-bar span', function () {
+    $('#site-search').trigger('submit');
+});

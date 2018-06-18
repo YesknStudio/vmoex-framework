@@ -3,6 +3,7 @@
 namespace Yeskn\BlogBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Yeskn\BlogBundle\Entity\Post;
+use Yeskn\BlogBundle\Entity\Tab;
 
 /**
  * PostRepository
@@ -12,6 +13,42 @@ use Yeskn\BlogBundle\Entity\Post;
  */
 class PostRepository extends EntityRepository
 {
+    /**
+     * @param Tab $tab
+     * @param $sort
+     * @param $pageSize
+     * @param $first
+     * @return Post[]
+     */
+    public function getIndexList($tab, $sort, $pageSize, $first)
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        if ($tab) {
+            $qb->where('p.tab = :tab')->setParameter('tab', $tab);
+
+            if ($tab->getLevel() == 1) {
+                $subQuery = $this->getEntityManager()->getRepository('YesknBlogBundle:Tab')
+                    ->createQueryBuilder('t')
+                    ->select('t.id')
+                    ->where('t.parent = :parent')
+                    ->setParameter('parent', $tab)
+                    ->getQuery()
+                    ->getArrayResult()
+                ;
+
+                if ($subQuery) {
+                    $qb->orWhere($qb->expr()->in('p.tab', array_column($subQuery, 'id')));
+                }
+            }
+        }
+
+        $qb->orderBy('p.isTop', 'DESC');
+        $qb->addOrderBy('p.'.key($sort), current($sort));
+        $qb->setFirstResult($first);
+        $qb->setMaxResults($pageSize);
+        return $qb->getQuery()->getResult();
+    }
     /**
      * @return Post[]
      */

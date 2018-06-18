@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Comment;
 use Yeskn\BlogBundle\Entity\Notice;
-use Yeskn\BlogBundle\Entity\Notification;
 use Yeskn\BlogBundle\Entity\Post;
 use Yeskn\BlogBundle\Entity\User;
 use Yeskn\BlogBundle\Utils\HtmlPurer;
@@ -50,7 +49,7 @@ class DefaultController extends Controller
             $sort = ['views' => 'DESC'];
         }
 
-        $condition = [];
+        $tabObj = null;
 
         if ($tab and $tab != 'all' and $tab != 'hot') {
             $tabObj = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
@@ -58,11 +57,10 @@ class DefaultController extends Controller
             if (empty($tabObj)) {
                 return new JsonResponse('tab not exists');
             }
-            $condition = ['tab' => $tabObj];
         }
 
         $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
-            ->findBy($condition, $sort, $pagesize, $pagesize*($page-1));
+            ->getIndexList($tabObj, $sort, $pagesize, $pagesize*($page-1));
 
         $countQuery = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
             ->createQueryBuilder('a')
@@ -77,7 +75,7 @@ class DefaultController extends Controller
         $count = $countQuery->getQuery()->getSingleScalarResult();
 
         $allTabs = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
-            ->findAll();
+            ->findBy(['level' => 1]);
 
         $pageData['allPage'] = ceil($count/$pagesize);
         $pageData['currentPage'] = $page;
@@ -85,11 +83,14 @@ class DefaultController extends Controller
         $response = $this->render('YesknBlogBundle:Default:index.html.twig', array(
             'posts' => $posts,
             'tab' => $tab,
+            'currentTab' => $tabObj,
             'tabs' => $allTabs,
             'pageData' => $pageData
         ));
 
-        $response->headers->setCookie(new Cookie('_tab', $tab));
+        if ($tabObj and $tabObj->getLevel() == 1) {
+            $response->headers->setCookie(new Cookie('_tab', $tab));
+        }
 
         return $response;
     }
@@ -174,7 +175,7 @@ class DefaultController extends Controller
     {
         if ($request->isMethod('GET')) {
 
-            $tabs = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')->findAll();
+            $tabs = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')->findBy(['level' => 2]);
 
             return $this->render('@YesknBlog/create-topic.html.twig', [
                 'tabs' => $tabs
@@ -186,7 +187,7 @@ class DefaultController extends Controller
 
         $content = strip_tags($content, '<blockquote><code><p><br><a><strong><span><i><u><strike><b><font>');
 
-        $htmlPurer  = new HtmlPurer();
+        $htmlPurer  = new HtmlPurer($this->container);
         $content = $htmlPurer->pure($content)->getResult();
 
         if (empty($title) or empty(strip_tags($content))) {

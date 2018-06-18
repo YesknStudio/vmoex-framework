@@ -21,17 +21,22 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ '板块'|trans }} ALL
-                </div>
-                <div class="panel-body">
-                        {% for tab in tabs %}
-                            <a data-pjax class="btn btn-default btn-sm tabs-item-button" href="{{ path('home_tab', {tab:tab.alias}) }}" role="button">{{ tab.name|trans }}</a>
-                        {% endfor %}
-
-                </div>
-            </div>
+            {% for tab in tabs %}
+                {% if tab.level == 1 %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{ tab.name|trans }}
+                        </div>
+                        <div class="panel-body">
+                            {% for stab in tabs %}
+                                {% if stab.level == 2 and stab.parent == tab %}
+                                    <a data-pjax class="btn btn-default btn-sm tabs-item-button" href="{{ path('home_tab', {tab:stab.alias}) }}" role="button">{{ stab.name|trans }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
