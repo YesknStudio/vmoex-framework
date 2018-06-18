@@ -36,6 +36,10 @@ class DefaultController extends Controller
         $pagesize = 25;
 
         if (empty($tab)) {
+            $tab = $request->query->get('tab');
+        }
+
+        if (empty($tab)) {
             $tab = $request->cookies->get('_tab');
         }
 
@@ -89,6 +93,10 @@ class DefaultController extends Controller
         ));
 
         if ($tabObj and $tabObj->getLevel() == 1) {
+            $response->headers->setCookie(new Cookie('_tab', $tab));
+        }
+
+        if ($tab == 'all' or $tab == 'hot') {
             $response->headers->setCookie(new Cookie('_tab', $tab));
         }
 
