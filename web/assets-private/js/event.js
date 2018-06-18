@@ -35,6 +35,7 @@ $(document).on('click', 'li.messages>a', function () {
         url: window.vmoex.links.G_set_message_red_link,
         success: function () {
             $('li.messages>a span.text').text(window.vmoex.trans.message);
+            $('.nav-message-label').removeClass('warning-color');
         }
     });
 });

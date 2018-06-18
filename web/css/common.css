@@ -18,6 +18,9 @@ a:hover{
     color: #737373;
     text-decoration: underline;
 }
+.warning-color {
+    color: #FFA500;
+}
 .push-notifications-count {
     position: absolute;
     bottom: 50%;
@@ -36,6 +39,9 @@ a:hover{
 .panel {
     border: none;
     box-shadow:1px 1px 5px rgba(0,0,0,0.15);
+}
+.panel-default>.panel-heading {
+   border: none;
 }
 .badge {
     font-weight: normal;
@@ -201,10 +207,6 @@ h3.border-bottom{
     margin-top: 100px;
 }
 
-#search-content {
-    width: 200px
-}
-
 .content-main {
     margin-bottom: 20px;
     opacity: 0.95;
@@ -357,7 +359,18 @@ li.messages ul li div a {
 nav.navbar-static-top {
     opacity: 0.98;
 }
-
+nav .nav-search-bar input {
+    border-radius: 16px 0 0 16px;
+    width: 200px;
+    border-right-style:none;
+}
+nav .nav-search-bar input:focus {
+    outline: none;
+}
+nav .nav-search-bar span {
+    border-radius: 0 16px 16px 0;
+    background: #fff;
+}
 nav .dropdown-messages, nav .dropdown-notifications {
     width: 310px;
     min-width: 0;

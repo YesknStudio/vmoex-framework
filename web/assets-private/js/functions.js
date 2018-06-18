@@ -85,15 +85,15 @@ function handleNewMessage(data) {
 
     var message  = data.data;
     var $messageCount = $('#MyMessageCount');
+    var $messageLabel = $('.nav-message-label');
 
     if ($messageCount.length) {
         var originCount = parseInt($messageCount.text());
         if (originCount > 10) {
             return ;
         }
-        $messageCount.text( + 1);
+        $messageCount.text(originCount + 1);
     } else {
-        var $messageLabel = $('.nav-message-label');
         var messageLabel = $messageLabel.text();
         var newMessageLabel = messageLabel + '(<b id="MyMessageCount"></b>)';
         $messageLabel.html(newMessageLabel);
@@ -108,6 +108,7 @@ function handleNewMessage(data) {
     });
 
     $('li.messages ul').prepend(html);
+    $messageLabel.addClass('warning-color');
 }
 
 function handleNewFollower(data) {
