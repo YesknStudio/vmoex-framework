@@ -33,7 +33,10 @@ a:hover{
 .dropdown-menu.dropdown-user{
     margin-top: 0;
 }
-
+.panel {
+    border: none;
+    box-shadow:1px 1px 5px rgba(0,0,0,0.15);
+}
 .badge {
     font-weight: normal;
     background-color: #f5f5f5;
@@ -130,14 +133,21 @@ article.main img{
 }
 .content{
     margin-bottom: 10px;
+    padding-bottom: 10px;
     text-align: justify;
 }
 .content .topic-header {
-    padding: 15px;
+    padding: 15px 15px 0 15px;
 }
 .content .post-content {
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.content .post-tags {
     padding: 0 15px;
-    font-size: 16px;
+    position: relative;
+    bottom: 0;
 }
 .border-top{
     border-top: 1px solid #e7e7e7;
@@ -153,7 +163,7 @@ article.main img{
 }
 
 h3.border-bottom{
-    padding-bottom: 15px;
+    padding-bottom: 10px;
 }
 .margin-top-10{
     margin-top: 10px;
@@ -309,6 +319,7 @@ li.messages ul li div a {
     margin-bottom: 10px;
 }
 .comments{
+    background: #fff;
     padding: 0 15px 10px 15px;
 }
 .comment-main {
@@ -324,6 +335,20 @@ li.messages ul li div a {
 }
 .comments .comment-user-info {
     padding-bottom: 5px;
+}
+.comments .comments-header {
+    padding-top: 10px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.comment-box {
+    margin-top: 20px;
+    padding: 10px;
 }
 .my-messages ul.messages {
     list-style-type: none;
@@ -397,13 +422,18 @@ nav .dropdown-messages, nav .dropdown-notifications {
         width: 50px;
         height: 50px;
     }
-    .home-content-main .content {
-        padding: 10px 5px 5px 5px;
+    .content .post-content {
+        padding: 5px;
+    }
+    .content .post-tags {
+        padding: 0 5px;
     }
     .navbar-form {
         text-align: center;
     }
-
+    .content .topic-header {
+        padding: 10px 5px 5px 5px;
+    }
     ul.navbar-left li {
         text-align: center;
     }
@@ -481,11 +511,10 @@ nav .dropdown-messages, nav .dropdown-notifications {
         padding-left: 0;
     }
 }
-
 .content .topic-header > h2 {
     text-align: left;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 22px;
     margin-top: 0;
 }
 

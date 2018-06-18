@@ -49,6 +49,11 @@
 
     <script>
        $(function () {
+           if (window.editor) {
+               window.editor.destroy();
+               $('.wangEditor-container').html('<div id="editor-trigger"></div>');
+           }
+
            var editor = new WangEditor('editor-trigger');
 
            editor.config.printLog = false;
@@ -70,6 +75,7 @@
            editor.config.emotions = window.vmoex.emotions;
 
            editor.create();
+           window.editor = editor;
 
            $(document).off('submit', 'form#createTopic');
            $(document).on('submit', 'form#createTopic', function () {

@@ -8,7 +8,6 @@
 
 namespace Yeskn\BlogBundle\Entity;
 
-use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,7 +47,7 @@ class Comment
     private $createdAt;
 
     /**
-     * @var bool
+     * @var \DateTime
      *
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
@@ -73,6 +72,12 @@ class Comment
      * @ORM\OneToOne(targetEntity="Yeskn\BlogBundle\Entity\Comment")
      */
     private $replyTo;
+
+    /**
+     * @ORM\Column(name="floor", type="integer", options={"default":1}, unique=true)
+     *
+     */
+    private $floor;
 
     /**
      * @return int
@@ -123,7 +128,7 @@ class Comment
     }
 
     /**
-     * @return bool
+     * @return \DateTime
      */
     public function isDeletedAt()
     {
@@ -237,5 +242,21 @@ class Comment
     public function getThumbUpUsers()
     {
         return $this->thumbUpUsers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFloor()
+    {
+        return $this->floor;
+    }
+
+    /**
+     * @param mixed $floor
+     */
+    public function setFloor($floor)
+    {
+        $this->floor = $floor;
     }
 }

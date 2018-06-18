@@ -68,6 +68,7 @@
             }
             this.valueNodeName = nodeName.toLowerCase();
             this.$valueContainer = $elem;
+            this.triggerName=$elem.attr('id');
 
             // 记录 elem 的 prev 和 parent（最后渲染 editor 要用到）
             this.$prev = $elem.prev();
