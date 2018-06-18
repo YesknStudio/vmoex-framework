@@ -336,6 +336,8 @@ li.messages ul li div a {
     padding-bottom: 0;
 }
 .comments .comment-user-info {
+    line-height: 14px;
+    margin-top: -2px;
     padding-bottom: 5px;
 }
 .comments .comments-header {
@@ -347,10 +349,15 @@ li.messages ul li div a {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
-
+.comments .comment-content {
+    padding: 3px 0;
+}
 .comment-box {
     margin-top: 20px;
     padding: 10px;
+}
+.comment-box #editor-comment p {
+    margin: 0;
 }
 .my-messages ul.messages {
     list-style-type: none;
@@ -602,7 +609,9 @@ footer .footer-flag {
     font-size: 12px;
     color: darkgray;
 }
-
+.comment-reply:hover {
+    cursor: pointer;
+}
 .comment-footer span {
     display: inline-block;
 }
@@ -725,12 +734,6 @@ ul.pagination {
     color: #fff;
     background-color: #80bd01;
 }
-
-.txt-toolbar .panel-tab .content-container .content a,
-.wangEditor-drop-panel .panel-tab .content-container .content a {
-    padding: 5px;
-    margin: 5px;
-}
 .text-underline {
     text-decoration: underline;
 }
@@ -777,4 +780,22 @@ ul.pagination {
 
 .site-state-panel .state-item {
     margin-bottom: 0;
+}
+
+/** vendor rewrite **/
+
+.txt-toolbar .panel-tab .tab-container a.selected, .wangEditor-drop-panel .panel-tab .tab-container a.selected {
+    text-decoration: none;
+}
+.wangEditor-container .wangEditor-txt {
+    margin-top: 0;
+    padding: 5px;
+}
+.wangEditor-container .wangEditor-txt > p {
+    margin-top: 5px;
+}
+.txt-toolbar .panel-tab .content-container .content a,
+.wangEditor-drop-panel .panel-tab .content-container .content a {
+    padding: 5px;
+    margin: 5px;
 }

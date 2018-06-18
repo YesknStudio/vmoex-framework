@@ -82,19 +82,11 @@ class DefaultController extends Controller
         $pageData['allPage'] = ceil($count/$pagesize);
         $pageData['currentPage'] = $page;
 
-        $site = [
-            'startedAt' => new \DateTime('2018-05-25'),
-            'topicCount' => $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->countPost(),
-            'userCount' => $this->getDoctrine()->getRepository('YesknBlogBundle:User')->countUser(),
-            'commentCount' => $this->getDoctrine()->getRepository('YesknBlogBundle:Comment')->countComment()
-        ];
-
         $response = $this->render('YesknBlogBundle:Default:index.html.twig', array(
             'posts' => $posts,
             'tab' => $tab,
             'tabs' => $allTabs,
-            'pageData' => $pageData,
-            'site' => $site
+            'pageData' => $pageData
         ));
 
         $response->headers->setCookie(new Cookie('_tab', $tab));
@@ -118,8 +110,20 @@ class DefaultController extends Controller
         $post->setViews(intval($post->getViews())+1);
         $em->flush();
 
+        $commentUsers = [];
+        /**
+         * @var Comment $comment
+         */
+        foreach ($post->getComments() as $comment) {
+            $name = $comment->getUser()->getNickname();
+            if (array_search($name, $commentUsers) === false) {
+                $commentUsers[] = $name;
+            }
+        }
+
         $response = $this->render('YesknBlogBundle:Default:show.html.twig', array(
-            'post' => $post
+            'post' => $post,
+            'commentUsers' => json_encode($commentUsers)
         ));
 
         $response->headers->set('X-PJAX-URL', $request->getUri());
@@ -234,10 +238,11 @@ class DefaultController extends Controller
 
         $content = $request->get('content');
 
-        $content = strip_tags($content, '<p><br><a><strong><span><i><u><strike><b><font>');
+        $content = strip_tags($content, '<p><br><a><strong><span><i><u><strike><b><font><at>');
 
-        $htmlPurer  = new HtmlPurer();
+        $htmlPurer  = new HtmlPurer($this->container);
         $content = $htmlPurer->pure($content)->getResult();
+        $content = str_replace('<p></p>', '', $content);
 
         if (empty(strip_tags($content)) or mb_strlen($content) > 500) {
             return new JsonResponse(['ret' => 0, 'msg' => '内个啥...长度好像不合适哦！']);
@@ -426,5 +431,13 @@ class DefaultController extends Controller
     public function thanks()
     {
         return $this->render('@YesknBlog/thanks.html.twig');
+    }
+
+    /**
+     * @Route("/contribute")
+     */
+    public function contribute()
+    {
+        return $this->render('@YesknBlog/contribute.html.twig');
     }
 }

@@ -29,17 +29,6 @@ $(document).on('click', 'li.disabled a', function (e) {
     e.preventDefault();
 });
 
-$(document).on('click', 'li.messages>a', function () {
-    $.ajax({
-        method: "POST",
-        url: window.vmoex.links.G_set_message_red_link,
-        success: function () {
-            $('li.messages>a span.text').text(window.vmoex.trans.message);
-            $('.nav-message-label').removeClass('warning-color');
-        }
-    });
-});
-
 $(document).on('click', 'nav.navbar-static-top a', function (e) {
     if ($(this).attr('href') !== '#' && $(this).attr('href') !== '/logout') {
         e.preventDefault();
@@ -82,10 +71,6 @@ $(document).on('submit', '#site-search', function (e) {
 
     $('#navbar-collapse').collapse('hide');
     $('#navbar-collapse-user').collapse('hide');
-});
-
-$(document).on('click', '.navbar-item-alert, .navbar-item-message', function () {
-    $(this).find('span').addClass('nav-common-dot').removeClass('nav-warn-dot').text(0);
 });
 
 $(document).on('click', '.thumb-up', function () {
@@ -182,4 +167,21 @@ $(document).on('click', '#sign-remark', function () {
             }
         }
     })
+});
+
+// 回复文章的评论
+$(document).on('click', '.comment-reply', function () {
+    var replyTo = $(this).attr('data-at');
+    var replayU = $(this).attr('data-atu');
+    window.location.href = '#comment-box';
+    $('#editor-comment p:last-child').append('<span data-at="'+replayU+'">@'+replyTo + "</span>&nbsp;");
+    $('#editor-comment').focus();
+    setEndOfContenteditable(document.getElementById('editor-comment'));
+});
+
+$(document).on('keydown', '#editor-comment', function (e) {
+    var $this = $(this);
+    if (e.keyCode === 13) {
+        $this.height($this.height()+$this.scrollTop()+18);
+    }
 });

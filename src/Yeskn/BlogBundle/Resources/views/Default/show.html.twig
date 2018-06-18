@@ -81,10 +81,9 @@
                                     <span class="text-small-gray">[ {{ comment.user.remark }} ]</span>
                                 {% endif %}
 
-                                <span class="text-small-gray pull-right">#{{ comment.floor }}</span>
+                                <span class="text-small-gray pull-right">#{{ loop.index }}</span>
                             </div>
-                            <p>{{ comment.content|raw }}</p>
-
+                            <div class="comment-content">{{ comment.content|raw }}</div>
                             <div class="comment-footer">
                                 {% set hasThumb = comment.thumbUpUsers.contains(app.user) %}
                                 {% set open = hasThumb ? '' : '-o' %}
@@ -99,7 +98,7 @@
 
                                 <span><i class="fa fa-clock-o"></i> {{ comment.createdAt|ago }}</span>
 
-                                <span class="pull-right"> <i class="fa fa-reply"></i> 回复</span>
+                                <span class="pull-right comment-reply" data-at="{{ comment.user.nickname }}" data-atu="{{ comment.user.username }}"> <i class="fa fa-reply"></i> {{ '回复'|trans }}</span>
                             </div>
                         </div>
                     </li>
@@ -111,9 +110,9 @@
     </div>
 
     <div class="panel panel-default comment-box" id="comment-box">
-        <div class="form-group" style="margin-top: 20px">
+        <div class="form-group">
             <label class="control-label required" for="editor-trigger">{{ '添加新的评论'|trans }}</label>
-            <div id="editor-comment"></div>
+            <div id="editor-comment"><p></p></div>
             <p class="help-block">{{ '发表有颜色的评论将消耗5金币哦'|trans }}~</p>
         </div>
         <div class="form-group">
@@ -130,7 +129,8 @@
       $(function () {
           if (window.editor) {
               window.editor.destroy();
-              $('.wangEditor-container').html('<div id="editor-comment"></div>');
+              $('.wangEditor-container').before('<div id="editor-comment"><p></p></div>');
+              $('.wangEditor-container').remove();
           }
           var editor = new WangEditor('editor-comment');
 
@@ -149,23 +149,17 @@
               'eraser'
           ];
 
-          // 上传图片
-          editor.config.uploadImgUrl = '/upload';
-          editor.config.uploadParams = {
-              // token1: 'abcde',
-              // token2: '12345'
-          };
-          editor.config.uploadHeaders = {
-              // 'Accept' : 'text/x-json'
-          };
-          // editor.config.uploadImgFileName = 'myFileName';
-
           // 表情显示项
           editor.config.emotionsShow = 'value';
           editor.config.emotions = window.vmoex.emotions;
 
           editor.create();
           window.editor = editor;
+
+          $('#editor-comment').atwho({
+              at: "@",
+              data: JSON.parse('{{ commentUsers|raw }}')
+          })
       })
     </script>
 {% endblock %}

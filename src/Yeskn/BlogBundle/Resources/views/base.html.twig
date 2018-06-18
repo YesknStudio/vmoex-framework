@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        var loadingDiv = document.createElement("div");
+        loadingDiv.setAttribute('class','loading');
+        loadingDiv.style.position = 'fixed';
+        loadingDiv.style.top = '50%';
+        loadingDiv.style.left = '50%';
+        loadingDiv.style.marginLeft = '-196px';
+        loadingDiv.style.marginTop = '-79px';
+        var imgNode = document.createElement('img');
+        imgNode.setAttribute('src','{{ asset('img/vmoex-loading.gif') }}');
+        imgNode.setAttribute('alt','Loading...');
+        var html = document.getElementsByTagName('html')[0];
+        loadingDiv.insertBefore(imgNode,null);
+        html.insertBefore(loadingDiv,null);
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +31,7 @@
             'lib/nprogress/nprogress.css'
             'lib-man/bootoast/css/bootoast.css'
             'lib-man/live2d/css/live2d.css'
+            'lib-man/who/jquery.atwho.min.css'
             'css/common.css'
             filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
@@ -88,7 +104,7 @@
     </div>
 </div>
 
-<body>
+<body style="display: none">
 
 {% if app.request.get('_pjax') is empty %}
     {% block navbar %}
@@ -119,7 +135,7 @@
             <div class="brand">
                 <b><a data-pjax href="{{ path('about') }}">{{ 'about.vmoex'|trans }}</a></b>
                 <span class="snow">·</span>
-                <b><a data-pjax href="{{ path('buy_beer') }}">{{ '支持我们'|trans }}</a></b>
+                <b><a data-pjax href="{{ path('yeskn_blog_default_contribute') }}">{{ '支持我们'|trans }}</a></b>
                 <span class="snow">·</span>
                 <b><a data-pjax href="{{ path('buy_beer') }}">{{ 'buy_beer'|trans }} ｡◕‿◕｡</a></b>
             </div>
@@ -153,12 +169,19 @@
     {% include '@YesknBlog/landlord.html.twig' %}
 
     {% block foot_js_link %}
+    <script type="text/javascript">
+        $(function () {
+            $('.loading').remove();
+            $('body').fadeIn(1000);
+        })
+    </script>
     {% javascripts
         'lib/bootstrap/dist/js/bootstrap.min.js'
         'lib/nprogress/nprogress.js'
         'lib/jquery-pjax/jquery.pjax.js'
         'lib-man/weditor/editor.js'
         'lib-man/bootoast/js/bootoast.js'
+        'lib-man/who/jquery.atwho.min.js'
         'lib-man/live2d/js/live2d.js'
         'lib-man/live2d/js/message.js'
         'assets-private/js/functions.js'

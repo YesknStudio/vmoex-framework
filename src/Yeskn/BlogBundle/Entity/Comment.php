@@ -74,12 +74,6 @@ class Comment
     private $replyTo;
 
     /**
-     * @ORM\Column(name="floor", type="integer", options={"default":1}, unique=true)
-     *
-     */
-    private $floor;
-
-    /**
      * @return int
      */
     public function getId()
@@ -242,21 +236,5 @@ class Comment
     public function getThumbUpUsers()
     {
         return $this->thumbUpUsers;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFloor()
-    {
-        return $this->floor;
-    }
-
-    /**
-     * @param mixed $floor
-     */
-    public function setFloor($floor)
-    {
-        $this->floor = $floor;
     }
 }

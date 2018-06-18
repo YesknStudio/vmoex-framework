@@ -16,11 +16,10 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="not_read">
-                            {% if notices is not empty %}
+                            {% if unreadNotices is not empty %}
                                 <ul class="notifications-list list-group">
-                                    {% for notice in notices|reverse %}
-                                        {% if notice.isRead == false %}
-                                            <li class="list-group-item {{ notice.isRead ? '' : 'list-group-item-warning' }}">
+                                    {% for notice in notices %}
+                                            <li class="list-group-item list-group-item-warning">
                                                 <div style="padding-bottom: 10px">
                                                     {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
                                                     <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
@@ -33,7 +32,6 @@
                                                 </blockquote>
                                                 {% endif %}
                                             </li>
-                                        {% endif %}
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -44,11 +42,10 @@
                         </div>
 
                         <div class="tab-pane fade" id="read">
-                            {% if notices is not empty %}
-                                <ul class="notifications-list">
-                                    {% for notice in notices|reverse %}
-                                      {% if notice.isRead == true %}
-                                          <li>
+                            {% if readNotices is not empty %}
+                                <ul class="notifications-list  list-group">
+                                    {% for notice in readNotices %}
+                                          <li class="list-group-item">
                                               <div>
                                                   {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
                                                   <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
@@ -61,7 +58,6 @@
                                               </blockquote>
                                               {% endif %}
                                           </li>
-                                      {% endif %}
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -75,4 +71,18 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                method: "POST",
+                url: '{{ path('set_notice_red') }}',
+                success: function () {
+                    $('li.notifications span.text').text('{{ 'notifications'|trans }}');
+                    $('.nav-notice-label').removeClass('warning-color');
+                }
+            });
+            $('.navbar-item-alert span').addClass('nav-common-dot').removeClass('nav-warn-dot').text(0);
+        })
+    </script>
 {% endblock %}

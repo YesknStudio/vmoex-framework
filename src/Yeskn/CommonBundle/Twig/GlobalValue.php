@@ -140,6 +140,23 @@ class GlobalValue extends \Twig_Extension
         return $actives;
     }
 
+    /**
+     * @return array
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function siteState()
+    {
+        $site = [
+            'startedAt' => new \DateTime('2018-05-25'),
+            'topicCount' => $this->em->getRepository('YesknBlogBundle:Post')->countPost(),
+            'userCount' => $this->em->getRepository('YesknBlogBundle:User')->countUser(),
+            'commentCount' => $this->em->getRepository('YesknBlogBundle:Comment')->countComment()
+        ];
+
+        return $site;
+    }
+
     public function onlineUserCount()
     {
         return 23 + mt_rand(0, 3);
@@ -171,7 +188,8 @@ class GlobalValue extends \Twig_Extension
             new \Twig_SimpleFunction('hotComments',array($this,'hotComments'),array('is_safe' => 'html'),array('needs_environment' => true)),
             new \Twig_SimpleFunction('unReadMessages',array($this,'unReadMessages'),array('is_safe' => 'html'),array('needs_environment' => true)),
             new \Twig_SimpleFunction('hotUsers',array($this,'hotUsers'),array('is_safe' => 'html'),array('needs_environment' => true)),
-            new \Twig_SimpleFunction('onlineUserCount',array($this,'onlineUserCount'),array('is_safe' => 'html'),array('needs_environment' => true))
+            new \Twig_SimpleFunction('onlineUserCount',array($this,'onlineUserCount'),array('is_safe' => 'html'),array('needs_environment' => true)),
+            new \Twig_SimpleFunction('siteState',array($this,'siteState'),array('is_safe' => 'html'),array('needs_environment' => true)),
         );
     }
 }

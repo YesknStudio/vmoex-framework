@@ -37,9 +37,9 @@
 
                         <div class="tab-pane fade" id="send">
                             {% if sMessages is not empty %}
-                                <ul class="messages">
+                                <ul class="messages list-group">
                                     {% for message in sMessages %}
-                                        <li>你对<a data-pjax href="{{ path('user_home', {username: message.receiver.username}) }}">{{ message.receiver.nickname }}</a>说：{{ message.content }} <span class="pull-right">{{ message.createdAt|date('Y-m-d H:i:s') }}</span></li>
+                                        <li class="list-group-item">你对<a data-pjax href="{{ path('user_home', {username: message.receiver.username}) }}">{{ message.receiver.nickname }}</a>说：{{ message.content }} <span class="pull-right">{{ message.createdAt|ago }}</span></li>
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -53,4 +53,18 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                method: "POST",
+                url: window.vmoex.links.G_set_message_red_link,
+                success: function () {
+                    $('li.messages > span.text').text(window.vmoex.trans.message);
+                    $('.nav-message-label').removeClass('warning-color');
+                }
+            });
+            $('.navbar-item-message span').addClass('nav-common-dot').removeClass('nav-warn-dot').text(0);
+        })
+    </script>
 {% endblock %}

@@ -55,13 +55,13 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     public function queryUser($word, $cursor = 0, $limit = 15)
     {
         $qb = $this->createQueryBuilder('p')
-            ->where('p.username LIKE :username')->setParameter('username', $word)
-            ->orWhere('p.nickname LIKE :nickname')->setParameter('nickname', $word);
+            ->where('p.username LIKE :username')->setParameter('username', "%$word%")
+            ->orWhere('p.nickname LIKE :nickname')->setParameter('nickname', "%$word%");
 
         $total = $qb->select('COUNT(p)')->getQuery()->getSingleScalarResult();
 
         $results = $qb->select('p')
-            ->orderBy('p.registerAt', 'DESC')
+            ->orderBy('p.gold', 'DESC')
             ->setFirstResult($cursor)
             ->setMaxResults($limit)
             ->getQuery()

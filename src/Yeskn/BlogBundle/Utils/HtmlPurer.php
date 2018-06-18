@@ -10,6 +10,7 @@ namespace Yeskn\BlogBundle\Utils;
 
 
 use PHPHtmlParser\Dom;
+use Psr\Container\ContainerInterface;
 
 class HtmlPurer
 {
@@ -17,10 +18,17 @@ class HtmlPurer
 
     private $hasColor = false;
 
+    private $container;
+
     /**
      * @var Dom $handler
      */
     private static $handler = null;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
 
     /**
      * @param $html
@@ -84,12 +92,32 @@ class HtmlPurer
                 $node->setAttribute('color', $attrs['color']);
             }
 
-            if (strtolower($node->getTag()->name()) === 'a' and !empty($attrs['href'])) {
+            if (!empty($attrs['data-pjax'])) {
+                $node->setAttribute('data-pjax', $attrs['data-pjax']);
+            }
+
+            $nodeName = strtolower($node->getTag()->name());
+            if ($nodeName === 'a' and !empty($attrs['href'])) {
                 $node->setAttribute('href', $attrs['href']);
             }
 
-            if (strtolower($node->getTag()->name()) == 'img' and !empty($attrs['src'])) {
+            if ($nodeName == 'img' and !empty($attrs['src'])) {
                 $node->setAttribute('src', $attrs['src']);
+            }
+
+            if ($nodeName === 'span' and !empty($attrs['data-at'])) {
+                $aNode = new Dom\HtmlNode('a');
+                $aNode->setAttribute('href', $this->container->get('router')
+                    ->generate('user_home', ['username' => $attrs['data-at']]));
+                $aNode->setAttribute('data-pjax', 1);
+
+                $aNode->addChild(new Dom\TextNode($node->text() . ' '));
+
+                foreach ($node->getChildren() as  $child) {
+                    $node->removeChild($child->id());
+                }
+
+                $node->addChild($aNode);
             }
 
             if ($node->hasChildren()) {

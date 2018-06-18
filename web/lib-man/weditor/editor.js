@@ -1020,7 +1020,7 @@
         E.fn.clear = function () {
             var editor = this;
             var $txt = editor.txt.$txt;
-            $txt.html('<p><br></p>');
+            $txt.html('');
             editor.restoreSelectionByElem($txt.find('p').get(0));
         };
 
@@ -2887,12 +2887,12 @@
             var $children = $txt.children();
 
             if ($children.length === 0) {
-                $txt.append($('<p><br></p>'));
+                $txt.append($(''));
                 return;
             }
 
             if ($.trim($children.last().html()).toLowerCase() !== '<br>') {
-                $txt.append($('<p><br></p>'));
+                $txt.append($(''));
             }
         };
 
