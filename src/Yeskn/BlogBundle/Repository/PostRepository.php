@@ -32,6 +32,7 @@ class PostRepository extends EntityRepository
                     ->createQueryBuilder('t')
                     ->select('t.id')
                     ->where('t.parent = :parent')
+                    ->andWhere('t.level = 2')
                     ->setParameter('parent', $tab)
                     ->getQuery()
                     ->getArrayResult()

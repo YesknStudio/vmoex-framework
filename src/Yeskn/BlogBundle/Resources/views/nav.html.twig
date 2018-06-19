@@ -15,10 +15,10 @@
 
             {% if app.user %}
                 <div class="navbar-toggle collapsed navbar-item-custom navbar-item-alert" data-toggle="collapse" data-target="#notification-navbar-collapse">
-                    <a data-pjax href="{{ path('my_notices') }}"><i class="fa fa-bell fa-fw"></i> <span class="text badge nav-warn-dot">9</span></a>
+                    <a data-pjax href="{{ path('my_notices') }}"><i class="fa fa-bell fa-fw"></i> <span class="text badge nav-common-dot">0</span></a>
                 </div>
                 <div class="navbar-toggle collapsed navbar-item-custom navbar-item-message" data-toggle="collapse" data-target="#message-navbar-collapse">
-                    <a data-pjax href="{{ path('my_messages') }}"><i class="fa fa-envelope fa-fw"></i> <span class="text badge nav-warn-dot">4</span></a>
+                    <a data-pjax href="{{ path('my_messages') }}"><i class="fa fa-envelope fa-fw"></i> <span class="text badge nav-common-dot">0</span></a>
                 </div>
             {% endif %}
 
