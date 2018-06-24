@@ -1,6 +1,7 @@
 <?php
 
 namespace Yeskn\BlogBundle\Repository;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\NoResultException;
 use Yeskn\BlogBundle\Entity\Active;
 use Yeskn\BlogBundle\Entity\User;
@@ -55,5 +56,27 @@ class ActiveRepository extends \Doctrine\ORM\EntityRepository
         $this->getEntityManager()->flush();
 
         return $active;
+    }
+
+    /**
+     * @return int
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countOnlineUser()
+    {
+        $datetime = new \DateTime('-6 hour');
+
+        try {
+            return (int) $this->createQueryBuilder('p')
+                ->select('COUNT(p.id)')
+                ->where('p.updatedAt >= :update')
+                ->setParameter('update', $datetime, Type::DATETIME)
+                ->groupBy('p.user')
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NoResultException $exception) {
+            return 0;
+        }
+
     }
 }

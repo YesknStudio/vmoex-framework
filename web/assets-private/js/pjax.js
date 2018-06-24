@@ -1,7 +1,7 @@
 if ($.support.pjax) {
     $(document).pjax('a[data-pjax]', '.content-body', {
         fragment: '.content-body',
-        timeout: 5000
+        timeout: 12000
     });
 
     $(document).on('pjax:start', function () {

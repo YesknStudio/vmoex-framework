@@ -147,19 +147,19 @@ class GlobalValue extends \Twig_Extension
      */
     public function siteState()
     {
-        $site = [
-            'startedAt' => new \DateTime('2018-05-25'),
-            'topicCount' => $this->em->getRepository('YesknBlogBundle:Post')->countPost(),
-            'userCount' => $this->em->getRepository('YesknBlogBundle:User')->countUser(),
-            'commentCount' => $this->em->getRepository('YesknBlogBundle:Comment')->countComment()
-        ];
+        static $site;
+
+        if (empty($site)) {
+            $site = [
+                'startedAt' => new \DateTime('2018-05-25'),
+                'topicCount' => $this->em->getRepository('YesknBlogBundle:Post')->countPost(),
+                'userCount' => $this->em->getRepository('YesknBlogBundle:User')->countUser(),
+                'commentCount' => $this->em->getRepository('YesknBlogBundle:Comment')->countComment(),
+                'onlineUserCount' => $this->em->getRepository('YesknBlogBundle:Active')->countOnlineUser()
+            ];
+        }
 
         return $site;
-    }
-
-    public function onlineUserCount()
-    {
-        return 23 + mt_rand(0, 3);
     }
 
     /**

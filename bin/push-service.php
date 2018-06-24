@@ -1,6 +1,5 @@
 <?php
 use Workerman\Worker;
-use Workerman\WebServer;
 use Workerman\Lib\Timer;
 use PHPSocketIO\SocketIO;
 

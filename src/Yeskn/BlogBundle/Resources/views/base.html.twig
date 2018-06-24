@@ -158,8 +158,8 @@
                 <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a>
             </div>
 
-            {% set userCount = onlineUserCount() %}
-            <p style="margin: 20px 5px">{{ '当前在线count人'|trans({count:userCount}) }}，{{ '历史最高'|trans }} 393</p>
+            {% set siteState = siteState() %}
+            <p style="margin: 20px 5px">{{ '当前在线count人'|trans({count:siteState.onlineUserCount}) }}，{{ '历史最高'|trans }} 393</p>
             <p class="copy">© 2018 Vmoex - {{ 'vmoex_slogan'|trans }}</p>
             <p class="power">Designed with <span>❤</span> 彩虹の恋しい at Shanghai, China</p>
         </div>
@@ -196,5 +196,6 @@
     {% endjavascripts %}
     {% endblock %}
 {% endif %}
+<!-- Page rendered on {{ 'now'|localizeddate('long', 'long', null, 'UTC') }} -->
 </body>
 </html>

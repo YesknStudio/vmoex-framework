@@ -2,7 +2,15 @@ body {
     cursor: url('https://static.yeskn.com/vmoex/img/p.cur'), url(https://static.yeskn.com/vmoex/img/p.cur), auto;
     background: url("https://static.yeskn.com/vmoex/img/zhMoegirl18summer.jpg") no-repeat top left #f6f6f6;
 }
-html,body{overflow:hidden;overflow-y:auto;}
+@media (min-width: 1200px) {
+    .container {
+        width: 1100px;
+    }
+}
+html,body{
+    overflow:hidden;
+    overflow-y:auto;
+}
 a{
     color: #737373;
 }
