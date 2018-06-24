@@ -71,7 +71,7 @@ class ActiveRepository extends \Doctrine\ORM\EntityRepository
                 ->select('COUNT(p.id)')
                 ->where('p.updatedAt >= :update')
                 ->setParameter('update', $datetime, Type::DATETIME)
-                ->groupBy('p.user')
+                ->distinct()
                 ->getQuery()
                 ->getSingleScalarResult();
         } catch (NoResultException $exception) {
