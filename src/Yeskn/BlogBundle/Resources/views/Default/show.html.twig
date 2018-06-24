@@ -21,7 +21,7 @@
                     <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                     {% if post.comments.count %}
                         <span><i class="fa fa-commenting-o"></i>
-                        <a href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a>
+                        <a href="#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a>
                     </span>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}

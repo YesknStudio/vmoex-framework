@@ -135,8 +135,6 @@ class DefaultController extends Controller
             'commentUsers' => json_encode($commentUsers)
         ));
 
-        $response->headers->set('X-PJAX-URL', $request->getUri());
-
         return $response;
     }
 
