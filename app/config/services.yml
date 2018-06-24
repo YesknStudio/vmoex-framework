@@ -14,6 +14,10 @@ services:
             $translator: "@translator"
         tags:
             - { name: twig.extension }
+    twig.extension.twig_extensions_intl:
+        class: \Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
 
     Yeskn\BlogBundle\EventListener\RequestListener:
         tags:
