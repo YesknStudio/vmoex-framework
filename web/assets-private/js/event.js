@@ -169,7 +169,6 @@ $(document).on('click', '#sign-remark', function () {
     })
 });
 
-// 回复文章的评论
 $(document).on('click', '.comment-reply', function () {
     var replyTo = $(this).attr('data-at');
     var replayU = $(this).attr('data-atu');
@@ -186,7 +185,19 @@ $(document).on('keydown', '#editor-comment', function (e) {
     }
 });
 
-// 搜索
 $(document).on('click', 'nav .nav-search-bar span', function () {
     $('#site-search').trigger('submit');
+});
+
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 200) {
+        $('.go-top').fadeIn(200);
+    } else {
+        $('.go-top').fadeOut(200);
+    }
+});
+
+$('.go-top').click(function(event) {
+    event.preventDefault();
+    $('html, body').animate({scrollTop: 0}, 300);
 });

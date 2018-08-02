@@ -104,6 +104,62 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/register", methods={"POST"})
+     *
+     * @param $request
+     * @return Response
+     */
+    public function generateAction(Request $request)
+    {
+       $username = $request->get('username');
+       $blogName = $request->get('blogName');
+       $password = $request->get('password');
+       $email = $request->get('email');
+
+       $this->validateRegister($request);
+
+       $userRepository = $this->getDoctrine()->getRepository('YesknBlogBundle:User');
+
+       $findUser = $userRepository->findOneBy(['username' => $username]);
+
+       if ($findUser) {
+           return new JsonResponse(['ret' => 0, 'msg' => '该用户名已经被注册']);
+       }
+
+       $findUser = $userRepository->findOneBy(['email' => $email]);
+
+       if ($findUser) {
+           return new JsonResponse(['ret' => 0, 'msg' => '该邮箱已经被注册']);
+       }
+
+       $em = $this->getDoctrine()->getManager();
+
+       $user = new User();
+       $user->setUsername($username);
+       $user->setPassword($password);
+       $user->setSite($blogName);
+       $user->setEmail($email);
+
+       $password = $this->get('security.password_encoder')
+            ->encodePassword($user, $user->getPassword());
+
+        $user->setPassword($password);
+        $user->setRegisterAt(new \DateTime());
+        $user->setNickname($user->getUsername());
+        $user->setLoginAt(new \DateTime());
+        $user->setType('user');
+        $user->setApiKey(md5(uniqid()));
+        // 4) save the User!
+
+        $em->persist($user);
+
+        $em->flush();
+
+        // 用户创建成功，开始为用户生成博客
+
+    }
+
+    /**
      * @inheritdoc
      * @Route("/topic/{id}", name="yeskn_blog_show", requirements={"id": "[1-9]\d*"})
      */
@@ -446,5 +502,43 @@ class DefaultController extends Controller
     public function contribute()
     {
         return $this->render('@YesknBlog/contribute.html.twig');
+    }
+
+    /**
+     * @param Request $request
+     * @return bool|JsonResponse
+     */
+    private function validateRegister(Request $request)
+    {
+        $username = $request->get('username');
+        $blogName = $request->get('blogName');
+        $password = $request->get('password');
+        $email = $request->get('email');
+
+        if (strlen($username) > 16 or strlen($username) < 1) {
+            return new JsonResponse(['ret' => 0, 'msg' => '用户名长度错误'] );
+        }
+
+        if (empty(preg_match('/^[a-z0-9][a-z0-9\-]*[a-z0-9]$/', $username))) {
+            return new JsonResponse(['ret' => 0, 'msg' => '用户名不符合URL规则']);
+        }
+
+        if (strlen($blogName) > 16 or strlen($blogName) < 1) {
+            return new JsonResponse(['ret' => 0, 'msg' => '博客名称长度错误'] );
+        }
+
+        if (strlen($password) > 16 or strlen($password) < 1) {
+            return new JsonResponse(['ret' => 0, 'msg' => '密码长度错误'] );
+        }
+
+        if (empty(preg_match('/^[a-zA-Z0-9]{1,16}$/', $password))) {
+            return new JsonResponse(['ret' => 0, 'msg' => '密码格式错误，只允许字母和数字，且长度在16位内']);
+        }
+
+        if (!Validator::email()->validate($email)) {
+            return new JsonResponse(['ret' => 0, 'msg' => '邮箱格式错误']);
+        }
+
+        return true;
     }
 }
