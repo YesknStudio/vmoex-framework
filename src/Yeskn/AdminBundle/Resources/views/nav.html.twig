@@ -11,142 +11,16 @@
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-envelope fa-fw"></i>  私信 <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-messages">
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>南瓜</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>昨天</em>
-                                    </span>
-                        </div>
-                        <div>很简洁的一个博客系统.</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>星月</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>昨天</em>
-                                    </span>
-                        </div>
-                        <div>滋磁滋磁</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <strong>海风</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>昨天</em>
-                                    </span>
-                        </div>
-                        <div>你的博客挺不错的~</div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a class="text-center" href="#">
-                        <strong>查看所有私信</strong>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </li>
-            </ul>
-            <!-- /.dropdown-messages -->
-        </li>
-
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-bell fa-fw"></i>  通知 <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-alerts">
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-comment fa-fw"></i> 新的评论
-                            <span class="pull-right text-muted small">4分钟前</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-twitter fa-fw"></i> 3个新的粉丝
-                            <span class="pull-right text-muted small">12分钟前</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-envelope fa-fw"></i> 消息已发送
-                            <span class="pull-right text-muted small">4分钟前</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-tasks fa-fw"></i> 新的任务
-                            <span class="pull-right text-muted small">4分钟前</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">
-                        <div>
-                            <i class="fa fa-upload fa-fw"></i> 服务器重启
-                            <span class="pull-right text-muted small">4分钟前</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a class="text-center" href="#">
-                        <strong>查看所有通知</strong>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw"></i>  功能 <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="{{ path('user_setting') }}"><i class="fa fa-user fa-fw"></i>我的资料</a>
-                </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i>系统设置</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
-                </li>
+                <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out fa-fw"></i> 退出</a></li>
             </ul>
         </li>
     </ul>
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                    </div>
-                    <!-- /input-group -->
-                </li>
                 <li>
                     <a href="{{ path('yeskn_admin_default_index') }}"><i class="fa fa-dashboard fa-fw"></i> 控制台</a>
                 </li>
@@ -157,35 +31,15 @@
                             <a href="{{ path('yeskn_admin_post_list') }}"> 文章列表</a>
                         </li>
                         <li>
-                            <a href="{{ path('yeskn_admin_post_create') }}"> 发布新的文章</a>
+                            <a href="{{ path('admin_comment_index') }}"> 回复列表</a>
                         </li>
                         <li>
                             <a href="{{ path('yeskn_admin_tag_index') }}"> 标签列表</a>
                         </li>
                         <li>
-                            <a href="{{ path('yeskn_admin_tag_new') }}"> 新建标签</a>
-                        </li>
-                        <li>
                             <a href="{{ path('admin_tab_index') }}"> 板块列表</a>
                         </li>
-                        <li>
-                            <a href="{{ path('yeskn_admin_tab_add') }}"> 新建板块</a>
-                        </li>
-
                     </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="#"><i class="fa  fa-photo"></i> 相册管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="javascript:"> 图片列表</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-upload"></i> 上传新图片</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
                 </li>
                 <li>
                     <a href="#"><i class="fa  fa-user"></i> 用户管理<span class="fa arrow"></span></a>
@@ -193,75 +47,9 @@
                         <li>
                             <a href="{{ path('yeskn_admin_user_index') }}"> 用户列表</a>
                         </li>
-                        <li >
-                            <a href="{{ path('yeskn_admin_user_add') }}"><i class="fa fa-user-md"></i> 添加用户</a>
-                        </li>
                     </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="{{ path('yeskn_admin_post_create') }}"><i class="fa fa-edit fa-fw"></i> 评论管理</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-wrench"></i> 个人设置<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="#">Panels and Wells</a>
-                        </li>
-                        <li>
-                            <a href="#">Buttons</a>
-                        </li>
-                        <li>
-                            <a href="#">Notifications</a>
-                        </li>
-                        <li>
-                            <a href="#">Typography</a>
-                        </li>
-                        <li>
-                            <a href="#"> Icons</a>
-                        </li>
-                        <li>
-                            <a href="#">Grid</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> 广告管理<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Third Level <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-third-level -->
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-files-o fa-fw"></i> 页面管理<span class="fa arrow"></span></a>
                 </li>
             </ul>
         </div>
-        <!-- /.sidebar-collapse -->
     </div>
-    <!-- /.navbar-static-side -->
 </nav>

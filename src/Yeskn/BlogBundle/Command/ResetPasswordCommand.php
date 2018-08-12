@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of project JetBlog.
+ * This file is part of project Vmoex.
  *
  * Author: Jake
  * Create: 2018-05-27 02:04:51

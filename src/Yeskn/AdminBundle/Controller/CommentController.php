@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * This file is part of project vmoex.
  * User: Jake
  * Date: 2016/6/23
  * Time: 12:35
@@ -8,9 +8,9 @@
 
 namespace Yeskn\AdminBundle\Controller;
 
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Yeskn\CommonBundle\Controller\BaseController;
 
 /**
  * Class CommentController
@@ -18,16 +18,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  *
  * @Route("/admin/comment")
  */
-class CommentController extends Controller
+class CommentController extends BaseController
 {
     /**
      * @Route("", name="admin_comment_index")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $comments = $this->getDoctrine()->getRepository('YesknBlogBundle:Comment')->findAll();
+        $pageData = $this->getDoctrine()->getRepository('YesknBlogBundle:Comment')
+            ->getPageData($request->get('page'));
         return $this->render('@YesknAdmin/Comment/list.html.twig', [
-            'comments' => $comments
+            'paginator' => $this->getPaginator($pageData->count),
+            'comments' => $pageData->data
         ]);
     }
 }

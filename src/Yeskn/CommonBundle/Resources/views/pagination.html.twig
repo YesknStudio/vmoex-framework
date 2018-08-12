@@ -1,0 +1,67 @@
+{% set start = paginator.getOffsetCount() + 1 %}
+{% set end = paginator.getOffsetCount() + paginator.getPerPageCount() %}
+{% set total = paginator.getItemCount() %}
+
+{% if paginator.lastPage >= 0 %}
+    <div class="paginator flex">
+        <div class="summary" id="dt_a_info">
+            显示 {{ start }} 到 {{ end >= total ? total : end }} 条 总共 {{ paginator.getItemCount() }} 条
+        </div>
+
+        <div class="pagination pagination-sm">
+            {% if paginator.currentPage == paginator.firstPage %}
+                <li class="disabled">
+                    <a role="button" href="" tabindex="-1" style="pointer-events: none;" aria-label="Next">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a role="button" href="" tabindex="-1" style="pointer-events: none;" aria-label="Next">
+                        <span aria-hidden="true">‹</span>
+                    </a>
+                </li>
+            {% else %}
+                <li {% if 1 == paginator.currentPage %}class="disabled "{% endif %}>
+                    <a href="{{ paginator.getPageUrl(paginator.firstPage) }}" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+                <li {% if 1 == paginator.currentPage %}class="disabled "{% endif %}>
+                    <a href="{{ paginator.getPageUrl(paginator.previousPage) }}" aria-label="Previous">
+                        <span aria-hidden="true">‹</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% for page in paginator.pages %}
+                <li {% if page == paginator.currentPage %}class="active "{% endif %}><a
+                            href="{{ paginator.getPageUrl(page) }}">{{ page }}</a></li>
+            {% endfor %}
+
+            {% if paginator.currentPage == paginator.maxPage %}
+                <li class="disabled">
+                    <a role="button" href="" tabindex="-1" style="pointer-events: none;" aria-label="Next">
+                        <span aria-hidden="true">›</span>
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a role="button" href="" tabindex="-1" style="pointer-events: none;" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ paginator.getPageUrl(paginator.getNextPage()) }}" aria-label="Next">
+                        <span aria-hidden="true">›</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ paginator.getPageUrl(paginator.getLastPage()) }}" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            {% endif %}
+
+
+        </div>
+    </div>
+{% endif %}

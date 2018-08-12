@@ -37,7 +37,7 @@
                     <th class="" tabindex="4" aria-controls="dataTables-example" rowspan="1" colspan="1"
                         aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">
                         更新日期
-                    </th>`
+                    </th>
                     <th class="" tabindex="5" aria-controls="dataTables-example" rowspan="1" colspan="1"
                         aria-label="CSS grade: activate to sort column ascending" style="width: 50px;">
                         点击
@@ -68,7 +68,7 @@
                         <td class="center">{{ post.createdAt|ago }}</td>
                         <td class="center">{{ post.updatedAt ? post.updatedAt|ago : '' }}</td>
                         <td class="center">{{ post.views }}</td>
-                        <td class="center">{{ post.status }}</td>
+                        <td class="center">{{ post.status == 'published' ? '已发布' : post.status }}</td>
                         <td class="center">
                             <a href="{{ path('yeskn_admin_post_edit', {id:post.id}) }}">编辑</a>
                             <a href="{{ path('yeskn_admin_post_delete',{id:post.id}) }}">删除</a>
@@ -81,27 +81,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
-            <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">
-                共50项，显示1到10项
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
-                <ul class="pagination">
-                    <li class="paginate_button previous disabled" aria-controls="dataTables-example" tabindex="0"
-                        id="dataTables-example_previous">
-                        <a href="#">上一页</a>
-                    </li>
-                    <li class="paginate_button active" aria-controls="dataTables-example" tabindex="0">
-                        <a href="#">1</a>
-                    </li>
-                    <li class="paginate_button next" aria-controls="dataTables-example" tabindex="0"
-                        id="dataTables-example_next">
-                        <a href="#">下一页</a>
-                    </li>
-                </ul>
-            </div>
+        <div class="col-sm-12">
+            {% include '@YesknCommon/pagination.html.twig' with {paginator:paginator} %}
         </div>
     </div>
 {% endblock %}

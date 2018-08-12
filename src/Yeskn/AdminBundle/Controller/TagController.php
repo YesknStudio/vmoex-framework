@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * This file is part of project vmoex.
  * User: Jake
  * Date: 2016/6/22
  * Time: 20:15

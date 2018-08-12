@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of project JetBlog.
+ * This file is part of project Vmoex.
  *
  * Author: Jake
  * Create: 2018-05-25 22:42:21
@@ -8,10 +8,9 @@
 
 namespace Yeskn\BlogBundle\Repository;
 
+use Yeskn\CommonBundle\BaseRepository;
 
-use Doctrine\ORM\EntityRepository;
-
-class CommentRepository extends EntityRepository
+class CommentRepository extends BaseRepository
 {
     /**
      * @return mixed

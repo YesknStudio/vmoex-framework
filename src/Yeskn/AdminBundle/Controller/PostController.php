@@ -5,18 +5,17 @@ namespace Yeskn\AdminBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yeskn\BlogBundle\Entity\Post;
-use Yeskn\BlogBundle\Entity\Tag;
+use Yeskn\CommonBundle\Controller\BaseController;
 
 /**
  * Class PostController
  * @Route("/admin/post")
  * @Security("has_role('ROLE_ADMIN')")
  */
-class PostController extends Controller
+class PostController extends BaseController
 {
     /**
      * @Route("/create")
@@ -103,27 +102,16 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/preview")
-     */
-    public function previewAction()
-    {
-
-    }
-
-    /**
      * @Route("/list")
-     * @Route("/index")
-     * @Route("/")
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        /**
-         * @var Post[] $posts
-         */
-        $posts = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->findBy([], ['updatedAt' => 'DESC']);
+        $pageData = $this->getDoctrine()->getRepository(
+            'YesknBlogBundle:Post')->getPageData($request->get('page'));
 
         return $this->render('@YesknAdmin/Post/index.html.twig', array(
-            'posts' => $posts
+            'paginator' => $this->getPaginator($pageData->count),
+            'posts' => $pageData->data
         ));
     }
 }
