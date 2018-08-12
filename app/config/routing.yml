@@ -1,18 +1,14 @@
-yeskn_user:
+vmoex_user:
     resource: "@YesknUserBundle/Controller"
     type:     annotation
     prefix:   /
 
-yeskn_common:
-    resource: "@YesknCommonBundle/Resources/config/routing.xml"
-    prefix:   /
-
-yeskn_admin:
+vmoex_admin:
     resource: "@YesknAdminBundle/Controller"
     type:     annotation
     prefix:   /
 
-yeskn_blog:
+vmoex_front:
     resource: "@YesknBlogBundle/Controller/"
     type:     annotation
     prefix:   /
