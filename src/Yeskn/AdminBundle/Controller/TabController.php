@@ -19,8 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Yeskn\BlogBundle\Entity\Tab;
-use Yeskn\BlogBundle\Form\TabType;
+use Yeskn\WebBundle\Entity\Tab;
+use Yeskn\WebBundle\Form\TabType;
 use Intervention\Image\ImageManagerStatic as Image;
 
 /**
@@ -36,7 +36,7 @@ class TabController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $qb = $this->container->get('doctrine')->getRepository('YesknBlogBundle:Tab');
+        $qb = $this->container->get('doctrine')->getRepository('YesknWebBundle:Tab');
 
         if ($request->get('level')) {
             $tabs = $qb->findBy(['level' => $request->get('level')]);
@@ -99,7 +99,7 @@ class TabController extends Controller
     public function editAction(Request $request)
     {
         $tabAlias = $request->get('tab');
-        $tab = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
+        $tab = $this->getDoctrine()->getRepository('YesknWebBundle:Tab')
             ->findOneBy(['alias' => $tabAlias]);
 
         $form = $this->createForm(TabType::class, $tab);
@@ -129,7 +129,7 @@ class TabController extends Controller
     public function deleteAction(Request $request)
     {
         $tabAlias = $request->get('tab');
-        $tab = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
+        $tab = $this->getDoctrine()->getRepository('YesknWebBundle:Tab')
             ->findOneBy(['alias' => $tabAlias]);
 
         $em = $this->getDoctrine()->getManager();

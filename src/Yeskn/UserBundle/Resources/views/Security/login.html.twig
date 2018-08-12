@@ -1,4 +1,4 @@
-{% extends '@YesknBlog/base.html.twig' %}
+{% extends '@YesknWeb/base.html.twig' %}
 
 {% block main %}
     <div class="row">
@@ -18,7 +18,7 @@
                                 </div>
                             {% endif %}
 
-                            {% include '@YesknBlog/_flash_messages.html.twig' %}
+                            {% include '@YesknWeb/_flash_messages.html.twig' %}
 
                             <form data-pjax id="loginForm" action="{{ path('yeskn_login_check') }}" method="post" role="form">
                                 <fieldset>
@@ -50,5 +50,5 @@
 {% endblock %}
 
 {% block sidebar %}
-   {% include '@YesknBlog/login-sidebar.html.twig' %}
+   {% include '@YesknWeb/login-sidebar.html.twig' %}
 {% endblock %}

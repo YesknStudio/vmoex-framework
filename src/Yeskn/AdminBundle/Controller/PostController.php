@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Yeskn\BlogBundle\Entity\Post;
+use Yeskn\WebBundle\Entity\Post;
 use Yeskn\CommonBundle\Controller\BaseController;
 
 /**
@@ -27,7 +27,7 @@ class PostController extends BaseController
     {
         $post = new Post();
 
-        $form = $this->createForm('Yeskn\BlogBundle\Form\PostType', $post)
+        $form = $this->createForm('Yeskn\WebBundle\Form\PostType', $post)
             ->add('saveCraft', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
 
         $form->handleRequest($request);
@@ -58,10 +58,10 @@ class PostController extends BaseController
      */
     public function editAction(Request $request)
     {
-        $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')
+        $post = $this->getDoctrine()->getRepository('YesknWebBundle:Post')
             ->find($request->get('id'));
 
-        $form = $this->createForm('Yeskn\BlogBundle\Form\PostType', $post)
+        $form = $this->createForm('Yeskn\WebBundle\Form\PostType', $post)
             ->add('saveCraft', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
 
         $form->handleRequest($request);
@@ -89,7 +89,7 @@ class PostController extends BaseController
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->find($id);
+        $post = $this->getDoctrine()->getRepository('YesknWebBundle:Post')->find($id);
         if ($post) {
             $em->remove($post);
             $em->flush();
@@ -107,7 +107,7 @@ class PostController extends BaseController
     public function listAction(Request $request)
     {
         $pageData = $this->getDoctrine()->getRepository(
-            'YesknBlogBundle:Post')->getPageData($request->get('page'));
+            'YesknWebBundle:Post')->getPageData($request->get('page'));
 
         return $this->render('@YesknAdmin/Post/index.html.twig', array(
             'paginator' => $this->getPaginator($pageData->count),

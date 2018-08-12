@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Yeskn\BlogBundle\Entity\Category;
+use Yeskn\WebBundle\Entity\Category;
 
 /**
  * Class CategoryController
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-        $categories = $this->container->get('doctrine')->getRepository('YesknBlogBundle:Category')
+        $categories = $this->container->get('doctrine')->getRepository('YesknWebBundle:Category')
             ->findAll();
         return $this->render('@YesknAdmin/Category/index.html.twig',array(
             'categories' => $categories

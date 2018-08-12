@@ -25,7 +25,7 @@ class CommentController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        $pageData = $this->getDoctrine()->getRepository('YesknBlogBundle:Comment')
+        $pageData = $this->getDoctrine()->getRepository('YesknWebBundle:Comment')
             ->getPageData($request->get('page'));
         return $this->render('@YesknAdmin/Comment/list.html.twig', [
             'paginator' => $this->getPaginator($pageData->count),

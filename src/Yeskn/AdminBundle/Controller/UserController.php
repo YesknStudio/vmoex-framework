@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $users = $this->getDoctrine()->getRepository('YesknBlogBundle:User')->findAll();
+        $users = $this->getDoctrine()->getRepository('YesknWebBundle:User')->findAll();
         return $this->render('YesknAdminBundle:User:index.html.twig',array(
             'users' => $users
         ));

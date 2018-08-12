@@ -9,7 +9,7 @@ vmoex_admin:
     prefix:   /
 
 vmoex_front:
-    resource: "@YesknBlogBundle/Controller/"
+    resource: "@YesknWebBundle/Controller/"
     type:     annotation
     prefix:   /
 

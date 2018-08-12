@@ -14,7 +14,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\Translation\Translator;
-use Yeskn\BlogBundle\Entity\User;
+use Yeskn\WebBundle\Entity\User;
 
 class GlobalValue extends \Twig_Extension
 {
@@ -47,7 +47,7 @@ class GlobalValue extends \Twig_Extension
     public function signed(User $user)
     {
         try {
-            $res =  (int) $this->em->getRepository('YesknBlogBundle:Sign')
+            $res =  (int) $this->em->getRepository('YesknWebBundle:Sign')
                 ->createQueryBuilder('p')
                 ->select('COUNT(p)')
                 ->where('p.user = :user')->setParameter('user', $user)
@@ -96,20 +96,20 @@ class GlobalValue extends \Twig_Extension
 
     public function hotTags()
     {
-        $tags = $this->em->getRepository('YesknBlogBundle:Tag')->findAll();
+        $tags = $this->em->getRepository('YesknWebBundle:Tag')->findAll();
         return $tags;
     }
 
     public function hotPosts()
     {
-        $posts = $this->em->getRepository('YesknBlogBundle:Post')->findBy(
+        $posts = $this->em->getRepository('YesknWebBundle:Post')->findBy(
             [], ['views' => 'DESC'], 8);
         return $posts;
     }
 
     public function hotComments()
     {
-        $comments = $this->em->getRepository('YesknBlogBundle:Comment')
+        $comments = $this->em->getRepository('YesknWebBundle:Comment')
             ->findBy([], ['id' => 'DESC'], 5);
 
         return $comments;
@@ -123,7 +123,7 @@ class GlobalValue extends \Twig_Extension
     public function hotUsers()
     {
         $datetime = new \DateTime('-2 day');
-        $actives = $this->em->getRepository('YesknBlogBundle:Active')
+        $actives = $this->em->getRepository('YesknWebBundle:Active')
             ->createQueryBuilder('p')
             ->select('p.date', 'p.createdAt', 'MAX(p.val) as val')
             ->addSelect('u.username', 'u.avatar', 'u.nickname')
@@ -152,10 +152,10 @@ class GlobalValue extends \Twig_Extension
         if (empty($site)) {
             $site = [
                 'startedAt' => new \DateTime('2018-05-25'),
-                'topicCount' => $this->em->getRepository('YesknBlogBundle:Post')->countPost(),
-                'userCount' => $this->em->getRepository('YesknBlogBundle:User')->countUser(),
-                'commentCount' => $this->em->getRepository('YesknBlogBundle:Comment')->countComment(),
-                'onlineUserCount' => $this->em->getRepository('YesknBlogBundle:Active')->countOnlineUser()
+                'topicCount' => $this->em->getRepository('YesknWebBundle:Post')->countPost(),
+                'userCount' => $this->em->getRepository('YesknWebBundle:User')->countUser(),
+                'commentCount' => $this->em->getRepository('YesknWebBundle:Comment')->countComment(),
+                'onlineUserCount' => $this->em->getRepository('YesknWebBundle:Active')->countOnlineUser()
             ];
         }
 
@@ -164,11 +164,11 @@ class GlobalValue extends \Twig_Extension
 
     /**
      * @param User $user
-     * @return array|\Yeskn\BlogBundle\Entity\Message[]
+     * @return array|\Yeskn\WebBundle\Entity\Message[]
      */
     public function unReadMessages(User $user)
     {
-        return $this->em->getRepository('YesknBlogBundle:Message')
+        return $this->em->getRepository('YesknWebBundle:Message')
             ->findBy(['receiver' => $user, 'isRead' => false], ['createdAt', 'DESC']);
     }
 

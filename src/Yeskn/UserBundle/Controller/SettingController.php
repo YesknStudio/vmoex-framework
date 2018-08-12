@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Yeskn\BlogBundle\Entity\User;
+use Yeskn\WebBundle\Entity\User;
 
 /**
  * Class SettingController

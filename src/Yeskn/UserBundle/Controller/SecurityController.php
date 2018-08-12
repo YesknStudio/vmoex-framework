@@ -3,12 +3,12 @@
 namespace Yeskn\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Yeskn\BlogBundle\Form\UserType;
+use Yeskn\WebBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Yeskn\BlogBundle\Entity\User;
+use Yeskn\WebBundle\Entity\User;
 
 class SecurityController extends Controller
 {
@@ -68,7 +68,7 @@ class SecurityController extends Controller
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $check = $em->getRepository('YesknBlogBundle:User')
+            $check = $em->getRepository('YesknWebBundle:User')
                 ->checkEmailAndUsername($user->getEmail(), $user->getUsername());
             if ($check) {
                 $this->addFlash('error', '用户名或者邮箱已经注册');
@@ -122,7 +122,7 @@ class SecurityController extends Controller
     public function encode()
     {
 
-        $repo = $this->getDoctrine()->getRepository('YesknBlogBundle:User');
+        $repo = $this->getDoctrine()->getRepository('YesknWebBundle:User');
         $user = $repo->find(3);
         $plainPassword = '123456';
         $encoder = $this->container->get('security.password_encoder');

@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Yeskn\BlogBundle\Entity\Tag;
+use Yeskn\WebBundle\Entity\Tag;
 
 /**
  * Class TagController
@@ -55,7 +55,7 @@ class TagController extends Controller
      */
     public function editAction(Request $request)
     {
-        $tag = $this->getDoctrine()->getRepository('YesknBlogBundle:Tag')
+        $tag = $this->getDoctrine()->getRepository('YesknWebBundle:Tag')
             ->find($request->get('id'));
 
         $form = $this->createFormBuilder($tag)
@@ -83,7 +83,7 @@ class TagController extends Controller
      */
     public function indexAction()
     {
-        $tags = $this->getDoctrine()->getRepository('YesknBlogBundle:Tag')->findAll();
+        $tags = $this->getDoctrine()->getRepository('YesknWebBundle:Tag')->findAll();
         return $this->render('@YesknAdmin/Tag/index.html.twig',array(
             'tags' => $tags
         ));
@@ -96,7 +96,7 @@ class TagController extends Controller
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $tag = $this->getDoctrine()->getRepository('YesknBlogBundle:Tag')->find($id);
+        $tag = $this->getDoctrine()->getRepository('YesknWebBundle:Tag')->find($id);
         if ($tag) {
             $em->remove($tag);
             $em->flush();

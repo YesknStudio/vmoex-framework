@@ -1,4 +1,4 @@
-{% extends "@YesknBlog/base.html.twig" %}
+{% extends "@YesknWeb/base.html.twig" %}
 
 {% block main %}
     <div class="row">
@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
-                            {% include '@YesknBlog/_flash_messages.html.twig' %}
+                            {% include '@YesknWeb/_flash_messages.html.twig' %}
 
                             {{ form_start(form) }}
                             {{ form_widget(form) }}
@@ -25,5 +25,5 @@
 {% endblock %}
 
 {% block sidebar %}
-    {% include '@YesknBlog/login-sidebar.html.twig' %}
+    {% include '@YesknWeb/login-sidebar.html.twig' %}
 {% endblock %}

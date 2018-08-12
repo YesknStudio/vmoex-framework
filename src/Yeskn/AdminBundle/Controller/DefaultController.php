@@ -18,11 +18,11 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $postCount = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->countPost();
-        $userCount = $this->getDoctrine()->getRepository('YesknBlogBundle:User')->countUser();
-        $commentCount = $this->getDoctrine()->getRepository('YesknBlogBundle:Comment')->countComment();
+        $postCount = $this->getDoctrine()->getRepository('YesknWebBundle:Post')->countPost();
+        $userCount = $this->getDoctrine()->getRepository('YesknWebBundle:User')->countUser();
+        $commentCount = $this->getDoctrine()->getRepository('YesknWebBundle:Comment')->countComment();
 
-        $todayLoginUserCount = $this->getDoctrine()->getRepository('YesknBlogBundle:User')
+        $todayLoginUserCount = $this->getDoctrine()->getRepository('YesknWebBundle:User')
             ->getTodayLoggedUserCount();
 
         return $this->render('YesknAdminBundle:Default:index.html.twig', [
