@@ -11,6 +11,7 @@ parameters:
 assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
+    node: '%node_path%'
     filters:
         cssrewrite: ~
         uglifyjs2:

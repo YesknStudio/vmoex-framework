@@ -18,10 +18,12 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    node_path: /usr/local/bin/node
+    uglifyjs2_path: /usr/local/bin/uglifyjs
 
-    uglifyjs2_path: ~
     redis-dsn: ~
     assets_base_url: 'https://static.yeskn.com/vmoex/'
     assets_version: v0.
+
     socket_host: http://localhost:2120
     socket_push_host: http://localhost:2121
