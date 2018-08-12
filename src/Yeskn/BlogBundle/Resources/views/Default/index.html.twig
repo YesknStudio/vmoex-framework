@@ -1,165 +1,119 @@
 {% extends '@YesknBlog/base.html.twig' %}
 
-{% block page_wraper %}
-    <div class="row">
-        <div class="col-lg-12 blog-generate-box" style="display: none">
-            <div class="panel panel-default" style="padding: 10px;text-align: center">
-                <div class="panel-body " style="padding: 5px">
-                    <h2>开始创建属于自己的博客吧</h2>
-                    <br>
-                    <form action="" class="form-inline" id="generateForm">
-                        <div class="form-group">
-                            <label class="sr-only" for="username">用户名</label>
-                            <input type="text" class="form-control" id="username" placeholder="用户名">
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="blogName">博客名称</label>
-                            <input type="text" class="form-control" id="blogName" placeholder="博客名称">
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="password">密码</label>
-                            <input type="password" class="form-control" id="password" placeholder="密码">
-                        </div>
-                        <div class="form-group">
-                            <label class="sr-only" for="email">邮箱</label>
-                            <input type="email" class="form-control" id="email" placeholder="邮箱">
-                        </div>
-                        <button type="submit" class="btn btn-info">创建!</button>
-                        <button class="btn btn-text">更多说明</button>
-                    </form>
-                    <br>
-                    <div class="generate-alert alert alert-dismissible alert-danger" role="alert" style="display: none">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-
-                        <div class="alert-content">用户名只允许英文字符、数字和“-”，且需要符合URL规则</div>
-                    </div>
-                    <div class="generate-info" style="display: none">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                <span class="sr-only">分配内存空间</span>
-                            </div>
-                        </div>
-                        <div>分配内存空间...</div>
+{% block main %}
+    <div class="home-content-main">
+        {% if currentTab and currentTab.level == 2 %}
+            <div class="tab-header">
+                <div class="tab-avatar">
+                    <img class=" img-rounded" src="{{ asset(currentTab.avatar) }}" alt="">
+                </div>
+                <div class="tab-info">
+                    <b><a href="{{ path('yeskn_blog_homepage') }}">Vmoex</a> <i class="fa  fa-angle-right"></i> <a data-pjax href="{{ path('home_tab', {tab:currentTab.alias}) }}">{{ currentTab.parent.name }}</a> <i class="fa fa-angle-right"></i> {{ currentTab.name }}</b>
+                    <div style="padding: 10px 0">
+                        {{ currentTab.description }}
                     </div>
                 </div>
             </div>
-        </div>
+            {% else %}
+                <div class="tab-list">
+                    <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('home_tab', {tab: 'all'}) }}">{{ '全部'|trans }}</a>
+                    <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: 'hot'}) }}">{{ '热门'|trans }}</a>
+
+                    {% for tabItem in tabs %}
+                        <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('home_tab', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
+                    {% endfor %}
+                </div>
+        {% endif %}
+        {% if posts is not empty %}
+            {% for post in posts %}
+                <article class="main" style="position: relative">
+                    <div class="row">
+                        <div class="col-md-1 post-avatar">
+                            <img src="{{ asset(post.author.avatar) }}" class="img-rounded">
+                        </div>
+                        <div class="col-md-11 home-post-info">
+                    <div class="item-title">
+                        {% if post.isTop %}  <span class="warning-label x-small-font">{{ '置顶'|trans }}</span> {% endif %}
+                        <a data-pjax href="{{ path('yeskn_blog_show' , {'id' : post.id}) }}">{{ post.title }}</a>
+                    </div>
+                            <p class="post-meta">
+                        <span><i class="fa fa-user"></i>
+                            <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
+
+                                <span class="category">
+                                      <a data-pjax href="{{ path('home_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
+                                </span>
+                                <span><i class="fa fa-clock-o"></i> {{ post.updatedAt ? post.updatedAt|ago : post.createdAt|ago }}</span>
+                                <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
+                                {% if post.comments.count %}
+                                    <span><i class="fa fa-commenting-o"></i>
+                                        <a data-pjax href="{{ path('yeskn_blog_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a></span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    {#{% if post.tags is not empty %}#}
+                    {#<div style="position: relative;bottom:-10px">#}
+                    {#<p>#}
+                    {#<i class="fa  fa-tags item-tag"></i>#}
+                    {#{% for tag in post.tags %}#}
+                    {#<span class="item-tag"> {{ tag.name }} </span>#}
+                    {#{% endfor %}#}
+                    {#</p>#}
+                    {#</div>#}
+                    {#{% endif %}#}
+                </article>
+            {% endfor %}
+            <ul class="pagination">
+                {% set route = tab is not empty and tab != 'all' ? 'home_tab_paged' : 'blog_index_paginated' %}
+                {% if pageData.currentPage == 1 %}
+                    <li class="disabled">
+                        <a href="#">&laquo;</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path(route, {page:pageData['currentPage']-1,tab:tab}) }}" data-pjax>&laquo;</a>
+                    </li>
+                {% endif %}
+
+                {% if pageData.currentPage > 3 %}
+                    <li class="disabled">
+                        <a href="#">...</a>
+                    </li>
+                {% endif %}
+
+                {% for p in 1..pageData.allPage %}
+                    {% if p < pageData.currentPage - 2 %}
+                    {% endif %}
+
+                    {% if p == pageData.currentPage %}
+                        <li class="active"><a href="javascript:">{{ p }}</a></li>
+                    {% endif %}
+
+
+                    {% if p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage+2 %}
+                        <li><a href="{{ path(route, {'page':p, tab:tab}) }}" data-pjax>{{ p }}</a></li>
+                    {% endif %}
+
+
+                    {% if p > pageData.currentPage+2 %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if pageData.allPage > pageData.currentPage+2 %}
+                    <li class="disabled">
+                        <a href="#">...</a>
+                    </li>
+                {% endif %}
+
+                <li {% if pageData.currentPage == pageData.allPage %} class="disabled" {% endif %}>
+                    <a href="{{ path(route, {page:pageData['currentPage']+1,tab:tab}) }}" data-pjax>&raquo;
+                    </a>
+                </li>
+            </ul>
+        {% else %}
+            <div class="well">{{ '暂时没有任何文档！' }}</div>
+        {% endif %}
     </div>
-    <div class="row blog-list">
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <img src="{{ asset('img/4.jpg') }}" alt="" width="225" height="125">
-                <div class="panel-body " style="padding: 5px">
-                    <b style="color: grey"><a href="">夜色空凝</a></b>
-                    <br>
-                    <span class="text-small-gray">创建于12分钟前</span>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-
-                <div class="panel-body " style="padding: 5px">
-                    <b style="color: grey">夜色空凝</b>
-                    <br>
-                    <span class="text-small-gray">创建于12分钟前</span>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <img src="{{ asset('img/5.jpg') }}" alt="" width="225" height="125">
-                <div class="panel-body " style="padding: 5px">
-                    <b style="color: grey">夜色空凝</b>
-                    <br>
-                    <span class="text-small-gray">创建于12分钟前</span>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-
-                <div class="panel-body " style="padding: 5px">
-                    <b style="color: grey">彩虹的博客</b>
-                    <br>
-                    <span class="text-small-gray">创建于30天前</span>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-
-                <div class="panel-body " style="padding: 5px">
-                    <b style="color: grey">夜色空凝</b>
-                    <br>
-                    <span class="text-small-gray">创建于12分钟前</span>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <img src="{{ asset('img/g.jpeg') }}" alt="" width="225" height="125">
-                <div class="panel-body " style="padding: 5px">
-                    <b style="color: grey">阿里巴巴客户组</b>
-                    <br>
-                    <span class="text-small-gray">创建于12分钟前</span>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-
-                <div class="panel-body " style="padding: 5px">
-                    <b style="color: grey">夜色空凝</b>
-                    <br>
-                    <span class="text-small-gray">创建于12分钟前</span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-
-        function showAlert(message, type) {
-            var $generateAlert = $('.generate-alert');
-            var reType = type === 'success' ? 'danger' : 'success';
-            $generateAlert.removeClass('alert-'+reType).addClass('alert-'+type);
-            $generateAlert.find('.alert-content').text(message);
-            $generateAlert.slideDown();
-        }
-
-        $('#username').change(function () {
-            var $this = $(this);
-            var $blogName = $('#blogName');
-
-            if (!$blogName.attr('data-freeze')) {
-                $blogName.val($this.val() + '的博客');
-            }
-
-           showAlert('WPCast将会根据你的用户名生成免费的二级域名：https://' + $this.val() + '.wpcast.net', 'success');
-        });
-
-        $('#blogName').bind('input porpertychange',function(){
-            $(this).attr('data-freeze', 1);
-        });
-
-        $('#generateForm').submit(function (e) {
-            e.preventDefault();
-            var $submit = $('button[type="submit"]');
-            $submit.html("<i class='fa fa-spinner fa-spin '></i> 校验中...");
-
-            showAlert('用户名只允许数字、英文、“-”，且需要复合URL规范', 'danger');
-        });
-
-    </script>
 {% endblock %}
 
