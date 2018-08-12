@@ -1,9 +1,14 @@
 <?php
-/**
- * This file is part of project Vmoex.
+
+/*
+ * This file is part of project yeskn/vmoex.
  *
- * Author: Jake
- * Create: 2018-05-27 04:27:25
+ * (c) Jaggle <jaggle@yeskn.com>
+ *
+ * created at 2018-05-27 04:27:25
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Yeskn\WebBundle\Entity;

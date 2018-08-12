@@ -1,11 +1,15 @@
 <?php
-/**
- * This file is part of project Vmoex.
- *
- * Author: Jake
- * Create: 2018-06-03 21:14:28
- */
 
+/*
+ * This file is part of project yeskn/vmoex.
+ *
+ * (c) Jaggle <jaggle@yeskn.com>
+ *
+ * created at 2018-06-03 21:14:28
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Yeskn\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityRepository;

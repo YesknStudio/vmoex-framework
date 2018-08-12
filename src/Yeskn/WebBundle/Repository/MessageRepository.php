@@ -1,13 +1,17 @@
 <?php
-/**
- * This file is part of project Vmoex.
+
+/*
+ * This file is part of project yeskn/vmoex.
  *
- * Author: Jake
- * Create: 2018-05-27 04:58:26
+ * (c) Jaggle <jaggle@yeskn.com>
+ *
+ * created at 2018-05-27 04:58:26
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Yeskn\WebBundle\Repository;
-
 
 use Doctrine\ORM\EntityRepository;
 use Yeskn\WebBundle\Entity\Message;

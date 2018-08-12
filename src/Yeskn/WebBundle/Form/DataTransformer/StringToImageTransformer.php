@@ -1,11 +1,15 @@
 <?php
-/**
- * This file is part of project Vmoex.
- *
- * Author: Jake
- * Create: 2018-06-18 19:53:39
- */
 
+/*
+ * This file is part of project yeskn/vmoex.
+ *
+ * (c) Jaggle <jaggle@yeskn.com>
+ *
+ * created at 2018-06-18 19:53:39
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Yeskn\WebBundle\Form\DataTransformer;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
