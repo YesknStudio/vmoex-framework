@@ -116,7 +116,7 @@ class DefaultController extends Controller
      * @inheritdoc
      * @Route("/topic/{id}", name="yeskn_blog_show", requirements={"id": "[1-9]\d*"})
      */
-    public function postShowAction(Request $request, $id)
+    public function postShowAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $post = $this->getDoctrine()->getRepository('YesknWebBundle:Post')->find($id);
@@ -414,23 +414,6 @@ class DefaultController extends Controller
         return new JsonResponse([
             'messages' => $messageRet ?: null
         ]);
-    }
-
-    /**
-     * @Route("/test")
-     */
-    public function testAction()
-    {
-        $identicon = new \Identicon\Identicon();
-
-        $i = $identicon->getImageDataUri('singviy@gg.com');
-
-
-        $res = new Response();
-
-        $res->setContent($i);
-        //$res->headers->set('Content-Type', 'image/png');
-        return $res;
     }
 
     /**
