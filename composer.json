@@ -1,6 +1,7 @@
 {
     "name": "jaggle/vmoex",
     "license": "proprietary",
+    "description": "jaggle开发的二次元社区",
     "type": "project",
     "autoload": {
         "psr-4": {
