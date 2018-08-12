@@ -3,17 +3,6 @@ services:
 #        class: Yeskn\BlogBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
 
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
-
     socket.push:
         class: Yeskn\BlogBundle\Services\SocketPushService
         arguments: ["@service_container"]
-
-      # makes classes in src/AppBundle available to be used as services
-    Yeskn\BlogBundle\Controller\:
-        resource: '../../../BlogBundle/Controller/*'
-        # you can exclude directories or fil
-

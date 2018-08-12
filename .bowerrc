@@ -1,4 +1,3 @@
 {
-  "directory" : "web/lib/",
-  "registry": "https://registry.bower.io"
+  "directory" : "web/lib/"
 }
