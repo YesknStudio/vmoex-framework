@@ -29,12 +29,13 @@
             'lib/font-awesome/css/font-awesome.min.css'
             'lib/wangEditor/dist/css/wangEditor.min.css'
             'lib/nprogress/nprogress.css'
-            'lib-man/bootoast/css/bootoast.css'
-            'lib-man/live2d/css/live2d.css'
-            'lib-man/who/jquery.atwho.min.css'
             'css/common.css'
             filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
+
+    <link rel="stylesheet" href="https://static.yeskn.com/live2d/css/live2d.css">
+    <link rel="stylesheet" href="https://static.yeskn.com/jquery-atwho/jquery.atwho.min.css">
+    <link rel="stylesheet" href="https://static.yeskn.com/bootoast/css/bootoast.css">
         {% endstylesheets %}
         {% endblock %}
 
@@ -44,6 +45,7 @@
             filter='uglifyjs2' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
+
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -130,43 +132,8 @@
 
 {% if app.request.get('_pjax') is empty %}
     {% block footer %}
-    <footer>
-        <div class="container">
-            <div class="brand">
-                <b><a data-pjax href="{{ path('about') }}">{{ 'about.vmoex'|trans }}</a></b>
-                <span class="snow">·</span>
-                <b><a data-pjax href="{{ path('yeskn_web_default_contribute') }}">{{ '支持我们'|trans }}</a></b>
-                <span class="snow">·</span>
-                <b><a data-pjax href="{{ path('buy_beer') }}">{{ 'buy_beer'|trans }} ｡◕‿◕｡</a></b>
-            </div>
-
-            <br>
-
-            <div class="language-box">
-                <span style="display: inline-block;margin-right: 10px">{{ 'vmoex_available_with'|trans }}</span>
-
-                <img class="footer-flag" src="{{ asset('img/flags/zh_CN.png') }}" alt="zh_CN">
-                <a data-pjax href="javascript:"   class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a>
-                <span class="snow">·</span>
-                <img class="footer-flag" src="{{ asset('img/flags/en.png') }}" alt="en">
-                <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a>
-                <span class="snow">·</span>
-                <img class="footer-flag" src="{{ asset('img/flags/zh_TW.png') }}" alt="zh_TW">
-                <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a>
-                <span class="snow">·</span>
-                <img class="footer-flag" src="{{ asset('img/flags/jp.png') }}" alt="jp">
-                <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a>
-            </div>
-
-            {% set siteState = siteState() %}
-            <p style="margin: 20px 5px">{{ '当前在线count人'|trans({count:siteState.onlineUserCount}) }}，{{ '历史最高'|trans }} 393</p>
-            <p class="copy">© 2018 Vmoex - {{ 'vmoex_slogan'|trans }}</p>
-            <p class="power">Designed with <span>❤</span> 彩虹の恋しい at Shanghai, China</p>
-        </div>
-    </footer>
+        {% include '@YesknWeb/footer.html.twig' %}
     {% endblock %}
-
-    {% include '@YesknWeb/landlord.html.twig' %}
 
     {% block foot_js_link %}
     <script type="text/javascript">
@@ -179,23 +146,22 @@
         'lib/bootstrap/dist/js/bootstrap.min.js'
         'lib/nprogress/nprogress.js'
         'lib/jquery-pjax/jquery.pjax.js'
-        'lib-man/weditor/editor.js'
-        'lib-man/bootoast/js/bootoast.js'
-        'lib-man/who/jquery.atwho.min.js'
-        'lib-man/live2d/js/live2d.js'
-        'lib-man/live2d/js/message.js'
         'assets-private/js/functions.js'
         'assets-private/js/event.js'
         'assets-private/js/socket.js'
         'assets-private/js/pjax.js'
         'assets-private/js/common.js'
         filter='uglifyjs2' %}
-    <script src="{{ asset_url }}"></script>
-
-    <script src="https://cdn.bootcss.com/socket.io/1.3.7/socket.io.min.js"></script>
+        <script src="{{ asset_url }}"></script>
+        <script src="https://static.yeskn.com/weditor/editor.js"></script>
+        <script src="https://static.yeskn.com/live2d/js/live2d.js"></script>
+        <script src="https://static.yeskn.com/live2d/js/message.js"></script>
+        <script src="https://static.yeskn.com/bootoast/js/bootoast.js"></script>
+        <script src="https://static.yeskn.com/jquery-atwho/jquery.atwho.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdn.bootcss.com/socket.io/1.3.7/socket.io.min.js"></script>
     {% endjavascripts %}
     {% endblock %}
 {% endif %}
-<!-- Page rendered on {{ 'now'|localizeddate('long', 'long', null, 'UTC') }} -->
 </body>
 </html>
