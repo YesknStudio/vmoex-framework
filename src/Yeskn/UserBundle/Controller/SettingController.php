@@ -1,9 +1,14 @@
 <?php
-/**
- * This file is part of project vmoex.
- * User: Jake
- * Date: 2016/6/23
- * Time: 2:10
+
+/*
+ * This file is part of project yeskn/vmoex.
+ *
+ * (c) Jaggle <jaggle@yeskn.com>
+ *
+ * created at 2016/6/23 2:10
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Yeskn\UserBundle\Controller;
@@ -16,7 +21,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Yeskn\BlogBundle\Entity\User;
+use Yeskn\WebBundle\Entity\User;
 
 /**
  * Class SettingController

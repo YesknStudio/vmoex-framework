@@ -1,0 +1,11 @@
+{% if sidebar_head is not empty %}
+    {{ sidebar_head|raw }}
+{% endif %}
+
+{% include '@YesknWeb/sidebar/hello-stranger.html.twig' %}
+{% include '@YesknWeb/sidebar/my-status.html.twig' %}
+{% include '@YesknWeb/sidebar/hot-user.html.twig' %}
+{% include '@YesknWeb/sidebar/hot-topics.html.twig' %}
+{% include '@YesknWeb/sidebar/latest-comments.html.twig' %}
+
+{% include '@YesknWeb/sidebar/community-state.html.twig' %}

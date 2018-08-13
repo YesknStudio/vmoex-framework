@@ -19,25 +19,25 @@ services:
         tags:
             - { name: twig.extension }
 
-    Yeskn\BlogBundle\EventListener\RequestListener:
+    Yeskn\WebBundle\EventListener\RequestListener:
         tags:
             - { name: kernel.event_listener, event: kernel.request, priority: 50 }
 
-    Yeskn\BlogBundle\EventListener\ControllerListener:
+    Yeskn\WebBundle\EventListener\ControllerListener:
         arguments: ['@service_container']
         tags:
             - { name: kernel.event_listener, event: kernel.controller }
 
-    Yeskn\BlogBundle\EventListener\ResponseListener:
+    Yeskn\WebBundle\EventListener\ResponseListener:
         arguments: ~
         tags:
           - { name: kernel.event_listener, event: kernel.response }
 
     form.string2image.transformer:
-        class: Yeskn\BlogBundle\Form\DataTransformer\StringToImageTransformer
+        class: Yeskn\WebBundle\Form\DataTransformer\StringToImageTransformer
         arguments: ['@service_container']
 
-    Yeskn\BlogBundle\Form\TabType:
+    Yeskn\WebBundle\Form\TabType:
         arguments: ['@service_container', '@form.string2image.transformer']
         tags: [form.type]
 

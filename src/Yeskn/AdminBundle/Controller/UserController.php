@@ -1,9 +1,14 @@
 <?php
-/**
- * This file is part of project vmoex.
- * User: Jake
- * Date: 2016/6/22
- * Time: 21:36
+
+/*
+ * This file is part of project yeskn/vmoex.
+ *
+ * (c) Jaggle <jaggle@yeskn.com>
+ *
+ * created at 2016/6/22 21:36
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Yeskn\AdminBundle\Controller;
@@ -24,7 +29,7 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $users = $this->getDoctrine()->getRepository('YesknBlogBundle:User')->findAll();
+        $users = $this->getDoctrine()->getRepository('YesknWebBundle:User')->findAll();
         return $this->render('YesknAdminBundle:User:index.html.twig',array(
             'users' => $users
         ));

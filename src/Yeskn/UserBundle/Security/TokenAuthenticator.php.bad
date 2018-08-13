@@ -46,7 +46,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         $apiKey = $credentials['token'];
         //if null authentication will be failed
         //if a user object ,checkCredentials() is called
-        return $this->em->getRepository('YesknBlogBundle:User')
+        return $this->em->getRepository('YesknWebBundle:User')
             ->findOneBy(array('apiKey' => $apiKey));
     }
 
