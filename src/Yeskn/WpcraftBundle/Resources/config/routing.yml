@@ -1,0 +1,3 @@
+yeskn_wpcraft_homepage:
+    path:     /
+    defaults: { _controller: YesknWpcraftBundle:Default:index }
