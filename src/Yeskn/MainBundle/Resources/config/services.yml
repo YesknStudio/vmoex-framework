@@ -5,16 +5,16 @@ services:
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-  Yeskn\WpcraftBundle\:
-      resource: '../../../WpcraftBundle/*'
+  Yeskn\MainBundle\:
+      resource: '../../../MainBundle/*'
       # you can exclude directories or files
       # but if a service is unused, it's removed anyway
-      exclude: '../../../WpcraftBundle/{Entity,Repository,Tests}'
+      exclude: '../../../MainBundle/{Entity,Repository,Tests}'
 
     # controllers are imported separately to make sure they're public
     # and have a tag that allows actions to type-hint services
-  Yeskn\WpcraftBundle\Controller\:
-      resource: '../../../WpcraftBundle/Controller'
+  Yeskn\MainBundle\Controller\:
+      resource: '../../../MainBundle/Controller'
       public: true
       tags: ['controller.service_arguments']
 

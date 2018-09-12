@@ -1,0 +1,4 @@
+wpcraft:
+    resource: "@YesknMainBundle/Controller/"
+    type:     annotation
+    prefix:   /

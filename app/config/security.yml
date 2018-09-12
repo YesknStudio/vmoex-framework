@@ -1,9 +1,15 @@
 # To get started with security, check out the documentation:
 # https://symfony.com/doc/current/security.html
 security:
+    encoders:
+        Yeskn\MainBundle\Entity\User: bcrypt
+        Symfony\Component\Security\Core\User\User: plaintext
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        database_provider:
+            entity:
+                class: YesknMainBundle:User
         in_memory:
             memory: ~
 
@@ -13,12 +19,27 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        basic:
+            pattern: ^/basic
+            http_basic: ~
+
         main:
-            anonymous: ~
-            # activate different ways to authenticate
+            pattern: ^/
+            anonymous: true
+            logout_on_user_change: true
+            provider: database_provider
+            form_login:
+                login_path: login
+                check_path: login_check
+                always_use_default_target_path: true
+                default_target_path: /
+            remember_me:
+                secret: '%secret%'
+                name: _token
+                always_remember_me: true
+                lifetime: 604800 # 1 week in seconds
+                path: /
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+    access_control:
+    # require ROLE_ADMIN for /admin*
+        - { path: ^/admin , roles: ROLE_ADMIN }

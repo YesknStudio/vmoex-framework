@@ -1,6 +1,6 @@
 {
-    "name": "yeskn/wpcraft",
-    "license": "proprietary",
+    "name": "yeskn-studio/wpcraft",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -30,7 +30,11 @@
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.6.4",
         "symfony/symfony": "3.4.*",
-        "twig/twig": "^1.0||^2.0"
+        "twig/twig": "^1.0||^2.0",
+        "predis/predis": "^1.1",
+        "snc/redis-bundle": "^2.1",
+        "workerman/phpsocket.io": "^1.1",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
