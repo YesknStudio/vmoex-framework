@@ -1,0 +1,4 @@
+services:
+#    yeskn_o_auth.example:
+#        class: Yeskn\OAuthBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
