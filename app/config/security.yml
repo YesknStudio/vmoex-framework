@@ -30,9 +30,12 @@ security:
             provider: database_provider
             form_login:
                 login_path: login
-                check_path: login_check
+                check_path: do_login
                 always_use_default_target_path: true
                 default_target_path: /
+            logout:
+                path: /logout
+                target: /
             remember_me:
                 secret: '%secret%'
                 name: _token
@@ -41,5 +44,4 @@ security:
                 path: /
 
     access_control:
-    # require ROLE_ADMIN for /admin*
         - { path: ^/admin , roles: ROLE_ADMIN }

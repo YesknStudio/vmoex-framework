@@ -1,0 +1,23 @@
+<html>
+<head></head>
+<body>
+
+{% if error %}
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        {{ error.message|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
+<form action="{{ path('do_login') }}" method="post">
+    <label for="username"> 用户名
+        <input type="text" name="_username" id="username">
+    </label>
+    <label for="password"> 密码
+        <input type="password" name="_password" id="password">
+    </label>
+
+    <input type="submit" value="登录">
+</form>
+</body>
+</html>

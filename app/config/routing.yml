@@ -1,3 +1,16 @@
+yeskn_oauth:
+    resource: "@YesknOAuthBundle/Controller/"
+    host:     oauth-local.yeskn.com
+    type:     annotation
+    prefix:   /
+
+yeskn_admin:
+    resource: "@YesknAdminBundle/Controller/"
+    host:     admin.wpcraft.cn
+    type:     annotation
+    prefix:   /
+
 yeskn_wpcraft:
-    resource: "@YesknWpcraftBundle/Resources/config/routing.yml"
+    resource: "@YesknMainBundle/Controller/"
+    type:     annotation
     prefix:   /

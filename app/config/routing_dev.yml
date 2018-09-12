@@ -1,3 +1,20 @@
+yeskn_oauth:
+    resource: "@YesknOAuthBundle/Controller/"
+    host:     oauth-local.yeskn.com
+    type:     annotation
+    prefix:   /
+
+yeskn_admin:
+    resource: "@YesknAdminBundle/Controller/"
+    host:     admin-local.wpcraft.cn
+    type:     annotation
+    prefix:   /
+
+yeskn_wpcraft:
+    resource: "@YesknMainBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 _wdt:
     resource: '@WebProfilerBundle/Resources/config/routing/wdt.xml'
     prefix: /_wdt
