@@ -19,9 +19,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@YesknMain/default/index.html.twig', [
-            'base_dir' => $this->getParameter('kernel.project_dir')
-        ]);
+        return $this->redirectToRoute('post_list');
     }
 
     /**

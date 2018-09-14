@@ -124,3 +124,14 @@ notice_my_notice: null
 notice_unread: null
 notice_read: notice_read
 notice_replied_you: null
+post_top: null
+like: null
+action_too_fast: null
+banner_announce: null
+all: null
+hot: null
+site_state: null
+site_since: null
+site_post_count: null
+site_comment_count: null
+site_user_count: null

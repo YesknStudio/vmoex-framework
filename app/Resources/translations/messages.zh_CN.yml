@@ -124,3 +124,14 @@ notice_my_notice: notice_my_notice
 notice_unread: null
 notice_read: notice_read
 notice_replied_you: notice_replied_you
+post_top: post_top
+like: 赞
+action_too_fast: 好可怕，速度太快了
+banner_announce: '公告'
+all: '全部'
+hot: 热门
+site_state: 社区运行状态
+site_since: 社区成立时间
+site_post_count: 主题数量
+site_comment_count: 回复数量
+site_user_count: 注册用户数量

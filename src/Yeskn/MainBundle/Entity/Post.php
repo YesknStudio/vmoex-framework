@@ -115,6 +115,11 @@ class Post
     private $status;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\Tab", inversedBy="posts")
+     */
+    private $tab;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -485,5 +490,29 @@ class Post
     public function getIsTop()
     {
         return $this->isTop;
+    }
+
+    /**
+     * Set tab
+     *
+     * @param \Yeskn\MainBundle\Entity\Tab $tab
+     *
+     * @return Post
+     */
+    public function setTab(Tab $tab = null)
+    {
+        $this->tab = $tab;
+
+        return $this;
+    }
+
+    /**
+     * Get tab
+     *
+     * @return \Yeskn\MainBundle\Entity\Tab
+     */
+    public function getTab()
+    {
+        return $this->tab;
     }
 }

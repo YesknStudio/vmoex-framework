@@ -10,6 +10,7 @@
 namespace Yeskn\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,12 +28,94 @@ use Yeskn\MainBundle\Entity\Post;
 class PostController extends Controller
 {
     /**
-     * @inheritdoc
+     * @Route("/", name="post_list")
+     *
+     * @param $request
+     * @return Response
+     */
+    public function postListAction(Request $request)
+    {
+        $tab = $request->get('tab');
+        $page = $request->get('page', 1);
+
+        $pagesize = 25;
+
+        if (empty($tab)) {
+            $tab = $request->cookies->get('_tab');
+        }
+
+        if (empty($tab)) {
+            $tab = 'all';
+        }
+
+        $sort = ['updatedAt' => 'DESC'];
+
+        if ($tab == 'hot') {
+            $sort = ['views' => 'DESC'];
+        }
+
+        $tabObj = null;
+
+        if ($tab and $tab != 'all' and $tab != 'hot') {
+            $tabObj = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
+                ->findOneBy(['alias' => $tab]);
+            if (empty($tabObj)) {
+                return new JsonResponse('tab not exists');
+            }
+        }
+
+        $posts = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
+            ->getIndexList($sort, $pagesize, $pagesize*($page-1));
+
+        $countQuery = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.isDeleted = false');
+
+        if (!empty($tabObj)) {
+            $countQuery->andWhere('a.tab = :tab')->setParameter('tab', $tabObj);
+
+        }
+
+        $count = $countQuery->getQuery()->getSingleScalarResult();
+
+        $allTabs = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
+            ->findBy(['level' => 1]);
+
+        $pageData['allPage'] = ceil($count/$pagesize);
+        $pageData['currentPage'] = $page;
+
+        $response = $this->render('@YesknMain/post/index.html.twig', array(
+            'posts' => $posts,
+            'tab' => $tab,
+            'currentTab' => $tabObj,
+            'tabs' => $allTabs,
+            'pageData' => $pageData
+        ));
+
+        if ($tabObj and $tabObj->getLevel() == 1) {
+            $response->headers->setCookie(new Cookie('_tab', $tab));
+        }
+
+        if ($tab == 'all' or $tab == 'hot') {
+            $response->headers->setCookie(new Cookie('_tab', $tab));
+        }
+
+        return $response;
+    }
+
+    /**
+     * 查看文章详情
      * @Route("/{id}", name="post_show", requirements={"id": "[1-9]\d*"})
+     *
+     * @param $id
+     * @return Response
      */
     public function postShowAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
+
+        /** @var Post $post */
         $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->find($id);
         if (empty($post)) {
             return $this->render('@YesknMain/error.html.twig', [
