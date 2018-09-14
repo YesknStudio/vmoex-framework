@@ -58,9 +58,9 @@
         $(function () {
             $.ajax({
                 method: "POST",
-                url: window.vmoex.links.G_set_message_red_link,
+                url: window.Yeskn.links.G_set_message_red_link,
                 success: function () {
-                    $('li.messages > span.text').text(window.vmoex.trans.message);
+                    $('li.messages > span.text').text(window.Yeskn.trans.message);
                     $('.nav-message-label').removeClass('warning-color');
                 }
             });
