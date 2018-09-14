@@ -16,8 +16,8 @@
             </div>
         {% else %}
             <div class="tab-list">
-                <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('post_list', {tab: 'all'}) }}">{{ '全部'|trans }}</a>
-                <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('post_list', {tab: 'hot'}) }}">{{ '热门'|trans }}</a>
+                <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('post_list', {tab: 'all'}) }}">{{ 'all'|trans }}</a>
+                <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('post_list', {tab: 'hot'}) }}">{{ 'hot'|trans }}</a>
 
                 {% for tabItem in tabs %}
                     <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('post_list', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
