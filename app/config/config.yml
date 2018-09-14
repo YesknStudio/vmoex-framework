@@ -47,6 +47,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        socket_host: '%socket_host%'
     form_themes:
         - "bootstrap_3_layout.html.twig"
 

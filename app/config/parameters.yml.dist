@@ -20,3 +20,4 @@ parameters:
 
     node_path: /usr/local/bin/node
     uglifyjs2_path: /usr/local/bin/uglifyjs
+    socket_host: http://localhost:2120
