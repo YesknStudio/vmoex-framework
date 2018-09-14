@@ -1,0 +1,185 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Wpcraft</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="navbar-toggle collapsed navbar-avatar-mobile" data-toggle="collapse" data-target="#navbar-collapse-user">
+                {% set avatar = app.user ? app.user.avatar : 'https://static.yeskn.com/avatar.png' %}
+                <img src="{{ asset(avatar) }}" alt="" width="25px" height="25px" class="img-circle">
+            </div>
+
+            {% if app.user %}
+                <div class="navbar-toggle collapsed navbar-item-custom navbar-item-alert" data-toggle="collapse" data-target="#notification-navbar-collapse">
+                    <a data-pjax href="{{ path('my_notices') }}"><i class="fa fa-bell fa-fw"></i> <span class="text badge nav-common-dot">0</span></a>
+                </div>
+                <div class="navbar-toggle collapsed navbar-item-custom navbar-item-message" data-toggle="collapse" data-target="#message-navbar-collapse">
+                    <a data-pjax href="{{ path('my_messages') }}"><i class="fa fa-envelope fa-fw"></i> <span class="text badge nav-common-dot">0</span></a>
+                </div>
+            {% endif %}
+
+            <a data-pjax class="navbar-brand" href="{{ path('homepage') }}" style="padding-top: 8px">
+                <img alt="Brand" src="{{ asset('assets/images/logo.png') }}" width="94px">
+
+                <span class="vmoex-version">beta</span>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a data-pjax href="{{ path('documents') }}">{{ 'documents'|trans }}</a></li>
+                <li><a data-pjax href="{{ path('about') }}">{{ 'about'|trans }}</a></li>
+            </ul>
+            <form class="navbar-form navbar-left" id="site-search">
+                <div class="input-group nav-search-bar">
+                    <input type="text" id="search-content" class="form-control" placeholder="Search...">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                {% if app.user %}
+                    <li class="dropdown messages ">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <span class="text nav-message-label">{{ 'messages'|trans }}</span>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <script type="text/html" id="message-item-tpl">
+                            <li>
+                                <a data-pjax href="{{ path('my_messages') }}">
+                                    <div>
+                                        <strong>@nickname@</strong>
+                                        <span class="pull-right text-muted">
+                                        <em>@createdAt@</em>
+                                    </span>
+                                    </div>
+                                    <div>@content@</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                        </script>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <a data-pjax class="text-center" href="{{ path('my_messages') }}">
+                                    <strong>{{ '查看所有私信'|trans }}</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-messages -->
+                    </li>
+                    <li class="dropdown notifications">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i> <span class="text notification-label" data-origin="{{ 'notifications'|trans }}">{{ 'notifications'|trans }}</span> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <script type="text/html" id="NewFollowerItemTpl">
+                            <li class="new-follower-item">
+                                <a href="{{ path('my_notices') }}">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i> <span class="follower-count">@followerCount@</span>{{ '个新的粉丝'|trans }}
+                                        <span class="pull-right text-muted small">@createdAt@</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </script>
+                        <ul class="dropdown-menu dropdown-notifications">
+                            <li>
+                                <a data-pjax class="text-center" href="{{ path('my_notices') }}">
+                                    <strong>{{ '查看所有通知'|trans }}</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown user-actions">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <img src="{{ asset(app.user.avatar) }}" alt="" width="25px" height="25px" class="img-rounded">
+                            <span>{{ app.user.nickname }}</span>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li>
+                                    <a href="{{ path('yeskn_admin_default_index') }}">
+                                        <i class="fa fa-user fa-fw"></i> 后台管理
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="{{ path('user_home', {username: app.user.username}) }}" data-pjax>
+                                    <i class="fa fa-home fa-fw"></i> {{ "我的主页"|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a data-pjax href="{{ path('user_setting') }}" >
+                                    <i class="fa fa-gear fa-fw"></i> {{ '个人设置'|trans }}
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('logout') }}">
+                                    <i class="fa fa-sign-out fa-fw"></i> {{ 'logout'|trans }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li>
+                        <a data-pjax href="{{ path('login') }}"><i class="fa fa-sign-in"></i> {{ 'login'|trans }}</a>
+                    </li>
+                    <li>
+                        <a data-pjax href="{{ path('register') }}"> {{ 'register'|trans }}</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-user">
+            <ul class="nav navbar-nav navbar-left">
+                {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a href="{{ path('yeskn_admin_default_index') }}">
+                            <i class="fa fa-user fa-fw"></i> 后台管理
+                        </a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a data-pjax href="{{ path('user_home', {username: app.user.username}) }}">
+                        <i class="fa fa-home fa-fw"></i> {{ '我的主页'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a data-pjax href="{{ path('user_setting') }}" >
+                        <i class="fa fa-gear fa-fw"></i> {{ '个人设置'|trans }}
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="{{ path('logout') }}">
+                        <i class="fa fa-sign-out fa-fw"></i> {{ 'logout'|trans }}
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a data-pjax href="{{ path('login') }}"> {{ 'login'|trans }}</a>
+                </li>
+                <li>
+                    <a data-pjax href="{{ path('register') }}"> {{ 'register'|trans }}</a>
+                    {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{#<div class="container">#}
+    {#<div class="alert alert-warning alert-dismissible" role="alert" style="margin-bottom: 10px">#}
+        {#<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+        {#{{ 'banner.copyright'|trans }}#}
+    {#</div>#}
+{#</div>#}

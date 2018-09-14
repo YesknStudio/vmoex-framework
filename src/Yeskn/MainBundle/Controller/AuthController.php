@@ -3,16 +3,16 @@
 /**
  * This file is part of project yeskn-studio/wpcraft.
  *
- * Author: Jaggle
- * Create: 2018-09-12 13:53:59
+ * Author: Jake
+ * Create: 2018-09-14 15:26:13
  */
 
-namespace Yeskn\MainBundle\Controller\Auth;
+namespace Yeskn\MainBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
     /**
      * @Route("/login", name="login", methods={"GET"})
@@ -48,5 +48,13 @@ class LoginController extends Controller
     public function logoutAction()
     {
         throw new \Exception('this should never be reached!');
+    }
+
+    /**
+     * @Route("/register", name="register")
+     */
+    public function registerAction()
+    {
+
     }
 }

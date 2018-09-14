@@ -1,0 +1,55 @@
+# global -------------------------------------------------------------------
+about_site: 关于 Wpcraft
+chinese: 简体中文
+english: 英文
+chinese.tw: 繁体中文
+japanese: 日语
+ago: 前
+second: 秒
+day: 天
+hour: 小时
+minute: 分钟
+login: 登录
+logout: 登出
+register: 注册
+success: 操作成功
+fail: 操作失败
+click: 点击
+
+# footer -------------------------------------------------------------------
+wpcast_slogan: 9秒助你打造自己的博客
+trends: 动态
+blind.chat: 瞎聊
+search: 搜索
+about: 关于
+messages: 私信
+notifications: 通知
+comment: 评论
+hello_stranger: " 您好，陌生人！"
+hello_stranger_detail: 如果你喜欢Vmoex，请记得注册或者保存网址哦~
+my.status: 我的状态
+hot.users: 活跃用户
+today.hot.topics: 热门文档
+newly.comments: 最新评论
+today.activity: 今日活跃度
+continuous_signed count day: 已连续签到count天
+create_new_topic: 创建新主题
+activity: 活跃度
+wpcast_available_with: 'Wpcast 可用于: '
+用户名: 用户名
+邮箱: 邮箱
+密码: 密码
+verify_email: >
+  你的邮箱尚未激活，<a href="javascript:" class="alert-link">点此激活</a>
+在线可撩: 在线可撩
+加入于: 加入于
+第count位Vmoex用户: 第count位Vmoex用户
+最后在线时间：time: 最后在线时间：time
+name发布的帖子: name发布的帖子
+name的回复: name的回复
+time 发表在: time 发表在
+name的关注: name的关注
+name的粉丝: name的粉丝
+发送成功: 发送成功
+documents: 文档
+support: 支持

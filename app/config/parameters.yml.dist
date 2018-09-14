@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    node_path: /usr/local/bin/node
+    uglifyjs2_path: /usr/local/bin/uglifyjs

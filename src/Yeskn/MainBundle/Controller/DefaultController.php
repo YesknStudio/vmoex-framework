@@ -15,12 +15,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="wpcraft_index")
+     * @Route("/", name="homepage")
      */
     public function indexAction()
     {
         return $this->render('default/index.html.twig', [
             'base_dir' => $this->getParameter('kernel.project_dir')
         ]);
+    }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction()
+    {
+
+    }
+
+    /**
+     * @Route("/contribute", name="contribute")
+     */
+    public function contributeAction()
+    {
+
     }
 }

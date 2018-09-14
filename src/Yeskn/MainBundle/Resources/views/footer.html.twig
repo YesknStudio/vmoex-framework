@@ -1,0 +1,32 @@
+<footer>
+    <div class="container">
+        <div class="brand">
+            <b><a data-pjax href="{{ path('about') }}">{{ 'about_site'|trans }}</a></b>
+            <span class="snow">·</span>
+            <b><a data-pjax href="{{ path('contribute') }}">{{ 'support'|trans }}</a></b>
+        </div>
+
+        <br>
+
+        <div class="language-box">
+            <span style="display: inline-block;margin-right: 10px">{{ 'wpcast_available_with'|trans }}</span>
+
+            <img class="footer-flag" src="{{ asset('assets/images/flags/zh_CN.png') }}" alt="zh_CN">
+            <a data-pjax href="javascript:"   class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a>
+            <span class="snow">·</span>
+            <img class="footer-flag" src="{{ asset('assets/images/flags/en.png') }}" alt="en">
+            <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a>
+            <span class="snow">·</span>
+            <img class="footer-flag" src="{{ asset('assets/images/flags/zh_TW.png') }}" alt="zh_TW">
+            <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a>
+            <span class="snow">·</span>
+            <img class="footer-flag" src="{{ asset('assets/images/flags/jp.png') }}" alt="jp">
+            <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a>
+        </div>
+
+        {% set siteState = siteState() %}
+        <p style="margin: 20px 5px">{{ '当前在线count人'|trans({count:siteState.onlineUserCount}) }}，{{ '历史最高'|trans }} 393</p>
+        <p class="copy">© 2018 Vmoex - {{ 'wpcast_slogan'|trans }}</p>
+        <p class="power">Designed with <span>❤</span> 彩虹の恋しい at Shanghai, China</p>
+    </div>
+</footer>
