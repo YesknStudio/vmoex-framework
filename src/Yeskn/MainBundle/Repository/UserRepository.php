@@ -62,4 +62,43 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     {
         return $this->findOneBy(['username' => $username]);
     }
+
+    /**
+     * @param $word
+     * @param int $cursor
+     * @param int $limit
+     * @return array
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function queryUser($word, $cursor = 0, $limit = 15)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.username LIKE :username')->setParameter('username', "%$word%")
+            ->orWhere('p.nickname LIKE :nickname')->setParameter('nickname', "%$word%");
+
+        $total = $qb->select('COUNT(p)')->getQuery()->getSingleScalarResult();
+
+        $results = $qb->select('p')
+            ->orderBy('p.gold', 'DESC')
+            ->setFirstResult($cursor)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+
+        return [$results, $total];
+    }
+
+    /**
+     * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countUser()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('MAX(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

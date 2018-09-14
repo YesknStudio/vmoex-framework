@@ -1,0 +1,35 @@
+{% set site = siteState() %}
+
+<div class="panel panel-default site-state-panel hidden-xs hidden-sm">
+    <div class="panel-heading">
+        <i class="fa fa-bar-chart-o"></i> {{ '社区运行状态'|trans }}
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="form-group state-item">
+                <label class="col-sm-5 control-label">{{ "社区成立时间"|trans }}</label>
+                <div class="col-sm-7">
+                    <p class="form-control-static">{{ site.startedAt|date('Y-m-d') }}</p>
+                </div>
+            </div>
+            <div class="form-group state-item">
+                <label class="col-sm-5 control-label">{{ '主题数量'|trans }}</label>
+                <div class="col-sm-7">
+                    <p class="form-control-static">{{ site.topicCount }}</p>
+                </div>
+            </div>
+            <div class="form-group state-item">
+                <label class="col-sm-5 control-label">{{ '回复数量'|trans }}</label>
+                <div class="col-sm-7">
+                    <p class="form-control-static">{{ site.commentCount }}</p>
+                </div>
+            </div>
+            <div class="form-group state-item">
+                <label class="col-sm-5 control-label">{{ '注册用户数量'|trans }}</label>
+                <div class="col-sm-7">
+                    <p class="form-control-static">{{ site.userCount }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

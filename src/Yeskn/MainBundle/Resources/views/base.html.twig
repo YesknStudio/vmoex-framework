@@ -32,6 +32,7 @@
                 filter='cssrewrite' %}
                 <link rel="stylesheet" href="{{ asset_url }}"/>
             {% endstylesheets %}
+            <link rel="stylesheet" href="https://static.yeskn.com/bootoast/css/bootoast.css">
         {% endblock %}
 
         {% block head_js_link %}
@@ -52,6 +53,22 @@
                 username: '{{ app.user ? app.user.username : '' }}' || 'guest_' + Date.parse(new Date()),
                 socketToken: ''
             },
+            links: {
+                G_info_link: '{{ path('info') }}',
+                G_set_message_red_link: '{{ path('set_message_red') }}',
+                G_sign_link: '{{ path('sign') }}',
+                G_cdn__Path: '',
+                G_set_locale_link: '{{ path('set_locale') }}',
+                G_thumb_up__link: '{{ path('thumbup_comment') }}',
+                add_comment_to_post: '{{ path('add_comment_to_post', {postId: 1}) }}',
+                send_chat: '{{ path("send_chat") }}'
+            },
+            trans: {
+                thumbup: '{{ '赞'|trans }}',
+                message: '{{ 'messages'|trans }}',
+                action_too_quick: '{{ '好可怕，速度太快了'|trans }}！'
+            },
+            disableLog: true
         }
     </script>
         {% endblock %}
@@ -74,8 +91,7 @@
             </div>
             <div id="sidebar" class="col-md-4" role="complementary">
                 {% block sidebar %}
-                    {% set block_loaded = block('sidebar_head') is defined %}
-                    {% include '@YesknMain/sidebar.html.twig' with {sidebar_head: block_loaded  ? block('sidebar_head')  : ''} %}
+                    {% include '@YesknMain/sidebar.html.twig' %}
                 {% endblock %}
             </div>
         </div>
@@ -110,6 +126,7 @@
         <script src="{{ asset_url }}"></script>
 
         <script src="https://cdn.bootcss.com/socket.io/1.3.7/socket.io.min.js"></script>
+        <script src="https://static.yeskn.com/bootoast/js/bootoast.js"></script>
         {% endjavascripts %}
     {% endblock %}
 {% endif %}

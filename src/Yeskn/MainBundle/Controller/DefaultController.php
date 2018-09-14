@@ -29,7 +29,7 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-
+        return $this->render('@YesknMain/about.html.twig');
     }
 
     /**

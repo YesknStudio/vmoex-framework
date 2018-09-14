@@ -1,0 +1,204 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block page_wraper %}
+    <div>
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-gear"></i> 个人设置
+                </div>
+
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#home" data-toggle="tab">基本资料</a>
+                        </li>
+                        <li><a href="#account" data-toggle="tab">帐号和密码</a>
+                        </li>
+                        <li><a href="#private" data-toggle="tab">隐私设置</a>
+                        </li>
+                        <li><a href="#block" data-toggle="tab">屏蔽</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="home">
+                            <div class="container" style="margin-top:30px">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-5">
+                                        <form action="{{ path('modify_user_info') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="username" class="col-sm-2 control-label">{{ '用户名'|trans }}</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" value="{{ app.user.username }}" class="form-control" id="username" disabled>
+                                                    <span id="helpBlock" class="help-block">用户名不能被修改</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nickname" class="col-sm-2 control-label">{{ '昵称'|trans }}</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" value="{{ app.user.nickname }}" class="form-control" id="nickname" name="nickname" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="remark" class="col-sm-2 control-label">{{ '状态'|trans }}</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" value="{{ app.user.remark }}" class="form-control" id="remark" name="remark" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="avatar" class="col-sm-2 control-label">{{ '头像'|trans }}</label>
+                                                <div class="col-sm-2">
+                                                    <img src="{{ asset(app.user.avatar) }}" alt="" width="75">
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <input type="file" id="avatar" name="avatar" class="form-control">
+                                                    <p class="help-block">支持jpg、png、gif格式，gif格式需消耗50金币</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <span class="help-block">昵称和头像180天内只能修改一次，<a class="text-underline" href="">
+                                                            <small class="text-muted">{{ 'why_this'|trans }}</small></a>
+                                                    </span>
+                                                    <button type="submit" class="btn btn-default btn-sm">{{ '保存'|trans }}</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account">
+                            <div class="container" style="margin-top:30px">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-5">
+                                        <div class="row">
+                                            <label for="email" class="col-sm-2 control-label">{{ '邮箱'|trans }}</label>
+                                            <div class="col-sm-10">
+                                                {{ app.user.email }} <a href="javascript:"><i class="fa fa-pencil"></i> {{ '修改'|trans }}</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <label for="password" class="col-sm-2 control-label">{{ '密码'|trans }}</label>
+                                            <div class="col-sm-10">
+                                                <a href="javascript:"><i class="fa fa-pencil"></i> {{ '修改密码'|trans }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="private">
+                            <div class="container" style="margin-top:30px">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="username" class="col-sm-2 control-label">查看我的主页</label>
+                                                <div class="col-sm-10">
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="see"  value="1"> 我关注的人
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="see" value="2"> 我关注的和关注我的人
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="see" value="3"> 所有人
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="username" class="col-sm-2 control-label">给我发私信</label>
+                                                <div class="col-sm-10">
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="message"  value="1"> 我关注的人
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="message" value="2"> 我关注的和关注我的人
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="message" value="3"> 所有人
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="username" class="col-sm-2 control-label">我的在线状态</label>
+                                                <div class="col-sm-10">
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="st"  value="1"> 我关注的人
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="st" value="2"> 我关注的和关注我的人
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" name="st" value="3"> 所有人
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default">保存</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="block">
+                            <div class="container" style="margin-top:30px">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-8">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="username" class="col-sm-2 control-label">我屏蔽的用户</label>
+                                                <div class="col-sm-10">
+                                                    {% if app.user.following is not empty %}
+                                                        {% for fo in app.user.following %}
+                                                            <li style="list-style: none;margin: 10px 0;padding-right: 10px">
+                                                                <a data-pjax href="{{ path('user_home', {username: fo.username}) }}">
+                                                                    <img src="{{ fo.avatar }}" alt="" width="25" height="25" style="border-radius: 50%">
+                                                                    {{ fo.nickname }}
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        没有屏蔽的用户。
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="username" class="col-sm-2 control-label">我屏蔽的节点</label>
+                                                <div class="col-sm-10">
+                                                    {% if app.user.following is not empty %}
+                                                        {% for fo in app.user.following %}
+                                                            <li style="list-style: none;margin: 10px 0;padding-right: 10px">
+                                                                <a data-pjax href="{{ path('user_home', {username: fo.username}) }}">
+                                                                    <img src="{{ fo.avatar }}" alt="" width="25" height="25" style="border-radius: 50%">
+                                                                    {{ fo.nickname }}
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        没有屏蔽的节点。
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

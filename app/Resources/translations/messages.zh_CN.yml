@@ -1,5 +1,4 @@
-# global -------------------------------------------------------------------
-about_site: 关于 Wpcraft
+about_site: '关于 Wpcraft'
 chinese: 简体中文
 english: 英文
 chinese.tw: 繁体中文
@@ -15,57 +14,109 @@ register: 注册
 success: 操作成功
 fail: 操作失败
 click: 点击
-
-# nav
 nav_messages: 查看所有私信
 nav_new_fans: 个新的粉丝
 nav_all_notifications: 查看所有通知
 nav_user_home: 我的主页
 nav_user_setting: 个人设置
-
-# sidebar
-
-
-
-
-
-# footer -------------------------------------------------------------------
 footer_online_user_count: 当前在线count人
 footer_oneline_user_most: 历史最高
-
-wpcast_slogan: 9秒助你打造自己的博客
+wpcast_slogan: '9秒助你打造自己的博客'
 trends: 动态
 blind.chat: 瞎聊
 search: 搜索
-about: 关于
+about: '关于'
 messages: 私信
 notifications: 通知
 comment: 评论
-hello_stranger: " 您好，陌生人！"
-hello_stranger_detail: 如果你喜欢Vmoex，请记得注册或者保存网址哦~
+hello_stranger: ' 您好，陌生人！'
+hello_stranger_detail: '如果你喜欢Vmoex，请记得注册或者保存网址哦~'
 my.status: 我的状态
 hot.users: 活跃用户
 today.hot.topics: 热门文档
 newly.comments: 最新评论
 today.activity: 今日活跃度
-continuous_signed count day: 已连续签到count天
+'continuous_signed count day': 已连续签到count天
 create_new_topic: 创建新主题
 activity: 活跃度
 wpcast_available_with: 'Wpcast 可用于: '
 用户名: 用户名
 邮箱: 邮箱
-密码: 密码
-verify_email: >
-  你的邮箱尚未激活，<a href="javascript:" class="alert-link">点此激活</a>
+'密码': '密码'
+verify_email: "你的邮箱尚未激活，<a href=\"javascript:\" class=\"alert-link\">点此激活</a>\n"
 在线可撩: 在线可撩
-加入于: 加入于
+'加入于': '加入于'
 第count位Vmoex用户: 第count位Vmoex用户
 最后在线时间：time: 最后在线时间：time
 name发布的帖子: name发布的帖子
 name的回复: name的回复
-time 发表在: time 发表在
-name的关注: name的关注
+'time 发表在': 'time 发表在'
+'name的关注': 'name的关注'
 name的粉丝: name的粉丝
 发送成功: 发送成功
 documents: 文档
 support: 支持
+vmoex_slogan: null
+vmoex_description: null
+刷新: null
+banner.copyright: null
+trends_description: null
+板块: null
+当前在线count人: null
+历史最高: null
+致谢: null
+buy_beer: null
+'全部': null
+热门: null
+追剧: null
+福利: null
+插画: null
+歌姬: null
+游戏: null
+'站务公告': null
+漫展: null
+查看所有通知: null
+查看所有私信: null
+我的主页: null
+个人设置: null
+'添加新的评论': null
+发表有颜色的评论将消耗5金币哦: null
+好可怕，速度太快了: null
+'关于作者': null
+拉黑: null
+昵称: null
+状态: null
+头像: null
+保存: null
+修改: null
+'修改密码': null
+支持我们: null
+个新的粉丝: null
+赞: null
+什么是瞎聊: null
+blind_description: null
+社区运行状态: null
+社区成立时间: null
+主题数量: null
+回复数量: null
+注册用户数量: null
+'添加': null
+'请先登录': null
+Vmoex当前板块数量: null
+vmoex_available_with: null
+userhome_send_message: 发送私信
+userhome_has_followed: '已经关注'
+userhome_follow: '关注'
+userhome_block: 屏蔽
+userhome_no_recent_reply: 该用户最近没有回复
+userhome_he_is_cold: 该用户比较高冷
+userhome_he_has_no_follower: '没有人关注他'
+post_add_comment: '添加评论'
+post_no_comment: '文章没有评论'
+chat_sorry_co_content: 抱歉，暂时没有聊天消息
+chat_please_type: '请输入'
+send: 发送
+please_login: 请登录
+why_this: '为什么会这样？'
+userhome_no_published_post: '用户目前没有发布文章'
+reply: 回复

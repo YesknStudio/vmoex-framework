@@ -43,7 +43,7 @@ $(document).on('click', '.set-locale-link', function (e) {
     e.preventDefault();
     var locale = $(this).attr('data-locale');
 
-    $.post(window.vmoex.links.G_set_locale_link, {locale:locale}, function (data) {
+    $.post(window.Yeskn.links.G_set_locale_link, {locale:locale}, function (data) {
         if (data.ret) {
             success(data.msg);
             window.location.reload();
@@ -77,14 +77,14 @@ $(document).on('click', '.thumb-up', function () {
     var $this = $(this);
     $.ajax({
         method:  'POST',
-        url: window.vmoex.links.G_thumb_up__link,
+        url: window.Yeskn.links.G_thumb_up__link,
         data: {
             cid: $this.attr('data-cid')
         },
         success: function (data) {
             if (data.ret) {
                 var count = $this.find('.thumb-count').text();
-                if (count === window.vmoex.trans.thumbup) {
+                if (count === window.Yeskn.trans.thumbup) {
                     count = 0;
                 }
                 count = parseInt(count ? count : 0);
@@ -107,7 +107,7 @@ $(document).on('click', '#addCommentToPost', function () {
     var $this = $(this);
 
     if ($this.hasClass('disabled')) {
-        warning(window.vmoex.trans.action_too_quick);
+        warning(window.Yeskn.trans.action_too_quick);
         return ;
     }
 
@@ -117,7 +117,7 @@ $(document).on('click', '#addCommentToPost', function () {
     var content = editor.$txt.html();
     $.ajax({
         method: 'POST',
-        url: path(window.vmoex.links.add_comment_to_post, {1: postId}),
+        url: path(window.Yeskn.links.add_comment_to_post, {1: postId}),
         data: {
             content: content
         },
@@ -142,7 +142,7 @@ $(document).on('keydown', '.chat-panel input#btn-input', function (e) {
 $(document).on('click', '#sendChat', function () {
     $.ajax({
         method: 'POST',
-        url: window.vmoex.links.send_chat,
+        url: window.Yeskn.links.send_chat,
         data: {content: $('#btn-input').val()},
         success: function (data) {
             data.ret ? reload() : error(data.msg);
@@ -157,7 +157,7 @@ $(document).on('click', '#refresh-chat', function () {
 $(document).on('click', '#sign-remark', function () {
     $.ajax({
         method: 'POST',
-        url: window.vmoex.links.G_sign_link,
+        url: window.Yeskn.links.G_sign_link,
         success: function (data) {
             if (data.ret) {
                 success(data.msg);

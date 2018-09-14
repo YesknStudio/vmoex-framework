@@ -2,6 +2,7 @@
 
 namespace Yeskn\MainBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -58,6 +59,30 @@ class User implements UserInterface
     private $avatar;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="remark", type="string", length=255)
+     */
+    private $remark;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="gold", type="integer", options={"default":100})
+     */
+    private $gold = 100;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="sign_day", type="integer", options={"default": 0})
+     */
+    private $signDay = 0;
+
+    /**
+     * @ORM\Column(name="active_val", type="integer", options={"default":0})
+     */
+    private $activeVal = 0;
+
+    /**
      * @ORM\Column(name="role", type="string")
      */
     private $role;
@@ -82,6 +107,39 @@ class User implements UserInterface
      * @ORM\Column(name="login_at", type="datetime")
      */
     private $loginAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Yeskn\MainBundle\Entity\Post", mappedBy="author")
+     */
+    private $posts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Yeskn\MainBundle\Entity\Comment", mappedBy="user")
+     */
+    private $comments;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Yeskn\MainBundle\Entity\User", mappedBy="following")
+     */
+    private $followers;
+
+    /**
+     * @var
+     * @ORM\ManyToMany(targetEntity="Yeskn\MainBundle\Entity\User", inversedBy="followers")
+     * @ORM\JoinTable(name="followers",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="following_user_id", referencedColumnName="id")}
+     * )
+     */
+    private $following;
+    
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->followers = new ArrayCollection();
+        $this->following = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -258,6 +316,11 @@ class User implements UserInterface
      */
     public function getAvatar()
     {
+        if (empty($this->avatar)) {
+            $identicon = new \Identicon\Identicon();
+            return $identicon->getImageDataUri($this->username);
+        }
+
         return $this->avatar;
     }
 
@@ -294,5 +357,279 @@ class User implements UserInterface
     {
         //unset($this->password);
         //unset($this->salt);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRemark()
+    {
+        return $this->remark;
+    }
+
+    /**
+     * @param string $remark
+     */
+    public function setRemark($remark)
+    {
+        $this->remark = $remark;
+    }
+
+    /**
+     * Follow another User
+     *
+     * @param User $user
+     * @return void
+     */
+    public function follow(User $user)
+    {
+        $this->following[] = $user;
+
+        $user->followedBy($this);
+    }
+
+    /**
+     * Set followed by User
+     *
+     * @param User $user
+     * @return void
+     */
+    private function followedBy(User $user)
+    {
+        $this->followers[] = $user;
+    }
+
+    /**
+     * Return the Users this User is following
+     *
+     * @return ArrayCollection
+     */
+    public function following()
+    {
+        return $this->following;
+    }
+
+    /**
+     * Return the User’s followers
+     *
+     * @return ArrayCollection
+     */
+    public function followers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * Unfollow a User
+     *
+     * @param User $user
+     * @return void
+     */
+    public function unfollow(User $user)
+    {
+        $this->following->removeElement($user);
+
+        $user->unfollowedBy($this);
+    }
+
+    /**
+     * Set unfollowed by a User
+     *
+     * @param User $user
+     * @return void
+     */
+    private function unfollowedBy(User $user)
+    {
+        $this->followers->removeElement($user);
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Yeskn\MainBundle\Entity\Comment $comment
+     *
+     * @return User
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Yeskn\MainBundle\Entity\Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Add follower
+     *
+     * @param \Yeskn\MainBundle\Entity\User $follower
+     *
+     * @return User
+     */
+    public function addFollower(User $follower)
+    {
+        $this->followers[] = $follower;
+
+        return $this;
+    }
+
+    /**
+     * Remove follower
+     *
+     * @param \Yeskn\MainBundle\Entity\User $follower
+     */
+    public function removeFollower(User $follower)
+    {
+        $this->followers->removeElement($follower);
+    }
+
+    /**
+     * Get followers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * Add following
+     *
+     * @param \Yeskn\MainBundle\Entity\User $following
+     *
+     * @return User
+     */
+    public function addFollowing(User $following)
+    {
+        $this->following[] = $following;
+
+        return $this;
+    }
+
+    /**
+     * Remove following
+     *
+     * @param \Yeskn\MainBundle\Entity\User $following
+     */
+    public function removeFollowing(User $following)
+    {
+        $this->following->removeElement($following);
+    }
+
+    /**
+     * Get following
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowing()
+    {
+        return $this->following;
+    }
+
+    /**
+     * Add post
+     *
+     * @param \Yeskn\MainBundle\Entity\Post $post
+     *
+     * @return User
+     */
+    public function addPost(Post $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \Yeskn\MainBundle\Entity\Post $post
+     */
+    public function removePost(Post $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGold()
+    {
+        return $this->gold;
+    }
+
+    /**
+     * @param int $gold
+     */
+    public function setGold($gold)
+    {
+        $this->gold = $gold;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSignDay()
+    {
+        return $this->signDay;
+    }
+
+    /**
+     * @param int $signDay
+     */
+    public function setSignDay($signDay)
+    {
+        $this->signDay = $signDay;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActiveVal()
+    {
+        return $this->activeVal;
+    }
+
+    /**
+     * @param mixed $activeVal
+     */
+    public function setActiveVal($activeVal)
+    {
+        $this->activeVal = $activeVal;
     }
 }

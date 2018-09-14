@@ -1,0 +1,103 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block main %}
+    <style>
+        body {
+            background-image: url("https://ww2.sinaimg.cn/large/0060lm7Tgy1fi01a616erj31hc0u0q7g.jpg");
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="chat-panel panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-comments fa-fw"></i> {{ 'blind.chat'|trans }}
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="false">
+                            <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <ul class="dropdown-menu slidedown">
+                            <li>
+                                <a href="javascript:" id="refresh-chat">
+                                    <i class="fa fa-refresh fa-fw"></i> {{ '刷新'|trans }}
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body" id="chat-box">
+                    {% if chats is not empty %}
+                        <ul class="chat">
+                            {% for chat in chats %}
+                                {% set loc = (app.user and chat.user.id == app.user.id) ? 'right' : 'left' %}
+                                <li class="{{ loc }} clearfix">
+                                    <span class="chat-img pull-{{ loc }}">
+                                        <img style="border-radius: 5px" width="50" height="50" src="{{ asset(chat.user.avatar) }}" alt="User Avatar">
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            {% if loc == 'right' %}
+                                                <small class="text-muted">
+                                                    <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|ago }}
+                                                </small>
+                                                <strong class="pull-right primary-font"><a data-pjax href="{{ path('user_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                                {% else %}
+                                                    <strong class="primary-font"><a data-pjax href="{{ path('user_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                                    <small class="pull-right text-muted">
+                                                        <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|ago }}
+                                                    </small>
+                                            {% endif %}
+
+                                        </div>
+                                        <p class="pull-{{ loc }}" style="margin-top: 5px">{{ chat.content|raw }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            {{ 'chat_sorry_co_content'|trans }}
+                        </div>
+                    {% endif %}
+                </div>
+                <!-- /.panel-body -->
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="{{ 'chat_please_type'|trans }}">
+                        <span class="input-group-btn">
+                             {% if app.user %}
+                                 <button type="button" id="sendChat" class="btn btn-warning btn-sm">{{ 'send'|trans }}</button>
+                             {% else %}
+                                 <button type="button" class="btn btn-warning btn-sm disabled">{{ 'please_login'|trans }}</button>
+                             {% endif %}
+                        </span>
+                    </div>
+                </div>
+                <!-- /.panel-footer -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var elem = document.getElementById('chat-box');
+        elem.scrollTop = elem.scrollHeight;
+        $('#btn-input').focus();
+        $('.nav-chat-dot').removeClass('push-notifications-count');
+    </script>
+{% endblock %}
+
+{% block sidebar %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+       <i class="fa fa-question-circle"></i> {{ '什么是瞎聊'|trans }}
+    </div>
+    <div class="panel-body">
+        {{ 'blind_description'|trans }}
+    </div>
+</div>
+{% endblock %}

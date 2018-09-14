@@ -10,7 +10,7 @@
 
             <div class="navbar-toggle collapsed navbar-avatar-mobile" data-toggle="collapse" data-target="#navbar-collapse-user">
                 {% set avatar = app.user ? app.user.avatar : 'https://static.yeskn.com/avatar.png' %}
-                <img src="{{ asset(avatar) }}" alt="" width="25px" height="25px" class="img-circle">
+                <img src="{{ avatar }}" alt="" width="25px" height="25px" class="img-circle">
             </div>
 
             {% if app.user %}
@@ -97,14 +97,14 @@
                     </li>
                     <li class="dropdown user-actions">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <img src="{{ asset(app.user.avatar) }}" alt="" width="25px" height="25px" class="img-rounded">
+                            <img src="{{ app.user.avatar }}" alt="" width="25px" height="25px" class="img-rounded">
                             <span>{{ app.user.nickname }}</span>
                             <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li>
-                                    <a href="{{ path('yeskn_admin_default_index') }}">
+                                    <a href="{{ path('admin_index') }}">
                                         <i class="fa fa-user fa-fw"></i> 后台管理
                                     </a>
                                 </li>
@@ -144,7 +144,7 @@
                 {% if app.user %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li>
-                        <a href="{{ path('yeskn_admin_default_index') }}">
+                        <a href="{{ path('admin_index') }}">
                             <i class="fa fa-user fa-fw"></i> 后台管理
                         </a>
                     </li>

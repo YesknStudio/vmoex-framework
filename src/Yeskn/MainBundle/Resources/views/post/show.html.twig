@@ -1,0 +1,133 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block title %}<title>{{ post.title }} - Vmoex</title>{% endblock %}
+
+{% block main %}
+    <div class="home-content-main">
+        <div class="content">
+            <div class="topic-header border-bottom">
+                <div class="pull-right title-avatar">
+                    <a data-pjax href="{{ path('user_home', {username:post.author.username}) }}">
+                        <img src="{{ asset(post.author.avatar) }}" alt="" class="img-rounded">
+                    </a>
+                </div>
+                <h2>{{ post.title }}</h2>
+                <p class="post-meta">
+                    <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
+                    <span class="category">
+                     <a data-pjax href="{{ path('posts_with_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
+                </span>
+                    <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
+                    <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
+                    {% if post.comments.count %}
+                        <span><i class="fa fa-commenting-o"></i>
+                        <a href="#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a>
+                    </span>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('yeskn_admin_post_edit', {id:post.id}) }}">编辑</a>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="post-content">
+                {{ post.content|raw }}
+            </div>
+            <div class="post-tags">
+                {% if post.tags is not empty %}
+                    <i class="fa  fa-tags item-tag"></i>
+                    {% for tag in post.tags %}
+                        <span class="item-tag"> {{ tag.name }} </span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {#<div class="post-actions border-bottom">#}
+        {#<span><a href="">收藏</a></span>#}
+        {#<span><a href="">感谢</a></span>#}
+        {#<span><a href="">分享</a></span>#}
+        {#<span><a href="">屏蔽</a></span>#}
+        {#<span><a href="">举报</a></span>#}
+
+        {#<span class="pull-right last">12次收藏 / 30次感谢</span>#}
+        {#</div>#}
+
+    </div>
+
+    <div class="panel panel-default comments" id="comments">
+        <div class="comments-header">
+            <b>{{ 'comment'|trans|upper }}</b>
+
+            <div class="btn-group pull-right text-small-gray">
+                <a href="#comment-box">{{ 'post_add_comment'|trans }}</a>
+            </div>
+        </div>
+        {% if post.comments is not empty %}
+            <ul class="chat">
+                {% for comment in post.comments %}
+                    <li class="left clearfix comment-item">
+                <span class="chat-img pull-left comment-user-avatar">
+                    <img src="{{ asset(comment.user.avatar) }}" alt="User Avatar" class="img">
+                </span>
+                        <div class="comment-main chat-body clearfix">
+                            <div class="comment-user-info">
+                                <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
+                                {% if comment.user.type == 'admin' %}
+                                    <span class="mod-text" data-content="管理员" title="MOD">mod</span>
+                                {% elseif comment.user == post.author %}
+                                    <span class="author-label" data-content="author" title="author">author</span>
+                                {% endif %}
+
+                                {% if comment.user.remark %}
+                                    <span class="text-small-gray">[ {{ comment.user.remark }} ]</span>
+                                {% endif %}
+
+                                <span class="text-small-gray pull-right">#{{ loop.index }}</span>
+                            </div>
+                            <div class="comment-content">{{ comment.content|raw }}</div>
+                            <div class="comment-footer">
+                                {% set hasThumb = comment.thumbUpUsers.contains(app.user) %}
+                                {% set open = hasThumb ? '' : '-o' %}
+                                <span class="thumb thumb-up" data-cid="{{ comment.id }}">
+                                        <b>
+                                          <i class="fa fa-thumbs{{ open }}-up {{ hasThumb ? 'text-success' : '' }}"></i>
+                                        </b>
+                                        <b class="thumb-count">{{ comment.thumbUpUsers.count ?: '赞'|trans }}</b>
+                                    </span>
+
+                                <span class="snow">·</span>
+
+                                <span><i class="fa fa-clock-o"></i> {{ comment.createdAt|ago }}</span>
+
+                                <span class="pull-right comment-reply" data-at="{{ comment.user.nickname }}" data-atu="{{ comment.user.username }}"> <i class="fa fa-reply"></i> {{ 'reply'|trans }}</span>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{{ 'post_no_comment'|trans }}~~</p>
+        {% endif %}
+    </div>
+
+    <div class="panel panel-default comment-box" id="comment-box">
+        <div class="form-group">
+            <label class="control-label required" for="editor-trigger">{{ '添加新的评论'|trans }}</label>
+            <div id="editor-comment"><p></p></div>
+            <p class="help-block">{{ '发表有颜色的评论将消耗5金币哦'|trans }}~</p>
+        </div>
+        <div class="form-group">
+            {% if app.user %}
+                <button type="button" data-postId="{{ post.id }}" id="addCommentToPost" class="btn btn-info btn-sm">{{ '添加'|trans }}</button>
+            {% else %}
+                <button type="button" class="btn btn-info btn-sm disabled">{{ '请先登录'|trans }}</button>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    {% include '@YesknMain/sidebar/hello-stranger.html.twig' %}
+    {% include '@YesknMain/sidebar/my-status.html.twig' %}
+    {% include '@YesknMain/sidebar/vultr-ad.html.twig' %}
+{% endblock %}

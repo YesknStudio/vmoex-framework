@@ -22,3 +22,6 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+  socket.push:
+    class: Yeskn\MainBundle\Services\SocketPushService
+    arguments: ["@service_container"]

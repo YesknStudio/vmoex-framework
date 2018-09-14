@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-users"></i> {{ "hot.users"|trans }}
+    </div>
+    <div class="panel-body">
+        {% set hotUsers = hotUsers() %}
+        {% if hotUsers is not empty %}
+            <ul class="hot-user-list">
+                {% for active in hotUsers %}
+                    <li class="hot-user-item">
+                        <a data-pjax href="{{ path('user_home', {username: active.username}) }}">
+                            <img src="{{ avatar(active) }}" alt="" width="25" height="25" class="img-rounded">
+                            {{ active.nickname }}
+                        </a>
+                        <span class="pull-right">{{ active.val }}{{ 'activity'|trans }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+</div>

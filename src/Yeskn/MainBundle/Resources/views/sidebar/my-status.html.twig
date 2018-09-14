@@ -1,0 +1,33 @@
+{% if app.user %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-user"></i> {{ 'my.status'|trans }}
+        </div>
+        <div class="panel-body">
+            <p>
+                <strong>{{ "today.activity"|trans }}</strong>
+            </p>
+            <div class="progress active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ app.user.activeVal }}" aria-valuemin="0" aria-valuemax="128" style="width: {{ (app.user.activeVal/128)*100 }}%">
+                    <span class="sr-only">{{ app.user.activeVal }}</span>
+                </div>
+            </div>
+            <div style="padding: 10px 0">
+                {% if app.user|signed %}
+                    <button type="button" class="btn btn-default btn-sm" style="color: yellowgreen"><i class="fa fa-flag"></i> {{ 'continuous_signed count day'|trans({count:app.user.signDay}) }} ！</button>
+                {% else %}
+                    <button type="button" id="sign-remark" class="btn btn-warning btn-sm"><i class="fa fa-gift"></i> 签到领取奖励</button>
+                {% endif %}
+                <button class="btn btn-default btn-sm pull-right"><span class="gold-amount">{{ app.user.gold }}</span> <img src="{{ asset('assets/images/gold@2x.png') }}" height="16" alt="gold" border="0"></button>
+
+            </div>
+            <div class="alert alert-warning sidebar-validate-email-box" style="margin-bottom: 0">
+                {{ 'verify_email'|trans|raw }}
+            </div>
+
+            <div style="padding-top: 10px;text-align: center">
+                <a data-pjax class="btn btn-success btn-block" href="{{ path('create_post') }}"><i class="fa fa-edit"></i> {{ 'create_new_topic'|trans }}</a>
+            </div>
+        </div>
+    </div>
+{% endif %}

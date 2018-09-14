@@ -1,0 +1,29 @@
+<div class="panel panel-default hidden-xs hidden-sm">
+    <div class="panel-heading">
+        <i class="fa fa-comments"></i> {{ 'newly.comments'|trans }}
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <ul class="chat">
+            {% for comment in hotComments() %}
+                <li class="left clearfix">
+                <span class="chat-img pull-left">
+                    <img src="{{ asset(comment.user.avatar) }}" alt="User Avatar" class="img img-rounded" width="50" height="50">
+                </span>
+                    <div class="chat-body clearfix">
+                        <div class="header">
+                            <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
+                            <small class="pull-right text-muted">
+                                <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|ago }}
+                            </small>
+                        </div>
+                        <div style="margin-top: 5px">
+                            <a data-pjax href="{{ path('post_show', {id:comment.post.id}) }}#comments">{{ comment.content|raw }}</a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- /.panel-body -->
+</div>

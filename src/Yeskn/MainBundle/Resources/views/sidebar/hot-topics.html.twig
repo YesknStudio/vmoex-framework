@@ -1,0 +1,22 @@
+<div class="panel panel-default hidden-xs hidden-sm">
+    <div class="panel-heading">
+        <i class="glyphicon glyphicon-fire"></i> {{ 'today.hot.topics'|trans }}
+    </div>
+    <div class="panel-body latest-posts">
+        <ul class="hot-topic-list">
+            {% for post in hotPosts() %}
+                <li class="hot-topic-item">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <img style="display: block" src="{{ asset(post.author.avatar) }}" alt="" width="25" height="25" class="img-rounded">
+                        </div>
+                        <div class="col-md-9">
+                            <a data-pjax href="{{ path('post_show', {id:post.id}) }}">{{ post.title }}</a>
+                        </div>
+                        <div class="col-md-1"><span class="badge">{{ post.comments.count }}</span></div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

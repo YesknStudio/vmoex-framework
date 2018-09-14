@@ -39,7 +39,7 @@ class GlobalValue extends \Twig_Extension
     public function signed(User $user)
     {
         try {
-            $res =  (int) $this->em->getRepository('YesknBlogBundle:Sign')
+            $res =  (int) $this->em->getRepository('YesknMainBundle:Sign')
                 ->createQueryBuilder('p')
                 ->select('COUNT(p)')
                 ->where('p.user = :user')->setParameter('user', $user)
@@ -88,20 +88,20 @@ class GlobalValue extends \Twig_Extension
 
     public function hotTags()
     {
-        $tags = $this->em->getRepository('YesknBlogBundle:Tag')->findAll();
+        $tags = $this->em->getRepository('YesknMainBundle:Tag')->findAll();
         return $tags;
     }
 
     public function hotPosts()
     {
-        $posts = $this->em->getRepository('YesknBlogBundle:Post')->findBy(
+        $posts = $this->em->getRepository('YesknMainBundle:Post')->findBy(
             [], ['views' => 'DESC'], 8);
         return $posts;
     }
 
     public function hotComments()
     {
-        $comments = $this->em->getRepository('YesknBlogBundle:Comment')
+        $comments = $this->em->getRepository('YesknMainBundle:Comment')
             ->findBy([], ['id' => 'DESC'], 5);
 
         return $comments;
@@ -115,7 +115,7 @@ class GlobalValue extends \Twig_Extension
     public function hotUsers()
     {
         $datetime = new \DateTime('-2 day');
-        $actives = $this->em->getRepository('YesknBlogBundle:Active')
+        $actives = $this->em->getRepository('YesknMainBundle:Active')
             ->createQueryBuilder('p')
             ->select('p.date', 'p.createdAt', 'MAX(p.val) as val')
             ->addSelect('u.username', 'u.avatar', 'u.nickname')
@@ -154,6 +154,15 @@ class GlobalValue extends \Twig_Extension
         return $site;
     }
 
+    public function avatar(array $user)
+    {
+        if (empty($user['avatar']) && !empty($user['username'])) {
+            $identicon = new \Identicon\Identicon();
+            return $identicon->getImageDataUri($user['username']);
+        }
+        return $user['avatar'];
+    }
+
     public function getFilters()
     {
         return array(
@@ -172,6 +181,7 @@ class GlobalValue extends \Twig_Extension
             new \Twig_SimpleFunction('hotUsers',array($this,'hotUsers'),array('needs_environment' => true, 'is_safe' => 'html')),
             new \Twig_SimpleFunction('onlineUserCount',array($this,'onlineUserCount'),array('needs_environment' => true, 'is_safe' => 'html')),
             new \Twig_SimpleFunction('siteState',array($this,'siteState'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new \Twig_SimpleFunction('avatar',array($this,'avatar'), array('needs_environment' => false)),
         );
     }
 }

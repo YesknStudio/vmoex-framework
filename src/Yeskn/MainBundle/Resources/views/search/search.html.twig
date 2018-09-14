@@ -1,0 +1,54 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    搜索“{{ word }}”的结果
+                </div>
+                <div class="panel-body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#posts" data-toggle="tab">文章 ({{ posts[1] }})</a>
+                        </li>
+                        <li class=""><a href="#users" data-toggle="tab">用户 ({{ users[1] }})</a>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="posts">
+                            {% if posts[0] %}
+                                <ul class="list-group">
+                                    {% for post in posts[0] %}
+                                        <li class="list-group-item">
+                                            <img src="{{ asset(post.author.avatar) }}" alt="" width="30" height="30" class="img-rounded">
+                                            <a data-pjax href="{{ path('post_show', {id:post.id}) }}">{{ post.title }}</a>
+
+                                           <span class="pull-right" style="line-height: 35px"> <i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>抱歉，没有搜索到任何文章</p>
+                            {% endif %}
+                        </div>
+                        <div class="tab-pane fade" id="users">
+                            {% if users[0] %}
+                                <ul class="list-group">
+                                    {% for user in users[0] %}
+                                        <li class="list-group-item">
+                                            {{ user.nickname }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>抱歉，没有搜索到任何用户</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Vmoex Admin Panel">
+    <meta name="author" content="Jake">
+    {% block title %}  <title>Admin</title> {% endblock %}
+    {% block head_css_link %}
+        <link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/lib/startbootstrap-sb-admin-2/dist/css/sb-admin-2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/lib/font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/lib/metisMenu/dist/metisMenu.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+    {% endblock %}
+
+    {% block header_stylesheet %}{% endblock %}
+
+    {% block head_js_link %}
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    {% endblock %}
+</head>
+
+<body>
+
+<div id="wrapper">
+    {% block navbar %}
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        {% include '@YesknAdmin/nav.html.twig' %}
+        {% include '@YesknAdmin/sidebar.html.twig' %}
+    </nav>
+    {% endblock %}
+    <div id="page-wrapper">
+        {% include 'flash_messages.html.twig' %}
+        {% block page_wraper %}{% endblock %}
+    </div>
+
+</div>
+
+{% block foot_js_link %}
+    <script src="{{ asset('assets/lib/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/lib/metisMenu/dist/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets/lib/startbootstrap-sb-admin-2/dist/js/sb-admin-2.min.js') }}"></script>
+{% endblock %}
+{% block footer_javascript %}{% endblock %}
+</body>
+</html>

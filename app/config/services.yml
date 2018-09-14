@@ -21,3 +21,17 @@ services:
             $translator: "@translator"
         tags:
         - { name: twig.extension }
+        
+    Yeskn\MainBundle\EventListener\RequestListener:
+        tags:
+        - { name: kernel.event_listener, event: kernel.request, priority: 50 }
+
+    Yeskn\MainBundle\EventListener\ControllerListener:
+        arguments: ['@service_container']
+        tags:
+        - { name: kernel.event_listener, event: kernel.controller }
+
+    Yeskn\MainBundle\EventListener\ResponseListener:
+        arguments: ~
+        tags:
+        - { name: kernel.event_listener, event: kernel.response }
