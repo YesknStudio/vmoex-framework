@@ -38,7 +38,7 @@ class PostRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery('
                 SELECT p
-                FROM YesknBlogBundle:Post p
+                FROM YesknMainBundle:Post p
                 WHERE p.createdAt <= :now
                 ORDER BY p.createdAt ASC
             ')

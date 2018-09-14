@@ -15,7 +15,7 @@
                 <p class="post-meta">
                     <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
                     <span class="category">
-                     <a data-pjax href="{{ path('posts_with_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
+                     <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
                 </span>
                     <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
                     <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
@@ -71,7 +71,7 @@
                         <div class="comment-main chat-body clearfix">
                             <div class="comment-user-info">
                                 <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
-                                {% if comment.user.type == 'admin' %}
+                                {% if comment.user.role == 'ROLE_ADMIN' %}
                                     <span class="mod-text" data-content="管理员" title="MOD">mod</span>
                                 {% elseif comment.user == post.author %}
                                     <span class="author-label" data-content="author" title="author">author</span>
@@ -111,15 +111,15 @@
 
     <div class="panel panel-default comment-box" id="comment-box">
         <div class="form-group">
-            <label class="control-label required" for="editor-trigger">{{ '添加新的评论'|trans }}</label>
-            <div id="editor-comment"><p></p></div>
-            <p class="help-block">{{ '发表有颜色的评论将消耗5金币哦'|trans }}~</p>
+            <label class="control-label required" for="editor-trigger">{{ 'post_add_comment'|trans }}</label>
+            <textarea class="form-control" name="editor-comment" id="editor-comment" cols="30" rows="5" title=""></textarea>
+            <p class="help-block">{{ 'post_add_comment'|trans }}~</p>
         </div>
         <div class="form-group">
             {% if app.user %}
                 <button type="button" data-postId="{{ post.id }}" id="addCommentToPost" class="btn btn-info btn-sm">{{ '添加'|trans }}</button>
             {% else %}
-                <button type="button" class="btn btn-info btn-sm disabled">{{ '请先登录'|trans }}</button>
+                <button type="button" class="btn btn-info btn-sm disabled">{{ 'please_login'|trans }}</button>
             {% endif %}
 
         </div>

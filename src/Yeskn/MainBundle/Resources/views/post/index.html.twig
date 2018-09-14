@@ -65,7 +65,7 @@
                 </article>
             {% endfor %}
             <ul class="pagination">
-                {% set route = tab is not empty and tab != 'all' ? 'home_tab_paged' : 'blog_index_paginated' %}
+                {% set route = tab is not empty and tab != 'all' ? 'post_list' : 'post_list' %}
                 {% if pageData.currentPage == 1 %}
                     <li class="disabled">
                         <a href="#">&laquo;</a>

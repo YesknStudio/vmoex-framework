@@ -114,7 +114,8 @@ $(document).on('click', '#addCommentToPost', function () {
     var postId = $this.attr('data-postId');
 
     $this.addClass('disabled');
-    var content = editor.$txt.html();
+    var content = $('#editor-comment').val();
+
     $.ajax({
         method: 'POST',
         url: path(window.Yeskn.links.add_comment_to_post, {1: postId}),
@@ -176,13 +177,6 @@ $(document).on('click', '.comment-reply', function () {
     $('#editor-comment p:last-child').append('<span data-at="'+replayU+'">@'+replyTo + "</span>&nbsp;");
     $('#editor-comment').focus();
     setEndOfContenteditable(document.getElementById('editor-comment'));
-});
-
-$(document).on('keydown', '#editor-comment', function (e) {
-    var $this = $(this);
-    if (e.keyCode === 13) {
-        $this.height($this.height()+$this.scrollTop()+18);
-    }
 });
 
 $(document).on('click', 'nav .nav-search-bar span', function () {

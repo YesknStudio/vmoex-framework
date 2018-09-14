@@ -45,6 +45,8 @@ class Tab
     /**
      * @var Tab
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\Tab", inversedBy="id")
+     *
+     * @ORM\JoinColumn(name="parent_id", nullable=true)
      */
     private $parent;
 

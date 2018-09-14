@@ -44,10 +44,9 @@ class Category
 
     /**
      * @var
-     * @ORM\ManyToMany(targetEntity="Yeskn\MainBundle\Entity\Post",mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="Yeskn\MainBundle\Entity\Post",mappedBy="category")
      */
     private $posts;
-
 
     /**
      * Get id

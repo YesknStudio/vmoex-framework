@@ -70,7 +70,7 @@
                                         </span>
                                     <div class="post-meta">
                                          <span class="category">
-                                             <a data-pjax href="{{ path('posts_with_tab', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
+                                             <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
                                          </span>
                                         <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
                                         <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>

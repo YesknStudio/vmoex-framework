@@ -8,6 +8,7 @@
 
 namespace Yeskn\MainBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,7 +34,7 @@ class Comment
     private $content;
 
     /**
-     * @var integer
+     * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity="Yeskn\MainBundle\Entity\User", inversedBy="thumbUpComments")
      * @ORM\JoinTable(name="user_thumbup_comment")
      */
@@ -231,7 +232,7 @@ class Comment
     /**
      * Get thumbUpUsers
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getThumbUpUsers()
     {

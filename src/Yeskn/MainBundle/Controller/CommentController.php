@@ -9,6 +9,7 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ use Yeskn\MainBundle\Entity\User;
 class CommentController extends Controller
 {
     /**
-     * @Route("/topic/comment/thumb_up", name="thumbup_comment", requirements={
+     * @Route("/topic/comment/thumb_up", name="thumb_up_comment", requirements={
      *     "cid": "[1-9]\d*",
      * })
      *
@@ -30,7 +31,7 @@ class CommentController extends Controller
      */
     public function thumbPostComment(Request $request)
     {
-        $comment = $this->getDoctrine()->getRepository('YesknBlogBundle:Comment')
+        $comment = $this->getDoctrine()->getRepository('YesknMainBundle:Comment')
             ->findOneBy(['id' => $request->get('cid')]);
 
         if (empty($comment)) {
@@ -43,7 +44,10 @@ class CommentController extends Controller
             return new JsonResponse(['ret' => 0, 'msg' => 'no login']);
         }
 
-        if ($comment->getThumbUpUsers()->contains($user)) {
+        /** @var ArrayCollection $thumbUsers */
+        $thumbUsers = $comment->getThumbUpUsers();
+
+        if ($thumbUsers->contains($user)) {
             $comment->removeThumbUpUser($user);
             $action = 0;
         } else {
@@ -69,7 +73,7 @@ class CommentController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         /** @var Post $post */
-        $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->find($postId);
+        $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->find($postId);
         if (empty($post)) {
             return new JsonResponse(['err' => '文章不存在']);
         }

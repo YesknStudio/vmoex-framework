@@ -5,6 +5,8 @@ namespace Yeskn\MainBundle\Twig;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Symfony\Component\Routing\Router;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Translation\Translator;
 use Yeskn\MainBundle\Entity\User;
 
@@ -21,13 +23,30 @@ class GlobalValue extends \Twig_Extension
     private $translator;
 
     /**
+     * @var Router
+     */
+    private $router;
+
+
+    /**
+     * @var TokenStorage
+     */
+    private $tokenStorage;
+
+    private $socketHost;
+
+    /**
      * GlobalValue constructor.
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em, $translator)
+    public function __construct(EntityManager $em, $translator, $router, $tokenStorage, $socketHost)
     {
         $this->em = $em;
         $this->translator = $translator;
+        $this->router = $router;
+        $this->tokenStorage = $tokenStorage;
+
+        $this->socketHost = $socketHost;
     }
 
     /**
@@ -144,10 +163,10 @@ class GlobalValue extends \Twig_Extension
         if (empty($site)) {
             $site = [
                 'startedAt' => new \DateTime('2018-05-25'),
-                'topicCount' => 0,
-                'userCount' => 0,
-                'commentCount' => 0,
-                'onlineUserCount' => 0
+                'topicCount' => $this->em->getRepository('YesknMainBundle:Post')->countPost(),
+                'userCount' => $this->em->getRepository('YesknMainBundle:User')->countUser(),
+                'commentCount' => $this->em->getRepository('YesknMainBundle:Comment')->countComment(),
+                'onlineUserCount' => $this->em->getRepository('YesknMainBundle:Active')->countOnlineUser()
             ];
         }
 
@@ -171,6 +190,46 @@ class GlobalValue extends \Twig_Extension
         );
     }
 
+    public function javascriptVariables($postId)
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        if ($user) {
+            $userParam = [
+                'username' => $user->getUsername(),
+                'socketToken'=> ''
+            ];
+        } else {
+            $userParam = [
+                'username' => 'guest_' . time(),
+                'socketToken' => ''
+            ];
+        }
+
+        $result = [
+            'socketHost' => $this->socketHost,
+            'user' => $userParam,
+            'links' => [
+                'G_info_link' => $this->router->generate('info'),
+                'G_set_message_red_link' => $this->router->generate('set_message_red'),
+                'G_sign_link' => $this->router->generate('sign'),
+                'G_cdn__Path' => '',
+                'G_set_locale_link' => $this->router->generate('set_locale'),
+                'G_thumb_up__link' => $this->router->generate('thumb_up_comment'),
+                'add_comment_to_post' => $this->router->generate('add_comment_to_post', ['postId' => $postId]),
+                'send_chat' => $this->router->generate('send_chat'),
+            ],
+            'trans' => [
+                'thumbup' => $this->translator->trans('like'),
+                'message' => $this->translator->trans('messages'),
+                'action_too_quick' => $this->translator->trans('action_too_fast'),
+            ],
+            'disableLog' => true
+        ];
+
+        return json_encode($result);
+    }
+
     public function getFunctions()
     {
         return array(
@@ -181,7 +240,7 @@ class GlobalValue extends \Twig_Extension
             new \Twig_SimpleFunction('hotUsers',array($this,'hotUsers'),array('needs_environment' => true, 'is_safe' => 'html')),
             new \Twig_SimpleFunction('onlineUserCount',array($this,'onlineUserCount'),array('needs_environment' => true, 'is_safe' => 'html')),
             new \Twig_SimpleFunction('siteState',array($this,'siteState'),array('needs_environment' => true, 'is_safe' => 'html')),
-            new \Twig_SimpleFunction('avatar',array($this,'avatar'), array('needs_environment' => false)),
+            new \Twig_SimpleFunction('javascriptVariables',array($this,'javascriptVariables')),
         );
     }
 }

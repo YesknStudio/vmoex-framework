@@ -116,7 +116,7 @@ class PostController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
 
         /** @var Post $post */
-        $post = $this->getDoctrine()->getRepository('YesknBlogBundle:Post')->find($id);
+        $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->find($id);
         if (empty($post)) {
             return $this->render('@YesknMain/error.html.twig', [
                 'message' => '文章不存在'
@@ -147,7 +147,7 @@ class PostController extends Controller
     /**
      * 创建主题
      *
-     * @Route("create", name="create_post")
+     * @Route("/create", name="create_post")
      *
      * @param $request
      * @return RedirectResponse|Response
@@ -156,9 +156,9 @@ class PostController extends Controller
     {
         if ($request->isMethod('GET')) {
 
-            $tabs = $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')->findBy(['level' => 2]);
+            $tabs = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')->findBy(['level' => 2]);
 
-            return $this->render('@YesknAdmin/post/create.html.twig', [
+            return $this->render('@YesknMain/post/create.html.twig', [
                 'tabs' => $tabs
             ]);
         }
@@ -168,11 +168,13 @@ class PostController extends Controller
 
         $content = strip_tags($content);
 
+        $content = nl2br($content);
+
         if (empty($title) or empty(strip_tags($content))) {
             return new JsonResponse(['ret' => 0, 'msg' => '内容为空!']);
         }
 
-        $this->getDoctrine()->getRepository('YesknBlogBundle:Tab')
+        $tab = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
             ->findOneBy(['alias' => $request->get('tab')]);
         $post = new Post();
 
@@ -184,6 +186,7 @@ class PostController extends Controller
         $post->setIsDeleted(false);
         $post->setSummary('');
         $post->setCover('');
+        $post->setTab($tab);
         $post->setStatus('published');
 
         $date = new \DateTime();

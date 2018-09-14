@@ -132,6 +132,16 @@ class User implements UserInterface
      * )
      */
     private $following;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Yeskn\MainBundle\Entity\Comment", mappedBy="thumbUpUsers")
+     */
+    private $thumbUpComments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Yeskn\MainBundle\Entity\Active", mappedBy="user")
+     */
+    private $actives;
     
     public function __construct()
     {
@@ -139,6 +149,7 @@ class User implements UserInterface
         $this->comments = new ArrayCollection();
         $this->followers = new ArrayCollection();
         $this->following = new ArrayCollection();
+        $this->actives = new ArrayCollection();
     }
 
     /**
@@ -626,5 +637,55 @@ class User implements UserInterface
     public function setActiveVal($activeVal)
     {
         $this->activeVal = $activeVal;
+    }
+
+    /**
+     * Add active
+     *
+     * @param \Yeskn\MainBundle\Entity\Active $active
+     *
+     * @return User
+     */
+    public function addActive(Active $active)
+    {
+        $this->actives[] = $active;
+
+        return $this;
+    }
+
+    /**
+     * Remove active
+     *
+     * @param \Yeskn\MainBundle\Entity\Active $active
+     */
+    public function removeActive(Active $active)
+    {
+        $this->actives->removeElement($active);
+    }
+
+    /**
+     * Get actives
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActives()
+    {
+        return $this->actives;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getThumbUpComments()
+    {
+        return $this->thumbUpComments;
+    }
+
+    /**
+     * @param mixed $thumbUpComments
+     */
+    public function setThumbUpComments($thumbUpComments)
+    {
+        $this->thumbUpComments = $thumbUpComments;
     }
 }

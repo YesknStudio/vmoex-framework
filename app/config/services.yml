@@ -19,6 +19,9 @@ services:
         arguments:
             $em: "@doctrine.orm.entity_manager"
             $translator: "@translator"
+            $router: "@router"
+            $tokenStorage: "@security.token_storage"
+            $socketHost: "%socket_host%"
         tags:
         - { name: twig.extension }
         

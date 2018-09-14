@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Yeskn\BlogBundle\Entity\Message;
+use Yeskn\MainBundle\Entity\Message;
 
 class BlogCreateWorkerCommand extends ContainerAwareCommand
 {
@@ -27,7 +27,7 @@ class BlogCreateWorkerCommand extends ContainerAwareCommand
             $do = $this->getContainer()->get('doctrine');
             $push = $this->getContainer()->get('socket.push');
 
-            $user = $do->getRepository('YesknBlogBundle:User')->findOneBy([
+            $user = $do->getRepository('YesknMainBundle:User')->findOneBy([
                 'status' => 1,
                 'type' => 'user'
             ]);
@@ -35,8 +35,8 @@ class BlogCreateWorkerCommand extends ContainerAwareCommand
             $command = $this->getApplication()->find('blog:create');
 
             $arguments = [
-                '--username' => $user->username,
-                '--password' => $user->password
+                '--username' => $user->getUsername(),
+                '--password' => $user->getPassword()
             ];
 
             $commandInput = new ArrayInput($arguments);

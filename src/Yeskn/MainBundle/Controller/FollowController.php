@@ -41,7 +41,7 @@ class FollowController extends Controller
         }
 
         /** @var User $ta */
-        $ta = $this->getDoctrine()->getRepository('YesknBlogBundle:User')
+        $ta = $this->getDoctrine()->getRepository('YesknMainBundle:User')
             ->findOneBy(['username' => $username]);
         $em = $this->getDoctrine()->getManager();
 

@@ -47,29 +47,7 @@
         <![endif]-->
 
     <script>
-        window.Yeskn = {
-            socketHost: '{{ socket_host }}',
-            user: {
-                username: '{{ app.user ? app.user.username : '' }}' || 'guest_' + Date.parse(new Date()),
-                socketToken: ''
-            },
-            links: {
-                G_info_link: '{{ path('info') }}',
-                G_set_message_red_link: '{{ path('set_message_red') }}',
-                G_sign_link: '{{ path('sign') }}',
-                G_cdn__Path: '',
-                G_set_locale_link: '{{ path('set_locale') }}',
-                G_thumb_up__link: '{{ path('thumbup_comment') }}',
-                add_comment_to_post: '{{ path('add_comment_to_post', {postId: 1}) }}',
-                send_chat: '{{ path("send_chat") }}'
-            },
-            trans: {
-                thumbup: '{{ 'like'|trans }}',
-                message: '{{ 'messages'|trans }}',
-                action_too_quick: '{{ 'action_too_fast'|trans }}！'
-            },
-            disableLog: true
-        }
+        window.Yeskn = {{ javascriptVariables(1)|raw }};
     </script>
         {% endblock %}
     {% endif %}
