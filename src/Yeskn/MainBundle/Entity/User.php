@@ -53,16 +53,21 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="site", type="string", length=100, nullable=true)
+     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
      */
-    private $site;
+    private $avatar;
+
+    /**
+     * @ORM\Column(name="role", type="string")
+     */
+    private $role;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="signature", type="string", length=200, nullable=true)
+     * @ORM\Column(name="salt", type="string")
      */
-    private $signature;
+    private $salt;
 
     /**
      * @var \DateTime
@@ -77,49 +82,6 @@ class User implements UserInterface
      * @ORM\Column(name="login_at", type="datetime")
      */
     private $loginAt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
-     */
-    private $avatar;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="remark", type="string", length=255, nullable=true)
-     */
-    private $remark;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=10)
-     */
-    private $type;
-
-    /**
-     * @ORM\Column(type="string", unique=true ,length=128)
-     */
-    private $apiKey;
-
-    /**
-     * @ORM\Column(name="active_val", type="integer", options={"default":0})
-     */
-    private $activeVal = 0;
-
-    /**
-     * @var integer
-     * @ORM\Column(name="gold", type="integer", options={"default":100})
-     */
-    private $gold = 100;
-
-    /**
-     * @var integer
-     * @ORM\Column(name="sign_day", type="integer", options={"default": 0})
-     */
-    private $signDay = 0;
 
     /**
      * Get id
@@ -228,54 +190,6 @@ class User implements UserInterface
     }
 
     /**
-     * Set site
-     *
-     * @param string $site
-     *
-     * @return User
-     */
-    public function setSite($site)
-    {
-        $this->site = $site;
-
-        return $this;
-    }
-
-    /**
-     * Get site
-     *
-     * @return string
-     */
-    public function getSite()
-    {
-        return $this->site;
-    }
-
-    /**
-     * Set signature
-     *
-     * @param string $signature
-     *
-     * @return User
-     */
-    public function setSignature($signature)
-    {
-        $this->signature = $signature;
-
-        return $this;
-    }
-
-    /**
-     * Get signature
-     *
-     * @return string
-     */
-    public function getSignature()
-    {
-        return $this->signature;
-    }
-
-    /**
      * Set registerAt
      *
      * @param \DateTime $registerAt
@@ -344,147 +258,34 @@ class User implements UserInterface
      */
     public function getAvatar()
     {
-        if (empty($this->avatar)) {
-//            $identicon = new \Identicon\Identicon();
-//            $this->avatar = $identicon->getImageDataUri($this->username);
-            $this->avatar = 'avatar@1x.png';
-        }
         return $this->avatar;
     }
 
-    /**
-     * @return string
-     */
-    public function getRemark()
+    public function getRole()
     {
-        return $this->remark;
+        return $this->role;
     }
 
-    /**
-     * @param string $remark
-     */
-    public function setRemark($remark)
+    public function setRole($role)
     {
-        $this->remark = $remark;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return User
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
+        $this->role = $role;
 
         return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
     }
 
     public function getRoles()
     {
-        $type = $this->getType();
-        switch($type){
-            case 'admin' :
-                return ['ROLE_ADMIN'];
-            case 'user':
-                return ['ROLE_USER'];
-            default:
-                return ['none'];
-        }
-
+        return (array) $this->getRole();
     }
 
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return $this->salt;
     }
 
-    /**
-     * Set apiKey
-     *
-     * @param string $apiKey
-     *
-     * @return User
-     */
-    public function setApiKey($apiKey)
+    public function eraseCredentials()
     {
-        $this->apiKey = $apiKey;
-
-        return $this;
-    }
-
-    /**
-     * Get apiKey
-     *
-     * @return string
-     */
-    public function getApiKey()
-    {
-        return $this->apiKey;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getActiveVal()
-    {
-        return $this->activeVal;
-    }
-
-    /**
-     * @param mixed $activeVal
-     */
-    public function setActiveVal($activeVal)
-    {
-        $this->activeVal = $activeVal;
-    }
-
-    /**
-     * @return int
-     */
-    public function getGold()
-    {
-        return $this->gold;
-    }
-
-    /**
-     * @param int $gold
-     */
-    public function setGold($gold)
-    {
-        $this->gold = $gold;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSignDay()
-    {
-        return $this->signDay;
-    }
-
-    /**
-     * @param int $signDay
-     */
-    public function setSignDay($signDay)
-    {
-        $this->signDay = $signDay;
+        //unset($this->password);
+        //unset($this->salt);
     }
 }

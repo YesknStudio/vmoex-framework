@@ -13,15 +13,15 @@ security:
         in_memory:
             memory: ~
 
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        basic:
-            pattern: ^/basic
-            http_basic: ~
 
         main:
             pattern: ^/

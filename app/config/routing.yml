@@ -1,6 +1,6 @@
 yeskn_oauth:
     resource: "@YesknOAuthBundle/Controller/"
-    host:     oauth-local.yeskn.com
+    host:     oauth.yeskn.com
     type:     annotation
     prefix:   /
 

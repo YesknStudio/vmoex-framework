@@ -11,7 +11,6 @@ namespace Yeskn\MainBundle\Controller\Auth;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
@@ -40,6 +39,14 @@ class LoginController extends Controller
      */
     public function doLoginAction()
     {
-        return new Response('ok');
+        throw new \Exception('this should never be reached!');
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction()
+    {
+        throw new \Exception('this should never be reached!');
     }
 }

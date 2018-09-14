@@ -1,3 +1,6 @@
+_main:
+    resource: routing.yml
+
 yeskn_oauth:
     resource: "@YesknOAuthBundle/Controller/"
     host:     oauth-local.yeskn.com
@@ -26,6 +29,3 @@ _profiler:
 _errors:
     resource: '@TwigBundle/Resources/config/routing/errors.xml'
     prefix: /_error
-
-_main:
-    resource: routing.yml
