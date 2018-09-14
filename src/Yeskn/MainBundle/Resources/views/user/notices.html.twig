@@ -1,0 +1,88 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default notifications-panel">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i> {{ 'notice_my_notice'|trans({name:app.user.nickname}) }}
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#not_read" data-toggle="tab">{{ 'notice_unread'|trans }}</a>
+                        </li>
+                        <li><a href="#read" data-toggle="tab">{{ 'notice_read'|trans }}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="not_read">
+                            {% if unreadNotices is not empty %}
+                                <ul class="notifications-list list-group">
+                                    {% for notice in notices %}
+                                            <li class="list-group-item list-group-item-warning">
+                                                <div style="padding-bottom: 10px">
+                                                    {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
+                                                    <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
+                                                    <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
+                                                    {{ notice.createdAt|ago }}{{ 'notice_replied_you'|trans }} <a data-pjax href="{{ path('post_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+                                                </div>
+
+                                                <blockquote class="home-bq">
+                                                    {{ notice.content.content|raw }}
+                                                </blockquote>
+                                                {% endif %}
+                                            </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    {{ 'chat_sorry_co_content'|trans }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="tab-pane fade" id="read">
+                            {% if readNotices is not empty %}
+                                <ul class="notifications-list  list-group">
+                                    {% for notice in readNotices %}
+                                          <li class="list-group-item">
+                                              <div>
+                                                  {% if notice.type == constant('Yeskn\\BlogBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
+                                                  <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
+                                                  <a data-pjax href="{{ path('user_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
+                                                  {{ notice.createdAt|ago }}{{ 'notice_replied_you'|trans }} <a data-pjax href="{{ path('post_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+                                              </div>
+
+                                              <blockquote class="home-bq">
+                                                  {{ notice.content.content|raw }}
+                                              </blockquote>
+                                              {% endif %}
+                                          </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    {{ 'chat_sorry_co_content'|trans }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                method: "POST",
+                url: '{{ path('set_notice_red') }}',
+                success: function () {
+                    $('li.notifications span.text').text('{{ 'notifications'|trans }}');
+                    $('.nav-notice-label').removeClass('warning-color');
+                }
+            });
+            $('.navbar-item-alert span').addClass('nav-common-dot').removeClass('nav-warn-dot').text(0);
+        })
+    </script>
+{% endblock %}

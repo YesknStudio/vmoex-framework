@@ -120,3 +120,7 @@ please_login: 请登录
 why_this: '为什么会这样？'
 userhome_no_published_post: '用户目前没有发布文章'
 reply: 回复
+notice_my_notice: notice_my_notice
+notice_unread: null
+notice_read: notice_read
+notice_replied_you: notice_replied_you

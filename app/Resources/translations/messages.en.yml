@@ -120,3 +120,7 @@ please_login: null
 why_this: null
 userhome_no_published_post: null
 reply: null
+notice_my_notice: null
+notice_unread: null
+notice_read: notice_read
+notice_replied_you: null
