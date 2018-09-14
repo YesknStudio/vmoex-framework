@@ -9,7 +9,7 @@
                 {% for active in hotUsers %}
                     <li class="hot-user-item">
                         <a data-pjax href="{{ path('user_home', {username: active.username}) }}">
-                            <img src="{{ avatar(active) }}" alt="" width="25" height="25" class="img-rounded">
+                            <img src="{{ asset(active.avatar) }}" alt="" width="25" height="25" class="img-rounded">
                             {{ active.nickname }}
                         </a>
                         <span class="pull-right">{{ active.val }}{{ 'activity'|trans }}</span>

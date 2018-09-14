@@ -63,7 +63,7 @@ class User implements UserInterface
      *
      * @ORM\Column(name="remark", type="string", length=255)
      */
-    private $remark;
+    private $remark = '';
 
     /**
      * @var integer
@@ -316,11 +316,6 @@ class User implements UserInterface
      */
     public function getAvatar()
     {
-        if (empty($this->avatar)) {
-            $identicon = new \Identicon\Identicon();
-            return $identicon->getImageDataUri($this->username);
-        }
-
         return $this->avatar;
     }
 

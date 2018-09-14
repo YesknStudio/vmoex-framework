@@ -68,16 +68,22 @@ class AuthController extends Controller
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $user->setRegisterAt(new \DateTime());
+
+            $fileName = md5($user->getUsername()) . '.png';
+            $file = $this->container->getParameter('kernel.project_dir') . '/web/avatar/' . $fileName;
+
+            $identicon = new \Identicon\Identicon();
+            $avatar = $identicon->getImageData($user->getUsername(), 100);
+
+            file_put_contents($file, $avatar);
+
+            $user->setAvatar('avatar/' . $fileName);
             $user->setNickname($user->getUsername());
             $user->setLoginAt(new \DateTime());
             $user->setRole('ROLE_USER');
-            // 4) save the User!
 
             $em->persist($user);
             $em->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
 
             $this->addFlash('success', '注册成功，请使用账号名"' . $user->getUsername().'"登录');
 
