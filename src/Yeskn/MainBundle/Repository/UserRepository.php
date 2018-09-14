@@ -21,6 +21,23 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     }
 
     /**
+     * @param $email
+     * @param $username
+     * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function checkEmailAndUsername($email, $username)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->where('p.email = :email')->setParameter('email', $email)
+            ->orWhere('p.username = :username')->setParameter('username', $username)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
      * @param $usernameOrEmail
      * @return User|object
      */

@@ -10,7 +10,12 @@
 namespace Yeskn\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Form\UserType;
 
 class AuthController extends Controller
 {
@@ -35,6 +40,57 @@ class AuthController extends Controller
     }
 
     /**
+     * @Route("/register", name="register")
+     * @param $request Request
+     * @throws
+     * @return RedirectResponse|Response
+     */
+    public function regAction(Request $request)
+    {
+        // 1) build the form
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $em = $this->getDoctrine()->getManager();
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $check = $em->getRepository('YesknMainBundle:User')
+                ->checkEmailAndUsername($user->getEmail(), $user->getUsername());
+            $user->setSalt(md5(uniqid()));
+
+            if ($check) {
+                $this->addFlash('error', '用户名或者邮箱已经注册');
+                return $this->redirectToRoute('register');
+            }
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+            $user->setRegisterAt(new \DateTime());
+            $user->setNickname($user->getUsername());
+            $user->setLoginAt(new \DateTime());
+            $user->setRole('ROLE_USER');
+            // 4) save the User!
+
+            $em->persist($user);
+            $em->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            $this->addFlash('success', '注册成功，请使用账号名"' . $user->getUsername().'"登录');
+
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render(
+            '@YesknMain/auth/register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    /**
      * @Route("/login", name="do_login", methods={"POST"})
      */
     public function doLoginAction()
@@ -48,13 +104,5 @@ class AuthController extends Controller
     public function logoutAction()
     {
         throw new \Exception('this should never be reached!');
-    }
-
-    /**
-     * @Route("/register", name="register")
-     */
-    public function registerAction()
-    {
-
     }
 }

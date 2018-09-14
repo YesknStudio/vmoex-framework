@@ -1,0 +1,29 @@
+{% extends "@YesknMain/base.html.twig" %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    {{ 'register'|trans }}Vmoex
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            {% include 'flash_messages.html.twig' %}
+
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    {% include '@YesknMain/sidebar-login.html.twig' %}
+{% endblock %}

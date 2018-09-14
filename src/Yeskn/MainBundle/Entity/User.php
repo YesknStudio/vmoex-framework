@@ -283,6 +283,13 @@ class User implements UserInterface
         return $this->salt;
     }
 
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
     public function eraseCredentials()
     {
         //unset($this->password);
