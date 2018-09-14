@@ -16,7 +16,23 @@ success: 操作成功
 fail: 操作失败
 click: 点击
 
+# nav
+nav_messages: 查看所有私信
+nav_new_fans: 个新的粉丝
+nav_all_notifications: 查看所有通知
+nav_user_home: 我的主页
+nav_user_setting: 个人设置
+
+# sidebar
+
+
+
+
+
 # footer -------------------------------------------------------------------
+footer_online_user_count: 当前在线count人
+footer_oneline_user_most: 历史最高
+
 wpcast_slogan: 9秒助你打造自己的博客
 trends: 动态
 blind.chat: 瞎聊

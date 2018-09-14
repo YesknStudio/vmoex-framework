@@ -65,7 +65,7 @@
                         <ul class="dropdown-menu dropdown-messages">
                             <li>
                                 <a data-pjax class="text-center" href="{{ path('my_messages') }}">
-                                    <strong>{{ '查看所有私信'|trans }}</strong>
+                                    <strong>{{ 'nav_messages'|trans }}</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </li>
@@ -80,7 +80,7 @@
                             <li class="new-follower-item">
                                 <a href="{{ path('my_notices') }}">
                                     <div>
-                                        <i class="fa fa-twitter fa-fw"></i> <span class="follower-count">@followerCount@</span>{{ '个新的粉丝'|trans }}
+                                        <i class="fa fa-twitter fa-fw"></i> <span class="follower-count">@followerCount@</span>{{ 'nav_new_fans'|trans }}
                                         <span class="pull-right text-muted small">@createdAt@</span>
                                     </div>
                                 </a>
@@ -89,7 +89,7 @@
                         <ul class="dropdown-menu dropdown-notifications">
                             <li>
                                 <a data-pjax class="text-center" href="{{ path('my_notices') }}">
-                                    <strong>{{ '查看所有通知'|trans }}</strong>
+                                    <strong>{{ 'nav_all_notifications'|trans }}</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </li>
@@ -111,12 +111,12 @@
                             {% endif %}
                             <li>
                                 <a href="{{ path('user_home', {username: app.user.username}) }}" data-pjax>
-                                    <i class="fa fa-home fa-fw"></i> {{ "我的主页"|trans }}
+                                    <i class="fa fa-home fa-fw"></i> {{ "nav_user_home"|trans }}
                                 </a>
                             </li>
                             <li>
                                 <a data-pjax href="{{ path('user_setting') }}" >
-                                    <i class="fa fa-gear fa-fw"></i> {{ '个人设置'|trans }}
+                                    <i class="fa fa-gear fa-fw"></i> {{ 'nav_user_setting'|trans }}
                                 </a>
                             </li>
                             <li class="divider"></li>
@@ -151,12 +151,12 @@
                 {% endif %}
                 <li>
                     <a data-pjax href="{{ path('user_home', {username: app.user.username}) }}">
-                        <i class="fa fa-home fa-fw"></i> {{ '我的主页'|trans }}
+                        <i class="fa fa-home fa-fw"></i> {{ 'nav_user_home'|trans }}
                     </a>
                 </li>
                 <li>
                     <a data-pjax href="{{ path('user_setting') }}" >
-                        <i class="fa fa-gear fa-fw"></i> {{ '个人设置'|trans }}
+                        <i class="fa fa-gear fa-fw"></i> {{ 'nav_user_setting'|trans }}
                     </a>
                 </li>
                 <li class="divider"></li>
