@@ -23,8 +23,14 @@ services:
             $tokenStorage: "@security.token_storage"
             $socketHost: "%socket_host%"
         tags:
-        - { name: twig.extension }
-        
+            - { name: twig.extension }
+
+    Yeskn\MainBundle\Twig\WebsiteInfo:
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: twig.extension }
+
     Yeskn\MainBundle\EventListener\RequestListener:
         tags:
         - { name: kernel.event_listener, event: kernel.request, priority: 50 }

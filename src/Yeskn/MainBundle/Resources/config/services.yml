@@ -18,6 +18,15 @@ services:
       public: true
       tags: ['controller.service_arguments']
 
+  Yeskn\MainBundle\Form\Logic\ManageBasicLogic:
+      arguments:
+        - "@doctrine.orm.entity_manager"
+
+  Yeskn\MainBundle\Form\ManageBasicType:
+      arguments:
+        - "%kernel.project_dir%"
+      tags: [form.type]
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

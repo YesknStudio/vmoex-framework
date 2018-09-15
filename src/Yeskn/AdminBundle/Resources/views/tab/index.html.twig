@@ -2,6 +2,7 @@
 
 {% block header_stylesheet %}
     <link rel="stylesheet" href="{{ asset('assets/lib/datatables/media/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/lib/eds-ui/edsUI.css') }}">
 {% endblock %}
 
 {% block page_wraper %}
@@ -35,10 +36,9 @@
                         <td>{{ item.level }}</td>
                         <td><a href="{{ path('post_list',{tab:item.alias}) }}">{{ item.name }}</a></td>
                         <td>{{ item.alias }}</td>
-                        <td>
-                            <a href="{{ path('admin_tab_index', {tab:item.alias}) }}">修改</a>
-                            |
-                            <a href="{{ path('admin_tab_index', {tab:item.alias}) }}">删除</a>
+                        <td width="115" align="center">
+                            <a class="btn btn-warning btn-xs" href="{{ path('admin_tab_index', {tab:item.alias}) }}"><i class="fa fa-edit"></i> 修改</a>
+                            <a data-edsPost class="btn btn-danger btn-xs" href="{{ path('admin_delete', {entity: 'tab', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -53,6 +53,7 @@
     <script src="{{ asset('assets/lib/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/lib/datatables/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/lib/datatables-responsive/js/dataTables.responsive.js') }}"></script>
+    <script src="{{ asset('assets/lib/eds-ui/edsUI.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#dataTables-example').DataTable({

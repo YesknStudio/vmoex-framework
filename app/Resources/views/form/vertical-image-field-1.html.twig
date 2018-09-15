@@ -1,0 +1,12 @@
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_label(form, '', {label_attr: {class: 'col-sm-2'}}) }}
+            <div class="col-sm-6">
+                <img src="{{ asset(data) }}" alt="">
+                {{ form_widget(form) }}
+            </div>
+            {{ form_errors(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}

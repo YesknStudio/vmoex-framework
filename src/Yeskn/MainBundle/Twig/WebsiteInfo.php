@@ -44,7 +44,7 @@ class WebsiteInfo extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('websiteInfo',array($this,'websiteInfo'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new \Twig_SimpleFunction('websiteInfo',array($this,'websiteInfo')),
         ];
     }
 }

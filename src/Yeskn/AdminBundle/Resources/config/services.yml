@@ -2,3 +2,16 @@ services:
 #    yeskn_admin.example:
 #        class: Yeskn\AdminBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+  Yeskn\AdminBundle\:
+    resource: '../../../AdminBundle/*'
+    # you can exclude directories or files
+    # but if a service is unused, it's removed anyway
+    exclude: '../../../AdminBundle/{Entity,Repository,Tests}'
+
+    # controllers are imported separately to make sure they're public
+    # and have a tag that allows actions to type-hint services
+  Yeskn\AdminBundle\Controller\:
+    resource: '../../../AdminBundle/Controller'
+    public: true
+    tags: ['controller.service_arguments']

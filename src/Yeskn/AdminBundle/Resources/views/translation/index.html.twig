@@ -41,8 +41,8 @@
                         <td>{{ item.japanese }}</td>
                         <td>{{ item.taiwanese }}</td>
                         <td width="115" align="center">
-                            <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> 编辑</button>
-                            <button class="btn btn-xs btn-danger"><i class="fa fa-remove"></i> 删除</button>
+                            <a href="" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> 编辑</a>
+                            <a data-edsPost href="{{ path('admin_delete', {entity:'translation', id:item.id}) }}" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
                 {% endfor %}
