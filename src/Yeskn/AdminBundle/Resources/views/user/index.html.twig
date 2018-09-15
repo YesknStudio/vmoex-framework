@@ -2,6 +2,7 @@
 
 {% block header_stylesheet %}
     <link rel="stylesheet" href="{{ asset('assets/lib/datatables/media/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/lib/eds-ui/edsUI.css') }}">
 {% endblock %}
 
 {% block page_wraper %}
@@ -49,7 +50,7 @@
                         <td>{{ item.role }}</td>
                         <td width="115" align="center">
                             <a role="button" class="btn btn-xs btn-warning" href="/"><i class="fa fa-edit"></i> 编辑</a>
-                            <a role="button" class="btn btn-xs btn-danger" href="/"><i class="fa fa-remove"></i> 删除</a>
+                            <a data-edsPost role="button" class="btn btn-xs btn-danger" href="{{ path('admin_delete', {entity: 'user', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -64,6 +65,7 @@
     <script src="{{ asset('assets/lib/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/lib/datatables/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/lib/datatables-responsive/js/dataTables.responsive.js') }}"></script>
+    <script src="{{ asset('assets/lib/eds-ui/edsUI.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#dataTables-example').DataTable({

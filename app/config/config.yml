@@ -50,6 +50,7 @@ twig:
     globals:
         socket_host: '%socket_host%'
     form_themes:
+        - "form/image-input-filed-type.html.twig"
         - "bootstrap_3_layout.html.twig"
 
 # Doctrine Configuration

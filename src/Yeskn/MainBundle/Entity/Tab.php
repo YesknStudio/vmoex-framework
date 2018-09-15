@@ -9,6 +9,8 @@
 namespace Yeskn\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Tab
@@ -57,6 +59,8 @@ class Tab
 
     /**
      * @ORM\Column(name="avatar", type="string", length=200)
+     *
+     * @Assert\File()
      */
     private $avatar;
 
@@ -214,7 +218,7 @@ class Tab
     }
 
     /**
-     * @return mixed
+     * @return UploadedFile
      */
     public function getAvatar()
     {

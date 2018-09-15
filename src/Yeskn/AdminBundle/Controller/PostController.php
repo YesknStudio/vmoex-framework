@@ -25,9 +25,7 @@ class PostController extends Controller
     {
         $post = new Post();
 
-        $form = $this->createForm('Yeskn\MainBundle\Form\PostType', $post)
-            ->add('saveCraft', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
-
+        $form = $this->createForm('Yeskn\MainBundle\Form\PostType', $post);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -62,9 +60,7 @@ class PostController extends Controller
         $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
             ->find($request->get('id'));
 
-        $form = $this->createForm('Yeskn\MainBundle\Form\PostType', $post)
-            ->add('saveCraft', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
-
+        $form = $this->createForm('Yeskn\MainBundle\Form\PostType', $post);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

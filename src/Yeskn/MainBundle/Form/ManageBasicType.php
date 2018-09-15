@@ -11,12 +11,11 @@ namespace Yeskn\MainBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Yeskn\MainBundle\Form\DataTransfer\DatetimeToStringTransfer;
-use Yeskn\MainBundle\Form\DataTransfer\StringToImageTransformer;
 use Yeskn\MainBundle\Form\Entity\BasicManage;
+use Yeskn\MainBundle\Form\Type\ImageInputType;
 
 class ManageBasicType extends AbstractType
 {
@@ -30,7 +29,7 @@ class ManageBasicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            $builder->create('siteLogo', FileType::class, [
+            $builder->create('siteLogo', ImageInputType::class, [
                 'label' => '网站LOGO',
                 'required' => false,
                 'data_class' => null,
@@ -38,7 +37,6 @@ class ManageBasicType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->addModelTransformer(new StringToImageTransformer($this->webRoot))
         );
         $builder->add(
             $builder->create('siteSince', DateType::class, [

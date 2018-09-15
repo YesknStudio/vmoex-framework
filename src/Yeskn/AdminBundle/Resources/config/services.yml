@@ -4,6 +4,9 @@ services:
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
   Yeskn\AdminBundle\:
+    public: true
+    autoconfigure: true
+    autowire: true
     resource: '../../../AdminBundle/*'
     # you can exclude directories or files
     # but if a service is unused, it's removed anyway
@@ -15,3 +18,8 @@ services:
     resource: '../../../AdminBundle/Controller'
     public: true
     tags: ['controller.service_arguments']
+
+  Yeskn\AdminBundle\Services\LoadTranslationService:
+    arguments:
+      - "%kernel.root_dir%"
+      - "@doctrine.orm.entity_manager"

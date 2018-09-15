@@ -1,6 +1,4 @@
 {% extends '@YesknAdmin/base.html.twig' %}
-{% form_theme form 'form/vertical-field-1.html.twig' %}
-{% form_theme form.avatar 'form/vertical-image-field-1.html.twig' %}
 
 {% block header_stylesheet %}
     <link rel="stylesheet" href="{{ asset('assets/lib/datatables/media/css/dataTables.bootstrap.min.css') }}">
@@ -31,6 +29,7 @@
                     <th>图标</th>
                     <th>层级</th>
                     <th>别名</th>
+                    <th>描述</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -42,8 +41,9 @@
                         <td align="center"><img height="20" width="20" src="{{ asset(item.avatar) }}" alt=""></td>
                         <td>{{ item.level }}</td>
                         <td>{{ item.alias }}</td>
+                        <td>{{ item.description }}</td>
                         <td width="115" align="center">
-                            <a class="btn btn-warning btn-xs" href="{{ path('admin_tab_index', {tab:item.alias}) }}"><i class="fa fa-edit"></i> 修改</a>
+                            <a data-edit class="btn btn-warning btn-xs" href="{{ path('admin_tab_edit', {id: item.id}) }}"><i class="fa fa-edit"></i> 修改</a>
                             <a data-edsPost class="btn btn-danger btn-xs" href="{{ path('admin_delete', {entity: 'tab', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
@@ -72,15 +72,34 @@
                 responsive: true
             });
 
-            edsUI.form('#modalForm', function (result) {
-                if(result.status) {
-                    window.location = '{{ path('admin_tab_index') }}';
-                } else {
-                    edsUI.mask().alert('result.message');
-                }
+            function ajaxForm(formId) {
+                edsUI.form(formId, function (result) {
+                    if(result.status) {
+                        window.location = '{{ path('admin_tab_index') }}';
+                    } else {
+                        edsUI.mask().alert(result.message);
+                    }
 
-                return false;
-            }, ['#saveModalFormBtn','text']);
+                    return false;
+                }, ['#saveModalFormBtn','text']);
+            }
+
+            ajaxForm('#modalForm');
+
+            $('[data-edit]').click(function (e) {
+                e.preventDefault();
+
+                var formId =  Math.round(Math.random()*100000000000);
+                var url = $(this).attr('href') + '?r=' + formId;
+
+                $.get(url, function (res) {
+                    $('body').append(res);
+
+                    $('#entityModal'+formId).last().modal();
+
+                    ajaxForm('#modalForm'+formId);
+                });
+            });
         });
     </script>
 {% endblock %}

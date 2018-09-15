@@ -30,7 +30,7 @@ class StringToImageTransformer implements DataTransformerInterface
             return new File($filePath);
         }
 
-        return $value;
+        return new File($value, false);
     }
 
     /**
