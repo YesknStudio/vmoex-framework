@@ -127,7 +127,7 @@ notice_replied_you: notice_replied_you
 post_top: post_top
 like: 赞
 action_too_fast: 好可怕，速度太快了
-banner_announce: '公告'
+banner_announce: '本網站的內容可能侵犯了您的權益，當前Vmoex使用您的文章（或者圖片等）僅用於測試真實上線情况，如您不允許，請致郵：support@vmoex.com。'
 all: '全部'
 hot: 热门
 site_state: 社区运行状态

@@ -24,4 +24,6 @@ services:
     #         $someArgument: 'some_value'
   socket.push:
     class: Yeskn\MainBundle\Services\SocketPushService
-    arguments: ["@service_container"]
+    arguments:
+      - "@service_container"
+      - "@twig.extension.global_value"

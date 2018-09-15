@@ -13,6 +13,7 @@ use GuzzleHttp\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Twig\GlobalValue;
 
 class SocketPushService
 {
@@ -26,10 +27,16 @@ class SocketPushService
      */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var GlobalValue
+     */
+    private $globalValue;
+
+    public function __construct(ContainerInterface $container, $globalValue)
     {
         $this->client = new Client();
         $this->container = $container;
+        $this->globalValue = $globalValue;
     }
 
     public function pushAll($event, $data = [])
@@ -56,8 +63,7 @@ class SocketPushService
                     'data' => [
                         'sender_username' => $message->getSender()->getUsername(),
                         'sender' => $message->getSender()->getNickname(),
-                        'createdAt' => $this->container->get('twig.extension.global_value')
-                            ->ago($message->getCreatedAt()),
+                        'createdAt' => $this->globalValue->ago($message->getCreatedAt()),
                         'content' => mb_substr(strip_tags($message->getContent()), 0, 20),
                     ]
                 ]
