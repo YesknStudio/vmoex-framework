@@ -27,6 +27,12 @@ services:
         - "%kernel.project_dir%"
       tags: [form.type]
 
+  Yeskn\MainBundle\Form\TabType:
+      arguments:
+        - "%kernel.project_dir%"
+      tags: [form.type]
+
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

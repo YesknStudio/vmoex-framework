@@ -1,0 +1,11 @@
+{% block checkbox_widget %}
+    {% spaceless %}
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" {{ block('widget_attributes') }}> {{ label }}
+                </label>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock checkbox_widget %}
