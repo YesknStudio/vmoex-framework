@@ -7,7 +7,12 @@
 {% block page_wraper %}
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">用户管理</h1>
+            <h1 class="page-header">用户管理
+
+                <span class="pull-right">
+                <button class="btn btn-success"><i class="fa fa-plus"></i> 增加</button>
+            </span>
+            </h1>
         </div>
     </div>
 
@@ -42,7 +47,10 @@
                         <td>{{ item.remark }}</td>
                         <td>{{ item.gold }}</td>
                         <td>{{ item.role }}</td>
-                        <td><a href="">删除</a></td>
+                        <td width="115" align="center">
+                            <a role="button" class="btn btn-xs btn-warning" href="/"><i class="fa fa-edit"></i> 编辑</a>
+                            <a role="button" class="btn btn-xs btn-danger" href="/"><i class="fa fa-remove"></i> 删除</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
