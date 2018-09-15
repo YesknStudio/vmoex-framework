@@ -38,12 +38,12 @@
                 {% for item in list %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.username }}</td>
-                        <td align="center"><img width="25" src="{{ item.avatar }}" alt=""></td>
+                        <td><a href="{{ path('member_home', {username:item.username}) }}">{{ item.username }}</a></td>
+                        <td align="center"><img width="25" src="{{ asset(item.avatar) }}" alt=""></td>
                         <td>{{ item.nickname }}</td>
                         <td>{{ item.email }}</td>
-                        <td>{{ item.loginAt|date('Y-m-d H:i:s') }}</td>
-                        <td>{{ item.registerAt|date('Y-m-d H:i:s') }}</td>
+                        <td>{{ item.loginAt|ago }}</td>
+                        <td>{{ item.registerAt|ago }}</td>
                         <td>{{ item.remark }}</td>
                         <td>{{ item.gold }}</td>
                         <td>{{ item.role }}</td>

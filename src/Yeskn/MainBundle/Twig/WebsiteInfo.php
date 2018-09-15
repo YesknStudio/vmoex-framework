@@ -26,12 +26,16 @@ class WebsiteInfo extends \Twig_Extension
 
     public function websiteInfo()
     {
-        $res = $this->em->getRepository('YesknMainBundle:Manage')->findAll();
+        static $return = [];
 
-        $return = [];
+        if (empty($return)) {
+            $res = $this->em->getRepository('YesknMainBundle:Manage')->findAll();
 
-        foreach ($res as $value) {
-            $return[$value->getName()] = $value->getValue();
+            $return = [];
+
+            foreach ($res as $value) {
+                $return[$value->getName()] = $value->getValue();
+            }
         }
 
         return $return;

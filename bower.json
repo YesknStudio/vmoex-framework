@@ -2,10 +2,11 @@
   "name": "wpcraft",
   "dependencies": {
     "bootstrap": "v3.3.7",
-    "jquery":"v3.3.1",
-    "jquery-pjax":"v2.0.1",
-    "nprogress":"v0.2.0",
-    "font-awesome":"v4.7.0",
-    "startbootstrap-sb-admin-2": "BlackrockDigital/startbootstrap-sb-admin-2#^3.3.7"
+    "jquery": "v3.3.1",
+    "jquery-pjax": "v2.0.1",
+    "nprogress": "v0.2.0",
+    "font-awesome": "v4.7.0",
+    "startbootstrap-sb-admin-2": "BlackrockDigital/startbootstrap-sb-admin-2#^3.3.7",
+    "eds-ui": "1.0.1"
   }
 }

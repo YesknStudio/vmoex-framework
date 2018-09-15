@@ -2,6 +2,7 @@
 
 {% block header_stylesheet %}
     <link rel="stylesheet" href="{{ asset('assets/lib/datatables/media/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/lib/eds-ui/dist/css/edsUI.css') }}">
 {% endblock %}
 
 {% block page_wraper %}
@@ -10,7 +11,7 @@
             <h1 class="page-header">翻译管理
 
                 <span class="pull-right">
-                <button class="btn btn-success"><i class="fa fa-plus"></i> 增加</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#addTranslateModal"><i class="fa fa-plus"></i> 增加</button>
             </span>
             </h1>
         </div>
@@ -50,17 +51,32 @@
         </div>
     </div>
 
+    {% include '@YesknAdmin/modals/add-translate-modal.html.twig' with {form: form} %}
 {% endblock %}
 
 {% block footer_javascript %}
     <script src="{{ asset('assets/lib/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/lib/datatables/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/lib/datatables-responsive/js/dataTables.responsive.js') }}"></script>
+    <script src="{{ asset('assets/lib/eds-ui/edsUI.js') }}"></script>
+
     <script>
         $(document).ready(function() {
+            $("[data-toggle=popover]").popover();
+
             $('#dataTables-example').DataTable({
                 responsive: true
             });
+
+            edsUI.form('#addTranslateForm', function (result) {
+                if(result.ret) {
+                    window.location = '{{ path('admin_translation_index') }}';
+                } else {
+                    edsUI.mask().alert('result.msg');
+                }
+
+                return false;
+            }, ['#saveTranslateBtn','text']);
         });
     </script>
 {% endblock %}

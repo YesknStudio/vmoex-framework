@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Vmoex Admin Panel">
     <meta name="author" content="Jake">
-    {% block title %}  <title>Admin</title> {% endblock %}
+    {% block title %}  <title>{{ 'site_name'|trans }} Admin</title> {% endblock %}
     {% block head_css_link %}
         <link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/dist/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/lib/startbootstrap-sb-admin-2/dist/css/sb-admin-2.min.css') }}">

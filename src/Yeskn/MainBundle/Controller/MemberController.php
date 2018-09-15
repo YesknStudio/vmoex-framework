@@ -42,11 +42,14 @@ class MemberController extends Controller
 
         $online = false;
 
-        /** @var \DateTime $updatedAt */
-        $updatedAt = $userActive->getUpdatedAt();
+        if ($userActive) {
 
-        if ($userActive and $updatedAt->getTimestamp() >= time() - 15*60) {
-            $online = true;
+            /** @var \DateTime $updatedAt */
+            $updatedAt = $userActive->getUpdatedAt();
+
+            if ($userActive and $updatedAt->getTimestamp() >= time() - 15*60) {
+                $online = true;
+            }
         }
 
         return $this->render('@YesknMain/user/user-home.html.twig', [
