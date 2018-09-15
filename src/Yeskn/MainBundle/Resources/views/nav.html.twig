@@ -109,7 +109,7 @@
                                 </li>
                             {% endif %}
                             <li>
-                                <a href="{{ path('user_home', {username: app.user.username}) }}" data-pjax>
+                                <a href="{{ path('member_home', {username: app.user.username}) }}" data-pjax>
                                     <i class="fa fa-home fa-fw"></i> {{ "nav_user_home"|trans }}
                                 </a>
                             </li>
@@ -149,7 +149,7 @@
                     </li>
                 {% endif %}
                 <li>
-                    <a data-pjax href="{{ path('user_home', {username: app.user.username}) }}">
+                    <a data-pjax href="{{ path('member_home', {username: app.user.username}) }}">
                         <i class="fa fa-home fa-fw"></i> {{ 'nav_user_home'|trans }}
                     </a>
                 </li>

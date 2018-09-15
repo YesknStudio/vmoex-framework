@@ -45,9 +45,9 @@
                                                 <small class="text-muted">
                                                     <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|ago }}
                                                 </small>
-                                                <strong class="pull-right primary-font"><a data-pjax href="{{ path('user_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                                <strong class="pull-right primary-font"><a data-pjax href="{{ path('member_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
                                                 {% else %}
-                                                    <strong class="primary-font"><a data-pjax href="{{ path('user_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                                    <strong class="primary-font"><a data-pjax href="{{ path('member_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
                                                     <small class="pull-right text-muted">
                                                         <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|ago }}
                                                     </small>

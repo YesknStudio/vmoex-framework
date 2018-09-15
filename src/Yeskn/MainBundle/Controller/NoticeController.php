@@ -29,9 +29,11 @@ class NoticeController extends Controller
             return new JsonResponse('user not login');
         }
 
+        /** @var Notice[] $unreadNotices */
         $unreadNotices = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')
             ->findBy(['pushTo' => $user, 'isRead' => false], ['createdAt' => 'DESC']);
 
+        /** @var Notice[] $readNotices */
         $readNotices = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')
             ->findBy(['pushTo' => $user, 'isRead' => true], ['createdAt' => 'DESC']);
 

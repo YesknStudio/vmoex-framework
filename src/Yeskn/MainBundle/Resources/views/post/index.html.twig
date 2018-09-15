@@ -38,7 +38,7 @@
                             </div>
                             <p class="post-meta">
                         <span><i class="fa fa-user"></i>
-                            <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
+                            <a data-pjax href="{{ path('member_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
 
                                 <span class="category">
                                       <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>

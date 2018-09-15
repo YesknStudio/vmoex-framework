@@ -162,7 +162,7 @@
                                                     {% if app.user.following is not empty %}
                                                         {% for fo in app.user.following %}
                                                             <li style="list-style: none;margin: 10px 0;padding-right: 10px">
-                                                                <a data-pjax href="{{ path('user_home', {username: fo.username}) }}">
+                                                                <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
                                                                     <img src="{{ fo.avatar }}" alt="" width="25" height="25" style="border-radius: 50%">
                                                                     {{ fo.nickname }}
                                                                 </a>
@@ -179,7 +179,7 @@
                                                     {% if app.user.following is not empty %}
                                                         {% for fo in app.user.following %}
                                                             <li style="list-style: none;margin: 10px 0;padding-right: 10px">
-                                                                <a data-pjax href="{{ path('user_home', {username: fo.username}) }}">
+                                                                <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
                                                                     <img src="{{ fo.avatar }}" alt="" width="25" height="25" style="border-radius: 50%">
                                                                     {{ fo.nickname }}
                                                                 </a>

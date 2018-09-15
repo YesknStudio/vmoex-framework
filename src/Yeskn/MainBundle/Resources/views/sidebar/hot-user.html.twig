@@ -8,7 +8,7 @@
             <ul class="hot-user-list">
                 {% for active in hotUsers %}
                     <li class="hot-user-item">
-                        <a data-pjax href="{{ path('user_home', {username: active.username}) }}">
+                        <a data-pjax href="{{ path('member_home', {username: active.username}) }}">
                             <img src="{{ asset(active.avatar) }}" alt="" width="25" height="25" class="img-rounded">
                             {{ active.nickname }}
                         </a>

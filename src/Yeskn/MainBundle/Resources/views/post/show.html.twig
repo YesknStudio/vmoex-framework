@@ -7,13 +7,13 @@
         <div class="content">
             <div class="topic-header border-bottom">
                 <div class="pull-right title-avatar">
-                    <a data-pjax href="{{ path('user_home', {username:post.author.username}) }}">
+                    <a data-pjax href="{{ path('member_home', {username:post.author.username}) }}">
                         <img src="{{ asset(post.author.avatar) }}" alt="" class="img-rounded">
                     </a>
                 </div>
                 <h2>{{ post.title }}</h2>
                 <p class="post-meta">
-                    <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('user_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
+                    <span><i class="fa fa-user"></i> <a data-pjax href="{{ path('member_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
                     <span class="category">
                      <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
                 </span>
@@ -70,7 +70,7 @@
                 </span>
                         <div class="comment-main chat-body clearfix">
                             <div class="comment-user-info">
-                                <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
+                                <strong class="primary-font"><a href="{{ path('member_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
                                 {% if comment.user.role == 'ROLE_ADMIN' %}
                                     <span class="mod-text" data-content="管理员" title="MOD">mod</span>
                                 {% elseif comment.user == post.author %}

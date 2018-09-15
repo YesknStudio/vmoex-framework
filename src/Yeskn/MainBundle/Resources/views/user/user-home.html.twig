@@ -20,7 +20,7 @@
                         <div class="chat-body clearfix">
                             <div class="header clearfix">
                                 <strong class="primary-font home-name"><a
-                                            href="{{ path('user_home', {username: user.username}) }}"
+                                            href="{{ path('member_home', {username: user.username}) }}"
                                             data-pjax>{{ user.nickname }}</a>
                                 </strong>
                                 {% if online %}
@@ -28,7 +28,7 @@
                                 {% endif %}
                                 <small class="pull-right text-muted">
                                     <i class="fa fa-clock-o fa-fw"></i> {{ '加入于'|trans }}{{ user.registerAt|date('Y-m-d H:i:s') }}，
-                                    {{ '第count位Vmoex用户'|trans({count:user.id}) }}
+                                    {{ 'user_place_in_site'|trans({count:user.id}) }}
 
                                     {% if userActive %}
                                         ，{{ '最后在线时间：time'|trans({time: userActive.updatedAt|ago}) }}
@@ -121,7 +121,7 @@
                     {% if user.following is not empty %}
                         {% for fo in user.following %}
                             <li style="list-style: none;margin: 10px 0;display: inline-block;padding-right: 10px">
-                                <a data-pjax href="{{ path('user_home', {username: fo.username}) }}">
+                                <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
                                     <img src="{{ asset(fo.avatar) }}" alt="" width="25" height="25" style="border-radius: 50%">
                                     {{ fo.nickname }}
                                 </a>
@@ -141,7 +141,7 @@
                     {% if user.followers is not empty %}
                         {% for fo in user.followers %}
                             <li style="list-style: none;margin: 10px 0;display: inline-block;padding-right: 10px">
-                                <a data-pjax href="{{ path('user_home', {username: fo.username}) }}">
+                                <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
                                     <img src="{{ asset(fo.avatar) }}" alt="" width="25" height="25" style="border-radius: 50%">
                                     {{ fo.nickname }}
                                 </a>

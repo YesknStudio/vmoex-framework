@@ -12,7 +12,7 @@
                 </span>
                     <div class="chat-body clearfix">
                         <div class="header">
-                            <strong class="primary-font"><a href="{{ path('user_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
+                            <strong class="primary-font"><a href="{{ path('member_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
                             <small class="pull-right text-muted">
                                 <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|ago }}
                             </small>

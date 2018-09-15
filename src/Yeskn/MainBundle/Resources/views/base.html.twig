@@ -21,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Wpcast">
-    {% block title %} <title>wpcraft</title> {% endblock %}
+    {% block title %} <title>{{ 'site_title'|trans }}</title> {% endblock %}
     {% if app.request.get('_pjax') is empty %}
         {% block head_css_link %}
             {% stylesheets

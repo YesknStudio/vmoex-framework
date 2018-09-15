@@ -22,7 +22,7 @@
                                     {% for message in rMessages %}
                                         <li class="list-group-item {{ message.isRead ? '' : 'list-group-item-warning' }}">
                                             <img src="{{ asset(message.sender.avatar) }}" alt="" width="30" height="30" class="img-rounded">
-                                            <a data-pjax href="{{ path('user_home', {username: message.sender.username}) }}">{{ message.sender.nickname }}</a>
+                                            <a data-pjax href="{{ path('member_home', {username: message.sender.username}) }}">{{ message.sender.nickname }}</a>
                                             {{ message.createdAt|ago }}
                                             对你说：{{ message.content }}
                                         </li>
@@ -39,7 +39,7 @@
                             {% if sMessages is not empty %}
                                 <ul class="messages list-group">
                                     {% for message in sMessages %}
-                                        <li class="list-group-item">你对<a data-pjax href="{{ path('user_home', {username: message.receiver.username}) }}">{{ message.receiver.nickname }}</a>说：{{ message.content }} <span class="pull-right">{{ message.createdAt|ago }}</span></li>
+                                        <li class="list-group-item">你对<a data-pjax href="{{ path('member_home', {username: message.receiver.username}) }}">{{ message.receiver.nickname }}</a>说：{{ message.content }} <span class="pull-right">{{ message.createdAt|ago }}</span></li>
                                     {% endfor %}
                                 </ul>
                             {% else %}
