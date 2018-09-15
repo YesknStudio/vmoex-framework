@@ -101,4 +101,16 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function getTodayLoggedUserCount()
+    {
+        $count = $this->createQueryBuilder('p')
+            ->select('SUM(p.id)')
+            ->where('p.loginAt >= :today')
+            ->setParameter('today', new \DateTime('today'))
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $count ?: 0;
+    }
 }

@@ -11,7 +11,7 @@ use Yeskn\MainBundle\Entity\Post;
 
 /**
  * Class PostController
- * @Route("/admin/post")
+ * @Route("/post")
  * @Security("has_role('ROLE_ADMIN')")
  */
 class PostController extends Controller
@@ -42,7 +42,7 @@ class PostController extends Controller
             $entityManager->flush();
 
             $this->addFlash('success', '创建文章成功');
-            return $this->redirectToRoute('yeskn_admin_post_list');
+            return $this->redirectToRoute('admin_post_index');
         }
 
         return $this->render('@YesknAdmin/Post/create.html.twig', array(
@@ -74,10 +74,10 @@ class PostController extends Controller
             $entityManager->flush();
 
             $this->addFlash('success', '编辑文章成功');
-            return $this->redirectToRoute('yeskn_admin_post_list');
+            return $this->redirectToRoute('admin_post_index');
         }
 
-        return $this->render('@YesknAdmin/Post/create.html.twig', array(
+        return $this->render('@YesknAdmin/post/create.html.twig', array(
             'post' => $post,
             'form' => $form->createView(),
         ));
@@ -95,10 +95,10 @@ class PostController extends Controller
             $em->remove($post);
             $em->flush();
             $this->addFlash('success','delete success');
-            return $this->redirectToRoute('yeskn_admin_post_list');
+            return $this->redirectToRoute('admin_post_index');
         } else {
             $this->addFlash('error','no post found for id' . $id);
-            return $this->redirectToRoute('yeskn_admin_post_list');
+            return $this->redirectToRoute('admin_post_index');
         }
     }
 
@@ -111,9 +111,7 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/list")
-     * @Route("/index")
-     * @Route("/")
+     * @Route("/", name="admin_post_index")
      */
     public function listAction()
     {
@@ -122,8 +120,8 @@ class PostController extends Controller
          */
         $posts = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->findBy([], ['updatedAt' => 'DESC']);
 
-        return $this->render('@YesknAdmin/Post/index.html.twig', array(
-            'posts' => $posts
+        return $this->render('@YesknAdmin/post/index.html.twig', array(
+            'list' => $posts
         ));
     }
 }

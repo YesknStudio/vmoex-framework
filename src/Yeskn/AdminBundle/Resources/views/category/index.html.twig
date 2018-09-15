@@ -7,7 +7,7 @@
 {% block page_wraper %}
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">文章管理</h1>
+            <h1 class="page-header">分类管理</h1>
         </div>
     </div>
 
@@ -17,28 +17,20 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>标题</th>
-                    <th>作者</th>
-                    <th>发布日期</th>
-                    <th>更新日期</th>
-                    <th>点击</th>
+                    <th>名称</th>
+                    <th>别名</th>
                     <th>状态</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for item in list %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td><a href="{{ path('post_show', {id:item.id}) }}">{{ item.title }}</a></td>
-                        <td>{{ item.author.username }}</td>
-                        <td>{{ item.createdAt|ago }}</td>
-                        <td>{{ item.updatedAt|ago }}</td>
-                        <td>{{ item.views }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.slug }}</td>
                         <td>{{ item.status }}</td>
-                        <td>
-                            <a href="{{ path('yeskn_admin_post_edit', {id:item.id}) }}">编辑</a>
-                            <a href="{{ path('yeskn_admin_post_delete',{id:item.id}) }}">删除</a>
-                        </td>
+                        <td></td>
                     </tr>
                 {% endfor %}
                 </tbody>

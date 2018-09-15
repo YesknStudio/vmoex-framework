@@ -6,9 +6,8 @@ yeskn_oauth:
 
 yeskn_admin:
     resource: "@YesknAdminBundle/Controller/"
-    host:     admin.wpcraft.cn
     type:     annotation
-    prefix:   /
+    prefix:   /admin
 
 yeskn_wpcraft:
     resource: "@YesknMainBundle/Controller/"

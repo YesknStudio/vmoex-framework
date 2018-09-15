@@ -5,7 +5,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="{{ path('homepage') }}">Wpcraft</a>
+    <a class="navbar-brand" href="{{ url('homepage') }}">Wpcraft</a>
 </div>
 <ul class="nav navbar-top-links navbar-right">
     <li class="dropdown">
@@ -120,7 +120,7 @@
             <i class="fa fa-user fa-fw"></i>  功能 <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
-            <li><a href="{{ path('user_setting') }}"><i class="fa fa-user fa-fw"></i>我的资料</a>
+            <li><a href="{{ absolute_url(path('user_setting')) }}"><i class="fa fa-user fa-fw"></i>我的资料</a>
             </li>
             <li><a href="#"><i class="fa fa-gear fa-fw"></i>系统设置</a>
             </li>

@@ -1,0 +1,37 @@
+{% extends '@YesknAdmin/base.html.twig' %}
+
+{% block page_wraper %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">创建新的文章</h3>
+        </div>
+    </div>
+    <div class="row">
+        {{ form_start(form) }}
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-9">
+                    {{ form_row(form.title) }}
+
+                    <div class="form-group">
+                        <label class="control-label required" for="editor-trigger">内容</label>
+                        <textarea class="form-control"  id="editor-trigger">{{ form_row(form.content) }}</textarea>
+                    </div>
+
+                    <button type="submit" value="{{ 'submit' }}" class="btn btn-primary">提交</button>
+                    {{ form_widget(form.saveCraft, { label: '存草稿', attr: { class: 'btn btn-primary' } }) }}
+                </div>
+                <div class="col-lg-3">
+                    {{ form_row(form.tab) }}
+                    {{ form_row(form.tags) }}
+                    {{ form_row(form.author) }}
+                    {{ form_row(form.views) }}
+
+                    {{ form_row(form.isTop) }}
+                    {{ form_row(form.cover) }}
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

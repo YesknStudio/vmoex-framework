@@ -7,6 +7,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Translation\Translator;
 use Yeskn\MainBundle\Entity\User;
 
@@ -194,7 +195,7 @@ class GlobalValue extends \Twig_Extension
     {
         $user = $this->tokenStorage->getToken()->getUser();
 
-        if ($user) {
+        if ($user instanceof UserInterface) {
             $userParam = [
                 'username' => $user->getUsername(),
                 'socketToken'=> ''
