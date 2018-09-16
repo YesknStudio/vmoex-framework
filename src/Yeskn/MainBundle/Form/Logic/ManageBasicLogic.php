@@ -21,9 +21,18 @@ class ManageBasicLogic
      */
     private $em;
 
+    private $options;
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
+
+        $this->options = [
+            'siteLogo',
+            'siteSince',
+            'siteVersion',
+            'siteAnnounce'
+        ];
     }
 
     /**
@@ -35,22 +44,22 @@ class ManageBasicLogic
 
         $repo = $this->em->getRepository('YesknMainBundle:Manage');
 
-        $entity = $repo->findOneBy(['name' => 'siteLogo']);
+        foreach ($this->options as $option) {
+            $entity = $repo->findOneBy(['name' => $option]);
 
-        if ($entity) {
-            $basicMange->setSiteLogo($entity->getValue());
-        }
+            if ($option == 'siteSince') {
+                $basicMange->set($option, new \DateTime($entity->getValue()));
+                continue;
+            }
 
-        $entity = $repo->findOneBy(['name' => 'siteSince']);
+            if ($option == 'siteAnnounce') {
+                $basicMange->set($option, boolval($entity->getValue()));
+                continue;
+            }
 
-        if ($entity) {
-            $basicMange->setSiteSince(new \DateTime($entity->getValue()));
-        }
-
-        $entity = $repo->findOneBy(['name' => 'siteVersion']);
-
-        if ($entity) {
-            $basicMange->setSiteVersion($entity->getValue());
+            if ($entity) {
+                $basicMange->set($option, $entity->getValue());
+            }
         }
 
         return $basicMange;
@@ -60,45 +69,24 @@ class ManageBasicLogic
     {
         $repo = $this->em->getRepository('YesknMainBundle:Manage');
 
-        if (!empty($basicManage->getSiteLogo())) {
-
-            $entity = $repo->findOneBy(['name' => 'siteLogo']);
-
-            if (empty($entity)) {
-                $entity = new Manage();
-            }
-
-            $entity->setName('siteLogo');
-            $entity->setValue($basicManage->getSiteLogo());
-
-            $this->em->persist($entity);
-            $this->em->flush();
-        }
-
-        if (!empty($basicManage->getSiteSince())) {
-            $entity = $repo->findOneBy(['name' => 'siteSince']);
+        foreach ($this->options as $option) {
+            $entity = $repo->findOneBy(['name' => $option]);
 
             if (empty($entity)) {
                 $entity = new Manage();
             }
 
-            $entity->setName('siteSince');
-            $entity->setValue($basicManage->getSiteSince()->format('Y-m-d'));
+            $entity->setName($option);
 
-            $this->em->persist($entity);
-            $this->em->flush();
+            $entity->setValue($basicManage->get($option));
 
-        }
-
-        if (!empty($basicManage->getSiteVersion())) {
-            $entity = $repo->findOneBy(['name' => 'siteVersion']);
-
-            if (empty($entity)) {
-                $entity = new Manage();
+            if ($option == 'siteAnnounce') {
+                $entity->setValue(intval($basicManage->getSiteAnnounce()));
             }
 
-            $entity->setName('siteVersion');
-            $entity->setValue($basicManage->getSiteVersion());
+            if ($option == 'siteSince') {
+                $entity->setValue($basicManage->getSiteSince()->format('Y-m-d'));
+            }
 
             $this->em->persist($entity);
             $this->em->flush();

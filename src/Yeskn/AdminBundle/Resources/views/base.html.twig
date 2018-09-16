@@ -54,5 +54,44 @@
     <script src="{{ asset('assets/lib/startbootstrap-sb-admin-2/dist/js/sb-admin-2.min.js') }}"></script>
 {% endblock %}
 {% block footer_javascript %}{% endblock %}
+<script>
+   setTimeout(function () {
+       $(".alert-success").slideUp(500);
+   }, 1000);
+
+   $(document).on('click', '[data-delete]', function (e) {
+       e.preventDefault();
+       let href = $(this).attr('href');
+       let modalId = Math.round(Math.random() * 100000000);
+       $.post('{{ path('admin_confirm_modal') }}', {
+           modalId: modalId
+       }, function (res) {
+           $('body').append(res);
+
+           let $modal = $('#confirmModal'+modalId);
+
+           $modal.modal();
+           $modal.find('[type="submit"]').on('click', function () {
+               $.post(href, {}, function (res) {
+                   if (res.status) {
+                       window.location.reload();
+                   } else {
+                       $modal.modal('hide');
+                       $.get('{{ path('admin_alert_modal') }}', {
+                           modalId: modalId,
+                           message: res.message
+                       }, function (res) {
+                           $('body').append(res);
+
+                           let $modal = $('#alertModal'+modalId);
+                           $modal.modal();
+                       })
+                   }
+               });
+           });
+       })
+   })
+
+</script>
 </body>
 </html>

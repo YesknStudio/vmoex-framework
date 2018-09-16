@@ -10,17 +10,13 @@
 namespace Yeskn\AdminBundle\CrudEvent;
 
 use Yeskn\AdminBundle\Services\LoadTranslationService;
-use Yeskn\MainBundle\Entity\Translation;
 
 class FinishEditTranslationEvent implements CrudEventInterface
 {
-    private $entity;
-
     private $loadService;
 
-    public function __construct(Translation $entity, LoadTranslationService $loadService)
+    public function __construct(LoadTranslationService $loadService)
     {
-        $this->entity = $entity;
         $this->loadService = $loadService;
 
     }

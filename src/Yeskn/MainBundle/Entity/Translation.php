@@ -62,6 +62,13 @@ class Translation
     private $taiwanese;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="can_delete", type="boolean", options={"default":false})
+     */
+    private $canDelete = true;
+
+    /**
      * @return int
      */
     public function getId()
@@ -155,5 +162,21 @@ class Translation
     public function setTaiwanese($taiwanese)
     {
         $this->taiwanese = $taiwanese;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanDelete()
+    {
+        return $this->canDelete;
+    }
+
+    /**
+     * @param bool $canDelete
+     */
+    public function setCanDelete($canDelete)
+    {
+        $this->canDelete = $canDelete;
     }
 }

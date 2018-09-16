@@ -4,7 +4,14 @@
             <div class="checkbox">
                 <label>
                     <input {% if data == 1 %}checked{% endif %} type="checkbox" {{ block('widget_attributes') }}> {{ label }}
+
+                    {% for attrname, attrvalue in attr %}
+                        {% if attrname == 'help' %}
+                            <span class="help-block x-small-font">{{ attrvalue }}</span>
+                        {% endif %}
+                    {% endfor %}
                 </label>
+                {{ form_errors(form) }}
             </div>
         </div>
     {% endspaceless %}

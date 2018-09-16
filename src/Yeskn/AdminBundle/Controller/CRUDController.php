@@ -36,18 +36,23 @@ class CRUDController extends Controller
      */
     public function deleteAction($entity, $id)
     {
-        $entity = $this->getDoctrine()->getRepository('YesknMainBundle:'. ucfirst($entity))
+        $entity = ucfirst($entity);
+        $entityObj = $this->getDoctrine()->getRepository('YesknMainBundle:'. $entity)
             ->find($id);
 
-        if ($entity) {
-            $em = $this->get('doctrine.orm.entity_manager');
-
+        if ($entityObj) {
             try {
-                $em->remove($entity);
+                $this->processEntityDeleteEvent($entity, $entityObj);
+
+                $em = $this->get('doctrine.orm.entity_manager');
+
+                $em->remove($entityObj);
                 $em->flush();
             } catch (\Exception $exception) {
                 return new JsonResponse(['status' => 0, 'message' => $exception->getMessage()]);
             }
+
+            $this->addSuccessFlash();
 
             return new JsonResponse(['status' => 1, 'message' => '删除成功']);
         }
@@ -170,11 +175,29 @@ class CRUDController extends Controller
         $entity = ucfirst($entity);
         $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\FinishEdit{$entity}Event";
 
+        /** @var CrudEventInterface $processor */
         switch ($entity) {
             case 'Translation':
-                /** @var CrudEventInterface $processor */
-                $processor = new $processorClass($entityObj, $this->get(LoadTranslationService::class));
+                $processor = new $processorClass($this->get(LoadTranslationService::class));
                 break;
+            default:
+                if (class_exists($processorClass)) {
+                    $processor = new $processorClass($entityObj);
+                } else {
+                    return true;
+                }
+        }
+
+        return $processor->execute();
+    }
+
+    protected function processEntityDeleteEvent($entity, $entityObj)
+    {
+        $entity = ucfirst($entity);
+        $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\ProcessDelete{$entity}Event";
+
+        /** @var CrudEventInterface $processor */
+        switch ($entity) {
             default:
                 if (class_exists($processorClass)) {
                     $processor = new $processorClass($entityObj);

@@ -67,7 +67,6 @@ class TabType extends AbstractType
                 'label' => '板块标志',
                 'required' => false
             ])
-//            ->addModelTransformer(new StringToImageTransformer($this->webRoot))
         );
 
     }

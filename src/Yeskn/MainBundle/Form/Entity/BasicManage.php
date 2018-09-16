@@ -17,6 +17,18 @@ class BasicManage implements \ArrayAccess
 
     private $siteVersion;
 
+    private $siteAnnounce;
+
+    public function set($name, $value)
+    {
+        $this->$name = $value;
+    }
+
+    public function get($name)
+    {
+        return $this->$name;
+    }
+
     /**
      * @return mixed
      */
@@ -83,5 +95,21 @@ class BasicManage implements \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->$offset);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSiteAnnounce()
+    {
+        return $this->siteAnnounce;
+    }
+
+    /**
+     * @param mixed $siteAnnounce
+     */
+    public function setSiteAnnounce($siteAnnounce)
+    {
+        $this->siteAnnounce = $siteAnnounce;
     }
 }

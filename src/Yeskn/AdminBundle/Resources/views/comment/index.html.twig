@@ -40,7 +40,7 @@
                         <td>{{ item.createdAt|ago }}</td>
                         <td width="115" align="center">
                             <a data-edit role="button" class="btn btn-xs btn-warning" href="{{ path('admin_edit', {entity: 'comment',id:item.id}) }}"><i class="fa fa-edit"></i> 编辑</a>
-                            <a data-edsPost role="button" class="btn btn-xs btn-danger" href="{{ path('admin_delete',{entity: 'comment', id:item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
+                            <a data-delete role="button" class="btn btn-xs btn-danger" href="{{ path('admin_delete',{entity: 'comment', id:item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
                 {% endfor %}

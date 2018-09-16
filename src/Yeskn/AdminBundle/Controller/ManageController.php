@@ -66,6 +66,8 @@ class ManageController extends Controller
                 $image->resize(100, 100)->save();
 
                 $basic->setSiteLogo($fileName);
+            } else {
+                $basic->setSiteLogo($oldLogo);
             }
 
             $manageBasicLogic->setBasicManage($basic);

@@ -44,7 +44,7 @@
                         <td>{{ item.description }}</td>
                         <td width="115" align="center">
                             <a data-edit class="btn btn-warning btn-xs" href="{{ path('admin_edit', {entity: 'tab', id: item.id}) }}"><i class="fa fa-edit"></i> 修改</a>
-                            <a data-edsPost class="btn btn-danger btn-xs" href="{{ path('admin_delete', {entity: 'tab', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
+                            <a data-delete class="btn btn-danger btn-xs" href="{{ path('admin_delete', {entity: 'tab', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
                 {% endfor %}

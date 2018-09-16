@@ -10,6 +10,7 @@
 namespace Yeskn\MainBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -46,6 +47,14 @@ class ManageBasicType extends AbstractType
             ->addModelTransformer(new DatetimeToStringTransfer())
         );
         $builder->add('siteVersion', null, ['label' => '网站版本']);
+
+        $builder->add('siteAnnounce', CheckboxType::class, [
+            'label' => '开启公告',
+            'required' => false,
+            'attr' => [
+                'help' => '请在翻译管理中编辑词条banner_announce来修改公告内容'
+            ]
+        ]);
     }
 
     /**

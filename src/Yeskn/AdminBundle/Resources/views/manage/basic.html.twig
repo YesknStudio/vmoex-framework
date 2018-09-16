@@ -1,5 +1,6 @@
 {% extends '@YesknAdmin/base.html.twig' %}
 {% form_theme basicForm 'form/vertical-field-1.html.twig' %}
+{% form_theme basicForm.siteAnnounce 'form/vertical-checkbox-type.html.twig' %}
 
 {% block page_wraper %}
     <div class="row">
@@ -7,6 +8,8 @@
             <h3 class="page-header">网站管理 - 基本管理</h3>
         </div>
     </div>
+
+    {% include 'flash_messages.html.twig' %}
 
     <div class="row">
         <div class="col-lg-12">

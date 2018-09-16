@@ -10,7 +10,9 @@
 namespace Yeskn\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -33,6 +35,36 @@ class DefaultController extends Controller
                 'todayLoginUserCount' => $todayLoginUserCount,
                 'comment' => $commentCount
             ]
+        ]);
+    }
+
+    /**
+     * @Route("/confirm_modal", name="admin_confirm_modal", methods={"POST"})
+     *
+     * @param $request
+     * @return Response
+     */
+    public function confirmModalAction(Request $request)
+    {
+        return $this->render('@YesknAdmin/modals/confirm-modal.html.twig', [
+            'modalId' => $request->get('modalId'),
+            'title' => $request->get('title', '提示'),
+            'message' => $request->get('message', '你确定要执行该操作吗？')
+        ]);
+    }
+
+    /**
+     * @Route("/alert_modal", name="admin_alert_modal", methods={"GET"})
+     *
+     * @param $request
+     * @return Response
+     */
+    public function alertModalAction(Request $request)
+    {
+        return $this->render('@YesknAdmin/modals/alert-modal.html.twig', [
+            'modalId' => $request->get('modalId'),
+            'title' => $request->get('title', '警告'),
+            'message' => $request->get('message', '操作失败！')
         ]);
     }
 }

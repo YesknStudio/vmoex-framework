@@ -44,7 +44,7 @@
                         <td>{{ item.taiwanese }}</td>
                         <td width="115" align="center">
                             <a data-edit href="{{ path('admin_edit', {entity: 'translation',id: item.id}) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> 编辑</a>
-                            <a data-edsPost href="{{ path('admin_delete', {entity:'translation', id:item.id}) }}" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i> 删除</a>
+                            <a data-delete href="{{ path('admin_delete', {entity:'translation', id:item.id}) }}" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
                 {% endfor %}
