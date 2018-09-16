@@ -33,7 +33,6 @@ class AuthController extends Controller
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('@YesknMain/Auth/login.html.twig', array(
-            // ...
             'last_username' => $lastUsername,
             'error'         => $error
         ));
@@ -57,13 +56,16 @@ class AuthController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $check = $em->getRepository('YesknMainBundle:User')
                 ->checkEmailAndUsername($user->getEmail(), $user->getUsername());
-            $user->setSalt(md5(uniqid()));
 
             if ($check) {
-                $this->addFlash('error', '用户名或者邮箱已经注册');
-                return $this->redirectToRoute('register');
+                $this->addFlash('danger', '用户名或者邮箱已经注册');
+                return $this->render('@YesknMain/auth/register.html.twig',[
+                    'form' => $form->createView()
+                ]);
             }
+
             // 3) Encode the password (you could also do this via Doctrine listener)
+            $user->setSalt(md5(uniqid()));
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);

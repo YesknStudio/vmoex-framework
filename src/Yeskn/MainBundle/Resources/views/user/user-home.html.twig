@@ -15,13 +15,14 @@
                 <ul class="chat">
                     <li class="left clearfix user-meta">
                         <span class="chat-img pull-left">
-                              <img src="{{ asset(user.avatar) }}" alt="User Avatar" class="img-rounded" width="50" height="50">
+                            <img src="{{ asset(user.avatar) }}" alt="User Avatar" class="img-rounded" width="50" height="50">
                         </span>
                         <div class="chat-body clearfix">
                             <div class="header clearfix">
-                                <strong class="primary-font home-name"><a
-                                            href="{{ path('member_home', {username: user.username}) }}"
-                                            data-pjax>{{ user.nickname }}</a>
+                                <strong class="primary-font home-name">
+                                    <a href="{{ path('member_home', {username: user.username}) }}"
+                                       data-pjax>{{ user.nickname }}
+                                    </a>
                                 </strong>
                                 {% if online %}
                                     <span class="user-online" aria-hidden="false">{{ '在线可撩'|trans }}</span>
@@ -40,7 +41,8 @@
                             <br/>
                             {% if app.user != user %}
                                 <button type="button" data-toggle="modal" data-target="#messageModal"
-                                        class="btn btn-warning btn-sm"><i class="fa fa-envelope"></i> {{ 'userhome_send_message'|trans }}
+                                        class="btn btn-warning btn-sm">
+                                    <i class="fa fa-envelope"></i> {{ 'userhome_send_message'|trans }}
                                 </button>
                                 <button type="button" id="follow-user" class="btn btn-outline btn-danger btn-sm"><i
                                             class="fa fa-heart"></i> {% if app.user in user.followers %}{{ 'userhome_has_followed'|trans }}{% else %}{{ 'userhome_follow'|trans }}{% endif %}
@@ -64,10 +66,10 @@
                         {% for post in posts|reverse %}
                             <article class="main home-article-main" style="position: relative;padding-left: 0">
                                 <div class="col-md-12 post-info">
-                                        <span class="item-small-title">
-                                            <a data-pjax
-                                               href="{{ path('post_show' , {'id' : post.id}) }}">{{ post.title }}</a>
-                                        </span>
+                                    <span class="item-small-title">
+                                        <a data-pjax
+                                           href="{{ path('post_show' , {'id' : post.id}) }}">{{ post.title }}</a>
+                                    </span>
                                     <div class="post-meta">
                                          <span class="category">
                                              <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
@@ -156,9 +158,12 @@
         </div>
     </div>
 
-{% endblock %}
+    {% include '@YesknMain/modals/send-message-modal.html.twig' with {
+        modalId: '',
+        title: '向' ~ user.nickname ~ '发送私信',
+        form: form
+    } %}
 
-{% block footer_javascript %}
     <script>
         $(function () {
             $(document).off('click', '#follow-user');
@@ -175,7 +180,7 @@
                                 fragment: '.content-body',
                                 timeout: 200000000,
                                 show: 'fade',
-                                cache: true,  //是否使用缓存
+                                cache: true,
                                 push: true,
                             })
                         }
@@ -200,8 +205,9 @@
                     cache: false,
                     processData: false,
                     contentType: false,
-                    success: function () {
-                        alert('{{ '发送成功'|trans }}');
+                    success: function (res) {
+
+                        alert(res.message);
                         $button.button('reset');
 
                         $('#message-text').val('');
@@ -211,12 +217,9 @@
                     }
                 });
             });
+
+            $('#messageModal').appendTo('body');
         })
     </script>
 
-    {% include '@YesknMain/modals/send-message-modal.html.twig' with {
-        modalId: '',
-        title: '向' ~ user.nickname ~ '发送私信',
-        form: form
-    } %}
 {% endblock %}

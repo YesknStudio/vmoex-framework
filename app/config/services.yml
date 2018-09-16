@@ -14,16 +14,6 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
-    twig.extension.global_value:
-        class: Yeskn\MainBundle\Twig\GlobalValue
-        arguments:
-            $em: "@doctrine.orm.entity_manager"
-            $translator: "@translator"
-            $router: "@router"
-            $tokenStorage: "@security.token_storage"
-            $socketHost: "%socket_host%"
-        tags:
-            - { name: twig.extension }
 
     Yeskn\MainBundle\Twig\WebsiteInfo:
         arguments:

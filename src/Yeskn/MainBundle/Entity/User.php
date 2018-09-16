@@ -5,6 +5,7 @@ namespace Yeskn\MainBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -27,6 +28,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=20, unique=true)
+     * @Assert\Regex("/^\w+$/")
+     * @Assert\Length(min="3", max="20")
      */
     private $username;
 
@@ -41,6 +44,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=128)
+     * @Assert\Length(min="6", max="18")
      */
     private $password;
 

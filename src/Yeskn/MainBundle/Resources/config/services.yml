@@ -1,10 +1,13 @@
 services:
-#    yeskn_wpcraft.example:
-#        class: Yeskn\WpcraftBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
 
-    # makes classes in src/AppBundle available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+  _defaults:
+      autowire: true      # Automatically injects dependencies in your services.
+      autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+      public: false       # Allows optimizing the container by removing unused services; this also means
+      # fetching services directly from the container via $container->get() won't work.
+      # The best practice is to be explicit about your dependencies anyway.
+
+
   Yeskn\MainBundle\:
       resource: '../../../MainBundle/*'
       # you can exclude directories or files
@@ -46,4 +49,18 @@ services:
     class: Yeskn\MainBundle\Services\SocketPushService
     arguments:
       - "@service_container"
-      - "@twig.extension.global_value"
+      - Yeskn\MainBundle\Twig\GlobalValue
+
+  Yeskn\MainBundle\Twig\GlobalValue:
+      arguments:
+        $em: "@doctrine.orm.entity_manager"
+        $translator: "@translator"
+        $router: "@router"
+        $tokenStorage: "@security.token_storage"
+        $socketHost: "%socket_host%"
+      tags:
+      - { name: twig.extension }
+
+  Yeskn\MainBundle\EventListener\AjaxAuthenticationListener:
+    tags:
+    - { name: kernel.event_listener, event: kernel.exception, method: onCoreException, priority: 1000 }

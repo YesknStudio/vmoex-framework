@@ -8,7 +8,7 @@
                     <img class=" img-rounded" src="{{ asset(currentTab.avatar) }}" alt="">
                 </div>
                 <div class="tab-info">
-                    <b><a href="{{ path('homepage') }}">Vmoex</a> <i class="fa  fa-angle-right"></i> <a data-pjax href="{{ path('post_list', {tab:currentTab.alias}) }}">{{ currentTab.parent.name }}</a> <i class="fa fa-angle-right"></i> {{ currentTab.name }}</b>
+                    <b><a href="{{ path('homepage') }}">{{ 'site_name'|trans }}</a> <i class="fa  fa-angle-right"></i> <a data-pjax href="{{ path('post_list', {tab:currentTab.alias}) }}">{{ currentTab.parent.name }}</a> <i class="fa fa-angle-right"></i> {{ currentTab.name }}</b>
                     <div style="padding: 10px 0">
                         {{ currentTab.description }}
                     </div>

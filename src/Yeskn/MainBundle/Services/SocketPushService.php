@@ -84,8 +84,7 @@ class SocketPushService
                     'data' => [
                         'followerNickname' => $from->getNickname(),
                         'followerUsername' => $from->getUsername(),
-                        'createdAt' => $this->container->get('twig.extension.global_value')
-                            ->ago(new \DateTime()),
+                        'createdAt' => $this->globalValue->ago(new \DateTime()),
                     ]
                 ]
             ]

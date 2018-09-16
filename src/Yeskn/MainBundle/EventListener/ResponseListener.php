@@ -8,6 +8,7 @@
 
 namespace Yeskn\MainBundle\EventListener;
 
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ResponseListener
@@ -19,12 +20,12 @@ class ResponseListener
         $response->headers->remove('X-Powered-By');
         $response->headers->set('X-Powered-By', 'Vmoex/0.1.12');
 
-//        $locale = $event->getRequest()->cookies->get('_locale');
-//
-//        if (empty($locale)) {
-//            $locale = 'zh_CN';
-//        }
-//
-//        $response->headers->setCookie(new Cookie('_locale', $locale));
+        $locale = $event->getRequest()->cookies->get('_locale');
+
+        if (empty($locale)) {
+            $locale = 'zh_CN';
+        }
+
+        $response->headers->setCookie(new Cookie('_locale', $locale));
     }
 }

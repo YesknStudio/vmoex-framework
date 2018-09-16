@@ -3,7 +3,6 @@
 namespace Yeskn\MainBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Routing\Router;
@@ -41,7 +40,7 @@ class GlobalValue extends \Twig_Extension
      * GlobalValue constructor.
      * @param EntityManager $em
      */
-    public function __construct(EntityManagerInterface $em, $translator, $router, $tokenStorage, $socketHost)
+    public function __construct($em, $translator, $router, $tokenStorage, $socketHost)
     {
         $this->em = $em;
         $this->translator = $translator;

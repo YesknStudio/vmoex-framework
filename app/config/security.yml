@@ -28,6 +28,7 @@ security:
             anonymous: true
             logout_on_user_change: true
             provider: database_provider
+            access_denied_handler: Yeskn\MainBundle\EventListener\AccessDeniedHandler
             form_login:
                 login_path: login
                 check_path: do_login
