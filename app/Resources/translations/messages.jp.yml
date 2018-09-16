@@ -1,6 +1,6 @@
 about_site: 'について Wpcraft'
 click: クリック
-banner.copyright: 'このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。'
+banner.copyright: このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。
 chinese: 中国語の簡体字
 english: 英語
 chinese.tw: 繁体中国語
@@ -16,9 +16,9 @@ register: 登録
 success: 操作が成功する
 fail: 操作に失敗する
 comment: コメント
-vmoex_slogan: '最も美しい2次元のコミュニティを作ります'
-'添加': '追加'
-'请先登录': '先に登録してください'
+vmoex_slogan: 最も美しい2次元のコミュニティを作ります
+添加: 追加
+请先登录: 先に登録してください
 trends_description: このプレートは、あなたが注目しているユーザー、プレート、またはテーマを展示するために使用されています。
 blind_description: 「雑談」は、Vmexコミュニティで提供されたオンライン即時チャットの機能であり、「雑談」を送るごとに金貨1枚が消費される。
 search: 検索
@@ -30,8 +30,8 @@ blind.chat: 雑談をする
 板块: のプレート
 Vmoex当前板块数量: Vmex現在のプレートの数
 hello_stranger: こんにちは、知らない人
-hello_stranger_detail: 'もしあなたがVmexが好きなら、登録や保存サイトを覚えてください。'
-my.status: '私の状態'
+hello_stranger_detail: もしあなたがVmexが好きなら、登録や保存サイトを覚えてください。
+my.status: 私の状態
 hot.users: 活躍するユーザー
 today.hot.topics: 本日の活躍
 newly.comments: 最新のコメント
@@ -40,13 +40,13 @@ create_new_topic: 新しいテーマを作成
 today.activity: 今日の活躍度
 'continuous_signed count day': count日までの署名
 wpcast_available_with: 'Wpcast 利用可能な: '
-'全部': すべて
+全部: すべて
 热门: 人気
 福利: 福祉
 插画: イラスト
 歌姬: 歌姫
-游戏: 'ゲーム'
-'站务公告': '駅務公告'
+游戏: ゲーム
+站务公告: 駅務公告
 漫展: 展示する
 当前在线count人: count人のオンラインオンライン
 历史最高: 歴史が最も高い
@@ -54,37 +54,37 @@ wpcast_available_with: 'Wpcast 利用可能な: '
 buy_beer: 虹の恋にビールを飲
 用户名: ユーザー名
 邮箱: 郵便ポスト
-'密码': パスワード
+密码: パスワード
 查看所有通知: すべての通知を調べる
 查看所有私信: 查看所有私信
-我的主页: '私のホームページ'
+我的主页: 私のホームページ
 个人设置: 個人設定
 verify_email: "あなたのメールはまだ活性化されていません。<a href=\"javascript:\" class=\"alert-link\">ここでアクティブにする</a>\n"
-'添加新的评论': '新しいコメントを追加'
+添加新的评论: 新しいコメントを追加
 发表有颜色的评论将消耗5金币哦: 色のコメントを発表すると5金貨が消費されますよ
 好可怕，速度太快了: 怖い、スピードが速い
-'关于作者': '作者'
+关于作者: 作者
 拉黑: ラブラック
-昵称: 'ニックネーム'
-状态: '状態'
-头像: '頭像'
+昵称: ニックネーム
+状态: 状態
+头像: 頭像
 保存: 保存
 修改: 修正
-'修改密码': パスワードを修正
+修改密码: パスワードを修正
 支持我们: 私たちを応援する
 个新的粉丝: 新しいファン
 在线可撩: オンライン
-'加入于': 'に加える'
+加入于: に加える
 第count位Vmoex用户: count位Vmexユーザー
 最后在线时间：time: 最後のオンライン時間：time
-name发布的帖子: 'nameの招待状'
+name发布的帖子: nameの招待状
 name的回复: nameの返事
 'time 发表在': timeが発表している
-'name的关注': nameの注目
+name的关注: nameの注目
 name的粉丝: nameのファン
 发送成功: 成功を送る
 赞: 賛
-社区运行状态: 'コミュニティの運行状態'
+社区运行状态: コミュニティの運行状態
 社区成立时间: コミュニティの成立時間
 主题数量: テーマの数
 回复数量: 回答数
@@ -127,10 +127,10 @@ notice_replied_you: null
 post_top: null
 like: null
 action_too_fast: null
-banner_announce: null
+banner_announce: このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。
 all: null
 hot: null
-site_state: null
+site_state: dsd
 site_since: null
 site_post_count: null
 site_comment_count: null
@@ -140,3 +140,5 @@ site_title: null
 site_name: null
 user_place_in_site: count位Vmexユーザー
 footer_available_with: '利用可能な: '
+yingwe: ds
+sds: dsds

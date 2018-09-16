@@ -5,7 +5,7 @@
     {{ form_start(form, {attr: {class: 'form-horizontal'}}) }}
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">创建新的文章
+                <h2 class="page-header">{{ title is defined ? title : '创建新的文章' }}
                     <span class="pull-right">
                         <button type="button" class="btn btn-default"><i class="fa fa-save"></i> 存草稿</button>
                         <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 发布</button>

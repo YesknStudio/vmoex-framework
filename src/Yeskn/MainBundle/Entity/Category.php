@@ -36,9 +36,9 @@ class Category
     private $slug;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="status", type="integer", length=1)
+     * @ORM\Column(name="status", type="boolean")
      */
     private $status;
 

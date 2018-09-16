@@ -43,9 +43,9 @@ class Tag
     private $createdAt;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="status", type="integer", length=1)
+     * @ORM\Column(name="status", type="boolean", length=1)
      */
     private $status;
 

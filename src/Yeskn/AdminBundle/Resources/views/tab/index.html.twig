@@ -43,7 +43,7 @@
                         <td>{{ item.alias }}</td>
                         <td>{{ item.description }}</td>
                         <td width="115" align="center">
-                            <a data-edit class="btn btn-warning btn-xs" href="{{ path('admin_tab_edit', {id: item.id}) }}"><i class="fa fa-edit"></i> 修改</a>
+                            <a data-edit class="btn btn-warning btn-xs" href="{{ path('admin_edit', {entity: 'tab', id: item.id}) }}"><i class="fa fa-edit"></i> 修改</a>
                             <a data-edsPost class="btn btn-danger btn-xs" href="{{ path('admin_delete', {entity: 'tab', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
@@ -55,8 +55,8 @@
 
     {% include '@YesknAdmin/modals/entity-modal.html.twig' with {
         form: form,
-        action: path('admin_tab_add'),
-        title: '编辑板块'
+        action: path('admin_edit', {entity: 'tab'}),
+        title: '添加板块'
     } %}
 
 {% endblock %}
@@ -90,7 +90,10 @@
                 e.preventDefault();
 
                 var formId =  Math.round(Math.random()*100000000000);
-                var url = $(this).attr('href') + '?r=' + formId;
+
+                let url = edsUI.location.init($(this).attr('href'))
+                    .setParameter('r', formId)
+                    .build();
 
                 $.get(url, function (res) {
                     $('body').append(res);

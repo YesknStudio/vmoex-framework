@@ -1,6 +1,4 @@
 {% extends '@YesknAdmin/base.html.twig' %}
-{% form_theme form 'form/vertical-field-1.html.twig' %}
-{% form_theme form.status 'form/vertical-checkbox-type.html.twig' %}
 
 {% block header_stylesheet %}
     <link rel="stylesheet" href="{{ asset('assets/lib/datatables/media/css/dataTables.bootstrap.min.css') }}">
@@ -41,9 +39,9 @@
                         <td>{{ item.name }}</td>
                         <td>{{ item.slug }}</td>
                         <td>{{ item.createdAt|ago }}</td>
-                        <td>{{ item.status }}</td>
+                        <td>{{ item.status ? '启用' : '不启用' }}</td>
                         <td width="115" align="center">
-                            <a class="btn btn-warning btn-xs" href="{{ path('admin_tag_index', {tab:item.slug}) }}"><i class="fa fa-edit"></i> 修改</a>
+                            <a data-edit class="btn btn-warning btn-xs" href="{{ path('admin_edit', {entity: 'tag', id: item.id}) }}"><i class="fa fa-edit"></i> 修改</a>
                             <a data-edsPost class="btn btn-danger btn-xs" href="{{ path('admin_delete', {entity: 'tag', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
@@ -55,7 +53,7 @@
 
     {% include '@YesknAdmin/modals/entity-modal.html.twig' with {
         form: form,
-        action: path('admin_tag_add'),
+        action: path('admin_edit', {entity: 'tag'}),
         title: '编辑标签'
     } %}
 
@@ -66,23 +64,8 @@
     <script src="{{ asset('assets/lib/datatables/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/lib/datatables-responsive/js/dataTables.responsive.js') }}"></script>
     <script src="{{ asset('assets/lib/eds-ui/edsUI.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTables-example').DataTable({
-                responsive: true
-            });
 
-            edsUI.form('#modalForm', function (result) {
-                if(result.status) {
-                    window.location = '{{ path('admin_tag_index') }}';
-                } else {
-                    edsUI.mask().alert('result.message');
-                }
-
-                return false;
-            }, ['#saveModalFormBtn','text']);
-        });
-
-
-    </script>
+    {% include '@YesknAdmin/crud/footer-javascript.html.twig' with {
+        entity: 'tag'
+    } %}
 {% endblock %}

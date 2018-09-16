@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\AdminBundle\Services\LoadTranslationService;
 use Yeskn\MainBundle\Entity\Translation;
-use Yeskn\MainBundle\Form\TranslateType;
+use Yeskn\MainBundle\Form\TranslationType;
 
 /**
  * Class TransactionController
@@ -36,7 +36,7 @@ class TranslationController extends Controller
 
         $translate = new Translation();
 
-        $form = $this->createForm(TranslateType::class, $translate);
+        $form = $this->createForm(TranslationType::class, $translate);
 
         return $this->render('@YesknAdmin/translation/index.html.twig', [
             'list' => $list,
@@ -54,7 +54,7 @@ class TranslationController extends Controller
     {
         $translate = new Translation();
 
-        $form = $this->createForm(TranslateType::class, $translate);
+        $form = $this->createForm(TranslationType::class, $translate);
 
         $form->handleRequest($request);
 
@@ -88,7 +88,7 @@ class TranslationController extends Controller
 
         $trans = $repo->find($id);
 
-        $form = $this->createForm(TranslateType::class, $trans);
+        $form = $this->createForm(TranslationType::class, $trans);
 
         $form->handleRequest($request);
 
@@ -98,6 +98,7 @@ class TranslationController extends Controller
             $em->persist($trans);
             $em->flush();
 
+            $this->get(LoadTranslationService::class)->execute();
 
             $this->addFlash('success', '操作成功');
 

@@ -12,7 +12,7 @@ namespace Yeskn\MainBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class TranslateType extends AbstractType
+class TranslationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

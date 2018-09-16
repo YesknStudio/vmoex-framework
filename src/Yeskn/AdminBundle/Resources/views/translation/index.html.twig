@@ -11,7 +11,7 @@
             <h1 class="page-header">翻译管理
 
                 <span class="pull-right">
-                <button class="btn btn-success" data-toggle="modal" data-target="#addTranslateModal"><i class="fa fa-plus"></i> 增加</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#entityModal"><i class="fa fa-plus"></i> 增加</button>
             </span>
             </h1>
         </div>
@@ -43,7 +43,7 @@
                         <td>{{ item.japanese }}</td>
                         <td>{{ item.taiwanese }}</td>
                         <td width="115" align="center">
-                            <a data-edit href="{{ path('admin_translation_edit', {id: item.id}) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> 编辑</a>
+                            <a data-edit href="{{ path('admin_edit', {entity: 'translation',id: item.id}) }}" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i> 编辑</a>
                             <a data-edsPost href="{{ path('admin_delete', {entity:'translation', id:item.id}) }}" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
@@ -53,7 +53,12 @@
         </div>
     </div>
 
-    {% include '@YesknAdmin/modals/add-translate-modal.html.twig' with {form: form} %}
+    {% include '@YesknAdmin/modals/entity-modal.html.twig' with {
+        form: form,
+        action: path('admin_edit', {entity: 'translation'}),
+        title: '增加翻译'
+    } %}
+
 {% endblock %}
 
 {% block footer_javascript %}
@@ -62,42 +67,7 @@
     <script src="{{ asset('assets/lib/datatables-responsive/js/dataTables.responsive.js') }}"></script>
     <script src="{{ asset('assets/lib/eds-ui/edsUI.js') }}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $("[data-toggle=popover]").popover();
-
-            $('#dataTables-example').DataTable({
-                responsive: true
-            });
-
-            function ajaxForm(formId) {
-                edsUI.form(formId, function (result) {
-                    if(result.status) {
-                        window.location = '{{ path('admin_translation_index') }}';
-                    } else {
-                        edsUI.mask().alert(result.message);
-                    }
-
-                    return false;
-                }, ['#saveModalFormBtn','text']);
-            }
-
-            ajaxForm('#modalForm');
-
-            $(document).on('click', '[data-edit]', function (e) {
-                e.preventDefault();
-
-                var formId =  Math.round(Math.random()*100000000000);
-                var url = $(this).attr('href') + '?r=' + formId;
-
-                $.get(url, function (res) {
-                    $('body').append(res);
-
-                    $('#entityModal'+formId).last().modal();
-
-                    ajaxForm('#modalForm'+formId);
-                });
-            });
-        });
-    </script>
+    {% include '@YesknAdmin/crud/footer-javascript.html.twig' with {
+        entity: 'translation'
+    } %}
 {% endblock %}

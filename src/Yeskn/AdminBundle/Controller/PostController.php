@@ -73,10 +73,11 @@ class PostController extends Controller
             return $this->redirectToRoute('admin_post_index');
         }
 
-        return $this->render('@YesknAdmin/post/create.html.twig', array(
+        return $this->render('@YesknAdmin/post/create.html.twig', [
+            'title' => '编辑文章',
             'post' => $post,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**

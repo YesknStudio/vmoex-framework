@@ -3,7 +3,7 @@
         <div class="col-sm-offset-2 col-sm-10">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" {{ block('widget_attributes') }}> {{ label }}
+                    <input {% if data == 1 %}checked{% endif %} type="checkbox" {{ block('widget_attributes') }}> {{ label }}
                 </label>
             </div>
         </div>
