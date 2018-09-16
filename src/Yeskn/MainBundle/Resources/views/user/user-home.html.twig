@@ -39,7 +39,7 @@
                             <div style="margin: 10px 0;">{{ user.remark|raw }}</div>
                             <br/>
                             {% if app.user != user %}
-                                <button type="button" data-toggle="modal" data-target="#exampleModal"
+                                <button type="button" data-toggle="modal" data-target="#messageModal"
                                         class="btn btn-warning btn-sm"><i class="fa fa-envelope"></i> {{ 'userhome_send_message'|trans }}
                                 </button>
                                 <button type="button" id="follow-user" class="btn btn-outline btn-danger btn-sm"><i
@@ -156,6 +156,9 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block footer_javascript %}
     <script>
         $(function () {
             $(document).off('click', '#follow-user');
@@ -169,37 +172,51 @@
                             warning(data.msg);
                         } else {
                             $.pjax.reload('.content-body', {
-                                fragment: '.content-body',                          //来源也的ID
+                                fragment: '.content-body',
                                 timeout: 200000000,
                                 show: 'fade',
                                 cache: true,  //是否使用缓存
                                 push: true,
-                                //scrollTo: 250,
                             })
                         }
                     }
                 })
             });
 
-            $(document).off('click', '#send-message');
-            $(document).on('click', '#send-message', function () {
-                var $this = $(this);
-                $this.button('loading');
+            $(document).off('submit', '#messageForm');
+            $(document).on('submit', '#messageForm', function (e) {
+                e.preventDefault();
+
+                let $this = $(this);
+                let $button = $this.find('[type="submit"]');
+                $button.button('loading');
+
+                let formData = new FormData($this[0]);
 
                 $.ajax({
                     method: 'POST',
                     url: '{{ path("send_message") }}',
-                    data: {content: $('#message-text').val(), to: '{{ user.username }}'},
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
                     success: function () {
                         alert('{{ '发送成功'|trans }}');
-                        $this.button('reset');
+                        $button.button('reset');
+
                         $('#message-text').val('');
-                        $('#exampleModal').modal('hide');
+                        $('#messageModal').modal('hide');
+
+                        $this.trigger('reset');
                     }
                 });
             });
         })
     </script>
 
-
+    {% include '@YesknMain/modals/send-message-modal.html.twig' with {
+        modalId: '',
+        title: '向' ~ user.nickname ~ '发送私信',
+        form: form
+    } %}
 {% endblock %}

@@ -1,26 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        var loadingDiv = document.createElement("div");
-        loadingDiv.setAttribute('class','loading');
-        loadingDiv.style.position = 'fixed';
-        loadingDiv.style.top = '50%';
-        loadingDiv.style.left = '50%';
-        loadingDiv.style.marginLeft = '-196px';
-        loadingDiv.style.marginTop = '-79px';
-        var imgNode = document.createElement('img');
-        imgNode.setAttribute('src','{{ asset('assets/images/loading.gif') }}');
-        imgNode.setAttribute('alt','Loading...');
-        var html = document.getElementsByTagName('html')[0];
-        loadingDiv.insertBefore(imgNode,null);
-        html.insertBefore(loadingDiv,null);
-    </script>
+    {% include '@YesknMain/javascripts/loading.html.twig' %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Wpcast">
+    <meta name="author" content="Yeskn">
     {% block title %} <title>{{ 'site_title'|trans }}</title> {% endblock %}
     {% if app.request.get('_pjax') is empty %}
         {% block head_css_link %}
@@ -36,19 +22,14 @@
         {% endblock %}
 
         {% block head_js_link %}
-        {% javascripts
-            'assets/lib/jquery/dist/jquery.min.js'
-            filter='uglifyjs2' %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-    <script>
-        window.Yeskn = {{ javascriptVariables(1)|raw }};
-    </script>
+            {% javascripts
+                'assets/lib/jquery/dist/jquery.min.js'
+                filter='uglifyjs2' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <script>
+                window.Yeskn = {{ javascriptVariables(1)|raw }};
+            </script>
         {% endblock %}
     {% endif %}
 </head>
@@ -82,15 +63,6 @@
     {% endblock %}
 
     {% block foot_js_link %}
-        <script type="text/javascript">
-            $(function () {
-                $('.loading').remove();
-                $('body').fadeIn(1000);
-
-
-                $('.blog-generate-box').slideDown();
-            })
-        </script>
         {% javascripts
             'assets/lib/bootstrap/dist/js/bootstrap.min.js'
             'assets/lib/nprogress/nprogress.js'
@@ -106,7 +78,18 @@
         <script src="https://cdn.bootcss.com/socket.io/1.3.7/socket.io.min.js"></script>
         <script src="https://static.yeskn.com/bootoast/js/bootoast.js"></script>
         {% endjavascripts %}
+
+        <script type="text/javascript">
+            $(function () {
+                $('.loading').remove();
+                $('body').fadeIn(1000);
+
+
+                $('.blog-generate-box').slideDown();
+            })
+        </script>
     {% endblock %}
+    {% block footer_javascript %}{% endblock %}
 {% endif %}
 </body>
 </html>

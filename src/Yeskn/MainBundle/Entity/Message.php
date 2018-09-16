@@ -49,7 +49,7 @@ class Message
      * @var boolean
      * @ORM\Column(name="is_read", type="boolean")
      */
-    private $isRead;
+    private $isRead = false;
 
     /**
      * @var \DateTime

@@ -32,6 +32,11 @@ services:
         - "%kernel.project_dir%"
       tags: [form.type]
 
+  Yeskn\MainBundle\Form\UserMessageType:
+      arguments:
+        - "@doctrine.orm.entity_manager"
+      tags: [form.type]
+
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:

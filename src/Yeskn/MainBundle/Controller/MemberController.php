@@ -12,6 +12,8 @@ namespace Yeskn\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Yeskn\MainBundle\Entity\Message;
+use Yeskn\MainBundle\Form\UserMessageType;
 
 /**
  * Class MemberController
@@ -52,10 +54,16 @@ class MemberController extends Controller
             }
         }
 
+        $message = new Message();
+
+        $message->setReceiver($user);
+        $message->setSender($this->getUser());
+
         return $this->render('@YesknMain/user/user-home.html.twig', [
             'user' => $user,
             'online' => $online,
-            'userActive' => $userActive
+            'userActive' => $userActive,
+            'form' => $this->createForm(UserMessageType::class, $message)->createView()
         ]);
     }
 }

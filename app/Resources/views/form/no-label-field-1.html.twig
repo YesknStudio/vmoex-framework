@@ -1,0 +1,15 @@
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                {{ form_widget(form) }}
+                {% for attrname, attrvalue in attr %}
+                    {% if attrname == 'help' %}
+                        <span class="help-block small-font">{{ attrvalue }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {{ form_errors(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}

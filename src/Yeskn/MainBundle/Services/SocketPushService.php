@@ -32,7 +32,7 @@ class SocketPushService
      */
     private $globalValue;
 
-    public function __construct(ContainerInterface $container, $globalValue)
+    public function __construct(ContainerInterface $container, GlobalValue $globalValue)
     {
         $this->client = new Client();
         $this->container = $container;

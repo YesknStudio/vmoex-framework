@@ -1,0 +1,15 @@
+<script>
+    let loadingDiv = document.createElement("div");
+    loadingDiv.setAttribute('class','loading');
+    loadingDiv.style.position = 'fixed';
+    loadingDiv.style.top = '50%';
+    loadingDiv.style.left = '50%';
+    loadingDiv.style.marginLeft = '-196px';
+    loadingDiv.style.marginTop = '-79px';
+    let imgNode = document.createElement('img');
+    imgNode.setAttribute('src','{{ asset('assets/images/loading.gif') }}');
+    imgNode.setAttribute('alt','Loading...');
+    let html = document.getElementsByTagName('html')[0];
+    loadingDiv.insertBefore(imgNode,null);
+    html.insertBefore(loadingDiv,null);
+</script>

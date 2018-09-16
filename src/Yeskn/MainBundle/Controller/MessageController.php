@@ -9,13 +9,22 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Yeskn\MainBundle\Entity\Message;
-use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Form\UserMessageType;
+use Yeskn\Support\Http\ApiOk;
 
+/**
+ * Class MessageController
+ * @package Yeskn\MainBundle\Controller
+ *
+ * @Security("has_role('ROLE_USER')")
+ *
+ */
 class MessageController extends Controller
 {
     /**
@@ -26,37 +35,26 @@ class MessageController extends Controller
      */
     public function sendMessage(Request $request)
     {
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-
-        if (empty($user)) {
-            return new JsonResponse(['ret' => 0, 'msg' => 'nologin']);
-        }
-
-        $content = $request->get('content');
-        $content = strip_tags($content);
-        $to = $request->get('to');
-
-        $em = $this->getDoctrine()->getManager();
-
-        $receiver = $em->getRepository('YesknMainBundle:User')->findOneBy(['username' => $to]);
-
         $message = new Message();
 
-        $message->setReceiver($receiver);
-        $message->setContent($content);
-        $message->setSender($user);
-        $message->setIsRead(false);
-        $message->setCreatedAt(new \DateTime());
+        $form = $this->createForm(UserMessageType::class, $message);
 
-        $em->persist($message);
-        $em->flush();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $message->setSender($this->getUser());
+            $message->setCreatedAt(new \DateTime());
+            $message->setContent(strip_tags($message->getContent()));
+
+            $em->persist($message);
+            $em->flush();
+        }
 
         $this->get('socket.push')->pushNewMessage($message);
 
-        return new JsonResponse(['ret' => 1]);
+        return new ApiOk();
     }
 
     /**
