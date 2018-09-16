@@ -11,7 +11,7 @@
             <h1 class="page-header">用户管理
 
                 <span class="pull-right">
-                <button class="btn btn-success"><i class="fa fa-plus"></i> 增加</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#entityModal"><i class="fa fa-plus"></i> 增加</button>
             </span>
             </h1>
         </div>
@@ -49,7 +49,7 @@
                         <td>{{ item.gold }}</td>
                         <td>{{ item.role }}</td>
                         <td width="115" align="center">
-                            <a role="button" class="btn btn-xs btn-warning" href="/"><i class="fa fa-edit"></i> 编辑</a>
+                            <a data-edit role="button" class="btn btn-xs btn-warning" href="{{ path('admin_edit', {entity: 'user', id: item.id}) }}"><i class="fa fa-edit"></i> 编辑</a>
                             <a data-edsPost role="button" class="btn btn-xs btn-danger" href="{{ path('admin_delete', {entity: 'user', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
                         </td>
                     </tr>
@@ -59,6 +59,12 @@
         </div>
     </div>
 
+    {% include '@YesknAdmin/modals/entity-modal.html.twig' with {
+        form: form,
+        action: path('admin_edit', {entity: 'user'}),
+        title: '增加用户'
+    } %}
+
 {% endblock %}
 
 {% block footer_javascript %}
@@ -66,11 +72,8 @@
     <script src="{{ asset('assets/lib/datatables/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/lib/datatables-responsive/js/dataTables.responsive.js') }}"></script>
     <script src="{{ asset('assets/lib/eds-ui/edsUI.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTables-example').DataTable({
-                responsive: true
-            });
-        });
-    </script>
+
+    {% include '@YesknAdmin/crud/footer-javascript.html.twig' with {
+        entity: 'user'
+    } %}
 {% endblock %}

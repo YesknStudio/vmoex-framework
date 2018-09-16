@@ -119,7 +119,11 @@ class CRUDController extends Controller
                 $processor = new $processorClass($entityObj);
                 break;
             default:
-                return true;
+                if (class_exists($processorClass)) {
+                    $processor = new $processorClass($entityObj);
+                } else {
+                    return true;
+                }
         }
 
         return $this->startEntityEditParam = $processor->execute();
@@ -130,20 +134,32 @@ class CRUDController extends Controller
         $entity = ucfirst($entity);
         $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\ProcessEdit{$entity}Event";
 
+        /** @var CrudEventInterface $processor */
         switch ($entity) {
             case 'Tab':
-                /** @var CrudEventInterface $processor */
                 $processor = new $processorClass(
                     $entityObj,
                     $this->getParameter('kernel.project_dir'),
                     $this->startEntityEditParam['oldAvatar']
                 );
                 break;
+            case 'User':
+                $processor = new $processorClass(
+                    $entityObj,
+                    $this->get('security.password_encoder'),
+                    $this->startEntityEditParam,
+                    $this->getParameter('kernel.project_dir')
+                );
+                break;
             case 'Tag':
                 $processor = new $processorClass($entityObj);
                 break;
             default:
-                return true;
+                if (class_exists($processorClass)) {
+                    $processor = new $processorClass($entityObj);
+                } else {
+                    return true;
+                }
         }
 
         return $this->processEntityEditParam = $processor->execute();
@@ -160,7 +176,11 @@ class CRUDController extends Controller
                 $processor = new $processorClass($entityObj, $this->get(LoadTranslationService::class));
                 break;
             default:
-                return true;
+                if (class_exists($processorClass)) {
+                    $processor = new $processorClass($entityObj);
+                } else {
+                    return true;
+                }
         }
 
         return $processor->execute();

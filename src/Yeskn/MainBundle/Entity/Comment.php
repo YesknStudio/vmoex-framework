@@ -69,7 +69,7 @@ class Comment
     private $post;
 
     /**
-     * @ORM\Column(name="reply_to", type="integer")
+     * @ORM\Column(name="reply_to", type="integer", nullable=true)
      * @ORM\OneToOne(targetEntity="Yeskn\MainBundle\Entity\Comment")
      */
     private $replyTo;

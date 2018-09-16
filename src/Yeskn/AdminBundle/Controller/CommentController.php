@@ -12,6 +12,7 @@ namespace Yeskn\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Entity\Comment;
+use Yeskn\MainBundle\Form\CommentType;
 
 /**
  * Class CommentController
@@ -32,7 +33,8 @@ class CommentController extends Controller
         $list = $this->getDoctrine()->getRepository('YesknMainBundle:Comment')->findBy([], ['createdAt' => 'DESC']);
 
         return $this->render('@YesknAdmin/comment/index.html.twig', array(
-            'list' => $list
+            'list' => $list,
+            'form' => $this->createForm(CommentType::class, new Comment())->createView()
         ));
     }
 }

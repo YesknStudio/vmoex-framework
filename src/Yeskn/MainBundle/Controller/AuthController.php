@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Entity\User;
-use Yeskn\MainBundle\Form\UserType;
+use Yeskn\MainBundle\Form\UserLoginType;
 
 class AuthController extends Controller
 {
@@ -49,7 +49,7 @@ class AuthController extends Controller
     {
         // 1) build the form
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserLoginType::class, $user);
         $em = $this->getDoctrine()->getManager();
 
         // 2) handle the submit (will only happen on POST)

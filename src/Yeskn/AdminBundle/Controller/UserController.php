@@ -11,6 +11,8 @@ namespace Yeskn\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Form\UserType;
 
 /**
  * Class UserController
@@ -28,7 +30,8 @@ class UserController extends Controller
         $list = $this->getDoctrine()->getRepository('YesknMainBundle:User')->findAll();
 
         return $this->render('@YesknAdmin/user/index.html.twig', [
-            'list' => $list
+            'list' => $list,
+            'form' => $this->createForm(UserType::class, new User())->createView()
         ]);
     }
 }
