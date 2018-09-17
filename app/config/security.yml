@@ -40,7 +40,6 @@ security:
             remember_me:
                 secret: '%secret%'
                 name: _token
-                always_remember_me: true
                 lifetime: 604800 # 1 week in seconds
                 path: /
 

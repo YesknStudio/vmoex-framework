@@ -7,7 +7,6 @@ services:
       # fetching services directly from the container via $container->get() won't work.
       # The best practice is to be explicit about your dependencies anyway.
 
-
   Yeskn\MainBundle\:
       resource: '../../../MainBundle/*'
       # you can exclude directories or files
@@ -40,16 +39,9 @@ services:
         - "@doctrine.orm.entity_manager"
       tags: [form.type]
 
-
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
   socket.push:
+    public: true
     class: Yeskn\MainBundle\Services\SocketPushService
-    arguments:
-      - "@service_container"
-      - Yeskn\MainBundle\Twig\GlobalValue
 
   Yeskn\MainBundle\Twig\GlobalValue:
       arguments:

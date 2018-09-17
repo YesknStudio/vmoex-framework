@@ -11,18 +11,40 @@ namespace Yeskn\MainBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Yeskn\MainBundle\Entity\Post;
+use Yeskn\MainBundle\Entity\Tab;
 
 class PostRepository extends EntityRepository
 {
     /**
+     * @param Tab $tab
      * @param $sort
      * @param $pageSize
      * @param $first
      * @return Post[]
      */
-    public function getIndexList($sort, $pageSize, $first)
+    public function getIndexList($tab, $sort, $pageSize, $first)
     {
         $qb = $this->createQueryBuilder('p');
+
+        if ($tab) {
+            $qb->where('p.tab = :tab')->setParameter('tab', $tab);
+
+            if ($tab->getLevel() == 1) {
+                $subQuery = $this->getEntityManager()->getRepository('YesknMainBundle:Tab')
+                    ->createQueryBuilder('t')
+                    ->select('t.id')
+                    ->where('t.parent = :parent')
+                    ->andWhere('t.level = 2')
+                    ->setParameter('parent', $tab)
+                    ->getQuery()
+                    ->getArrayResult()
+                ;
+
+                if ($subQuery) {
+                    $qb->orWhere($qb->expr()->in('p.tab', array_column($subQuery, 'id')));
+                }
+            }
+        }
 
         $qb->orderBy('p.isTop', 'DESC');
         $qb->addOrderBy('p.'.key($sort), current($sort));

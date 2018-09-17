@@ -18,6 +18,10 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
     public function handle(Request $request, AccessDeniedException $accessDeniedException)
     {
-        return new ApiFail('please login');
+        if ($request->isXmlHttpRequest()) {
+            return new ApiFail('please login');
+        }
+
+        return $accessDeniedException;
     }
 }

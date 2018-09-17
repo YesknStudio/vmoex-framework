@@ -12,7 +12,7 @@ yeskn_admin:
     type:     annotation
     prefix:   /admin
 
-yeskn_wpcraft:
+yeskn_main:
     resource: "@YesknMainBundle/Controller/"
     type:     annotation
     prefix:   /
