@@ -62,18 +62,14 @@ class PostController extends Controller
         $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
             ->find($request->get('id'));
 
-        $oldProperty = (new StartEditPostEvent($post))->execute();
+        $this->get(StartEditPostEvent::class)->setEntity($post)->execute();
 
         $form = $this->createForm('Yeskn\MainBundle\Form\PostType', $post);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            (new ProcessEditPostEvent(
-                $post,
-                $this->getParameter('kernel.project_dir'),
-                $oldProperty)
-            )->execute();
+            $this->get(ProcessEditPostEvent::class)->setEntity($post)->execute();
 
             $post->setUpdatedAt(new \DateTime());
 

@@ -50,7 +50,7 @@ class CRUDController extends Controller
             'ids' => $data['ids'],
             'entityName' => $data['entityName'],
             'form' => $this->createForm($typeClass, new $entityClass)->createView(),
-            'extra' => $data['extra']
+            'extra' => empty($data['extra']) ? [] : $data['extra']
         ]);
     }
 
