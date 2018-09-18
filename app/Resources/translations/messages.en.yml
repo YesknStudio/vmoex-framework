@@ -42,44 +42,44 @@ wpcast_available_with: 'wpcast available with: '
 历史最高: 'The highest in history'
 致谢: Thanks
 buy_beer: 'Buy Me '
-全部: All
+'全部': All
 热门: Hot
 追剧: Tv
 福利: Wel
 插画: Picture
 歌姬: 'Hawayi Music'
 游戏: Game
-站务公告: Announce
+'站务公告': Announce
 漫展: ComicDis
 用户名: Username
 邮箱: Email
-密码: Password
+'密码': Password
 查看所有通知: 'All Notifications'
 查看所有私信: 'All Messages'
 我的主页: 'My Homepage'
 个人设置: Setting
 verify_email: "Your Email is not activated，<a href=\"javascript:\" class=\"alert-link\">Click to Activate</a>\n"
-添加新的评论: 'Add new Comment'
+'添加新的评论': 'Add new Comment'
 发表有颜色的评论将消耗5金币哦: 'A color comment will consume 5 gold coins.'
 好可怕，速度太快了: 'It''s awful, the speed is too fast'
-关于作者: 'the author'
+'关于作者': 'the author'
 拉黑: Block
 昵称: Nickname
 状态: Status
 头像: Avatar
 保存: Save
 修改: Modity
-修改密码: 'Modity Password'
+'修改密码': 'Modity Password'
 支持我们: 'Support Us'
 个新的粉丝: ' new follower'
 在线可撩: online
-加入于: 'joined at '
+'加入于': 'joined at '
 第count位Vmoex用户: 'the count''st Vmoex member'
 最后在线时间：time: 'last online time：time'
 name发布的帖子: 'name''s topics'
 name的回复: 'name'' comments'
 'time 发表在': 'time posted at'
-name的关注: 'name''s following'
+'name的关注': 'name''s following'
 name的粉丝: 'name'' followers'
 发送成功: 'send success'
 赞: Like
@@ -92,8 +92,8 @@ blind_description: '"Blind Chat" is an online chat function provided by the Vmoe
 注册用户数量: 'Memember Count'
 documents: Documents
 support: Support
-添加: null
-请先登录: null
+'添加': null
+'请先登录': null
 Vmoex当前板块数量: null
 nav_messages: null
 nav_new_fans: null
@@ -144,3 +144,9 @@ yingwe: ds
 sds: dsd
 kdssd: dsd
 dsdsd: sdsds
+user_my_messages: 'My Messages'
+user_my_received_messages: Received
+user_my_sent_messages: Send
+sorry_no_content: 'Sorry, there is no content yet!'
+user_you_send_message_to: 'you said to receiver: '
+user_send_message_to_you: 'said to you: '
