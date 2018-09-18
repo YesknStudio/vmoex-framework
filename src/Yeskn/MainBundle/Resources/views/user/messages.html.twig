@@ -5,13 +5,13 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-envelope fa-fw"></i> {{ app.user.nickname }}的私信
+                    <i class="fa fa-envelope fa-fw"></i> {{ 'user_my_messages'|trans }}
                 </div>
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#receive" data-toggle="tab">我接收的</a>
+                        <li class="active"><a href="#receive" data-toggle="tab">{{ 'user_my_received_messages'|trans }}</a>
                         </li>
-                        <li><a href="#send" data-toggle="tab">我发出的</a>
+                        <li><a href="#send" data-toggle="tab">{{ 'user_my_sent_messages'|trans }}</a>
                         </li>
                     </ul>
 
@@ -23,14 +23,14 @@
                                         <li class="list-group-item {{ message.isRead ? '' : 'list-group-item-warning' }}">
                                             <img src="{{ asset(message.sender.avatar) }}" alt="" width="30" height="30" class="img-rounded">
                                             <a data-pjax href="{{ path('member_home', {username: message.sender.username}) }}">{{ message.sender.nickname }}</a>
-                                            {{ message.createdAt|ago }}
-                                            对你说：{{ message.content }}
+                                            {{ ('user_send_message_to_you'|trans) ~ message.content }}
+                                            <span class="pull-right">{{ message.createdAt|ago }}</span>
                                         </li>
                                     {% endfor %}
                                 </ul>
                             {% else %}
                                 <div class="alert alert-warning">
-                                    抱歉，暂时没有任何内容！
+                                    {{ 'sorry_no_content'|trans }}
                                 </div>
                             {% endif %}
                         </div>
@@ -39,12 +39,15 @@
                             {% if sMessages is not empty %}
                                 <ul class="messages list-group">
                                     {% for message in sMessages %}
-                                        <li class="list-group-item">你对<a data-pjax href="{{ path('member_home', {username: message.receiver.username}) }}">{{ message.receiver.nickname }}</a>说：{{ message.content }} <span class="pull-right">{{ message.createdAt|ago }}</span></li>
+                                        <li class="list-group-item">
+                                            {{ 'user_you_send_message_to'|trans({receiver: '<a data-pjax href="%s">%s</a>'|format(message.receiver.username, message.receiver.nickname)})|raw }}
+                                            {{ message.content }} <span class="pull-right">{{ message.createdAt|ago }}</span>
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             {% else %}
                                 <div class="alert alert-warning">
-                                    抱歉，暂时没有任何内容！
+                                    {{ 'sorry_no_content'|trans }}
                                 </div>
                             {% endif %}
                         </div>

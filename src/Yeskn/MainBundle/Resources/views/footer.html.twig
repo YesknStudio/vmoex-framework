@@ -12,20 +12,22 @@
             <span style="display: inline-block;margin-right: 10px">{{ 'site_name'|trans }} {{ 'footer_available_with'|trans }}</span>
 
             <img class="footer-flag" src="{{ asset('assets/images/flags/zh_CN.png') }}" alt="zh_CN">
-            <a data-pjax href="javascript:"   class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans }}</a>
+            <a data-pjax href="javascript:"   class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans([], 'messages', 'zh_CN') }}</a>
             <span class="snow">·</span>
             <img class="footer-flag" src="{{ asset('assets/images/flags/en.png') }}" alt="en">
-            <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans }}</a>
+            <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans([], 'messages', 'en') }}</a>
             <span class="snow">·</span>
             <img class="footer-flag" src="{{ asset('assets/images/flags/zh_TW.png') }}" alt="zh_TW">
-            <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans }}</a>
+            <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans([], 'messages', 'zh_TW') }}</a>
             <span class="snow">·</span>
             <img class="footer-flag" src="{{ asset('assets/images/flags/jp.png') }}" alt="jp">
-            <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans }}</a>
+            <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans([], 'messages', 'jp') }}</a>
         </div>
 
         {% set siteState = siteState() %}
-        <p style="margin: 20px 5px">{{ 'footer_online_user_count'|trans({count:siteState.onlineUserCount}) }}，{{ 'footer_oneline_user_most'|trans }} 393</p>
+        <p style="margin: 20px 5px">
+            {{ 'footer_online_user_count'|trans({count:siteState.onlineUserCount}) }}，{{ 'footer_oneline_user_most'|trans }} 393
+        </p>
         <p class="copy">{{ 'site_copyright'|trans }}</p>
         <p class="power">Designed with <span>❤</span> 彩虹の恋しい at Shanghai, China</p>
     </div>
