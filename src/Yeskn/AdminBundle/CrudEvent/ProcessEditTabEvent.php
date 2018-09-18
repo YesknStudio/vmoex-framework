@@ -28,7 +28,7 @@ class ProcessEditTabEvent extends AbstractCrudEntityEvent
     public function __construct($projectDir)
     {
         $this->webRoot = $projectDir . '/web';
-        $this->oldAvatar = StartEditTabEvent::$oldProperty;
+        $this->oldAvatar = StartEditTabEvent::$oldProperty['avatar'];
     }
 
     public function execute()
