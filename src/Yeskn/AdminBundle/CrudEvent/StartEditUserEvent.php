@@ -12,14 +12,14 @@ namespace Yeskn\AdminBundle\CrudEvent;
 use Symfony\Component\HttpFoundation\File\File;
 use Yeskn\MainBundle\Entity\User;
 
-class StartEditUserEvent implements CrudEventInterface
+class StartEditUserEvent extends AbstractCrudEntityEvent
 {
-    private $entity;
+    /**
+     * @var User
+     */
+    protected $entity;
 
-    public function __construct(User $entity)
-    {
-        $this->entity = $entity;
-    }
+    public static $odlProperty;
 
     public function execute()
     {
@@ -30,9 +30,9 @@ class StartEditUserEvent implements CrudEventInterface
         $oldAvatar = $entityObj->getAvatar();
         $entityObj->setAvatar(new File($oldAvatar, false));
 
-        return [
-            'oldAvatar' => $oldAvatar,
-            'oldPassword' => $entityObj->getPassword()
+        return self::$odlProperty = [
+            'avatar' => $oldAvatar,
+            'password' => $entityObj->getPassword()
         ];
     }
 }

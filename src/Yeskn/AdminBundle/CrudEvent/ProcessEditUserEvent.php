@@ -11,16 +11,19 @@ namespace Yeskn\AdminBundle\CrudEvent;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Yeskn\MainBundle\Entity\User;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class ProcessEditUserEvent implements CrudEventInterface
+class ProcessEditUserEvent extends AbstractCrudEntityEvent
 {
-    private $entity;
+    /**
+     * @var User
+     */
+    protected $entity;
 
     /**
-     * @var PasswordEncoderInterface
+     * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
 
@@ -28,12 +31,11 @@ class ProcessEditUserEvent implements CrudEventInterface
 
     private $webRoot;
 
-    public function __construct(User $entity, $passwordEncoder, $oldValue, $webRoot)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, $projectDir)
     {
-        $this->entity = $entity;
         $this->passwordEncoder = $passwordEncoder;
-        $this->oldValue = $oldValue;
-        $this->webRoot = $webRoot . '/web/';
+        $this->oldValue = StartEditUserEvent::$odlProperty;
+        $this->webRoot = $projectDir . '/web/';
     }
 
     public function execute()
@@ -58,7 +60,7 @@ class ProcessEditUserEvent implements CrudEventInterface
             $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
         } else {
-            $user->setPassword($this->oldValue['oldPassword']);
+            $user->setPassword($this->oldValue['password']);
         }
 
         /** @var File $file */
@@ -78,7 +80,7 @@ class ProcessEditUserEvent implements CrudEventInterface
 
             $user->setAvatar($fileName);
         } else {
-            $user->setAvatar($this->oldValue['oldAvatar']);
+            $user->setAvatar($this->oldValue['avatar']);
         }
     }
 }

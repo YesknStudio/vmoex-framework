@@ -14,19 +14,21 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Yeskn\MainBundle\Entity\Tab;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class ProcessEditTabEvent implements CrudEventInterface
+class ProcessEditTabEvent extends AbstractCrudEntityEvent
 {
-    private $entity;
+    /**
+     * @var Tab
+     */
+    protected $entity;
 
     private $webRoot;
 
     private $oldAvatar;
 
-    public function __construct(Tab $tab, $projectDir, $oldAvatar = null)
+    public function __construct($projectDir)
     {
-        $this->entity = $tab;
         $this->webRoot = $projectDir . '/web';
-        $this->oldAvatar = $oldAvatar;
+        $this->oldAvatar = StartEditTabEvent::$oldProperty;
     }
 
     public function execute()

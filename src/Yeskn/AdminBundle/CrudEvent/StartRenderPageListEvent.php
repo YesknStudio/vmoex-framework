@@ -13,20 +13,19 @@ use Symfony\Component\Routing\RouterInterface;
 use Yeskn\MainBundle\Entity\Page;
 use Yeskn\MainBundle\Twig\GlobalValue;
 
-class StartRenderPageListEvent implements CrudEventInterface
+class StartRenderPageListEvent extends AbstractCrudListEvent
 {
     private $entityName = '页面';
 
     /** @var Page[] */
-    private $list;
+    protected $list;
 
     private $globalValue;
 
     private $router;
 
-    public function __construct($list, GlobalValue $globalValue, RouterInterface $router)
+    public function __construct(GlobalValue $globalValue, RouterInterface $router)
     {
-        $this->list = $list;
         $this->globalValue = $globalValue;
         $this->router = $router;
     }

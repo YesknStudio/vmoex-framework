@@ -1,3 +1,10 @@
+<script type="text/html" id="modalWellMessageTpl">
+    <div class="alert alert-danger alert-dismissible entityModalErrorWell fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @message@
+    </div>
+</script>
+
 <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
@@ -9,7 +16,13 @@
                 if(result.status) {
                     window.location = '{{ path('admin_list', {entity: entity}) }}';
                 } else {
-                    edsUI.mask().alert(result.message);
+                    $('.entityModalErrorWell').remove();
+
+                    let $well = edsUI.parse($('#modalWellMessageTpl').html(), {
+                        message: result.message
+                    });
+
+                    $(formId).find('.modal-body').prepend($well);
                 }
 
                 return false;
@@ -21,7 +34,7 @@
         $(document).on('click', '[data-edit]', function (e) {
             e.preventDefault();
 
-            var formId =  Math.round(Math.random()*100000000000);
+            let formId =  Math.round(Math.random()*100000000000);
 
             let url = edsUI.location.init($(this).attr('href'))
                 .setParameter('r', formId)

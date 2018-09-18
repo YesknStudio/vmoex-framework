@@ -14,19 +14,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Yeskn\AdminBundle\CrudEvent\AbstractCrudEntityEvent;
+use Yeskn\AdminBundle\CrudEvent\AbstractCrudListEvent;
 use Yeskn\AdminBundle\CrudEvent\CrudEventInterface;
-use Yeskn\AdminBundle\Services\LoadTranslationService;
-use Yeskn\MainBundle\Twig\GlobalValue;
 use Yeskn\Support\Http\ApiOk;
 use Yeskn\Support\Http\Session\Flash;
 
 class CRUDController extends Controller
 {
     use Flash;
-
-    protected $startEntityEditParam;
-
-    protected $processEntityEditParam;
 
     /**
      * @Route("/{entity}/list", methods={"GET"}, name="admin_list")
@@ -53,7 +49,8 @@ class CRUDController extends Controller
             'list' => $data['list'],
             'ids' => $data['ids'],
             'entityName' => $data['entityName'],
-            'form' => $this->createForm($typeClass, new $entityClass)->createView()
+            'form' => $this->createForm($typeClass, new $entityClass)->createView(),
+            'extra' => $data['extra']
         ]);
     }
 
@@ -148,20 +145,14 @@ class CRUDController extends Controller
         $entity = ucfirst($entityName);
         $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\StartEdit{$entity}Event";
 
-        switch ($entity) {
-            case 'Tab':
-                /** @var CrudEventInterface $processor */
-                $processor = new $processorClass($entityObj);
-                break;
-            default:
-                if (class_exists($processorClass)) {
-                    $processor = new $processorClass($entityObj);
-                } else {
-                    return true;
-                }
+        /** @var AbstractCrudEntityEvent $processor */
+        if (class_exists($processorClass)) {
+            $processor = $this->get($processorClass)->setEntity($entityObj);
+        } else {
+            return true;
         }
 
-        return $this->startEntityEditParam = $processor->execute();
+        return $processor->execute();
     }
 
     protected function startEntitiesRenderEvent($entity, array $list)
@@ -169,11 +160,11 @@ class CRUDController extends Controller
         $entity = ucfirst($entity);
         $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\StartRender{$entity}ListEvent";
 
-        /** @var CrudEventInterface $processor */
-        switch ($entity) {
-            case 'Page':
-                $processor = new $processorClass($list, $this->get(GlobalValue::class), $this->get('router'));
-                break;
+        /** @var AbstractCrudListEvent $processor */
+        if (class_exists($processorClass)) {
+            $processor = $this->get($processorClass)->setList($list);
+        } else {
+            return true;
         }
 
         return $processor->execute();
@@ -184,35 +175,14 @@ class CRUDController extends Controller
         $entity = ucfirst($entity);
         $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\ProcessEdit{$entity}Event";
 
-        /** @var CrudEventInterface $processor */
-        switch ($entity) {
-            case 'Tab':
-                $processor = new $processorClass(
-                    $entityObj,
-                    $this->getParameter('kernel.project_dir'),
-                    $this->startEntityEditParam['oldAvatar']
-                );
-                break;
-            case 'User':
-                $processor = new $processorClass(
-                    $entityObj,
-                    $this->get('security.password_encoder'),
-                    $this->startEntityEditParam,
-                    $this->getParameter('kernel.project_dir')
-                );
-                break;
-            case 'Tag':
-                $processor = new $processorClass($entityObj);
-                break;
-            default:
-                if (class_exists($processorClass)) {
-                    $processor = new $processorClass($entityObj);
-                } else {
-                    return true;
-                }
+        /** @var AbstractCrudEntityEvent $processor */
+        if (class_exists($processorClass)) {
+            $processor = $this->get($processorClass)->setEntity($entityObj);
+        } else {
+            return true;
         }
 
-        return $this->processEntityEditParam = $processor->execute();
+        return $processor->execute();
     }
 
     protected function finishEntityEditEvent($entity, $entityObj)
@@ -221,16 +191,10 @@ class CRUDController extends Controller
         $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\FinishEdit{$entity}Event";
 
         /** @var CrudEventInterface $processor */
-        switch ($entity) {
-            case 'Translation':
-                $processor = new $processorClass($this->get(LoadTranslationService::class));
-                break;
-            default:
-                if (class_exists($processorClass)) {
-                    $processor = new $processorClass($entityObj);
-                } else {
-                    return true;
-                }
+        if (class_exists($processorClass)) {
+            $processor = $this->get($processorClass)->setEntity($entityObj);
+        } else {
+            return true;
         }
 
         return $processor->execute();
@@ -241,14 +205,11 @@ class CRUDController extends Controller
         $entity = ucfirst($entity);
         $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\ProcessDelete{$entity}Event";
 
-        /** @var CrudEventInterface $processor */
-        switch ($entity) {
-            default:
-                if (class_exists($processorClass)) {
-                    $processor = new $processorClass($entityObj);
-                } else {
-                    return true;
-                }
+        /** @var AbstractCrudEntityEvent $processor */
+        if (class_exists($processorClass)) {
+            $processor = $this->get($processorClass)->setEntity($entityObj);
+        } else {
+            return true;
         }
 
         return $processor->execute();

@@ -11,19 +11,17 @@ namespace Yeskn\AdminBundle\CrudEvent;
 
 use Yeskn\MainBundle\Entity\Tag;
 
-class ProcessEditTagEvent implements CrudEventInterface
+class ProcessEditTagEvent extends AbstractCrudEntityEvent
 {
-    private $tag;
-
-    public function __construct(Tag $tag)
-    {
-        $this->tag = $tag;
-    }
+    /**
+     * @var Tag
+     */
+    protected $entity;
 
     public function execute()
     {
-        if (empty($this->tag->getId())) {
-            $this->tag->setCreatedAt(new \DateTime());
+        if (empty($this->entity->getId())) {
+            $this->entity->setCreatedAt(new \DateTime());
         }
     }
 }

@@ -11,14 +11,12 @@ namespace Yeskn\AdminBundle\CrudEvent;
 
 use Yeskn\MainBundle\Entity\Translation;
 
-class ProcessDeleteTranslationEvent implements CrudEventInterface
+class ProcessDeleteTranslationEvent extends AbstractCrudEntityEvent
 {
-    private $entity;
-
-    public function __construct(Translation $entity)
-    {
-        $this->entity = $entity;
-    }
+    /**
+     * @var Translation
+     */
+    protected $entity;
 
     public function execute()
     {

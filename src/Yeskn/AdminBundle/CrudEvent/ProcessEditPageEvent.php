@@ -11,14 +11,12 @@ namespace Yeskn\AdminBundle\CrudEvent;
 
 use Yeskn\MainBundle\Entity\Page;
 
-class ProcessEditPageEvent implements CrudEventInterface
+class ProcessEditPageEvent extends AbstractCrudEntityEvent
 {
-    private $entity;
-
-    public function __construct(Page $entity)
-    {
-        $this->entity = $entity;
-    }
+    /**
+     * @var Page
+     */
+    protected $entity;
 
     public function execute()
     {

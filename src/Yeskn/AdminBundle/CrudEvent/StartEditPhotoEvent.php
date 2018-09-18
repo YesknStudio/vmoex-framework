@@ -4,18 +4,18 @@
  * This file is part of project wpcraft.
  *
  * Author: Jake
- * Create: 2018-09-16 12:11:49
+ * Create: 2018-09-18 22:02:17
  */
 
 namespace Yeskn\AdminBundle\CrudEvent;
 
 use Symfony\Component\HttpFoundation\File\File;
-use Yeskn\MainBundle\Entity\Tab;
+use Yeskn\MainBundle\Entity\Photo;
 
-class StartEditTabEvent extends AbstractCrudEntityEvent
+class StartEditPhotoEvent extends AbstractCrudEntityEvent
 {
     /**
-     * @var Tab
+     * @var Photo
      */
     protected $entity;
 
@@ -25,12 +25,14 @@ class StartEditTabEvent extends AbstractCrudEntityEvent
     {
         $entityObj = $this->entity;
 
-        $oldAvatar = $entityObj->getAvatar();
-        $entityObj->setAvatar(new File($oldAvatar, false));
+        if ($oldCover = $entityObj->getFile()) {
+            $entityObj->setFile(new File($oldCover, false));
+        } else {
+            $oldCover = null;
+        }
 
         return self::$oldProperty = [
-            'avatar' => $oldAvatar
+            'file' => $oldCover
         ];
     }
-
 }

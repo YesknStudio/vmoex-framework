@@ -11,34 +11,38 @@ namespace Yeskn\AdminBundle\CrudEvent;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Yeskn\MainBundle\Entity\Post;
+use Yeskn\MainBundle\Entity\Photo;
 use Intervention\Image\ImageManagerStatic as Image;
 
-class ProcessEditPostEvent extends AbstractCrudEntityEvent
+class ProcessEditPhotoEvent extends AbstractCrudEntityEvent
 {
     /**
-     * @var Post
+     * @var Photo
      */
     protected $entity;
 
     private $webPath;
 
-    private $oldCover;
+    private $oldFile;
 
     public function __construct($projectDir)
     {
         $this->webPath = $projectDir . '/web';
-        $this->oldCover = StartEditPostEvent::$oldProperty['cover'];
+        $this->oldFile = StartEditPhotoEvent::$oldProperty['file'];
     }
 
     public function execute()
     {
         $entityObj = $this->entity;
 
+        if (empty($entityObj->getId())) {
+            $entityObj->setCreatedAt(new \DateTime());
+        }
+
         /** @var UploadedFile $file */
-        if ($file = $entityObj->getCover()) {
+        if ($file = $entityObj->getFile()) {
             $extension = $file->guessExtension();
-            $fileName = 'upload/cover/' . time() . mt_rand(1000, 9999) . '.' . $extension;
+            $fileName = 'upload/photo/' . time() . mt_rand(1000, 9999) . '.' . $extension;
 
             $targetPath = $this->webPath .  '/' . $fileName;
 
@@ -50,11 +54,11 @@ class ProcessEditPostEvent extends AbstractCrudEntityEvent
             $image = Image::make($targetPath);
             $image->resize(200, 100)->save();
 
-            $entityObj->setCover($fileName);
-        } else if (!empty($this->oldCover)) {
-            $entityObj->setCover($this->oldCover);
+            $entityObj->setFile($fileName);
+        } else if (!empty($this->oldFile)) {
+            $entityObj->setFile($this->oldFile);
         } else {
-            throw new \Exception('封面图不能为空');
+            throw new \Exception('图片不能为空');
         }
     }
 }

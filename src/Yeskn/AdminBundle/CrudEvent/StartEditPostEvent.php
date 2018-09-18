@@ -12,14 +12,14 @@ namespace Yeskn\AdminBundle\CrudEvent;
 use Symfony\Component\HttpFoundation\File\File;
 use Yeskn\MainBundle\Entity\Post;
 
-class StartEditPostEvent
+class StartEditPostEvent extends AbstractCrudEntityEvent
 {
-    private $entity;
+    /**
+     * @var Post
+     */
+    protected $entity;
 
-    public function __construct(Post $entity)
-    {
-        $this->entity = $entity;
-    }
+    public static $oldProperty;
 
     public function execute()
     {
@@ -31,8 +31,8 @@ class StartEditPostEvent
             $oldCover = null;
         }
 
-        return [
-            'oldCover' => $oldCover
+        return self::$oldProperty = [
+            'cover' => $oldCover
         ];
     }
 }

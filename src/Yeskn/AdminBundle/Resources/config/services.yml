@@ -8,9 +8,11 @@ services:
     autoconfigure: true
     autowire: true
     resource: '../../../AdminBundle/*'
+    bind:
+      $projectDir: '%kernel.project_dir%'
     # you can exclude directories or files
     # but if a service is unused, it's removed anyway
-    exclude: '../../../AdminBundle/{Entity,Repository,Tests,CrudEvent}'
+    exclude: '../../../AdminBundle/{Entity,Repository,Tests}'
 
     # controllers are imported separately to make sure they're public
     # and have a tag that allows actions to type-hint services

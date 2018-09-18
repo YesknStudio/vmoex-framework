@@ -11,14 +11,12 @@ namespace Yeskn\AdminBundle\CrudEvent;
 
 use Yeskn\MainBundle\Entity\Comment;
 
-class ProcessEditCommentEvent implements CrudEventInterface
+class ProcessEditCommentEvent extends AbstractCrudEntityEvent
 {
-    private $entity;
-
-    public function __construct(Comment $entity)
-    {
-        $this->entity = $entity;
-    }
+    /**
+     * @var Comment
+     */
+    protected $entity;
 
     public function execute()
     {
