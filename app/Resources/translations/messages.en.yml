@@ -124,12 +124,12 @@ notice_my_notice: null
 notice_unread: null
 notice_read: notice_read
 notice_replied_you: null
-post_top: null
+post_top: Top
 like: null
 action_too_fast: null
 banner_announce: 'The content of this site may be infringed on your rights, Vmoex use your articles (or pictures, etc.) only for testing the real line, if you do not allow, please mail: support@vmoex.com.'
 all: null
-hot: null
+hot: Hot
 site_state: dsds
 site_since: null
 site_post_count: null

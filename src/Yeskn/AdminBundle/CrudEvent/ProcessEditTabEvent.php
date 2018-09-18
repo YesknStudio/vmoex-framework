@@ -33,6 +33,10 @@ class ProcessEditTabEvent implements CrudEventInterface
     {
         $entityObj = $this->entity;
 
+        if ($entityObj->getLevel() == 1) {
+            $entityObj->setParent(null);
+        }
+
         /** @var UploadedFile $file */
         if ($file = $entityObj->getAvatar()) {
             $extension = $file->guessExtension();

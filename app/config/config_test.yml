@@ -8,6 +8,11 @@ framework:
     profiler:
         collect: false
 
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: '%test_database_path%'
+
 web_profiler:
     toolbar: false
     intercept_redirects: false

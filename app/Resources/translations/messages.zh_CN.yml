@@ -67,7 +67,7 @@ trends_description: null
 致谢: null
 buy_beer: null
 全部: null
-热门: null
+热门: 热力门
 追剧: null
 福利: null
 插画: null
@@ -124,7 +124,7 @@ notice_my_notice: notice_my_notice
 notice_unread: null
 notice_read: notice_read
 notice_replied_you: notice_replied_you
-post_top: post_top
+post_top: 置顶
 like: 赞
 action_too_fast: 好可怕，速度太快了
 banner_announce: このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。
@@ -137,7 +137,7 @@ site_comment_count: 回复数量
 site_user_count: 注册用户数量
 site_copyright: '@2018 Wpcraft - 9秒助你打造自己的博客'
 site_title: 'Wpcraft - 9秒助你打造自己的博客'
-site_name: 博客云
+site_name: Wpcraft
 user_place_in_site: 第count位Wpcraft用户
 footer_available_with: '可用于: '
 yingwe: sdsd

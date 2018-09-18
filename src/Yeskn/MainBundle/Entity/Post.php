@@ -4,6 +4,7 @@ namespace Yeskn\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Post
@@ -78,8 +79,10 @@ class Post
     /**
      * @var string
      * @ORM\Column(name="cover", type="string", length=100, nullable=true)
+     *
+     * @Assert\File()
      */
-    private $cover = '/upload/cover/sample.jpg';
+    private $cover = '';
 
     /**
      * @var \DateTime

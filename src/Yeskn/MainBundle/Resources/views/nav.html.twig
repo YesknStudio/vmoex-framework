@@ -9,7 +9,7 @@
             </button>
 
             <div class="navbar-toggle collapsed navbar-avatar-mobile" data-toggle="collapse" data-target="#navbar-collapse-user">
-                {% set avatar = app.user ? app.user.avatar : 'https://static.yeskn.com/avatar.png' %}
+                {% set avatar = app.user ? app.user.avatar : asset('avatar/default.png') %}
                 <img src="{{ asset(avatar) }}" alt="" width="25px" height="25px" class="img-circle">
             </div>
 

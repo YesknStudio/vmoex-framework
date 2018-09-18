@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\AdminBundle\CrudEvent\CrudEventInterface;
 use Yeskn\AdminBundle\Services\LoadTranslationService;
+use Yeskn\MainBundle\Twig\GlobalValue;
 use Yeskn\Support\Http\ApiOk;
 use Yeskn\Support\Http\Session\Flash;
 
@@ -26,6 +27,35 @@ class CRUDController extends Controller
     protected $startEntityEditParam;
 
     protected $processEntityEditParam;
+
+    /**
+     * @Route("/{entity}/list", methods={"GET"}, name="admin_list")
+     *
+     * @param $entity
+     *
+     * @return Response
+     */
+    public function listAction($entity)
+    {
+        $entity = ucfirst($entity);
+        $repo = $this->getDoctrine()->getRepository('YesknMainBundle:' . $entity);
+
+        $list = $repo->findBy([], ['id' => 'DESC']);
+
+        $typeClass = "Yeskn\MainBundle\Form\\{$entity}Type";
+        $entityClass = "Yeskn\MainBundle\Entity\\{$entity}";
+
+        $data = $this->startEntitiesRenderEvent($entity, $list);
+
+        return $this->render('@YesknAdmin/crud/list.html.twig', [
+            'entity' => strtolower($entity),
+            'columns' => $data['columns'],
+            'list' => $data['list'],
+            'ids' => $data['ids'],
+            'entityName' => $data['entityName'],
+            'form' => $this->createForm($typeClass, new $entityClass)->createView()
+        ]);
+    }
 
     /**
      * @Route("/delete_{entity}_{id}", methods={"POST"}, requirements={"id":"\d+"}, name="admin_delete")
@@ -132,6 +162,21 @@ class CRUDController extends Controller
         }
 
         return $this->startEntityEditParam = $processor->execute();
+    }
+
+    protected function startEntitiesRenderEvent($entity, array $list)
+    {
+        $entity = ucfirst($entity);
+        $processorClass = "Yeskn\\AdminBundle\\CrudEvent\\StartRender{$entity}ListEvent";
+
+        /** @var CrudEventInterface $processor */
+        switch ($entity) {
+            case 'Page':
+                $processor = new $processorClass($list, $this->get(GlobalValue::class), $this->get('router'));
+                break;
+        }
+
+        return $processor->execute();
     }
 
     protected function processEntityEditEvent($entity, $entityObj)

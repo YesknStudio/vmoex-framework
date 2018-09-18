@@ -37,3 +37,7 @@ services:
         arguments: ~
         tags:
         - { name: kernel.event_listener, event: kernel.response }
+
+    Yeskn\MainBundle\Routing\DynamicLoader:
+        tags:
+            - routing.loader

@@ -129,7 +129,7 @@ like: null
 action_too_fast: null
 banner_announce: 本網站的內容可能侵犯了您的權益，當前Vmoex使用您的文章（或者圖片等）僅用於測試真實上線情况，如您不允許，請致郵：support@vmoex.com。
 all: null
-hot: null
+hot: 熱門
 site_state: dddd
 site_since: null
 site_post_count: null

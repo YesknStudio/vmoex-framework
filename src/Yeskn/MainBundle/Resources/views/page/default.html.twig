@@ -1,0 +1,24 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block main %}
+    <style>
+        body {
+            background-image: url("https://ww1.sinaimg.cn/large/0060lm7Tgy1fi01ahtu3sj31hc0u078q.jpg");
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-file-text"></i> {{ pageName|trans }}
+                </div>
+                <div class="panel-body">
+                    {{ content|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

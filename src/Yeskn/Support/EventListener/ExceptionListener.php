@@ -18,9 +18,9 @@ class ExceptionListener
     {
         $exception = $event->getException();
         $isAjax = $event->getRequest()->isXmlHttpRequest();
-        $event->allowCustomResponseCode();
 
         if ($isAjax) {
+            $event->allowCustomResponseCode();
             $response = new ApiFail($exception->getMessage());
             $response->setStatusCode(200);
 
