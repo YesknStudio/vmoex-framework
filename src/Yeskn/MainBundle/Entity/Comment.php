@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="Yeskn\MainBundle\Repository\CommentRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment
 {
@@ -237,5 +238,14 @@ class Comment
     public function getThumbUpUsers()
     {
         return $this->thumbUpUsers;
+    }
+
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
     }
 }

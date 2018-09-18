@@ -3,12 +3,15 @@
 namespace Yeskn\MainBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yeskn\MainBundle\Entity\User;
 
 class GlobalValue extends \Twig_Extension
@@ -30,7 +33,7 @@ class GlobalValue extends \Twig_Extension
 
 
     /**
-     * @var TokenStorage
+     * @var TokenStorageInterface
      */
     private $tokenStorage;
 
@@ -38,10 +41,19 @@ class GlobalValue extends \Twig_Extension
 
     /**
      * GlobalValue constructor.
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
+     * @param TranslatorInterface $translator
+     * @param RouterInterface $router
+     * @param TokenStorageInterface $tokenStorage
+     * @param $socketHost
      */
-    public function __construct($em, $translator, $router, $tokenStorage, $socketHost)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        TranslatorInterface $translator,
+        RouterInterface $router,
+        TokenStorageInterface $tokenStorage,
+        $socketHost
+    ) {
         $this->em = $em;
         $this->translator = $translator;
         $this->router = $router;

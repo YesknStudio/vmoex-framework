@@ -9,7 +9,7 @@
 
 namespace Yeskn\AdminBundle\Services;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Yaml\Yaml;
 use Yeskn\MainBundle\Entity\Translation;
 
@@ -19,7 +19,7 @@ class LoadTranslationService
 
     private $entityManager;
 
-    public function __construct($rootDir, EntityManager $entityManager)
+    public function __construct($rootDir, EntityManagerInterface $entityManager)
     {
         $this->rootDir = $rootDir;
         $this->entityManager = $entityManager;

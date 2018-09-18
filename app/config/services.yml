@@ -19,8 +19,6 @@ services:
             - { name: kernel.event_listener, event: kernel.exception }
 
     Yeskn\MainBundle\Twig\WebsiteInfo:
-        arguments:
-            - "@doctrine.orm.entity_manager"
         tags:
             - { name: twig.extension }
 
@@ -29,12 +27,10 @@ services:
         - { name: kernel.event_listener, event: kernel.request, priority: 50 }
 
     Yeskn\MainBundle\EventListener\ControllerListener:
-        arguments: ['@service_container']
         tags:
         - { name: kernel.event_listener, event: kernel.controller }
 
     Yeskn\MainBundle\EventListener\ResponseListener:
-        arguments: ~
         tags:
         - { name: kernel.event_listener, event: kernel.response }
 

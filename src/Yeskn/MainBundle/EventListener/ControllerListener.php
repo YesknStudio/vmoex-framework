@@ -8,42 +8,47 @@
 
 namespace Yeskn\MainBundle\EventListener;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Repository\ActiveRepository;
 
 class ControllerListener
 {
-    private $container;
+    private $tokenStorage;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var ActiveRepository
+     */
+    private $repository;
+
+    public function __construct(TokenStorageInterface $tokenStorage, EntityManagerInterface $em)
     {
-        $this->container = $container;
+        $this->tokenStorage = $tokenStorage;
+        $this->repository = $em->getRepository('YesknMainBundle:Active');
     }
 
     public function onKernelController()
     {
+        /** @var User $user */
         $user = $this->getUser();
 
         if ($user) {
-            $activeRepository = $this->container->get('doctrine')
-                ->getRepository('YesknMainBundle:Active');
-            $activeRepository->increaseTodayActive($user);
+            $this->repository->increaseTodayActive($user);
         }
     }
 
     /**
-     * @return User|null
+     * @return UserInterface|null
      */
     protected function getUser()
     {
-        if (!$this->container->has('security.token_storage')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application. Try running "composer require symfony/security-bundle".');
-        }
-
-        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
+        if (null === $token = $this->tokenStorage->getToken()) {
             return null;
         }
 
+        /** @var UserInterface $user */
         if (!is_object($user = $token->getUser())) {
             // e.g. anonymous authentication
             return null;

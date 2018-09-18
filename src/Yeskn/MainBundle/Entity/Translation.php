@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="translation")
  * @ORM\Entity(repositoryClass="Yeskn\MainBundle\Repository\TranslationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Translation
 {
@@ -178,5 +179,16 @@ class Translation
     public function setCanDelete($canDelete)
     {
         $this->canDelete = $canDelete;
+    }
+
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function checkDelete()
+    {
+        if (!$this->isCanDelete()) {
+            throw new \Exception('该词条为系统设置，无法删除');
+        }
     }
 }

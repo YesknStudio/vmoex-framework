@@ -22,13 +22,6 @@ use Yeskn\MainBundle\Form\Type\ImageInputType;
 
 class TabType extends AbstractType
 {
-    private $webRoot;
-
-    public function __construct($webRoot)
-    {
-        $this->webRoot = $webRoot;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         /** @var Tab $entity */

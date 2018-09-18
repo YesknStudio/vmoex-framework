@@ -6,6 +6,8 @@ services:
       public: false       # Allows optimizing the container by removing unused services; this also means
       # fetching services directly from the container via $container->get() won't work.
       # The best practice is to be explicit about your dependencies anyway.
+      bind:
+        $socketHost: "%socket_host%"
 
   Yeskn\MainBundle\:
       resource: '../../../MainBundle/*'
@@ -20,36 +22,11 @@ services:
       public: true
       tags: ['controller.service_arguments']
 
-  Yeskn\MainBundle\Form\Logic\ManageBasicLogic:
-      arguments:
-        - "@doctrine.orm.entity_manager"
-
-  Yeskn\MainBundle\Form\ManageBasicType:
-      arguments:
-        - "%kernel.project_dir%"
-      tags: [form.type]
-
-  Yeskn\MainBundle\Form\TabType:
-      arguments:
-        - "%kernel.project_dir%"
-      tags: [form.type]
-
-  Yeskn\MainBundle\Form\UserMessageType:
-      arguments:
-        - "@doctrine.orm.entity_manager"
-      tags: [form.type]
-
   socket.push:
     public: true
     class: Yeskn\MainBundle\Services\SocketPushService
 
   Yeskn\MainBundle\Twig\GlobalValue:
-      arguments:
-        $em: "@doctrine.orm.entity_manager"
-        $translator: "@translator"
-        $router: "@router"
-        $tokenStorage: "@security.token_storage"
-        $socketHost: "%socket_host%"
       tags:
       - { name: twig.extension }
 
