@@ -9,10 +9,9 @@
 
 namespace Yeskn\AdminBundle\CrudEvent;
 
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Yeskn\MainBundle\Entity\Tab;
-use Intervention\Image\ImageManagerStatic as Image;
+use Yeskn\Support\File\ImageHandler;
 
 class ProcessEditTabEvent extends AbstractCrudEntityEvent
 {
@@ -25,10 +24,16 @@ class ProcessEditTabEvent extends AbstractCrudEntityEvent
 
     private $oldAvatar;
 
-    public function __construct($projectDir)
+    private $imageHandler;
+
+    public function __construct($projectDir, ImageHandler $imageHandler)
     {
         $this->webRoot = $projectDir . '/web';
         $this->oldAvatar = StartEditTabEvent::$oldProperty['avatar'];
+
+        $imageHandler->setHeight(200);
+        $imageHandler->setWidth(200);
+        $this->imageHandler = $imageHandler;
     }
 
     public function execute()
@@ -39,22 +44,8 @@ class ProcessEditTabEvent extends AbstractCrudEntityEvent
             $entityObj->setParent(null);
         }
 
-        /** @var UploadedFile $file */
-        if ($file = $entityObj->getAvatar()) {
-            $extension = $file->guessExtension();
-            $fileName = 'upload/' . time() . mt_rand(1000, 9999) . '.' . $extension;
-
-            $targetPath = $this->webRoot .  '/' . $fileName;
-
-            $fs = new Filesystem();
-            $fs->copy($file->getRealPath(), $targetPath);
-
-            Image::configure(array('driver' => 'gd'));
-
-            $image = Image::make($targetPath);
-            $image->resize(100, 100)->save();
-
-            $entityObj->setAvatar($fileName);
+        if ($entityObj->getAvatar() instanceof File) {
+            $this->imageHandler->handle($entityObj, 'avatar');
         } else if (!empty($this->oldAvatar)) {
             $entityObj->setAvatar($this->oldAvatar);
         } else {

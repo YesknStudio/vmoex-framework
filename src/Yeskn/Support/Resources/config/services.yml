@@ -1,0 +1,12 @@
+services:
+
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false       # Allows optimizing the container by removing unused services; this also means
+    bind:
+      $projectDir: '%kernel.project_dir%'
+
+
+  Yeskn\Support\:
+    resource: '../../../Support/*'

@@ -3,9 +3,8 @@ _main:
 
 yeskn_oauth:
     resource: "@YesknOAuthBundle/Controller/"
-    host:     oauth-local.yeskn.com
     type:     annotation
-    prefix:   /
+    prefix:   /oauth
 
 yeskn_admin:
     resource: "@YesknAdminBundle/Controller/"

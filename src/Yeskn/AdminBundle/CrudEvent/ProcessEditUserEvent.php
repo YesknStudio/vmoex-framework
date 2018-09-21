@@ -35,7 +35,7 @@ class ProcessEditUserEvent extends AbstractCrudEntityEvent
     {
         $this->passwordEncoder = $passwordEncoder;
         $this->oldValue = StartEditUserEvent::$odlProperty;
-        $this->webRoot = $projectDir . '/web/';
+        $this->webRoot = $projectDir . '/web';
     }
 
     public function execute()
