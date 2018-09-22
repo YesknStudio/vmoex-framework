@@ -28,7 +28,10 @@ class GoodsType extends AbstractType
 
         $builder->add('title', TextType::class);
         $builder->add('cover', ImageInputType::class, [
-            'required' => $entity->getCover() ? false: true
+            'required' => $entity->getCover() ? false: true,
+            'attr' =>  [
+                'help' => '创建时需要上传商品封面图。'
+            ]
         ]);
         $builder->add('detail', TextareaType::class);
         $builder->add('amount', IntegerType::class);

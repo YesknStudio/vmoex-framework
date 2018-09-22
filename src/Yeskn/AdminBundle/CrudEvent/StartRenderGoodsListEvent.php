@@ -63,7 +63,12 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
             'columns' => ['ID', '标题', '图片', '价格', '邮费', '数量'],
             'entityName' => $this->entityName,
             'list' => $result,
-            'ids' => $ids
+            'ids' => $ids,
+            'extra' => [
+                'columnAttr' => [
+                    2 => 'align=center'
+                ]
+            ]
         ];
     }
 }

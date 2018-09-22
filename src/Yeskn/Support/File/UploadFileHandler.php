@@ -16,6 +16,8 @@ class UploadFileHandler
 {
     private $basePath;
 
+    protected $fileName;
+
     public function __construct($projectDir)
     {
         $this->basePath = $projectDir . '/web';
@@ -32,10 +34,16 @@ class UploadFileHandler
         /** @var File $file */
         $file = $entity->$getMethod();
 
-        $extension = $file->guessExtension();
-        $fileName = '/upload/' . time() . mt_rand(1000, 9999) . '.' . $extension;
+        if (empty($this->fileName)) {
+            $extension = $file->guessExtension();
+            $this->fileName = '/upload/' . time() . mt_rand(1000, 9999) . '.' . $extension;
+        } else {
+            if (strpos($this->fileName, '/') !== 0) {
+                $this->fileName = '/upload/' . $this->fileName;
+            }
+        }
 
-        $targetPath = $this->basePath . $fileName;
+        $targetPath = $this->basePath . $this->fileName;
 
         $fs = new Filesystem();
         $fs->copy($file->getRealPath(), $targetPath);
@@ -43,7 +51,7 @@ class UploadFileHandler
         $method = 'set' . ucfirst($attribute);
 
         if (method_exists($entity, $method)) {
-            $entity->$method($fileName);
+            $entity->$method($this->fileName);
 
             return new UploadedFile($targetPath);
         }

@@ -23,6 +23,8 @@ class ImageHandler extends UploadFileHandler
 
     private $height;
 
+    protected $fileName;
+
     public function handle($entity, $attribute)
     {
         $uploaded = $this->upload($entity, $attribute);
@@ -62,5 +64,16 @@ class ImageHandler extends UploadFileHandler
     public function setHeight($height)
     {
         $this->height = $height;
+    }
+
+    public function setSize($width, $height)
+    {
+        $this->setWidth($width);
+        $this->setHeight($height);
+    }
+
+    public function setFileName($name)
+    {
+        $this->fileName = $name;
     }
 }

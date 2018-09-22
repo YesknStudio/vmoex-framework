@@ -10,14 +10,13 @@
 namespace Yeskn\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Form\Logic\ManageBasicLogic;
 use Yeskn\MainBundle\Form\ManageBasicType;
-use Intervention\Image\ImageManagerStatic as Image;
+use Yeskn\Support\File\ImageHandler;
 
 /**
  * Class ManageController
@@ -32,10 +31,11 @@ class ManageController extends Controller
      *
      * @param $request
      * @param $manageBasicLogic
+     * @param $imageHandler
      *
      * @return Response
      */
-    public function basicAction(Request $request, ManageBasicLogic $manageBasicLogic)
+    public function basicAction(Request $request, ManageBasicLogic $manageBasicLogic, ImageHandler $imageHandler)
     {
         $basic = $manageBasicLogic->getBasicManage();
 
@@ -51,21 +51,9 @@ class ManageController extends Controller
 
         if ($basicForm->isSubmitted() && $basicForm->isValid()) {
             if ($file = $basic->getSiteLogo()) {
-                $extension = $file->guessExtension();
-                $webRoot = $this->getParameter('kernel.project_dir') . '/web';
-                $fileName = 'upload/' . time() . mt_rand(1000, 9999) . '.' . $extension;
-
-                $targetPath = $webRoot .  '/' . $fileName;
-
-                $fs = new Filesystem();
-                $fs->copy($file->getRealPath(), $targetPath);
-
-                Image::configure(array('driver' => 'gd'));
-
-                $image = Image::make($targetPath);
-                $image->resize(100, 100)->save();
-
-                $basic->setSiteLogo($fileName);
+                $imageHandler->setSize(340, 115);
+                $imageHandler->setFileName('/assets/images/logo.png');
+                $imageHandler->handle($basic, 'siteLogo');
             } else {
                 $basic->setSiteLogo($oldLogo);
             }
