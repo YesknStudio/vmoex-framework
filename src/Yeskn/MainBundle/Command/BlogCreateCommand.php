@@ -52,7 +52,7 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $connection = $container->get('doctrine')->getConnection();
 
-        $this->username = $username = $input->getOption('name');
+        $this->username = $username = $input->getOption('username');
         $password = $input->getOption('password');
         $blogName = $input->getOption('blogName');
         $email = $input->getOption('email');
