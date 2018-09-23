@@ -89,11 +89,13 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $this->writeln('博客初始化成功！');
 
-        $this->writeln('地址：'. $this->url);
+        $this->writeln(sprintf('地址：<a target="_blank" href="%s">%s</a>', $this->url, $this->url));
         $this->writeln('用户名：'. $username);
         $this->writeln('标题：'. $username . '的博客');
         $this->writeln('密码：'. $password);
         $this->writeln('邮箱：'. $email);
+
+        $this->writeln('您的博客创建成功');
     }
 
     public function initDatabase($name, $title, $pass, $email)

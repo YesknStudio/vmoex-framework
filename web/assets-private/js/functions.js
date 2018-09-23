@@ -123,7 +123,7 @@ function handleNewChat() {
 }
 
 function handleCreateBlogEvent(data) {
-    $('#processBlogStep4 .progress').append('<span class="help-block">'+data.msg+'</span>');
+    $('#processBlogStep4 #processBlogSocketMessage').append('<span class="help-block">'+data.msg+'</span>');
 }
 
 function path(route, parameters) {

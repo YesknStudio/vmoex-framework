@@ -16,9 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Entity\Blog;
 use Yeskn\Support\Http\ApiFail;
 use Yeskn\Support\Http\ApiOk;
+use Yeskn\Support\Http\HttpResponse;
 
 class BlogController extends Controller
 {
+    use HttpResponse;
+
     /**
      * @return Response
      * @throws \LogicException
@@ -27,22 +30,23 @@ class BlogController extends Controller
      */
     public function createAction(Request $request, $step)
     {
-        if ($request->isMethod('POST')) {
-            $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
-            $blog = $blogRepo->findOneBy(['user' => $this->getUser()], ['id' => 'DESC']);
+        $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
+        $blog = $blogRepo->findOneBy(['user' => $this->getUser()], ['id' => 'DESC']);
 
-            if ($blog && $blog->getStatus() == 'created') {
-                return new ApiFail('你已经创建了一个博客，无法再创建更多了');
-            } else {
-                if (empty($blog)) {
-                    if ($step == 1) {
-                        $blog = new Blog();
-                        $blog->setUser($this->getUser());
-                    } else {
-                        return new ApiFail('非法操作');
-                    }
+        if ($blog && $blog->getStatus() == 'created') {
+            return $this->errorResponse('你已经创建了一个博客，无法再创建更多了');
+        } else {
+            if (empty($blog)) {
+                if ($step == 1) {
+                    $blog = new Blog();
+                    $blog->setUser($this->getUser());
+                } else {
+                    return $this->errorResponse('请回到第一步进行创建');
                 }
             }
+        }
+
+        if ($request->isMethod('POST')) {
 
             if ($step == 1) {
                 $blogName = $request->get('blogName');
@@ -86,14 +90,17 @@ class BlogController extends Controller
                 }
 
                 $blog->setPassword($password);
-                $blog->setStatus('queueing');
                 $this->get('doctrine.orm.entity_manager')->flush();
-
-                //
 
                 return new ApiOk();
             }
         }
+
+        if ($step == 4 && !empty($blog->getPassword()) && $blog->getStatus() == Blog::STATUS_STARING) {
+            $blog->setStatus(Blog::STATUS_QUEUEING);
+            $this->get('doctrine.orm.entity_manager')->flush();
+        }
+
         return $this->render('@YesknMain/blog/create.html.twig', [
             'step' => $step
         ]);

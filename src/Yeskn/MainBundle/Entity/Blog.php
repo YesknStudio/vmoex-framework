@@ -19,6 +19,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Blog
 {
+    const STATUS_STARING = 'starting';
+    const STATUS_QUEUEING = 'queueing';
+    const STATUS_CREATED = 'created';
+
     /**
      * @var int
      *
@@ -75,7 +79,7 @@ class Blog
      * @var string
      * @ORM\Column(name="status", type="string")
      */
-    private $status = 'staring';
+    private $status = 'starting';
 
     /**
      * @var \DateTime

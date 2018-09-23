@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Yeskn\MainBundle\Entity\Blog;
 
 class BlogCreateWorkerCommand extends ContainerAwareCommand
 {
@@ -26,7 +27,7 @@ class BlogCreateWorkerCommand extends ContainerAwareCommand
             $do = $this->getContainer()->get('doctrine');
 
             $blog = $do->getRepository('YesknMainBundle:Blog')
-                ->findOneBy(['status' => 'queueing'], ['id' => 'ASC']);
+                ->findOneBy(['status' => Blog::STATUS_QUEUEING], ['id' => 'ASC']);
 
             if (empty($blog)) {
                 sleep(3);
@@ -46,7 +47,7 @@ class BlogCreateWorkerCommand extends ContainerAwareCommand
 
             $command->run($commandInput, $output);
 
-            $blog->setStatus('created');
+            $blog->setStatus(Blog::STATUS_CREATED);
             $this->getContainer()->get('doctrine.orm.entity_manager')->flush();
 
             sleep(3);
