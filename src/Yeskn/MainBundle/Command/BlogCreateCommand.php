@@ -98,7 +98,7 @@ class BlogCreateCommand extends ContainerAwareCommand
 
     public function initDatabase($name, $title, $pass, $email)
     {
-        $this->url = $url = "https://{$name}.wpcraft.cn";
+        $this->url = $url = "https://{$name}." . $this->getContainer()->getParameter('domain');
         $client = new Client(['verify' => false]);
 
         $client->post($url . '/wp-admin/setup-config.php?step=2', [

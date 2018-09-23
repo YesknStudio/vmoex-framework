@@ -33,7 +33,7 @@
                             {% endfor %}
                         </div>
                         <div class="item">
-                            {% for key, blog in blog_list if key <= 6-1 %}
+                            {% for key, blog in blog_list if key > 3 and key <= 6-1 %}
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="panel panel-default">
                                         <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
@@ -50,7 +50,7 @@
                             {% endfor %}
                         </div>
                         <div class="item">
-                            {% for key, blog in blog_list if key <= 9-1 %}
+                            {% for key, blog in blog_list if key > 6 and key <= 9-1 %}
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="panel panel-default">
                                         <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">

@@ -6,10 +6,9 @@
         <div class="panel-body">
             {{ 'hello_stranger_detail'|trans }}
 
-
             <br>
             <br>
-            <button class="btn btn-default btn-sm btn-block">{{ 'home_now_register'|trans }}</button>
+            <a data-pjax href="{{ path('register') }}" class="btn btn-default btn-sm btn-block">{{ 'home_now_register'|trans }}</a>
         </div>
     </div>
 {% endif %}
