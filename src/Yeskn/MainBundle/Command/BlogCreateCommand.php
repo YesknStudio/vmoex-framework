@@ -74,11 +74,11 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $this->writeln('创建数据库用户成功...', 30);
 
-        $webPath = $allocate->allocateWebSpace($username);
+        $webPath = $allocate->allocateWebSpace($domain);
 
         $this->writeln('分配服务器空间成功...', 40);
 
-        $allocate->allocateDbSpace($username);
+        $allocate->allocateDbSpace($domain);
 
         $this->writeln('分配数据库空间成功...', 50);
 
@@ -92,7 +92,7 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $fs->chown($webPath, $config['server_user'], true);
 
-        $this->initDatabase($username, $username, $blogName, $password, $email);
+        $this->initDatabase($domain, $username, $blogName, $password, $email);
 
         $this->writeln('博客初始化成功！', 70);
 
