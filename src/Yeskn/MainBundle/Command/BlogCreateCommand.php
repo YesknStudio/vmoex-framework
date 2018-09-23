@@ -21,6 +21,8 @@ class BlogCreateCommand extends ContainerAwareCommand
 {
     private $url;
 
+    private $dbPass;
+
     /**
      * @var OutputInterface
      */
@@ -67,10 +69,10 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $this->writeln('创建数据库成功...', 30);
 
-        $sql = "grant all privileges on {$dbName}.* to {$domain}@localhost identified by '?';flush privileges;";
+        $this->dbPass = $dbPass = substr(md5($password), 25);
+        $sql = "grant all privileges on {$dbName}.* to {$domain}@localhost identified by '{$dbPass}';flush privileges;";
 
-        $statement = $connection->prepare($sql);
-        $statement->execute([$password]);
+        $connection->executeQuery($sql);
 
         $this->writeln('创建数据库用户成功...', 30);
 
@@ -114,7 +116,7 @@ class BlogCreateCommand extends ContainerAwareCommand
             'form_params' => [
                 'dbname' => 'wpcast_'.$domain,
                 'uname' => $domain,
-                'pwd' => $pass,
+                'pwd' => $this->dbPass,
                 'dbhost' => 'localhost',
                 'prefix' => 'wp_',
                 'language' => 'zh_CN',
