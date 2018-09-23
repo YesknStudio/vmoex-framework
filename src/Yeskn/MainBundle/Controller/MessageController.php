@@ -58,25 +58,6 @@ class MessageController extends Controller
     }
 
     /**
-     * @Route("/my-messages", name="my_messages", methods={"GET"})
-     */
-    public function myMessagesAction()
-    {
-        $messageRepository = $this->getDoctrine()->getRepository('YesknMainBundle:Message');
-
-        /** @var Message[] $rMessages */
-        $rMessages = $messageRepository->findBy(['receiver' => $this->getUser()], ['createdAt' => 'DESC']);
-        /** @var Message[] $sMessages */
-        $sMessages = $messageRepository->findBy(['sender' => $this->getUser()],['createdAt' => 'DESC']);
-
-        return $this->render('@YesknMain/user/messages.html.twig', [
-            'rMessages' => $rMessages,
-            'sMessages' => $sMessages
-        ]);
-
-    }
-
-    /**
      * @Route("/set-message-red", name="set_message_red", methods={"POST"})
      */
     public function setReadAction()

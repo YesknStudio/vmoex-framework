@@ -16,9 +16,15 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Yeskn\MainBundle\Entity\Message;
+use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Form\ChangePasswordType;
+use Yeskn\MainBundle\Form\Entity\ChangePassword;
 
 /**
+ * 个人中心
+ *
  * Class UserController
  * @package Yeskn\MainBundle\Controller
  *
@@ -26,10 +32,7 @@ use Yeskn\MainBundle\Entity\User;
  */
 class UserController extends Controller
 {
-    /**
-     * @Route("/home", name="user_home")
-     */
-    public function homeAction()
+    private function getUserHomeInfo()
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -54,19 +57,127 @@ class UserController extends Controller
             $online = true;
         }
 
-        return $this->render('@YesknMain/user/user-home.html.twig', [
+        return [
             'user' => $user,
             'online' => $online,
             'userActive' => $userActive
-        ]);
+        ];
+    }
+
+    /**
+     * @Route("/home", name="user_home")
+     */
+    public function homeAction()
+    {
+        return $this->render('@YesknMain/user/user-home.html.twig',
+            $this->getUserHomeInfo() + [
+                'scope' => 'home'
+            ]);
     }
 
     /**
      * @Route("/setting", name="user_setting")
      */
-    public function settingAction()
+    public function settingAction(Request $request)
     {
-        return $this->render('@YesknMain/user/setting.html.twig');
+        $form = $request->get('form');
+
+        if (empty($form)) {
+            $form = $this->createForm(ChangePasswordType::class, new ChangePassword());
+        }
+
+        return $this->render('@YesknMain/user/setting.html.twig',
+            $this->getUserHomeInfo() + [
+                'scope' => 'setting',
+                'form' => $form->createView()
+            ]);
+    }
+
+    /**
+     * @Route("/notice", name="user_notice")
+     */
+    public function noticeAction()
+    {
+        /** @var Notice[] $unreadNotices */
+        $unreadNotices = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')
+            ->findBy(['pushTo' => $this->getUser(), 'isRead' => false], ['createdAt' => 'DESC']);
+
+        /** @var Notice[] $readNotices */
+        $readNotices = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')
+            ->findBy(['pushTo' => $this->getUser(), 'isRead' => true], ['createdAt' => 'DESC']);
+
+        return $this->render('@YesknMain/user/notices.html.twig',
+            $this->getUserHomeInfo() + [
+                'scope' => 'notice',
+                'readNotices' => $readNotices,
+                'unreadNotices' => $unreadNotices
+            ]);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
+     *
+     * @Route("/message", name="user_message")
+     */
+    public function messageAction()
+    {
+        $messageRepository = $this->getDoctrine()->getRepository('YesknMainBundle:Message');
+
+        /** @var Message[] $rMessages */
+        $rMessages = $messageRepository->findBy(['receiver' => $this->getUser()], ['createdAt' => 'DESC']);
+        /** @var Message[] $sMessages */
+        $sMessages = $messageRepository->findBy(['sender' => $this->getUser()],['createdAt' => 'DESC']);
+
+        return $this->render('@YesknMain/user/messages.html.twig',
+            $this->getUserHomeInfo() + [
+                'scope' => 'message',
+                'rMessages' => $rMessages,
+                'sMessages' => $sMessages
+            ]);
+    }
+
+    /**
+     * @Route("/blog", name="user_blog")
+     */
+    public function blogAction()
+    {
+        $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
+
+        $blogList = $blogRepo->findBy(['user' => $this->getUser()], ['createdAt' => 'DESC']);
+
+        return $this->render('@YesknMain/user/blog.html.twig',
+            $this->getUserHomeInfo() + [
+                'scope' => 'blog',
+                'blog_list' => $blogList
+            ]);
+    }
+
+    /**
+     * @Route("/change-password", name="user_change_password")
+     */
+    public function changePasswordAction(Request $request)
+    {
+        $changePasswordModel = new ChangePassword();
+        $form = $this->createForm(ChangePasswordType::class, $changePasswordModel);
+
+        $user = $this->getUser();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $changePasswordModel->newPassword);
+            $user->setPassword($password);
+
+            $this->get('doctrine.orm.entity_manager')->flush();
+
+            return $this->redirectToRoute('user_setting');
+        }
+
+        return $this->forward('YesknMainBundle:User:setting', [], [
+            'form' => $form
+        ]);
     }
 
     /**

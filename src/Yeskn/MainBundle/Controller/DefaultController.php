@@ -9,6 +9,7 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,9 +19,21 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->redirectToRoute('post_list');
+        $tab = $request->get('tab');
+        $page = $request->get('page', 1);
+
+        $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
+
+        $blogList = $blogRepo->findBy([], ['createdAt' => 'DESC']);
+
+        return $this->forward('YesknMainBundle:Common:homeList', [
+            'tab' => $tab,
+            'page' => $page,
+            'scope' => 'home',
+            'blogList' => $blogList
+        ]);
     }
 
     /**

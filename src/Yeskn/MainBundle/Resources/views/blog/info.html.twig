@@ -1,0 +1,51 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block head_css_link %}
+    {{ parent() }}
+    <style>
+        body {
+            background-image: none;
+        }
+    </style>
+{% endblock %}
+
+
+{% block navbar %}
+{% endblock %}
+
+{% block page_wraper %}
+    <div class="row content-row">
+        <div class="col-sm-12 blog-info-content">
+            <div class="panel panel-default blog-info-panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img style="border-radius: 2px" src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
+                        </div>
+                        <div class="col-md-9">
+                            <h2 style="margin-top: 0; text-decoration: none; color: #777">
+                                {{ blog.title }}
+                            </h2>
+                            <p>
+                                {{ blog.subtitle ?: ('blog_has_no_description'|trans) }}
+                            </p>
+                            <p>
+                            <span class="text-small-gray">
+                            {{ 'blog_created_by_name'|trans({name: blog.user.nickname}) }}
+                                {{ blog.createdAt|ago }}</span>
+                            </p>
+                            <p>
+                                <a href="https://{{ blog.subdomain }}.wpcraft.cn">立即前往 >>></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="text-center text-small-gray">@2018 <a href="{{ path('homepage') }}">wpcraft</a> all right reserved.</div>
+{% endblock %}
+

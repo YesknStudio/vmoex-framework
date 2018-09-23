@@ -15,10 +15,10 @@
 
             {% if app.user %}
                 <div class="navbar-toggle collapsed navbar-item-custom navbar-item-alert" data-toggle="collapse" data-target="#notification-navbar-collapse">
-                    <a data-pjax href="{{ path('my_notices') }}"><i class="fa fa-bell fa-fw"></i> <span class="text badge nav-common-dot">0</span></a>
+                    <a data-pjax href="{{ path('user_notice') }}"><i class="fa fa-bell fa-fw"></i> <span class="text badge nav-common-dot">0</span></a>
                 </div>
                 <div class="navbar-toggle collapsed navbar-item-custom navbar-item-message" data-toggle="collapse" data-target="#message-navbar-collapse">
-                    <a data-pjax href="{{ path('my_messages') }}"><i class="fa fa-envelope fa-fw"></i> <span class="text badge nav-common-dot">0</span></a>
+                    <a data-pjax href="{{ path('user_message') }}"><i class="fa fa-envelope fa-fw"></i> <span class="text badge nav-common-dot">0</span></a>
                 </div>
             {% endif %}
 
@@ -32,6 +32,10 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
                 <li><a data-pjax href="{{ path('post_list') }}">{{ 'documents'|trans }}</a></li>
+                <li class="nav-chat-item">
+                    <a data-pjax href="{{ path('bind_chat') }}">{{ 'blind.chat'|trans }}</a>
+                    <div class="nav-chat-dot {%  if show_icon is not defined %}push-notifications-count {% endif %} hidden-xs hidden-sm"></div>
+                </li>
                 <li><a data-pjax href="{{ path('about') }}">{{ 'about'|trans }}</a></li>
             </ul>
             <form class="navbar-form navbar-left" id="site-search">
@@ -43,55 +47,22 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if app.user %}
                     <li class="dropdown messages ">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope fa-fw"></i>
-                            <span class="text nav-message-label">{{ 'messages'|trans }}</span>
+                        <a data-pjax href="{{ path('user_notice') }}">
+                            <i class="fa fa-bell fa-fw"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown user-create">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-plus"></span>
                             <i class="fa fa-caret-down"></i>
                         </a>
-                        <script type="text/html" id="message-item-tpl">
+
+                        <ul class="dropdown-menu">
                             <li>
-                                <a data-pjax href="{{ path('my_messages') }}">
-                                    <div>
-                                        <strong>@nickname@</strong>
-                                        <span class="pull-right text-muted">
-                                        <em>@createdAt@</em>
-                                    </span>
-                                    </div>
-                                    <div>@content@</div>
-                                </a>
+                                <a href="{{ path('blog_create') }}">{{ 'nav_create_blog'|trans }}</a>
+                                <a href="{{ path('create_post') }}">{{ 'nav_create_post'|trans }}</a>
                             </li>
-                            <li class="divider"></li>
-                        </script>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <a data-pjax class="text-center" href="{{ path('my_messages') }}">
-                                    <strong>{{ 'nav_messages'|trans }}</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown notifications">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <span class="text notification-label" data-origin="{{ 'notifications'|trans }}">{{ 'notifications'|trans }}</span> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <script type="text/html" id="NewFollowerItemTpl">
-                            <li class="new-follower-item">
-                                <a href="{{ path('my_notices') }}">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> <span class="follower-count">@followerCount@</span>{{ 'nav_new_fans'|trans }}
-                                        <span class="pull-right text-muted small">@createdAt@</span>
-                                    </div>
-                                </a>
-                            </li>
-                        </script>
-                        <ul class="dropdown-menu dropdown-notifications">
-                            <li>
-                                <a data-pjax class="text-center" href="{{ path('my_notices') }}">
-                                    <strong>{{ 'nav_all_notifications'|trans }}</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
                     <li class="dropdown user-actions">
@@ -109,7 +80,7 @@
                                 </li>
                             {% endif %}
                             <li>
-                                <a href="{{ path('member_home', {username: app.user.username}) }}" data-pjax>
+                                <a href="{{ path('user_home') }}" data-pjax>
                                     <i class="fa fa-home fa-fw"></i> {{ "nav_user_home"|trans }}
                                 </a>
                             </li>
@@ -131,7 +102,7 @@
                         <a data-pjax href="{{ path('login') }}"><i class="fa fa-sign-in"></i> {{ 'login'|trans }}</a>
                     </li>
                     <li>
-                        <a data-pjax href="{{ path('register') }}"> {{ 'register'|trans }}</a>
+                        <a data-pjax href="{{ path('register') }}"><i class="fa fa-registered"></i> {{ 'register'|trans }}</a>
                     </li>
 
                 {% endif %}

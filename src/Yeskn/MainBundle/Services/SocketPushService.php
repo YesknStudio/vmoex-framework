@@ -71,6 +71,21 @@ class SocketPushService
         ]);
     }
 
+    public function pushCreateBlogEvent($username, $msg, $ret = 1)
+    {
+        $this->client->post($this->container->getParameter('socket_push_host'), [
+            'form_params' => [
+                'type' => 'publish',
+                'event' => 'create_blog_event',
+                'to' => $username,
+                'data' => [
+                    'ret' => $ret,
+                    'msg' => $msg
+                ]
+            ]
+        ]);
+    }
+
     public function pushNewFollowerNotification(User $from, User $followed)
     {
         $this->client->post($this->container->getParameter('socket_push_host') , [

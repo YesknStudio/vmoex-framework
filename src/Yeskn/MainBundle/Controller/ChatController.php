@@ -18,15 +18,29 @@ use Yeskn\MainBundle\Entity\User;
 class ChatController extends Controller
 {
     /**
-     * @Route("/blind-chat", name="bind_chat")
+     * @Route("/chat", name="bind_chat")
      */
-    public function bindChatAction()
+    public function bindChatAction(Request $request)
     {
         $chats = $this->getDoctrine()->getRepository('YesknMainBundle:Chat')
             ->getLatestChat(100);
-        return $this->render('@YesknMain/chat/chat.html.twig', [
-            'chats' => $chats
-        ]);
+
+        if ($request->getSession()->has('chat.show_icon')) {
+            $showIcon = false;
+        } else {
+            $showIcon = true;
+            $request->getSession()->set('show_icon', 1);
+        }
+
+        $params = [
+            'chats' => $chats,
+        ];
+
+        if ($showIcon) {
+            $params['show_icon'] = 1;
+        }
+
+        return $this->render('@YesknMain/chat/chat.html.twig', $params);
     }
 
     /**

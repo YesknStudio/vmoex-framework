@@ -21,11 +21,20 @@ class BlogCreateCommand extends ContainerAwareCommand
 {
     private $url;
 
+    /**
+     * @var OutputInterface
+     */
+    private $output;
+
+    private $username;
+
     protected function configure()
     {
         $this->setName('blog:create');
-        $this->addOption('name', null, InputOption::VALUE_REQUIRED);
+        $this->addOption('username', null, InputOption::VALUE_REQUIRED);
         $this->addOption('password', null, InputOption::VALUE_REQUIRED);
+        $this->addOption('email', null, InputOption::VALUE_REQUIRED);
+        $this->addOption('blogName', null, InputOption::VALUE_REQUIRED);
     }
 
     /**
@@ -36,31 +45,35 @@ class BlogCreateCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->output = $output;
+
         $container = $this->getContainer();
         $allocate = new AllocateSpaceService($container);
 
         $connection = $container->get('doctrine')->getConnection();
 
-        $username = $input->getOption('name');
+        $this->username = $username = $input->getOption('name');
         $password = $input->getOption('password');
+        $blogName = $input->getOption('blogName');
+        $email = $input->getOption('email');
 
         $connection->executeQuery("create database wpcast_{$username};");
 
-        $output->writeln('创建数据库成功...');
+        $this->writeln('创建数据库成功...');
 
         $sql = "grant all privileges on wpcast_{$username}.* to {$username}@localhost identified by '{$password}';flush privileges;";
 
         $connection->executeQuery($sql);
 
-        $output->writeln('创建数据库用户成功...');
+        $this->writeln('创建数据库用户成功...');
 
         $webPath = $allocate->allocateWebSpace($username);
 
-        $output->writeln('分配服务器空间成功...');
+        $this->writeln('分配服务器空间成功...');
 
         $allocate->allocateDbSpace($username);
 
-        $output->writeln('分配数据库空间成功...');
+        $this->writeln('分配数据库空间成功...');
 
         $fs = new Filesystem();
 
@@ -68,26 +81,24 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $fs->mirror($config['wordpress_source'], $webPath);
 
-        $output->writeln('复制wordpress代码成功...');
+        $this->writeln('复制wordpress代码成功...');
 
         $fs->chown($webPath, $config['server_user'], true);
 
-        $email = 'singviy@qq.com';
+        $this->initDatabase($username, $blogName, $password, $email);
 
-        $this->initDatabase($username, $username. '的博客', $password, $email);
+        $this->writeln('博客初始化成功！');
 
-        $output->writeln('博客初始化成功！');
-
-        $output->writeln('地址：'. $this->url);
-        $output->writeln('用户名：'. $username);
-        $output->writeln('标题：'. $username . '的博客');
-        $output->writeln('密码：'. $password);
-        $output->writeln('邮箱：'. $email);
+        $this->writeln('地址：'. $this->url);
+        $this->writeln('用户名：'. $username);
+        $this->writeln('标题：'. $username . '的博客');
+        $this->writeln('密码：'. $password);
+        $this->writeln('邮箱：'. $email);
     }
 
     public function initDatabase($name, $title, $pass, $email)
     {
-        $this->url = $url = "https://{$name}.wpcast.net";
+        $this->url = $url = "https://{$name}.wpcraft.cn";
         $client = new Client(['verify' => false]);
 
         $client->post($url . '/wp-admin/setup-config.php?step=2', [
@@ -115,5 +126,12 @@ class BlogCreateCommand extends ContainerAwareCommand
                 'language' => 'zh_CN'
             ]
         ]);
+    }
+
+    protected function writeln($msg)
+    {
+        $pushService = $this->getContainer()->get('socket.push');
+
+        $pushService->pushCreateBlogEvent($this->username, $msg);
     }
 }

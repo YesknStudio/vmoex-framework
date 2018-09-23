@@ -1,9 +1,14 @@
 {% extends '@YesknMain/base.html.twig' %}
+{% form_theme form 'form/vertical-field-1.html.twig' %}
+
+{% block head_css_link %}
+    {{ parent() }}
+{% endblock %}
 
 {% block page_wraper %}
-    <div>
-        <div class="row">
-        <div class="col-lg-12">
+    <div class="row content-row">
+        {% include '@YesknMain/user/sidebar.html.twig' %}
+        <div class="col-lg-8 content-main" role="main">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-gear"></i> 个人设置
@@ -13,21 +18,15 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#home" data-toggle="tab">基本资料</a>
                         </li>
-                        <li><a href="#account" data-toggle="tab">帐号和密码</a>
-                        </li>
-                        <li><a href="#private" data-toggle="tab">隐私设置</a>
-                        </li>
-                        <li><a href="#block" data-toggle="tab">屏蔽</a>
+                        <li><a href="#account" data-toggle="tab">修改密码</a>
                         </li>
                     </ul>
 
-                    <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="home">
-                            <div class="container" style="margin-top:30px">
+                            <div style="margin-top:30px">
                                 <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-5">
+                                    <div class="col-sm-12">
                                         <form action="{{ path('modify_user_info') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <div class="form-group">
                                                 <label for="username" class="col-sm-2 control-label">{{ '用户名'|trans }}</label>
@@ -72,125 +71,17 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="account">
-                            <div class="container" style="margin-top:30px">
+                            <div style="margin-top:30px">
                                 <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-5">
+                                    <div class="col-sm-12">
                                         <div class="row">
-                                            <label for="email" class="col-sm-2 control-label">{{ '邮箱'|trans }}</label>
-                                            <div class="col-sm-10">
-                                                {{ app.user.email }} <a href="javascript:"><i class="fa fa-pencil"></i> {{ '修改'|trans }}</a>
+                                            {{ form_start(form, {attr: {class: 'form-horizontal', id: 'modalForm', action: path('user_change_password')}}) }}
+                                            {{ form_widget(form) }}
+                                            <div class="col-sm-offset-2 col-sm-6">
+                                                <button type="submit" class="btn btn-default">更新</button>
                                             </div>
+                                            {{ form_end(form) }}
                                         </div>
-                                        <br>
-                                        <div class="row">
-                                            <label for="password" class="col-sm-2 control-label">{{ '密码'|trans }}</label>
-                                            <div class="col-sm-10">
-                                                <a href="javascript:"><i class="fa fa-pencil"></i> {{ '修改密码'|trans }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="private">
-                            <div class="container" style="margin-top:30px">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <form class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label">查看我的主页</label>
-                                                <div class="col-sm-10">
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="see"  value="1"> 我关注的人
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="see" value="2"> 我关注的和关注我的人
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="see" value="3"> 所有人
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label">给我发私信</label>
-                                                <div class="col-sm-10">
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="message"  value="1"> 我关注的人
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="message" value="2"> 我关注的和关注我的人
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="message" value="3"> 所有人
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label">我的在线状态</label>
-                                                <div class="col-sm-10">
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="st"  value="1"> 我关注的人
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="st" value="2"> 我关注的和关注我的人
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input type="radio" name="st" value="3"> 所有人
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-default">保存</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="block">
-                            <div class="container" style="margin-top:30px">
-                                <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-8">
-                                        <form class="form-horizontal">
-                                            <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label">我屏蔽的用户</label>
-                                                <div class="col-sm-10">
-                                                    {% if app.user.following is not empty %}
-                                                        {% for fo in app.user.following %}
-                                                            <li style="list-style: none;margin: 10px 0;padding-right: 10px">
-                                                                <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
-                                                                    <img src="{{ fo.avatar }}" alt="" width="25" height="25" style="border-radius: 50%">
-                                                                    {{ fo.nickname }}
-                                                                </a>
-                                                            </li>
-                                                        {% endfor %}
-                                                    {% else %}
-                                                        没有屏蔽的用户。
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label">我屏蔽的节点</label>
-                                                <div class="col-sm-10">
-                                                    {% if app.user.following is not empty %}
-                                                        {% for fo in app.user.following %}
-                                                            <li style="list-style: none;margin: 10px 0;padding-right: 10px">
-                                                                <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
-                                                                    <img src="{{ fo.avatar }}" alt="" width="25" height="25" style="border-radius: 50%">
-                                                                    {{ fo.nickname }}
-                                                                </a>
-                                                            </li>
-                                                        {% endfor %}
-                                                    {% else %}
-                                                        没有屏蔽的节点。
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -199,6 +90,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

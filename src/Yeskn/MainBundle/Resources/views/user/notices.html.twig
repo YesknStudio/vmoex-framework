@@ -1,8 +1,13 @@
 {% extends '@YesknMain/base.html.twig' %}
 
-{% block main %}
-    <div class="row">
-        <div class="col-lg-12">
+{% block head_css_link %}
+    {{ parent() }}
+{% endblock %}
+
+{% block page_wraper %}
+    <div class="row content-row">
+        {% include '@YesknMain/user/sidebar.html.twig' %}
+        <div class="col-lg-8 content-main" role="main">
             <div class="panel panel-default notifications-panel">
                 <div class="panel-heading">
                     <i class="fa fa-bell fa-fw"></i> {{ 'notice_my_notice'|trans({name:app.user.nickname}) }}
@@ -19,19 +24,19 @@
                             {% if unreadNotices is not empty %}
                                 <ul class="notifications-list list-group">
                                     {% for notice in notices %}
-                                            <li class="list-group-item list-group-item-warning">
-                                                <div style="padding-bottom: 10px">
-                                                    {% if notice.type == constant('Yeskn\\MainBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
-                                                    <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
-                                                    <a data-pjax href="{{ path('member_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
-                                                    {{ notice.createdAt|ago }}{{ 'notice_replied_you'|trans }} <a data-pjax href="{{ path('post_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
-                                                </div>
+                                        <li class="list-group-item list-group-item-warning">
+                                            <div style="padding-bottom: 10px">
+                                                {% if notice.type == constant('Yeskn\\MainBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
+                                                <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
+                                                <a data-pjax href="{{ path('member_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
+                                                {{ notice.createdAt|ago }}{{ 'notice_replied_you'|trans }} <a data-pjax href="{{ path('post_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+                                            </div>
 
-                                                <blockquote class="home-bq">
-                                                    {{ notice.content.content|raw }}
-                                                </blockquote>
-                                                {% endif %}
-                                            </li>
+                                            <blockquote class="home-bq">
+                                                {{ notice.content.content|raw }}
+                                            </blockquote>
+                                            {% endif %}
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -45,19 +50,19 @@
                             {% if readNotices is not empty %}
                                 <ul class="notifications-list  list-group">
                                     {% for notice in readNotices %}
-                                          <li class="list-group-item">
-                                              <div>
-                                                  {% if notice.type == constant('Yeskn\\MainBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
-                                                  <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
-                                                  <a data-pjax href="{{ path('member_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
-                                                  {{ notice.createdAt|ago }}{{ 'notice_replied_you'|trans }} <a data-pjax href="{{ path('post_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
-                                              </div>
+                                        <li class="list-group-item">
+                                            <div>
+                                                {% if notice.type == constant('Yeskn\\MainBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
+                                                <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
+                                                <a data-pjax href="{{ path('member_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
+                                                {{ notice.createdAt|ago }}{{ 'notice_replied_you'|trans }} <a data-pjax href="{{ path('post_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+                                            </div>
 
-                                              <blockquote class="home-bq">
-                                                  {{ notice.content.content|raw }}
-                                              </blockquote>
-                                              {% endif %}
-                                          </li>
+                                            <blockquote class="home-bq">
+                                                {{ notice.content.content|raw }}
+                                            </blockquote>
+                                            {% endif %}
+                                        </li>
                                     {% endfor %}
                                 </ul>
                             {% else %}

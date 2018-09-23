@@ -1,5 +1,18 @@
 {% extends '@YesknMain/base.html.twig' %}
 
-{% block main %}
-    {{ message }}
+{% block page_wraper %}
+    <style>
+        body{
+            background:none
+        }
+    </style>
+
+    <div class="row content-row">
+        <div class="col-lg-12 content-main" role="main">
+            <div class="alert alert-dismissible alert-danger text-center" role="alert">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

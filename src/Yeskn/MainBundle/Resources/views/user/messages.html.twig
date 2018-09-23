@@ -1,8 +1,13 @@
 {% extends '@YesknMain/base.html.twig' %}
 
-{% block main %}
-    <div class="row">
-        <div class="col-lg-12">
+{% block head_css_link %}
+    {{ parent() }}
+{% endblock %}
+
+{% block page_wraper %}
+    <div class="row content-row">
+        {% include '@YesknMain/user/sidebar.html.twig' %}
+        <div class="col-lg-8 content-main" role="main">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-envelope fa-fw"></i> {{ 'user_my_messages'|trans }}
@@ -40,7 +45,8 @@
                                 <ul class="messages list-group">
                                     {% for message in sMessages %}
                                         <li class="list-group-item">
-                                            {{ 'user_you_send_message_to'|trans({receiver: '<a data-pjax href="%s">%s</a>'|format(message.receiver.username, message.receiver.nickname)})|raw }}
+                                            <img src="{{ asset(message.receiver.avatar) }}" alt="" width="30" height="30" class="img-rounded">
+                                            {{ 'user_you_send_message_to'|trans({receiver: '<a data-pjax href="%s">%s</a>'|format(path('member_home', {username: message.receiver.username}), message.receiver.nickname)})|raw }}
                                             {{ message.content }} <span class="pull-right">{{ message.createdAt|ago }}</span>
                                         </li>
                                     {% endfor %}
@@ -70,4 +76,5 @@
             $('.navbar-item-message span').addClass('nav-common-dot').removeClass('nav-warn-dot').text(0);
         })
     </script>
+
 {% endblock %}

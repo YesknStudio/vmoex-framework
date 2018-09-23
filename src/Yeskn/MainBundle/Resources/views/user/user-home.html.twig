@@ -1,225 +1,120 @@
 {% extends '@YesknMain/base.html.twig' %}
 
-{% block main %}
-    <style>
-        body {
-            background-image: url("https://ww2.sinaimg.cn/large/0060lm7Tgy1fi01a6qd26j31hc0u0dmg.jpg");
-            background-position: center center;
-            background-size: cover;
-            background-attachment: fixed;
-        }
-    </style>
-    <div class="row user-home">
-        <div class="col-lg-12">
-            <div class="panel-body user-meta">
-                <ul class="chat">
-                    <li class="left clearfix user-meta">
-                        <span class="chat-img pull-left">
-                            <img src="{{ asset(user.avatar) }}" alt="User Avatar" class="img-rounded" width="50" height="50">
-                        </span>
-                        <div class="chat-body clearfix">
-                            <div class="header clearfix">
-                                <strong class="primary-font home-name">
-                                    <a href="{{ path('member_home', {username: user.username}) }}"
-                                       data-pjax>{{ user.nickname }}
-                                    </a>
-                                </strong>
-                                {% if online %}
-                                    <span class="user-online" aria-hidden="false">{{ '在线可撩'|trans }}</span>
-                                {% endif %}
-                                <small class="pull-right text-muted">
-                                    <i class="fa fa-clock-o fa-fw"></i> {{ '加入于'|trans }}{{ user.registerAt|date('Y-m-d H:i:s') }}，
-                                    {{ 'user_place_in_site'|trans({count:user.id}) }}
+{% block head_css_link %}
+    {{ parent() }}
+{% endblock %}
 
-                                    {% if userActive %}
-                                        ，{{ '最后在线时间：time'|trans({time: userActive.updatedAt|ago}) }}
-                                    {% endif %}
-                                </small>
+{% block page_wraper %}
+    <div class="row content-row">
+       {% include '@YesknMain/user/sidebar.html.twig' %}
+        <div class="col-lg-8 content-main" role="main">
+            <div class="row user-home">
+                <div class="col-lg-12">
 
-                            </div>
-                            <div style="margin: 10px 0;">{{ user.remark|raw }}</div>
-                            <br/>
-                            {% if app.user != user %}
-                                <button type="button" data-toggle="modal" data-target="#messageModal"
-                                        class="btn btn-warning btn-sm">
-                                    <i class="fa fa-envelope"></i> {{ 'userhome_send_message'|trans }}
-                                </button>
-                                <button type="button" id="follow-user" class="btn btn-outline btn-danger btn-sm"><i
-                                            class="fa fa-heart"></i> {% if app.user in user.followers %}{{ 'userhome_has_followed'|trans }}{% else %}{{ 'userhome_follow'|trans }}{% endif %}
-                                </button>
-                                <button type="button" id="block-user" class="btn btn-outline btn-warning btn-sm"><i
-                                            class="fa fa-lock"></i> {{ 'userhome_block'|trans }}
-                                </button>
-                            {% endif %}
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{ 'user_my_posts'|trans }}
                         </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ 'name发布的帖子'|trans({name:user.nickname}) }}
-                </div>
-                <div class="panel-body">
-                    {% set posts = user.posts|slice(0, 20) %}
-                    {% if posts is not empty %}
-                        {% for post in posts|reverse %}
-                            <article class="main home-article-main" style="position: relative;padding-left: 0">
-                                <div class="col-md-12 post-info">
+                        <div class="panel-body">
+                            {% set posts = user.posts|slice(0, 20) %}
+                            {% if posts is not empty %}
+                                {% for post in posts|reverse %}
+                                    <article class="main home-article-main" style="position: relative;padding-left: 0">
+                                        <div class="col-md-12 post-info">
                                     <span class="item-small-title">
                                         <a data-pjax
                                            href="{{ path('post_show' , {'id' : post.id}) }}">{{ post.title }}</a>
                                     </span>
-                                    <div class="post-meta">
+                                            <div class="post-meta">
                                          <span class="category">
                                              <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
                                          </span>
-                                        <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
-                                        <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
-                                        {% if post.comments.count %}
-                                            <span><i class="fa fa-commenting-o"></i>
+                                                <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
+                                                <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
+                                                {% if post.comments.count %}
+                                                    <span><i class="fa fa-commenting-o"></i>
                                                 <a data-pjax href="{{ path('post_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a></span>
-                                        {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </article>
+                                {% endfor %}
+                            {% else %}
+                                {{ 'userhome_no_published_post'|trans }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{ 'user_my_comments'|trans }}
+                        </div>
+                        <div class="panel-body">
+                            {% set comments = user.comments %}
+                            {% if comments is not empty %}
+                                {% for comment in comments|reverse %}
+                                    <div class="row border-bottom" style="margin-bottom: 10px">
+                                        <div class="col-md-12">
+                                            {{ 'time 发表在'|trans({time:comment.createdAt|ago}) }}
+                                            <a data-pjax href="{{ path('post_show', {id: comment.post.id}) }}">{{ comment.post.title }}</a>
+                                            上：
+                                            <blockquote class="home-bq">
+                                                {{ comment.content|raw }}
+                                            </blockquote>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        {% endfor %}
-                    {% else %}
-                        {{ 'userhome_no_published_post'|trans }}
-                    {% endif %}
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ 'name的回复'|trans({name:user.nickname}) }}
-                </div>
-                <div class="panel-body">
-                    {% set comments = user.comments %}
-                    {% if comments is not empty %}
-                        {% for comment in comments|reverse %}
-                            <div class="row border-bottom" style="margin-bottom: 10px">
-                                <div class="col-md-12">
-                                    {{ 'time 发表在'|trans({time:comment.createdAt|ago}) }}
-                                    <a data-pjax href="{{ path('post_show', {id: comment.post.id}) }}">{{ comment.post.title }}</a>
-                                    上：
-                                    <blockquote class="home-bq">
-                                        {{ comment.content|raw }}
-                                    </blockquote>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {{ 'userhome_no_recent_reply'|trans }}
-                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                {{ 'userhome_no_recent_reply'|trans }}
+                            {% endif %}
 
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ 'name的关注'|trans({name:user.nickname}) }}
-                </div>
-                <div class="panel-body">
-                    {% if user.following is not empty %}
-                        {% for fo in user.following %}
-                            <li style="list-style: none;margin: 10px 0;display: inline-block;padding-right: 10px">
-                                <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
-                                    <img src="{{ asset(fo.avatar) }}" alt="" width="25" height="25" style="border-radius: 50%">
-                                    {{ fo.nickname }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    {% else %}
-                        {{ 'userhome_he_is_cold'|trans({name:user.nickname}) }}
-                    {% endif %}
-                </div>
-            </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{ 'user_my_following'|trans }}
+                        </div>
+                        <div class="panel-body">
+                            {% if user.following is not empty %}
+                                {% for fo in user.following %}
+                                    <li style="list-style: none;margin: 10px 0;display: inline-block;padding-right: 10px">
+                                        <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
+                                            <img src="{{ asset(fo.avatar) }}" alt="" width="25" height="25" style="border-radius: 50%">
+                                            {{ fo.nickname }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                {{ 'userhome_he_is_cold'|trans({name:user.nickname}) }}
+                            {% endif %}
+                        </div>
+                    </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ 'name的粉丝'|trans({name:user.nickname}) }}
-                </div>
-                <div class="panel-body">
-                    {% if user.followers is not empty %}
-                        {% for fo in user.followers %}
-                            <li style="list-style: none;margin: 10px 0;display: inline-block;padding-right: 10px">
-                                <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
-                                    <img src="{{ asset(fo.avatar) }}" alt="" width="25" height="25" style="border-radius: 50%">
-                                    {{ fo.nickname }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    {% else %}
-                        {{ 'userhome_he_has_no_follower'|trans }}
-                    {% endif %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            {{ 'user_my_follower'|trans }}
+                        </div>
+                        <div class="panel-body">
+                            {% if user.followers is not empty %}
+                                {% for fo in user.followers %}
+                                    <li style="list-style: none;margin: 10px 0;display: inline-block;padding-right: 10px">
+                                        <a data-pjax href="{{ path('member_home', {username: fo.username}) }}">
+                                            <img src="{{ asset(fo.avatar) }}" alt="" width="25" height="25" style="border-radius: 50%">
+                                            {{ fo.nickname }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                {{ 'userhome_he_has_no_follower'|trans }}
+                            {% endif %}
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    {% include '@YesknMain/modals/send-message-modal.html.twig' with {
-        modalId: '',
-        title: '向' ~ user.nickname ~ '发送私信',
-        form: form
-    } %}
-
-    <script>
-        $(function () {
-            $(document).off('click', '#follow-user');
-            $(document).on('click', '#follow-user', function () {
-                $.ajax({
-                    method: 'POST',
-                    url: '{{ path("follow_user") }}',
-                    data: {username: '{{ user.username }}'},
-                    success: function (data) {
-                        if (!data.ret) {
-                            warning(data.msg);
-                        } else {
-                            $.pjax.reload('.content-body', {
-                                fragment: '.content-body',
-                                timeout: 200000000,
-                                show: 'fade',
-                                cache: true,
-                                push: true,
-                            })
-                        }
-                    }
-                })
-            });
-
-            $(document).off('submit', '#messageForm');
-            $(document).on('submit', '#messageForm', function (e) {
-                e.preventDefault();
-
-                let $this = $(this);
-                let $button = $this.find('[type="submit"]');
-                $button.button('loading');
-
-                let formData = new FormData($this[0]);
-
-                $.ajax({
-                    method: 'POST',
-                    url: '{{ path("send_message") }}',
-                    data: formData,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    success: function (res) {
-
-                        alert(res.message);
-                        $button.button('reset');
-
-                        $('#message-text').val('');
-                        $('#messageModal').modal('hide');
-
-                        $this.trigger('reset');
-                    }
-                });
-            });
-
-            $('#messageModal').appendTo('body');
-        })
-    </script>
 
 {% endblock %}

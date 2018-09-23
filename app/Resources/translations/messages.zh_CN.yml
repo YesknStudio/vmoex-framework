@@ -17,20 +17,20 @@ click: 点击
 nav_messages: 查看所有私信
 nav_new_fans: 个新的粉丝
 nav_all_notifications: 查看所有通知
-nav_user_home: 我的主页
+nav_user_home: 个人中心
 nav_user_setting: 个人设置
 footer_online_user_count: 当前在线count人
 footer_oneline_user_most: 历史最高
 wpcast_slogan: 9秒助你打造自己的博客
 trends: 动态
-blind.chat: 瞎聊
+blind.chat: 聊聊
 search: 搜索
 about: 关于
 messages: 私信
 notifications: 通知
 comment: 评论
 hello_stranger: ' 您好，陌生人！'
-hello_stranger_detail: 如果你喜欢Vmoex，请记得注册或者保存网址哦~
+hello_stranger_detail: Wpcraft可以快速帮你打造属于自己的博客，基于wordpress，操作简单，但是功能却非常强大
 my.status: 我的状态
 hot.users: 活跃用户
 today.hot.topics: 热门文档
@@ -54,7 +54,7 @@ name的回复: name的回复
 name的关注: name的关注
 name的粉丝: name的粉丝
 发送成功: 发送成功
-documents: 文档
+documents: 交流分享
 support: 支持
 vmoex_slogan: null
 vmoex_description: null
@@ -94,7 +94,7 @@ buy_beer: null
 个新的粉丝: null
 赞: null
 什么是瞎聊: null
-blind_description: null
+blind_description: 随便聊聊。
 社区运行状态: null
 社区成立时间: null
 主题数量: null
@@ -109,8 +109,8 @@ userhome_has_followed: 已经关注
 userhome_follow: 关注
 userhome_block: 屏蔽
 userhome_no_recent_reply: 该用户最近没有回复
-userhome_he_is_cold: 该用户比较高冷
-userhome_he_has_no_follower: 没有人关注他
+userhome_he_is_cold: '比较高冷?，目前没有关注任何人。'
+userhome_he_has_no_follower: 名声不佳，没有任何粉丝╮(╯_╰)╭
 post_add_comment: 添加评论
 post_no_comment: 文章没有评论
 chat_sorry_co_content: 抱歉，暂时没有聊天消息
@@ -127,7 +127,7 @@ notice_replied_you: 回复我的
 post_top: 置顶
 like: 赞
 action_too_fast: 好可怕，速度太快了
-banner_announce: このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。
+banner_announce: 欢迎来到Wpcraft，在这里你可以快速方便的创建自己的博客，感受创作之美！
 all: 全部
 hot: 热门
 site_state: 社区运行状态
@@ -150,3 +150,18 @@ user_my_sent_messages: 我发出的
 sorry_no_content: 抱歉，暂时没有任何内容！
 user_you_send_message_to: 你对receiver说：
 user_send_message_to_you: 对你说：
+Title: 标题
+Cover: 封面
+Detail: 详情
+latest_blogs: 最新创建
+nav_create_blog: 创建博客
+nav_create_post: 创建新主题
+'Old password': 老密码
+'New Password': 新密码
+'Repeat Password': 重复密码
+home_now_register: 立即注册！
+user_my_posts: 我的帖子
+user_my_comments: 我的评论
+user_my_following: 我的关注
+user_my_follower: 关注我的
+user_my_blog: 我创建的博客

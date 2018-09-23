@@ -1,5 +1,191 @@
 {% extends '@YesknMain/base.html.twig' %}
 
-{% block page_wraper %}
-    <h1>欢迎使用 yeskn-studio/framework !</h1>
+{% block main %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ 'latest_blogs'|trans }}
+        </div>
+        <div class="panel-body">
+            <div class="row blog-list">
+                <div class="carousel slide" id="blogCarousel">
+                    <ol class="carousel-indicators" style="">
+                        <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#blogCarousel" data-slide-to="1"></li>
+                        <li data-target="#blogCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            {% for key, blog in blog_list if key <= 3-1 %}
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="panel panel-default">
+                                        <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
+                                        <div class="panel-body " style="padding: 5px">
+                                            <b style="color: grey">
+                                                <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
+                                            </b>
+                                            <br>
+                                            <span class="text-small-gray">创建于{{ blog.createdAt|ago }}</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="item">
+                            {% for key, blog in blog_list if key <= 6-1 %}
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="panel panel-default">
+                                        <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
+                                        <div class="panel-body " style="padding: 5px">
+                                            <b style="color: grey">
+                                                <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
+                                            </b>
+                                            <br>
+                                            <span class="text-small-gray">创建于{{ blog.createdAt|ago }}</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="item">
+                            {% for key, blog in blog_list if key <= 9-1 %}
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="panel panel-default">
+                                        <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
+                                        <div class="panel-body " style="padding: 5px">
+                                            <b style="color: grey">
+                                                <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
+                                            </b>
+                                            <br>
+                                            <span class="text-small-gray">创建于{{ blog.createdAt|ago }}</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="home-content-main" id="home-content-main">
+
+        {% if currentTab and currentTab.level == 2 %}
+            <div class="tab-header">
+                <div class="tab-avatar">
+                    <img class=" img-rounded" src="{{ asset(currentTab.avatar) }}" alt="">
+                </div>
+                <div class="tab-info">
+                    <b><a href="{{ path('homepage') }}">{{ 'site_name'|trans }}</a> <i class="fa  fa-angle-right"></i> <a data-pjax href="{{ path('post_list', {tab:currentTab.alias}) }}">{{ currentTab.parent.name }}</a> <i class="fa fa-angle-right"></i> {{ currentTab.name }}</b>
+                    <div style="padding: 10px 0">
+                        {{ currentTab.description }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="tab-list">
+                <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('homepage', {tab: 'all'}) }}#home-content-main">{{ 'all'|trans }}</a>
+                <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: 'hot'}) }}#home-content-main">{{ 'hot'|trans }}</a>
+
+                {% for tabItem in tabs %}
+                    <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: tabItem.alias}) }}#home-content-main">{{ tabItem.name|trans }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if posts is not empty %}
+            {% for post in posts %}
+                <article class="main" style="position: relative">
+                    <div class="row">
+                        <div class="col-md-1 post-avatar">
+                            <img src="{{ asset(post.author.avatar) }}" class="img-rounded">
+                        </div>
+                        <div class="col-md-11 home-post-info">
+                            <div class="item-title">
+                                {% if post.isTop %}  <span class="warning-label x-small-font">{{ 'post_top'|trans }}</span> {% endif %}
+                                <a data-pjax href="{{ path('post_show' , {'id' : post.id}) }}">{{ post.title }}</a>
+                            </div>
+                            <p class="post-meta">
+                        <span><i class="fa fa-user"></i>
+                            <a data-pjax href="{{ path('member_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
+
+                                <span class="category">
+                                      <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
+                                </span>
+                                <span><i class="fa fa-clock-o"></i> {{ post.updatedAt ? post.updatedAt|ago : post.createdAt|ago }}</span>
+                                <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
+                                {% if post.comments.count %}
+                                    <span><i class="fa fa-commenting-o"></i>
+                                        <a data-pjax href="{{ path('post_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a></span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    {#{% if post.tags is not empty %}#}
+                    {#<div style="position: relative;bottom:-10px">#}
+                    {#<p>#}
+                    {#<i class="fa  fa-tags item-tag"></i>#}
+                    {#{% for tag in post.tags %}#}
+                    {#<span class="item-tag"> {{ tag.name }} </span>#}
+                    {#{% endfor %}#}
+                    {#</p>#}
+                    {#</div>#}
+                    {#{% endif %}#}
+                </article>
+            {% endfor %}
+            <ul class="pagination">
+                {% set route = tab is not empty and tab != 'all' ? 'post_list' : 'post_list' %}
+                {% if pageData.currentPage == 1 %}
+                    <li class="disabled">
+                        <a href="#">&laquo;</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path(route, {page:pageData['currentPage']-1,tab:tab}) }}" data-pjax>&laquo;</a>
+                    </li>
+                {% endif %}
+
+                {% if pageData.currentPage > 3 %}
+                    <li class="disabled">
+                        <a href="#">...</a>
+                    </li>
+                {% endif %}
+
+                {% for p in 1..pageData.allPage %}
+                    {% if p < pageData.currentPage - 2 %}
+                    {% endif %}
+
+                    {% if p == pageData.currentPage %}
+                        <li class="active"><a href="javascript:">{{ p }}</a></li>
+                    {% endif %}
+
+
+                    {% if p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage+2 %}
+                        <li><a href="{{ path(route, {'page':p, tab:tab}) }}" data-pjax>{{ p }}</a></li>
+                    {% endif %}
+
+
+                    {% if p > pageData.currentPage+2 %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if pageData.allPage > pageData.currentPage+2 %}
+                    <li class="disabled">
+                        <a href="#">...</a>
+                    </li>
+                {% endif %}
+
+                <li {% if pageData.currentPage == pageData.allPage %} class="disabled" {% endif %}>
+                    <a href="{{ path(route, {page:pageData['currentPage']+1,tab:tab}) }}" data-pjax>&raquo;
+                    </a>
+                </li>
+            </ul>
+        {% else %}
+            <div class="well no-post">{{ '暂时没有任何文档！' }}</div>
+        {% endif %}
+    </div>
 {% endblock %}

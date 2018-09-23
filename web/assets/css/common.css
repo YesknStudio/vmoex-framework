@@ -1,6 +1,18 @@
 body {
     cursor: url('https://static.yeskn.com/vmoex/img/p.cur'), url(https://static.yeskn.com/vmoex/img/p.cur), auto;
-    background: url("https://static.yeskn.com/vmoex/img/zhMoegirl18summer.jpg") no-repeat top left #f6f6f6;
+    background: url("https://static.yeskn.com/vmoex/img/bg.jpg") no-repeat top left #f6f6f6;
+    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -moz-font-feature-settings:"liga","kern";
+    text-rendering:optimizelegibility;
+}
+.modal-open-noscroll {
+    padding-right: 0 !important;
+}
+.list-group .list-group-item.active {
+    background-color: #74cee2;
+    border-color: #74cee2;
 }
 @media (min-width: 1200px) {
     .container {
@@ -53,6 +65,13 @@ a:hover{
     border-radius: 50%;
     width: 15px;
     height: 15px;
+}
+#blogCarousel .carousel-indicators {
+    bottom: -20px
+
+}
+#blogCarousel .carousel-indicators li {
+    background-color: #ddd;
 }
 .dropdown-menu.dropdown-user{
     margin-top: 0;
@@ -692,7 +711,7 @@ article.main span.category a, .post-meta span.category a{
     font-size: 12px;
 }
 
-.user-home .user-online {
+.user-meta .user-online {
     vertical-align: super ;
     margin-left: 10px;
     padding: 0 4px;
@@ -734,6 +753,14 @@ ul.pagination {
     text-decoration: none;
     color: #fff;
     border-radius: 4px;
+}
+
+.blog-info-content {
+    margin-top: 150px;
+}
+
+.blog-info-content .blog-info-panel {
+    padding: 20px;
 }
 
 .author-label {

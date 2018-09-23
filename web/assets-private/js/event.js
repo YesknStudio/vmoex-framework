@@ -46,7 +46,7 @@ $(document).on('click', '.set-locale-link', function (e) {
     $.post(window.Yeskn.links.G_set_locale_link, {locale:locale}, function (data) {
         if (data.ret) {
             success(data.msg);
-            window.location.reload();
+            window.location = window.location;
         } else {
             error(data.msg);
         }

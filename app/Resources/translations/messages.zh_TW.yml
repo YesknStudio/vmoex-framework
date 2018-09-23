@@ -24,7 +24,7 @@ notifications: 通知
 板块: 板塊
 Vmoex当前板块数量: Vmoex當前板塊數量
 hello_stranger: 你好，陌生人
-hello_stranger_detail: 如果你喜歡Vmoex，請記得注册或者保存網址哦~
+hello_stranger_detail: null
 my.status: 我的狀態
 hot.users: 活躍用戶
 today.hot.topics: 今日熱門話題
@@ -127,7 +127,7 @@ notice_replied_you: null
 post_top: null
 like: null
 action_too_fast: null
-banner_announce: 本網站的內容可能侵犯了您的權益，當前Vmoex使用您的文章（或者圖片等）僅用於測試真實上線情况，如您不允許，請致郵：support@vmoex.com。
+banner_announce: null
 all: null
 hot: 熱門
 site_state: dddd
@@ -150,3 +150,18 @@ user_my_sent_messages: null
 sorry_no_content: null
 user_you_send_message_to: null
 user_send_message_to_you: null
+Title: null
+Cover: null
+Detail: null
+latest_blogs: null
+nav_create_blog: null
+nav_create_post: null
+'Old password': null
+'New Password': null
+'Repeat Password': null
+home_now_register: null
+user_my_posts: null
+user_my_comments: null
+user_my_following: null
+user_my_follower: null
+user_my_blog: null

@@ -30,7 +30,7 @@ blind.chat: 雑談をする
 板块: のプレート
 Vmoex当前板块数量: Vmex現在のプレートの数
 hello_stranger: こんにちは、知らない人
-hello_stranger_detail: もしあなたがVmexが好きなら、登録や保存サイトを覚えてください。
+hello_stranger_detail: null
 my.status: 私の状態
 hot.users: 活躍するユーザー
 today.hot.topics: 本日の活躍
@@ -127,7 +127,7 @@ notice_replied_you: null
 post_top: null
 like: null
 action_too_fast: null
-banner_announce: このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。
+banner_announce: null
 all: null
 hot: 人気
 site_state: dsd
@@ -150,3 +150,18 @@ user_my_sent_messages: null
 sorry_no_content: null
 user_you_send_message_to: null
 user_send_message_to_you: null
+Title: null
+Cover: null
+Detail: null
+latest_blogs: null
+nav_create_blog: null
+nav_create_post: null
+'Old password': null
+'New Password': null
+'Repeat Password': null
+home_now_register: null
+user_my_posts: null
+user_my_comments: null
+user_my_following: null
+user_my_follower: null
+user_my_blog: null

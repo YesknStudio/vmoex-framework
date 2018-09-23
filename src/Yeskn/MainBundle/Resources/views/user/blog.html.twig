@@ -1,0 +1,32 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block page_wraper %}
+    <div class="row content-row">
+        {% include '@YesknMain/user/sidebar.html.twig' %}
+        <div class="col-lg-8 content-main" role="main">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-envelope fa-fw"></i> {{ 'user_my_blog'|trans }}
+                </div>
+                <div class="panel-body">
+                    <div class="row blog-list">
+                        {% for blog in blog_list %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="panel panel-default">
+                                    <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
+                                    <div class="panel-body " style="padding: 5px">
+                                        <b style="color: grey">
+                                            <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a></b>
+                                        <br>
+                                        <span class="text-small-gray">创建于{{ blog.createdAt|ago }}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Yeskn\MainBundle\Entity\Message;
 
 class BlogCreateWorkerCommand extends ContainerAwareCommand
 {
@@ -25,25 +24,27 @@ class BlogCreateWorkerCommand extends ContainerAwareCommand
     {
         while (true) {
             $do = $this->getContainer()->get('doctrine');
-            $push = $this->getContainer()->get('socket.push');
 
-            $user = $do->getRepository('YesknMainBundle:User')->findOneBy([
-                'status' => 1,
-                'type' => 'user'
-            ]);
+            $blog = $do->getRepository('YesknMainBundle:Blog')
+                ->findOneBy(['status' => 'queueing'], ['id' => 'ASC']);
+
+            if (empty($blog)) {
+                sleep(3);
+                continue;
+            }
 
             $command = $this->getApplication()->find('blog:create');
 
             $arguments = [
-                '--username' => $user->getUsername(),
-                '--password' => $user->getPassword()
+                '--username' => $blog->getUser()->getUsername(),
+                '--password' => $blog->getPassword(),
+                '--email' => $blog->getUser()->getEmail(),
+                '--blogName' => $blog->getTitle(),
             ];
 
             $commandInput = new ArrayInput($arguments);
 
             $command->run($commandInput, $output);
-
-            $push->pushNewMessage(new Message());
 
             sleep(3);
         }

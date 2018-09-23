@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Yeskn\MainBundle\Entity\User;
 
 class UserLoginType extends AbstractType
 {
@@ -24,7 +25,7 @@ class UserLoginType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Yeskn\MainBundle\Entity\User',
+            'data_class' => User::class,
         ]);
     }
 }

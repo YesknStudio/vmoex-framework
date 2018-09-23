@@ -122,6 +122,10 @@ function handleNewChat() {
     $('.nav-chat-dot').addClass('push-notifications-count');
 }
 
+function handleCreateBlogEvent(data) {
+    $('#processBlogStep4 .progress').append('<span class="help-block">'+data.msg+'</span>');
+}
+
 function path(route, parameters) {
     for (var k in parameters) {
         if (parameters.hasOwnProperty(k)) {

@@ -21,7 +21,7 @@ banner.copyright: 'The content of this site may be infringed on your rights, Vmo
 trends_description: 'This section is used to display the user, plate or theme you are interested in, and this function is being developed.'
 trends: Trends
 activity: ' Activity'
-blind.chat: BlindChat
+blind.chat: ChatChat
 about: About
 板块: Tabs
 comment: ' comment'
@@ -29,7 +29,7 @@ search: Search
 messages: Msg
 notifications: Notice
 hello_stranger: 'Hello, Stranger !'
-hello_stranger_detail: 'If you like Vmoex, remember to register or add this site to your bookmark.'
+hello_stranger_detail: null
 my.status: 'My Status'
 hot.users: 'Activist Users'
 today.hot.topics: 'Hot Topics Today'
@@ -127,7 +127,7 @@ notice_replied_you: null
 post_top: Top
 like: null
 action_too_fast: null
-banner_announce: 'The content of this site may be infringed on your rights, Vmoex use your articles (or pictures, etc.) only for testing the real line, if you do not allow, please mail: support@vmoex.com.'
+banner_announce: null
 all: null
 hot: Hot
 site_state: dsds
@@ -137,7 +137,7 @@ site_comment_count: null
 site_user_count: null
 site_copyright: null
 site_title: null
-site_name: bokecloud
+site_name: null
 user_place_in_site: 'the count''st Vmoex member'
 footer_available_with: 'available with: '
 yingwe: ds
@@ -150,3 +150,18 @@ user_my_sent_messages: Send
 sorry_no_content: 'Sorry, there is no content yet!'
 user_you_send_message_to: 'you said to receiver: '
 user_send_message_to_you: 'said to you: '
+Title: null
+Cover: null
+Detail: null
+latest_blogs: null
+nav_create_blog: null
+nav_create_post: null
+'Old password': null
+'New Password': null
+'Repeat Password': null
+home_now_register: 'register now！'
+user_my_posts: null
+user_my_comments: null
+user_my_following: null
+user_my_follower: null
+user_my_blog: null

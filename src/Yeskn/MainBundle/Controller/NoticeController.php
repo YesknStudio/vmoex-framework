@@ -17,32 +17,6 @@ use Yeskn\MainBundle\Entity\Notice;
 class NoticeController extends Controller
 {
     /**
-     * @Route("/my-notices", name="my_notices")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function myNoticesAction()
-    {
-        $user = $this->getUser();
-
-        if (empty($user)) {
-            return new JsonResponse('user not login');
-        }
-
-        /** @var Notice[] $unreadNotices */
-        $unreadNotices = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')
-            ->findBy(['pushTo' => $user, 'isRead' => false], ['createdAt' => 'DESC']);
-
-        /** @var Notice[] $readNotices */
-        $readNotices = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')
-            ->findBy(['pushTo' => $user, 'isRead' => true], ['createdAt' => 'DESC']);
-
-        return $this->render('@YesknMain/user/notices.html.twig', [
-            'readNotices' => $readNotices,
-            'unreadNotices' => $unreadNotices
-        ]);
-    }
-
-    /**
      * @Route("/set-notice-red", name="set_notice_red", methods={"POST"})
      */
     public function setNoticeRedAction()

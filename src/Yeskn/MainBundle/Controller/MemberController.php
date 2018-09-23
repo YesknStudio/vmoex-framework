@@ -59,7 +59,7 @@ class MemberController extends Controller
         $message->setReceiver($user);
         $message->setSender($this->getUser());
 
-        return $this->render('@YesknMain/user/user-home.html.twig', [
+        return $this->render('@YesknMain/member/home.html.twig', [
             'user' => $user,
             'online' => $online,
             'userActive' => $userActive,
