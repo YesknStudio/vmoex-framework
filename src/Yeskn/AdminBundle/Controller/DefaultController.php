@@ -28,7 +28,7 @@ class DefaultController extends Controller
         $todayLoginUserCount = $this->getDoctrine()->getRepository('YesknMainBundle:User')
             ->getTodayLoggedUserCount();
 
-        return $this->render('YesknAdminBundle:Default:index.html.twig', [
+        return $this->render('YesknAdminBundle:default:index.html.twig', [
             'count' => [
                 'post' => $postCount,
                 'user' => $userCount,
