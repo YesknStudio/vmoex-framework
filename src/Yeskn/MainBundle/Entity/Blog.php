@@ -73,7 +73,7 @@ class Blog
      * @ORM\Column(name="cover", type="string", nullable=true)
      * @Assert\File()
      */
-    private $cover;
+    private $cover = 'https://static.yeskn.com/wpcast/default-img.png';
 
     /**
      * @var string
