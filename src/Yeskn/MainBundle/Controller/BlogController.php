@@ -84,7 +84,6 @@ class BlogController extends Controller
                 $found = $blogRepo->findOneBy(['subdomain' => $subdomain]);
 
                 if ($found) {
-                    mysqli_real_escape_string();
                     return $this->errorResponse('该域名已经被占用！');
                 }
 

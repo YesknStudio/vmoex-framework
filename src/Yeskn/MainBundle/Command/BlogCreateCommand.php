@@ -98,13 +98,14 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $this->writeln('博客初始化成功！', 70);
 
-        $this->writeln(sprintf('地址：<a target="_blank" href="%s">%s</a>', $this->url, $this->url));
+        $htmlUrl = sprintf('<a target="_blank" href="%s">%s</a>', $this->url, $this->url);
+        $this->writeln('地址：' . $htmlUrl);
         $this->writeln('用户名：'. $username);
         $this->writeln('标题：'. $blogName);
         $this->writeln('密码：'. $password);
         $this->writeln('邮箱：'. $email);
 
-        $this->writeln('您的博客创建成功', 100);
+        $this->writeln('恭喜，您的博客创建成功，立即访问 >>> ' . $htmlUrl, 100);
     }
 
     public function initDatabase($domain, $username, $title, $pass, $email)
@@ -145,6 +146,6 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $this->output->writeln($msg);
 
-        $pushService->pushCreateBlogEvent($this->username, $msg, $percent);
+        $pushService->pushCreateBlogEvent($this->username, $msg, 1, $percent);
     }
 }
