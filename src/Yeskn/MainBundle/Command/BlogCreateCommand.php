@@ -67,10 +67,10 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $this->writeln('创建数据库成功...', 30);
 
-        $sql = "grant all privileges on {$dbName}.* to '?'@localhost identified by '?';flush privileges;";
+        $sql = "grant all privileges on {$dbName}.* to {$domain}@localhost identified by '?';flush privileges;";
 
         $statement = $connection->prepare($sql);
-        $statement->execute([$domain, $password]);
+        $statement->execute([$password]);
 
         $this->writeln('创建数据库用户成功...', 30);
 
