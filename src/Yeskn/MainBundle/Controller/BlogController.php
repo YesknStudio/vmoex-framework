@@ -77,6 +77,17 @@ class BlogController extends Controller
                     return new ApiFail('请输入博客域名！');
                 }
 
+                if (preg_match('/^[1-9a-z\-]{3, 18}$/', $subdomain) !== 1) {
+                    return new ApiFail('您输入的域名不符合规则，只能填写数字，小写字母和中划线(-)！');
+                }
+
+                $found = $blogRepo->findOneBy(['subdomain' => $subdomain]);
+
+                if ($found) {
+                    mysqli_real_escape_string();
+                    return $this->errorResponse('该域名已经被占用！');
+                }
+
                 $blog->setSubdomain($subdomain);
                 $this->get('doctrine.orm.entity_manager')->flush();
 

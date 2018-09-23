@@ -9,6 +9,7 @@
 
 namespace Yeskn\MainBundle\Command;
 
+use Doctrine\DBAL\Driver\Connection;
 use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,6 +36,7 @@ class BlogCreateCommand extends ContainerAwareCommand
         $this->addOption('password', null, InputOption::VALUE_REQUIRED);
         $this->addOption('email', null, InputOption::VALUE_REQUIRED);
         $this->addOption('blogName', null, InputOption::VALUE_REQUIRED);
+        $this->addOption('domain', null, InputOption::VALUE_REQUIRED);
     }
 
     /**
@@ -50,20 +52,26 @@ class BlogCreateCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $allocate = new AllocateSpaceService($container);
 
+        /** @var \Doctrine\DBAL\Connection $connection */
         $connection = $container->get('doctrine')->getConnection();
+        $sm = $connection->getSchemaManager();
 
         $this->username = $username = $input->getOption('username');
         $password = $input->getOption('password');
         $blogName = $input->getOption('blogName');
         $email = $input->getOption('email');
+        $domain = $input->getOption('domain');
 
-        $connection->executeQuery("create database wpcast_{$username};");
+        $dbName = 'wpcast_'.$domain;
+
+        $sm->createDatabase($dbName);
 
         $this->writeln('创建数据库成功...');
 
-        $sql = "grant all privileges on wpcast_{$username}.* to {$username}@localhost identified by '{$password}';flush privileges;";
+        $sql = "grant all privileges on {$blogName}.* to '?'@localhost identified by '?';flush privileges;";
 
-        $connection->executeQuery($sql);
+        $statement = $connection->prepare($sql);
+        $statement->execute([$domain, $password]);
 
         $this->writeln('创建数据库用户成功...');
 

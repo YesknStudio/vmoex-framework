@@ -38,6 +38,7 @@ class BlogCreateWorkerCommand extends ContainerAwareCommand
 
             $arguments = [
                 '--username' => $blog->getUser()->getUsername(),
+                '--domain' => $blog->getSubdomain(),
                 '--password' => $blog->getPassword(),
                 '--email' => $blog->getUser()->getEmail(),
                 '--blogName' => $blog->getTitle(),
