@@ -31,7 +31,6 @@ class Blog
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User")
-     * @ORM\Column(name="user_id", type="integer", nullable=false)
      */
     private $user;
 

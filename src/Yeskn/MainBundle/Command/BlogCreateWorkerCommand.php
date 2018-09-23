@@ -46,6 +46,9 @@ class BlogCreateWorkerCommand extends ContainerAwareCommand
 
             $command->run($commandInput, $output);
 
+            $blog->setStatus('created');
+            $this->getContainer()->get('doctrine.orm.entity_manager')->flush();
+
             sleep(3);
         }
     }
