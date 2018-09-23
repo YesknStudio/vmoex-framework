@@ -71,7 +71,7 @@ class SocketPushService
         ]);
     }
 
-    public function pushCreateBlogEvent($username, $msg, $ret = 1)
+    public function pushCreateBlogEvent($username, $msg, $ret = 1, $percent = null)
     {
         $this->client->post($this->container->getParameter('socket_push_host'), [
             'form_params' => [
@@ -80,7 +80,8 @@ class SocketPushService
                 'to' => $username,
                 'data' => [
                     'ret' => $ret,
-                    'msg' => $msg
+                    'msg' => $msg,
+                    'percent' => $percent
                 ]
             ]
         ]);

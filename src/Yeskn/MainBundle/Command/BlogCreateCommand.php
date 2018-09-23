@@ -9,7 +9,6 @@
 
 namespace Yeskn\MainBundle\Command;
 
-use Doctrine\DBAL\Driver\Connection;
 use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -66,22 +65,22 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $sm->createDatabase($dbName);
 
-        $this->writeln('创建数据库成功...');
+        $this->writeln('创建数据库成功...', 30);
 
         $sql = "grant all privileges on {$blogName}.* to '?'@localhost identified by '?';flush privileges;";
 
         $statement = $connection->prepare($sql);
         $statement->execute([$domain, $password]);
 
-        $this->writeln('创建数据库用户成功...');
+        $this->writeln('创建数据库用户成功...', 30);
 
         $webPath = $allocate->allocateWebSpace($username);
 
-        $this->writeln('分配服务器空间成功...');
+        $this->writeln('分配服务器空间成功...', 40);
 
         $allocate->allocateDbSpace($username);
 
-        $this->writeln('分配数据库空间成功...');
+        $this->writeln('分配数据库空间成功...', 50);
 
         $fs = new Filesystem();
 
@@ -89,32 +88,32 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $fs->mirror($config['wordpress_source'], $webPath);
 
-        $this->writeln('复制wordpress代码成功...');
+        $this->writeln('复制wordpress代码成功...', 60);
 
         $fs->chown($webPath, $config['server_user'], true);
 
-        $this->initDatabase($username, $blogName, $password, $email);
+        $this->initDatabase($username, $username, $blogName, $password, $email);
 
-        $this->writeln('博客初始化成功！');
+        $this->writeln('博客初始化成功！', 70);
 
         $this->writeln(sprintf('地址：<a target="_blank" href="%s">%s</a>', $this->url, $this->url));
         $this->writeln('用户名：'. $username);
-        $this->writeln('标题：'. $username . '的博客');
+        $this->writeln('标题：'. $blogName);
         $this->writeln('密码：'. $password);
         $this->writeln('邮箱：'. $email);
 
-        $this->writeln('您的博客创建成功');
+        $this->writeln('您的博客创建成功', 100);
     }
 
-    public function initDatabase($name, $title, $pass, $email)
+    public function initDatabase($domain, $username, $title, $pass, $email)
     {
-        $this->url = $url = "https://{$name}." . $this->getContainer()->getParameter('domain');
+        $this->url = $url = "https://{$domain}." . $this->getContainer()->getParameter('domain');
         $client = new Client(['verify' => false]);
 
         $client->post($url . '/wp-admin/setup-config.php?step=2', [
             'form_params' => [
-                'dbname' => 'wpcast_'.$name,
-                'uname' => $name,
+                'dbname' => 'wpcast_'.$domain,
+                'uname' => $domain,
                 'pwd' => $pass,
                 'dbhost' => 'localhost',
                 'prefix' => 'wp_',
@@ -126,7 +125,7 @@ class BlogCreateCommand extends ContainerAwareCommand
         $client->post($url . '/wp-admin/install.php?step=2', [
             'form_params' => [
                 'weblog_title' => $title,
-                'user_name' => $name,
+                'user_name' => $username,
                 'admin_password' => $pass,
                 'pass1-text' => $pass,
                 'admin_password2' => $pass,
@@ -138,12 +137,12 @@ class BlogCreateCommand extends ContainerAwareCommand
         ]);
     }
 
-    protected function writeln($msg)
+    protected function writeln($msg, $percent = null)
     {
         $pushService = $this->getContainer()->get('socket.push');
 
         $this->output->writeln($msg);
 
-        $pushService->pushCreateBlogEvent($this->username, $msg);
+        $pushService->pushCreateBlogEvent($this->username, $msg, $percent);
     }
 }

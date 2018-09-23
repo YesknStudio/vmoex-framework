@@ -123,6 +123,9 @@ function handleNewChat() {
 }
 
 function handleCreateBlogEvent(data) {
+    if (data.percent) {
+        $('#processBlogStep4 .progress-bar').css('width', data.percent + '%').attr('aria-valuenow',  data.percent)
+    }
     $('#processBlogStep4 #processBlogSocketMessage').append('<span class="help-block">'+data.msg+'</span>');
 }
 
