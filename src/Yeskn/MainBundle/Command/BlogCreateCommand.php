@@ -132,6 +132,8 @@ class BlogCreateCommand extends ContainerAwareCommand
     {
         $pushService = $this->getContainer()->get('socket.push');
 
+        $this->output->writeln($msg);
+
         $pushService->pushCreateBlogEvent($this->username, $msg);
     }
 }
