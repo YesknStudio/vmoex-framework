@@ -9,6 +9,7 @@ imports:
 
 framework:
     assets:
+        version: "%assets_version%"
         base_urls:
             - "%assets_base_url%"
 
