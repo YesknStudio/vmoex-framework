@@ -26,7 +26,16 @@
             </div>
 
             <div style="padding-top: 10px;text-align: center">
-                <a data-pjax class="btn btn-success btn-block" href="{{ path('create_post') }}"><i class="fa fa-edit"></i> {{ 'create_new_topic'|trans }}</a>
+                <div class="btn-group">
+                    <button data-pjax class="btn btn-success" href="{{ path('create_post') }}"><i class="fa fa-edit"></i> {{ 'create_new_topic'|trans }}</button>
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a data-pjax href="{{ path('blog_create') }}"><i class="fa fa-wordpress"></i> {{ 'nav_create_blog'|trans }}</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
