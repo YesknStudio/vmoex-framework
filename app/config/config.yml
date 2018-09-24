@@ -35,7 +35,7 @@ framework:
     trusted_hosts: ~
     session:
         # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id: session.handler.native_file
+        handler_id:  snc_redis.session.handler
         save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
     fragments: ~
     http_method_override: true
@@ -87,3 +87,38 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: "%redis_dsn%"
+        session:
+            type: predis
+            alias: session
+            dsn: "%redis_dsn%"
+        cache:
+            type: predis
+            alias: cache
+            dsn: "%redis_dsn%"
+            options:
+                profile: 2.2
+                connection_timeout: 10
+                read_write_timeout: 30
+    session:
+        client: session
+    doctrine:
+        metadata_cache:
+            client: cache
+            entity_manager: default
+            document_manager: default
+        result_cache:
+            client: cache
+            entity_manager: default
+        query_cache:
+            client: cache
+            entity_manager: default
+        second_level_cache:
+            client: cache
+            entity_manager: default
