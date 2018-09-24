@@ -11,6 +11,7 @@ namespace Yeskn\MainBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\Support\Http\ApiOk;
 
@@ -27,6 +28,18 @@ class StatusController extends Controller
         return new ApiOk([
             'site_name' => $one->getChinese()
         ]);
+    }
+
+    /**
+     * @Route("/status/close-alert", name="status_close_alert")
+     */
+    public function closeAnnounceAlert()
+    {
+        $response = new ApiOk();
+
+        $response->headers->setCookie(new Cookie('_hide_announce', 1));
+
+        return $response;
     }
 
     /**

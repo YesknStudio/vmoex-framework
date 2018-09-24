@@ -147,9 +147,9 @@
     </div>
 </nav>
 
-{% if websiteInfo().siteAnnounce %}
+{% if websiteInfo().siteAnnounce and hideAnnounceAlert() == false %}
     <div class="container">
-        <div class="alert alert-warning alert-dismissible" role="alert" style="margin-bottom: 10px">
+        <div id="navSiteAnnounceAlert" class="alert alert-warning alert-dismissible" role="alert" style="margin-bottom: 10px">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             {{ 'banner_announce'|trans }}
         </div>

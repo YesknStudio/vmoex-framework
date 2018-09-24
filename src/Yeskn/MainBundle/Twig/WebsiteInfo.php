@@ -11,6 +11,8 @@ namespace Yeskn\MainBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class WebsiteInfo extends \Twig_Extension
 {
@@ -19,11 +21,16 @@ class WebsiteInfo extends \Twig_Extension
      */
     private $em;
 
-    public function __construct(EntityManagerInterface $em)
+    /**
+     * @var null|Request
+     */
+    private $request;
+
+    public function __construct(EntityManagerInterface $em, RequestStack $request)
     {
         $this->em = $em;
+        $this->request = $request->getCurrentRequest();
     }
-
 
     public function websiteInfo()
     {
@@ -42,10 +49,16 @@ class WebsiteInfo extends \Twig_Extension
         return $return;
     }
 
+    public function hideAnnounceAlert()
+    {
+        return (boolean) $this->request->cookies->has('_hide_announce');
+    }
+
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('websiteInfo',array($this,'websiteInfo')),
+            new \Twig_SimpleFunction('websiteInfo', [$this, 'websiteInfo']),
+            new \Twig_SimpleFunction('hideAnnounceAlert', [$this,'hideAnnounceAlert']),
         ];
     }
 }

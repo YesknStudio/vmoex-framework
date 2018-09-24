@@ -191,6 +191,10 @@ $(window).scroll(function() {
     }
 });
 
+$(document).on('click', '#navSiteAnnounceAlert button' , function () {
+    $.post(window.Yeskn.links.close_alert);
+});
+
 $('.go-top').click(function(event) {
     event.preventDefault();
     $('html, body').animate({scrollTop: 0}, 300);

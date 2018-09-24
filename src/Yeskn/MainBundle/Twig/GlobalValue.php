@@ -231,6 +231,7 @@ class GlobalValue extends \Twig_Extension
                 'G_thumb_up__link' => $this->router->generate('thumb_up_comment'),
                 'add_comment_to_post' => $this->router->generate('add_comment_to_post', ['postId' => $postId]),
                 'send_chat' => $this->router->generate('send_chat'),
+                'close_alert' => $this->router->generate('status_close_alert')
             ],
             'trans' => [
                 'thumbup' => $this->translator->trans('like'),
