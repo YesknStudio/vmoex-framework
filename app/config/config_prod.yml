@@ -7,6 +7,11 @@ imports:
 #        result_cache_driver: apc
 #        query_cache_driver: apc
 
+framework:
+    assets:
+        base_urls:
+            - "%assets_base_url%"
+
 monolog:
     handlers:
         main:
