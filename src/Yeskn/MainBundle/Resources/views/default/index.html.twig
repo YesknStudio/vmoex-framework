@@ -27,7 +27,9 @@
                                                 <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
                                             </b>
                                             <br>
-                                            <span class="text-small-gray">创建于<span data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
+                                            <span class="text-small-gray">
+                                                <a data-pjax href="{{ path('member_home', {username: blog.user.username}) }}">{{ blog.user.nickname }}</a>
+                                                创建于<span data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
 
                                         </div>
                                     </div>
@@ -44,7 +46,9 @@
                                                 <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
                                             </b>
                                             <br>
-                                            <span class="text-small-gray">创建于<span  data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
+                                            <span class="text-small-gray">
+                                                <a data-pjax href="{{ path('member_home', {username: blog.user.username}) }}">{{ blog.user.nickname }}</a>
+                                                创建于<span  data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
 
                                         </div>
                                     </div>
@@ -61,7 +65,9 @@
                                                 <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
                                             </b>
                                             <br>
-                                            <span class="text-small-gray">创建于<span  data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
+                                            <span class="text-small-gray">
+                                                <a data-pjax href="{{ path('member_home', {username: blog.user.username}) }}">{{ blog.user.nickname }}</a>
+                                                创建于<span  data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
 
                                         </div>
                                     </div>
@@ -116,7 +122,7 @@
                             <a data-pjax href="{{ path('member_home', {username: post.author.username}) }}">{{ post.author.nickname }}</a></span>
 
                                 <span class="category">
-                                      <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
+                                      <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge"> {{ post.tab.name|trans }}</a>
                                 </span>
                                 <span data-toggle="tooltip" title="{{ post.createdAt|date }}"><i class="fa fa-clock-o"></i>{{ post.createdAt|ago }}</span>
                                 <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
