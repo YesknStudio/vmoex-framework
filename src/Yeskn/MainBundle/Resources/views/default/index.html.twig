@@ -17,61 +17,17 @@
                     <div class="carousel-inner">
                         <div class="item active">
                             {% for key, blog in blog_list if key <= 3-1 %}
-                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <div class="panel panel-default">
-                                        <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">
-                                            <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
-                                        </a>
-                                        <div class="panel-body " style="padding: 5px">
-                                            <b style="color: grey">
-                                                <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
-                                            </b>
-                                            <br>
-                                            <span class="text-small-gray">
-                                                <a data-pjax href="{{ path('member_home', {username: blog.user.username}) }}">{{ blog.user.nickname }}</a>
-                                                创建于<span data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
                             {% endfor %}
                         </div>
                         <div class="item">
-                            {% for key, blog in blog_list if key > 3 and key <= 6-1 %}
-                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <div class="panel panel-default">
-                                        <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
-                                        <div class="panel-body " style="padding: 5px">
-                                            <b style="color: grey">
-                                                <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
-                                            </b>
-                                            <br>
-                                            <span class="text-small-gray">
-                                                <a data-pjax href="{{ path('member_home', {username: blog.user.username}) }}">{{ blog.user.nickname }}</a>
-                                                创建于<span  data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
-
-                                        </div>
-                                    </div>
-                                </div>
+                            {% for key, blog in blog_list if key > 3 and key <= 6 %}
+                                {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
                             {% endfor %}
                         </div>
                         <div class="item">
-                            {% for key, blog in blog_list if key > 6 and key <= 9-1 %}
-                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <div class="panel panel-default">
-                                        <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
-                                        <div class="panel-body " style="padding: 5px">
-                                            <b style="color: grey">
-                                                <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
-                                            </b>
-                                            <br>
-                                            <span class="text-small-gray">
-                                                <a data-pjax href="{{ path('member_home', {username: blog.user.username}) }}">{{ blog.user.nickname }}</a>
-                                                创建于<span  data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span></span>
-
-                                        </div>
-                                    </div>
-                                </div>
+                            {% for key, blog in blog_list if key > 6 and key <= 9 %}
+                                {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
                             {% endfor %}
                         </div>
                     </div>
@@ -124,7 +80,7 @@
                                 <span class="category">
                                       <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge"> {{ post.tab.name|trans }}</a>
                                 </span>
-                                <span data-toggle="tooltip" title="{{ post.createdAt|date }}"><i class="fa fa-clock-o"></i>{{ post.createdAt|ago }}</span>
+                                <span data-toggle="tooltip" title="{{ post.createdAt|date }}"><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
                                 <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                                 {% if post.comments.count %}
                                     <span><i class="fa fa-commenting-o"></i>
