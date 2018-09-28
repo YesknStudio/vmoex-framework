@@ -9,6 +9,7 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class BlogController extends Controller
      * @throws \LogicException
      *
      * @Route("/blog/create/step/{step}", name="blog_create", requirements={"step": "\d+"}, defaults={"step":1})
+     * @Security("has_role('ROLE_USER')")
      */
     public function createAction(Request $request, $step)
     {
