@@ -42,7 +42,7 @@ class Device
      * @var
      * @ORM\Column(name="type", type="string", options={"comment":"web、博客空间；db、数据库空间"})
      */
-    private $type;
+    private $type = '';
 
     /**
      * @var Blog
