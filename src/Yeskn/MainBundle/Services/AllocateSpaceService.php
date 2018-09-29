@@ -17,7 +17,6 @@ use Yeskn\MainBundle\Entity\Blog;
 
 class AllocateSpaceService
 {
-
     private $container;
 
     /**

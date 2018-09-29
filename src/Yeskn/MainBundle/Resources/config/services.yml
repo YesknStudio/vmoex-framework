@@ -22,6 +22,9 @@ services:
       public: true
       tags: ['controller.service_arguments']
 
+  Yeskn\MainBundle\Services\AllocateSpaceService:
+    public: true
+
   socket.push:
     public: true
     class: Yeskn\MainBundle\Services\SocketPushService
