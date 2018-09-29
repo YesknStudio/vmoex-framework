@@ -9,6 +9,7 @@
 
 namespace Yeskn\MainBundle\Services;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
@@ -18,16 +19,22 @@ class AllocateSpaceService
 
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    public function __construct(ContainerInterface $container, EntityManagerInterface $entityManager)
     {
         $this->container = $container;
+        $this->em = $entityManager;
     }
     public function allocate($name, $size, $imgPath, $mountPath)
     {
         $fs = new Filesystem();
 
-        $mount = $mountPath . '/' . $name;
-        $img = $imgPath . '/' . $name . '.img';
+        $mount = $mountPath . '/' . $name; // /alidata/www/wpcraft-blogs/xxx
+        $img = $imgPath . '/' . $name . '.img';  // /mnt/wpcast-web/xxx.img
 
         if (!$fs->exists($mount)) {
             $fs->mkdir($mount);
@@ -37,10 +44,20 @@ class AllocateSpaceService
 
         $process->run();
 
-        $process->setCommandLine("losetup {$img}")->run();
-        $process->setCommandLine('mkfs.ext4 /dev/loop0')->run();
-        $process->setCommandLine("mount {$img} {$mount}")->run();
-        $process->setCommandLine('losetup -d /dev/loop0')->run();
+        $deviceRepo = $this->em->getRepository('YesknMainBundle:Device');
+
+        $device = $deviceRepo->findOneBy(['blog' => null, ['id' => 'DESC']]);
+
+        if (!$device) {
+            throw new \Exception('no more device');
+        }
+
+        $deviceName = $device->getDeviceName();
+
+        $process->setCommandLine("losetup {$deviceName} {$img}")->run();
+        $process->setCommandLine("mkfs.ext3 {$deviceName}")->run();
+        $process->setCommandLine("losetup -d {$deviceName}")->run();
+        $process->setCommandLine("mount -o loop {$img} {$mount}")->run();
 
         return $mount;
     }

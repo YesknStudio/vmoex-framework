@@ -70,7 +70,7 @@ class BlogCreateCommand extends ContainerAwareCommand
         $this->writeln('创建数据库成功...', 30);
 
         $this->dbPass = $dbPass = substr(md5($password), 25);
-        $sql = "grant all privileges on {$dbName}.* to {$domain}@localhost identified by '{$dbPass}';flush privileges;";
+        $sql = "grant all privileges on {$dbName}.* to '{$domain}'@localhost identified by '{$dbPass}';flush privileges;";
 
         $connection->executeQuery($sql);
 
