@@ -49,7 +49,7 @@ class AddDeviceCommand extends ContainerAwareCommand
             $em->persist($device);
             $em->flush();
 
-            $process = new Process("mknod -m 0660  b 7 {$i}");
+            $process = new Process("mknod -m 0660 {$deviceName} b 7 {$i}");
             $code = $process->run();
 
             if ($code != 0) {
