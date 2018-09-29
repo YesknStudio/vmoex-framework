@@ -48,7 +48,7 @@ class AllocateSpaceService
 
         $deviceRepo = $this->em->getRepository('YesknMainBundle:Device');
 
-        $device = $deviceRepo->findOneBy(['blog' => null], ['id' => 'DESC']);
+        $device = $deviceRepo->findOneBy(['blog' => null], ['id' => 'ASC']);
 
         if (!$device) {
             throw new \Exception('no more device');
