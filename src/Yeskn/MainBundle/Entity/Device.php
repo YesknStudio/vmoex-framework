@@ -12,7 +12,11 @@ namespace Yeskn\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="device", indexes={@ORM\Index(name="idx_unique_device", columns={"machine_id", "device_name"})})
+ * @ORM\Table(name="device",
+ *     uniqueConstraints={
+ *       @ORM\UniqueConstraint(name="idx_unique_device", columns={"machine_id", "device_name"})
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="Yeskn\MainBundle\Repository\DeviceRepository")
  */
 class Device
