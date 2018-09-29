@@ -51,7 +51,6 @@ class BlogCreateCommand extends ContainerAwareCommand
         $this->output = $output;
 
         $container = $this->getContainer();
-        $allocate = new AllocateSpaceService($container);
 
         /** @var \Doctrine\DBAL\Connection $connection */
         $connection = $container->get('doctrine')->getConnection();
@@ -62,6 +61,15 @@ class BlogCreateCommand extends ContainerAwareCommand
         $blogName = $input->getOption('blogName');
         $email = $input->getOption('email');
         $domain = $input->getOption('domain');
+
+        $doctrine = $container->get('doctrine');
+
+        $blogRepo = $doctrine->getRepository('YesknMainBundle:Blog');
+
+        $blog = $blogRepo->findOneBy(['subdomain' => $domain]);
+
+        $allocate = $container->get(AllocateSpaceService::class);
+        $allocate->setBlog($blog);
 
         $dbName = 'wpcast_'.$domain;
 

@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
+use Yeskn\MainBundle\Entity\Blog;
 
 class AllocateSpaceService
 {
@@ -24,12 +25,14 @@ class AllocateSpaceService
      */
     private $em;
 
+    private $blog;
+
     public function __construct(ContainerInterface $container, EntityManagerInterface $entityManager)
     {
         $this->container = $container;
         $this->em = $entityManager;
     }
-    public function allocate($name, $size, $imgPath, $mountPath)
+    public function allocate($name, $size, $imgPath, $mountPath, $type = 'web')
     {
         $fs = new Filesystem();
 
@@ -54,6 +57,11 @@ class AllocateSpaceService
 
         $deviceName = $device->getDeviceName();
 
+        $device->setBlog($this->blog);
+        $device->setType($type);
+
+        $this->em->flush();
+
         $process->setCommandLine("losetup {$deviceName} {$img}")->run();
         $process->setCommandLine("mkfs.ext3 {$deviceName}")->run();
         $process->setCommandLine("losetup -d {$deviceName}")->run();
@@ -69,7 +77,9 @@ class AllocateSpaceService
         return $this->allocate($name,
             $webConfig['web_size'],
             $webConfig['web_img_path'],
-            $webConfig['web_path']);
+            $webConfig['web_path'],
+            'web'
+        );
     }
 
     public function allocateDbSpace($name)
@@ -79,6 +89,13 @@ class AllocateSpaceService
         return $this->allocate('wpcast_'.$name,
             $webConfig['db_size'],
             $webConfig['db_img_path'],
-            $webConfig['db_path']);
+            $webConfig['db_path'],
+        'db'
+        );
+    }
+
+    public function setBlog(Blog $blog)
+    {
+        $this->blog = $blog;
     }
 }

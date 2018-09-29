@@ -39,6 +39,12 @@ class Device
     private $deviceName;
 
     /**
+     * @var
+     * @ORM\Column(name="type", type="string", options={"comment":"web、博客空间；db、数据库空间"})
+     */
+    private $type;
+
+    /**
      * @var Blog
      * @ORM\OneToOne(targetEntity="Yeskn\MainBundle\Entity\Blog")
      * @ORM\JoinColumn(nullable=true)
@@ -107,5 +113,21 @@ class Device
     public function setBlog($blog)
     {
         $this->blog = $blog;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }
