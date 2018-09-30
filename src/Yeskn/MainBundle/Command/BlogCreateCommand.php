@@ -114,7 +114,7 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $conn = DriverManager::getConnection($connectionParams);
         $conn->executeUpdate('update `wp_options` set `option_value`= ? where `option_name` = ?', [
-            [$blog->getSubtitle(), 'blogdescription']
+            $blog->getSubtitle(), 'blogdescription'
         ]);
 
         $this->writeln('博客初始化成功！', 70);
