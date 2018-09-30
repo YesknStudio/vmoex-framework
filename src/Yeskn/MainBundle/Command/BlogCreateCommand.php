@@ -110,7 +110,7 @@ class BlogCreateCommand extends ContainerAwareCommand
             'password' => $this->dbPass,
             'host' => 'localhost',
             'driver' => 'pdo_mysql',
-            'charset' => 'utf8mb4'
+            'charset' => 'UTF8'
         ];
 
         $conn = DriverManager::getConnection($connectionParams);
