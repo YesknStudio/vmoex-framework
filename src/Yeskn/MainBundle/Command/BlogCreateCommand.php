@@ -71,7 +71,7 @@ class BlogCreateCommand extends ContainerAwareCommand
         $allocate = $container->get(AllocateSpaceService::class);
         $allocate->setBlog($blog);
 
-        $dbName = 'wpcraft_'.$domain;
+        $dbName = 'wpcast_'.$domain;
 
         $connection->executeQuery("create database {$dbName};");
 
