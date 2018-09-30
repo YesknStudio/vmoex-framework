@@ -8,6 +8,7 @@ services:
       # The best practice is to be explicit about your dependencies anyway.
       bind:
         $socketHost: "%socket_host%"
+        $projectDir: "%kernel.project_dir%"
 
   Yeskn\MainBundle\:
       resource: '../../../MainBundle/*'

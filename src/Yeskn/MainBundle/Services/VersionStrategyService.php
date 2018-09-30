@@ -17,7 +17,7 @@ class VersionStrategyService implements VersionStrategyInterface
 
     public function __construct($projectDir)
     {
-        $this->varDir = rtrim($projectDir, '/') . '/assets_version';
+        $this->varDir = rtrim($projectDir, '/') . '/var';
     }
 
     public function getVersion($path)
@@ -27,6 +27,6 @@ class VersionStrategyService implements VersionStrategyInterface
 
     public function applyVersion($path)
     {
-        return $path . '?v=' . file_get_contents($this->varDir);
+        return $path . '?v=' . file_get_contents($this->varDir . '/assets_version');
     }
 }
