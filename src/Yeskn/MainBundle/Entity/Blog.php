@@ -56,6 +56,13 @@ class Blog
      */
     private $cname;
 
+
+    /**
+     * @var Device[]
+     * @ORM\OneToMany(targetEntity="Yeskn\MainBundle\Entity\Device", mappedBy="blog")
+     */
+    private $devices;
+
     /**
      * @var string
      * @ORM\Column(name="title", type="string")
@@ -267,5 +274,21 @@ class Blog
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return Device[]
+     */
+    public function getDevices()
+    {
+        return $this->devices;
+    }
+
+    /**
+     * @param Device[] $devices
+     */
+    public function setDevices($devices)
+    {
+        $this->devices = $devices;
     }
 }

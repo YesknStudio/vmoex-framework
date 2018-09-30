@@ -50,7 +50,7 @@ class Device
 
     /**
      * @var Blog
-     * @ORM\OneToOne(targetEntity="Yeskn\MainBundle\Entity\Blog")
+     * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\Blog", inversedBy="devices")
      * @ORM\JoinColumn(nullable=true)
      */
     private $blog;
