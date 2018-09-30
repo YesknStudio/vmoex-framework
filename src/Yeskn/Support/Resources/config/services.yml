@@ -10,6 +10,6 @@ services:
   Yeskn\Support\:
     resource: '../../../Support/*'
 
-  Yeskn\Support\EventListener\ClearCacheListener:
+  Yeskn\Support\EventListener\ConsoleCommandListener:
     tags:
-      - { name: kernel.cache_clearer, event: console.command }
+      - { name: kernel.event_listener, event: console.command, method: onConsoleCommand  }
