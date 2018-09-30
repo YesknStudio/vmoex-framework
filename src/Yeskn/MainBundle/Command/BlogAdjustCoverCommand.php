@@ -42,10 +42,27 @@ class BlogAdjustCoverCommand extends AbstractCommand
 
             $domain = $this->parameter('domain');
 
-            $img = "https://{$blogName}.{$domain}/wp-content/themes/{$template}/screenshot.png";
+            $wpcast = $this->parameter('wpcast');
+
+            $themePath = $wpcast['web_path'] . '/' . $blogName;
+
+            $files = [
+                "/wp-content/themes/{$template}/screenshot.png",
+                "/wp-content/themes/{$template}/screenshot.jpg",
+            ];
+
+            foreach ($files as $file) {
+                if (file_exists($themePath . $file)) {
+                    $img =  "https://{$blogName}.{$domain}" . $file;
+                    break;
+                }
+            }
 
             $this->connection()->executeQuery("use wpcraft");
-            $blog->setCover($img);
+
+            if (!empty($img)) {
+                $blog->setCover($img);
+            }
 
             $this->em()->flush();
         }
