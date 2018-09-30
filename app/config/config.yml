@@ -48,7 +48,6 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        socket_host: '%socket_host%'
         domain: '%domain%'
     form_themes:
         - "form/image-input-filed-type.html.twig"

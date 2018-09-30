@@ -32,16 +32,20 @@ class SocketPushService
      */
     private $globalValue;
 
+    private $socketPushHost;
+
     public function __construct(ContainerInterface $container, GlobalValue $globalValue)
     {
         $this->client = new Client();
         $this->container = $container;
         $this->globalValue = $globalValue;
+
+        $this->socketPushHost = $container->getParameter('socket_push_host');
     }
 
     public function pushAll($event, $data = [])
     {
-        $this->client->post($this->container->getParameter('socket_push_host') , [
+        $this->client->post($this->socketPushHost , [
             'form_params' => [
                 'type' => 'publish',
                 'event' => $event,
@@ -52,7 +56,7 @@ class SocketPushService
 
     public function pushNewMessage(Message $message)
     {
-        $this->client->post($this->container->getParameter('socket_push_host') , [
+        $this->client->post($this->socketPushHost, [
             'form_params' => [
                 'type' => 'publish',
                 'event' => 'new_message',
@@ -73,7 +77,7 @@ class SocketPushService
 
     public function pushCreateBlogEvent($username, $msg, $ret = 1, $percent = null)
     {
-        $this->client->post($this->container->getParameter('socket_push_host'), [
+        $this->client->post($this->socketPushHost, [
             'form_params' => [
                 'type' => 'publish',
                 'event' => 'create_blog_event',
@@ -89,7 +93,7 @@ class SocketPushService
 
     public function pushNewFollowerNotification(User $from, User $followed)
     {
-        $this->client->post($this->container->getParameter('socket_push_host') , [
+        $this->client->post($this->socketPushHost , [
             'form_params' => [
                 'type' => 'publish',
                 'event' => 'new_follower',
