@@ -73,6 +73,13 @@ class AllocateSpaceService
             }
         }
 
+        if ($type == 'web') {
+            $ret = $process->setCommandLine("chown -R apache:apache {$mount}")->run();
+            if ($ret != 0) {
+                throw new \Exception("chown -R apache:root {$mount}: {$ret}");
+            }
+        }
+
         return $mount;
     }
 
