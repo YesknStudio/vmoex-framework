@@ -44,6 +44,7 @@ class BlogAdjustCoverCommand extends AbstractCommand
 
             $img = "https://{$blogName}.{$domain}/wp-content/themes/{$template}/screenshot.png";
 
+            $this->connection()->executeQuery("use wpcraft");
             $blog->setCover($img);
 
             $this->em()->flush();
