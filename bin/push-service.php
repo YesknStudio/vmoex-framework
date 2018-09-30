@@ -2,6 +2,7 @@
 use Workerman\Worker;
 use Workerman\Lib\Timer;
 use PHPSocketIO\SocketIO;
+use Symfony\Component\Yaml\Yaml;
 
 include __DIR__ . '/../vendor/autoload.php';
 
@@ -12,18 +13,31 @@ $last_online_count = 0;
 // 记录最后一次广播的在线页面数
 $last_online_page_count = 0;
 
-$param = require_once __DIR__ . '/socket-param.php';
+$socketPort = 3120;
+$socketPushPort = 3121;
 
-if ($param['local_cert']) {
-    // ssl context
+$parameters = Yaml::parseFile(__DIR__ . '/../app/config/parameters.yml');
+$parameters = $parameters['parameters'];
+
+if (!empty($parameters['socket_local_cert'])) {
     $context = array(
-        'ssl' => $param
+        'ssl' => [
+            'local_cert' => $parameters['socket_local_cert'],
+            'local_pk' => $parameters['socket_local_pk'],
+            'verify_peer' => false
+        ]
     );
+
+    preg_match('/:(\d+)\/?$/', $parameters['socket_host'], $mat);
+    $socketPort = $mat[1];
+    preg_match('/:(\d+)\/?$/', $parameters['socket_push_host'], $mat2);
+    $socketPushPort = $mat[1];
 } else {
     $context = [];
 }
+
 // PHPSocketIO服务
-$sender_io = new SocketIO(3120, $context);
+$sender_io = new SocketIO($socketPort, $context);
 // 客户端发起连接事件时，设置连接socket的各种事件回调
 $sender_io->on('connection', function(\PHPSocketIO\Socket $socket){
     // 当客户端发来登录事件时触发
@@ -65,8 +79,9 @@ $sender_io->on('connection', function(\PHPSocketIO\Socket $socket){
 
 // 当$sender_io启动后监听一个http端口，通过这个端口可以给任意uid或者所有uid推送数据
 $sender_io->on('workerStart', function(){
+    global $socketPushPort;
     // 监听一个http端口
-    $inner_http_worker = new Worker('http://0.0.0.0:3121');
+    $inner_http_worker = new Worker('http://0.0.0.0:' . $socketPushPort);
     // 当http客户端发来数据时触发
     $inner_http_worker->onMessage = function(Workerman\Connection\ConnectionInterface $http_connection){
         global $uidConnectionMap;
