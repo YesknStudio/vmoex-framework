@@ -38,7 +38,7 @@ class AllocateSpaceService
         $mount = $mountPath . '/' . $name; // /alidata/www/wpcraft-blogs/xxx
         $img = $imgPath . '/' . $name . '.img';  // /mnt/wpcast-web/xxx.img
 
-        if (!$fs->exists($mount)) {
+        if ($type == 'web' && !$fs->exists($mount)) {
             $fs->mkdir($mount);
         }
 
@@ -65,6 +65,13 @@ class AllocateSpaceService
         $process->setCommandLine("mkfs.ext3 {$deviceName}")->run();
         $process->setCommandLine("losetup -d {$deviceName}")->run();
         $process->setCommandLine("mount -o loop {$img} {$mount}")->run();
+
+        if ($type == 'db') {
+            $ret = $process->setCommandLine("chown -R mysql:mysql {$mount}")->run();
+            if ($ret != 0) {
+                throw new \Exception("chown -R mysql:mysql {$mount}: {$ret}");
+            }
+        }
 
         return $mount;
     }
