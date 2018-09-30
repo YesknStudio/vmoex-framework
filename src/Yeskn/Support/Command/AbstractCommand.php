@@ -11,7 +11,7 @@ namespace Yeskn\Support\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class AbstractCommand extends ContainerAwareCommand
+abstract class AbstractCommand extends ContainerAwareCommand
 {
     /**
      * @return \Doctrine\Bundle\DoctrineBundle\Registry|object
