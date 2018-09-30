@@ -24,16 +24,20 @@ class ConsoleCommandListener
     {
         switch ($event->getCommand()->getName()) {
             case 'assetic:dump':
-                $this->onAsseticDump();
+                $this->onAsseticDump($event);
                 break;
             default:
                 return ;
         }
     }
 
-    protected function onAsseticDump()
+    protected function onAsseticDump(ConsoleCommandEvent $event)
     {
+        $output = $event->getOutput();
         $hash = substr(uniqid(), 0, 8);
+
+        $output->writeln("<comment>generated new assets version: {$hash}</comment>");
+
         file_put_contents($this->varDir . '/assets_version', $hash);
     }
 }
