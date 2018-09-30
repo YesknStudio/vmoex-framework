@@ -9,6 +9,7 @@
 
 namespace Yeskn\MainBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -99,6 +100,11 @@ class Blog
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
+
+    public function __construct()
+    {
+        $this->devices = new ArrayCollection();
+    }
 
     /**
      * @return int
