@@ -9,6 +9,7 @@
 
 namespace Yeskn\MainBundle\Command;
 
+use Doctrine\DBAL\DriverManager;
 use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -73,8 +74,7 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $dbName = 'wpcast_'.$domain;
 
-        $connection->executeQuery("create database {$dbName};");
-
+        $sm->createDatabase($dbName);
         $this->writeln('创建数据库成功...', 30);
 
         $this->dbPass = $dbPass = substr(md5($password), 25);
@@ -103,6 +103,20 @@ class BlogCreateCommand extends ContainerAwareCommand
         $fs->chown($webPath, $config['server_user'], true);
 
         $this->initDatabase($domain, $username, $blogName, $password, $email);
+
+        $connectionParams = [
+            'dbname' => $dbName,
+            'user' => $dbName,
+            'password' => $this->dbPass,
+            'host' => 'localhost',
+            'driver' => 'pdo_mysql'
+        ];
+
+        $conn = DriverManager::getConnection($connectionParams);
+
+        $conn->update('wp_options', ['option_value' => $blog->getSubtitle()], [
+            'option_name' => 'blogdescription'
+        ]);
 
         $this->writeln('博客初始化成功！', 70);
 
