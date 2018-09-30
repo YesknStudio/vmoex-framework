@@ -19,3 +19,6 @@
 web/assets/lib/
 web/avatar/
 web/upload
+web/js
+web/css
+web/build

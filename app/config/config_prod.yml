@@ -9,7 +9,7 @@ imports:
 
 framework:
     assets:
-        version: "%assets_version%"
+        version_strategy: Yeskn\MainBundle\Services\VersionStrategyService
         base_urls:
             - "%assets_base_url%"
 

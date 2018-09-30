@@ -1,10 +1,6 @@
 {% extends '@YesknMain/base.html.twig' %}
 {% form_theme form 'form/vertical-field-1.html.twig' %}
 
-{% block head_css_link %}
-    {{ parent() }}
-{% endblock %}
-
 {% block page_wraper %}
     <div class="row content-row">
         {% include '@YesknMain/user/sidebar.html.twig' %}
