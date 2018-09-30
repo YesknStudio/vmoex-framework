@@ -37,21 +37,23 @@ class BlogDestroyCommand extends AbstractCommand
 
         $command = new Process('date');
 
-        /** @var Device[] $devices */
-        $devices = $blog->getDevices() ;
+        if ($blog) {
+            /** @var Device[] $devices */
+            $devices = $blog->getDevices();
 
-        foreach ($devices as $device) {
-            $device->setBlog(null);
-            $device->setType('');
+            foreach ($devices as $device) {
+                $device->setBlog(null);
+                $device->setType('');
 
-            if ($deviceName = $device->getDeviceName()) {
-                $command->setCommandLine( "losetup -d {$deviceName}")->run();
-                $command->setCommandLine( "umount {$deviceName}")->run();
+                if ($deviceName = $device->getDeviceName()) {
+                    $command->setCommandLine( "losetup -d {$deviceName}")->run();
+                    $command->setCommandLine( "umount {$deviceName}")->run();
+                }
             }
-        }
 
-        $this->em()->remove($blog);
-        $this->em()->flush();
+            $this->em()->remove($blog);
+            $this->em()->flush();
+        }
 
         $this->connection()->executeQuery("drop database wpcast_{$blogName}");
 
