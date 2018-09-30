@@ -41,13 +41,15 @@ class BlogDestroyCommand extends AbstractCommand
             /** @var Device[] $devices */
             $devices = $blog->getDevices();
 
-            foreach ($devices as $device) {
-                $device->setBlog(null);
-                $device->setType('');
+            if ($devices) {
+                foreach ($devices as $device) {
+                    $device->setBlog(null);
+                    $device->setType('');
 
-                if ($deviceName = $device->getDeviceName()) {
-                    $command->setCommandLine( "losetup -d {$deviceName}")->run();
-                    $command->setCommandLine( "umount {$deviceName}")->run();
+                    if ($deviceName = $device->getDeviceName()) {
+                        $command->setCommandLine( "losetup -d {$deviceName}")->run();
+                        $command->setCommandLine( "umount {$deviceName}")->run();
+                    }
                 }
             }
 
