@@ -7,6 +7,9 @@ services:
     bind:
       $projectDir: '%kernel.project_dir%'
 
-
   Yeskn\Support\:
     resource: '../../../Support/*'
+
+  Yeskn\Support\EventListener\ClearCacheListener:
+    tags:
+      - { name: kernel.cache_clearer, event: console.command }

@@ -13,6 +13,13 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 class VersionStrategyService implements VersionStrategyInterface
 {
+    private $varDir;
+
+    public function __construct($projectDir)
+    {
+        $this->varDir = rtrim($projectDir, '/') . '/assets_version';
+    }
+
     public function getVersion($path)
     {
         return '';
@@ -20,7 +27,6 @@ class VersionStrategyService implements VersionStrategyInterface
 
     public function applyVersion($path)
     {
-        $hash = substr(uniqid(),0, 8);
-        return $path . '?v=' . $hash;
+        return $path . '?v=' . file_get_contents($this->varDir);
     }
 }

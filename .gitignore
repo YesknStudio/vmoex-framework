@@ -8,6 +8,7 @@
 !var/cache/.gitkeep
 !/var/logs
 /var/logs/*
+/var/assets_version
 !var/logs/.gitkeep
 !/var/sessions
 /var/sessions/*
