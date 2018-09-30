@@ -77,7 +77,7 @@ class Blog
     private $subtitle;
 
     /**
-     * @var File
+     * @var string|File
      * @ORM\Column(name="cover", type="string", nullable=true)
      * @Assert\File()
      */
@@ -219,7 +219,7 @@ class Blog
     }
 
     /**
-     * @return File
+     * @return string
      */
     public function getCover()
     {
@@ -227,7 +227,7 @@ class Blog
     }
 
     /**
-     * @param File $cover
+     * @param string $cover
      */
     public function setCover($cover)
     {

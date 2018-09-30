@@ -25,16 +25,28 @@ class BlogAdjustCoverCommand extends AbstractCommand
         $blogs = $this->doctrine()->getRepository('YesknMainBundle:Blog')->findAll();
 
         foreach ($blogs as $blog) {
-            $blogName = $blog->getName();
+            $blogName = $blog->getSubdomain();
             $this->connection()->executeQuery("use wpcast_{$blogName}");
             $queryBuilder = $this->connection()->createQueryBuilder();
 
             $result = $queryBuilder->from('wp_options')
                 ->select('option_value')
-                ->where("option = 'template'")
+                ->where("option_name = 'template'")
                 ->execute();
 
-            $result->fetchAll(\PDO::FETCH_ASSOC);
+            $result = $result->fetchAll(\PDO::FETCH_ASSOC);
+
+            if (!empty($result) && !empty($result[0])) {
+                $template = $result[0]['option_value'];
+            }
+
+            $domain = $this->parameter('domain');
+
+            $img = "https://{$blogName}.{$domain}/wp-content/themes/{$template}/screenshot.png";
+
+            $blog->setCover($img);
+
+            $this->em()->flush();
         }
     }
 }
