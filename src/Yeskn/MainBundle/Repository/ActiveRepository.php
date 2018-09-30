@@ -67,7 +67,7 @@ class ActiveRepository extends EntityRepository
      */
     public function countOnlineUser()
     {
-        $datetime = new \DateTime('-6 hour');
+        $datetime = new \DateTime('-15 minute');
 
         try {
             return (int) $this->createQueryBuilder('p')
