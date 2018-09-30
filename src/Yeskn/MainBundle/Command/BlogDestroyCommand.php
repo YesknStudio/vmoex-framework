@@ -50,6 +50,8 @@ class BlogDestroyCommand extends AbstractCommand
                         $command->setCommandLine( "losetup -d {$deviceName}")->run();
                         $command->setCommandLine( "umount {$deviceName}")->run();
                     }
+
+                    $this->em()->flush();
                 }
             }
 
