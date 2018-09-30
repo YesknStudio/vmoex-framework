@@ -106,7 +106,7 @@ class BlogCreateCommand extends ContainerAwareCommand
 
         $connectionParams = [
             'dbname' => $dbName,
-            'user' => $dbName,
+            'user' => $domain,
             'password' => $this->dbPass,
             'host' => 'localhost',
             'driver' => 'pdo_mysql'
