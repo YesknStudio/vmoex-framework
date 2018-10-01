@@ -40,3 +40,6 @@ parameters:
         db_img_path: /mnt/wpcast-db
         wordpress_source: /root/wordpress
         server_user: apache
+
+    github_client_id: ~
+    github_client_secret: ~

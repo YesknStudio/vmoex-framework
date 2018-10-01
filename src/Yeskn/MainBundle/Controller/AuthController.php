@@ -106,7 +106,7 @@ class AuthController extends Controller
     public function loginFromGithubAction()
     {
         return $this->redirect('https://github.com/login/oauth/authorize?' . http_build_query([
-            'client_id' => '0b87a7aa7ed20cfa9a53',
+            'client_id' => $this->getParameter('github_client_id'),
             'redirect_uri' => 'https://www.wpcraft.cn/oauth/github',
             'scopes' => 'user',
             'state' => 'github'
@@ -124,8 +124,8 @@ class AuthController extends Controller
 
         $response = $http->post('https://github.com/login/oauth/access_token', [
             'form_params' => [
-                'client_id' => '0b87a7aa7ed20cfa9a53',
-                'client_secret' => '3689483dc4fd7ddd2ed7f4e396cbeaf48d26647d',
+                'client_id' => $this->getParameter('github_client_id'),
+                'client_secret' => $this->getParameter('github_client_secret'),
                 'code' => $code,
                 'redirect_uri' => 'https://www.wpcraft.cn/oauth/github',
                 'state' => 'github'
