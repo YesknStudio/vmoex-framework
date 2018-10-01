@@ -43,10 +43,10 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=128, nullable=true)
+     * @ORM\Column(name="password", type="string", length=128)
      * @Assert\Length(min="6", max="18")
      */
-    private $password;
+    private $password = '';
 
     /**
      * @var string
@@ -94,9 +94,9 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", nullable=true")
+     * @ORM\Column(name="salt", type="string")
      */
-    private $salt;
+    private $salt = '';
 
     /**
      * @var \DateTime
