@@ -129,10 +129,13 @@ class AuthController extends Controller
                 'code' => $code,
                 'redirect_uri' => 'https://www.wpcraft.cn/oauth/github',
                 'state' => 'github'
+            ],
+            'headers' => [
+                'Accept' => 'application/json'
             ]
         ]);
 
-        $response = json_decode($response->getBody());
+        $response = json_decode($response->getBody()->getContents());
 
         $access_token = $response->access_token;
 
@@ -142,7 +145,7 @@ class AuthController extends Controller
             ]
         ]);
 
-        $response = json_decode($response->getBody(), true);
+        $response = json_decode($response->getBody()->getContents(), true);
 
         return new JsonResponse($response);
     }
