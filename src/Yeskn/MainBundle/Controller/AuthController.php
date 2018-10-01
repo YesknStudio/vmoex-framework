@@ -9,7 +9,9 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -96,6 +98,53 @@ class AuthController extends Controller
             '@YesknMain/auth/register.html.twig',
             array('form' => $form->createView())
         );
+    }
+
+    /**
+     * @Route("/login/github", name="login_from_github")
+     */
+    public function loginFromGithubAction()
+    {
+        return $this->redirect('https://github.com/login/oauth/authorize?' . http_build_query([
+            'client_id' => '0b87a7aa7ed20cfa9a53',
+            'redirect_uri' => 'https://www.wpcraft.cn/oauth/github',
+            'scopes' => 'user',
+            'state' => 'github'
+        ]));
+    }
+
+    /**
+     * @Route("/oauth/github", name="oauth_github")
+     */
+    public function oauthGithub(Request $request)
+    {
+        $code = $request->get('code');
+
+        $http = new Client();
+
+        $response = $http->post('https://github.com/login/oauth/access_token', [
+            'form_params' => [
+                'client_id' => '0b87a7aa7ed20cfa9a53',
+                'client_secret' => '3689483dc4fd7ddd2ed7f4e396cbeaf48d26647d',
+                'code' => $code,
+                'redirect_uri' => 'https://www.wpcraft.cn/oauth/github',
+                'state' => 'github'
+            ]
+        ]);
+
+        $response = json_decode($response->getBody());
+
+        $access_token = $response->access_token;
+
+        $response = $http->get('https://api.github.com/user', [
+            'headers' => [
+                'Authorization' => 'token ' . $access_token
+            ]
+        ]);
+
+        $response = json_decode($response->getBody(), true);
+
+        return new JsonResponse($response);
     }
 
     /**
