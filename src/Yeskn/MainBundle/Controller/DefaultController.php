@@ -32,7 +32,8 @@ class DefaultController extends Controller
             'tab' => $tab,
             'page' => $page,
             'scope' => 'home',
-            'blogList' => $blogList
+            'blogList' => $blogList,
+            'sortBy' => $request->get('sortBy', 'com')
         ]);
     }
 

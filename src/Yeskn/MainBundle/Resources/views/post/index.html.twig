@@ -22,6 +22,16 @@
                 {% for tabItem in tabs %}
                     <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('post_list', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
                 {% endfor %}
+
+
+                {% set routeName = app.request.attributes.get('_forwarded').get('_route') %}
+
+                <div class="pull-right visible-lg panel-sort-btns">
+                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'pub'}) }}#home-content-main" class="btn btn-default {% if sortBy == 'pub' %}current{% endif %}">最新发布</a>
+                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'com'}) }}#home-content-main" class="btn btn-default {% if sortBy == 'com' %}current{% endif %}">最新评论</a>
+                    </div>
+                </div>
             </div>
         {% endif %}
         {% if posts is not empty %}
@@ -43,7 +53,12 @@
                                 <span class="category">
                                       <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
                                 </span>
-                                <span><i class="fa fa-clock-o"></i> {{ post.updatedAt ? post.updatedAt|ago : post.createdAt|ago }}</span>
+
+                                {% set postTime = sortBy == 'pub' ? post.createdAt : post.updatedAt %}
+                                <span data-toggle="tooltip" title="{{ postTime|date }}">
+                                    <i class="fa fa-clock-o"></i>
+                                    {{ postTime|ago }}
+                                </span>
                                 <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                                 {% if post.comments.count %}
                                     <span><i class="fa fa-commenting-o"></i>

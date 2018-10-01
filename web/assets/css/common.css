@@ -789,7 +789,7 @@ ul.pagination {
     border-radius: 3px 3px 0 0;
 }
 .tab-list a {
-    margin: 0 4px;
+    /*margin: 0 4px;*/
     color: #80bd01;
     padding: 3px 4px;
     border-radius: 3px;
@@ -808,6 +808,12 @@ ul.pagination {
 }
 .text-underline {
     text-decoration: underline;
+}
+
+.panel-sort-btns .btn.current {
+    color: #fff;
+    background-color: #80bd01;
+    border-color: #80bd01;
 }
 
 /** sidebar --------------------- **/

@@ -22,6 +22,7 @@ class CommonController extends Controller
         $page = $request->get('page', 1);
         $scope = $request->get('scope');
         $blogList = $request->get('blogList');
+        $sortBy = $request->get('sortBy');
 
         $pagesize = 25;
 
@@ -33,7 +34,11 @@ class CommonController extends Controller
             $tab = 'all';
         }
 
-        $sort = ['updatedAt' => 'DESC'];
+        if ($sortBy == 'pub') {
+            $sort = ['createdAt' => 'DESC'];
+        } else {
+            $sort = ['updatedAt' => 'DESC'];
+        }
 
         if ($tab == 'hot') {
             $sort = ['views' => 'DESC'];
@@ -89,6 +94,7 @@ class CommonController extends Controller
             'tab' => $tab,
             'currentTab' => $tabObj,
             'tabs' => $allTabs,
+            'sortBy' => $sortBy,
             'pageData' => $pageData
         ];
 

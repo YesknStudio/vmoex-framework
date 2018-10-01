@@ -99,6 +99,12 @@ class Post
     private $updatedAt;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(name="last_comment_at", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    private $lastCommentAt;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="isDeleted", type="boolean")
@@ -517,5 +523,21 @@ class Post
     public function getTab()
     {
         return $this->tab;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastCommentAt()
+    {
+        return $this->lastCommentAt;
+    }
+
+    /**
+     * @param \DateTime $lastCommentAt
+     */
+    public function setLastCommentAt($lastCommentAt)
+    {
+        $this->lastCommentAt = $lastCommentAt;
     }
 }

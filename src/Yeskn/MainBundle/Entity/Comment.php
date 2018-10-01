@@ -248,4 +248,12 @@ class Comment
     {
         $this->createdAt = new \DateTime();
     }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onPersist()
+    {
+        $this->getPost()->setLastCommentAt(new \DateTime());
+    }
 }
