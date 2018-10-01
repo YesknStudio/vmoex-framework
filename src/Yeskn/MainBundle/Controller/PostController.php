@@ -36,12 +36,13 @@ class PostController extends Controller
     {
         $tab = $request->get('tab');
         $page = $request->get('page', 1);
-
+        $sortBy = $request->get('sortBy', 'com');
 
         return $this->forward('YesknMainBundle:Common:homeList', [], [
             'tab' => $tab,
             'page' => $page,
-            'scope' => 'post'
+            'scope' => 'post',
+            'sortBy' => $sortBy
         ]);
     }
 
