@@ -11,7 +11,9 @@ namespace Yeskn\MainBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Yeskn\Support\Command\AbstractCommand;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class BlogAdjustCoverCommand extends AbstractCommand
 {
@@ -53,16 +55,34 @@ class BlogAdjustCoverCommand extends AbstractCommand
 
             foreach ($files as $file) {
                 if (file_exists($themePath . $file)) {
-                    $img =  "https://{$blogName}.{$domain}" . $file;
+                    $fileObj = new File($themePath . $file);
+                    $ext = $fileObj->guessExtension();
+
+                    Image::configure(array('driver' => 'gd'));
+
+                    if (!is_dir($this->parameter('kernel.project_dir') . '/web/upload/blog')) {
+                        mkdir($this->parameter('kernel.project_dir') . '/web/upload/blog');
+                    }
+
+                    $relative = 'upload/blog/' . $domain .  time() . '.' . $ext;
+                    $newFile = $this->parameter('kernel.project_dir') . '/web/' . $relative;
+
+                    copy($themePath . $file, $newFile);
+
+                    $image = Image::make($newFile);
+                    $image->resize(325, 225)->save();
+
+                    $img = $this->parameter('assets_base_url') . '/' . $relative;
                     break;
                 }
             }
 
-            $this->connection()->executeQuery("use wpcraft");
-
-            if (!empty($img)) {
-                $blog->setCover($img);
+            if (empty($img)) {
+                return ;
             }
+
+            $this->connection()->executeQuery("use wpcraft");
+            $blog->setCover($img);
 
             $this->em()->flush();
         }

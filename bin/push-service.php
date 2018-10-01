@@ -35,22 +35,49 @@ if (!empty($parameters['socket_local_cert'])) {
     $context = [];
 }
 
+/**
+ * @return \Predis\Client
+ */
+function getRedis()
+{
+    global $parameters;
+
+    /** @var \Predis\Client $redis */
+    static $redis = null;
+
+    if (empty($redis) || $redis->isConnected() == false) {
+        $redis = new \Predis\Client($parameters['redis_dsn']);
+    }
+
+    return $redis;
+}
+
 $sender_io = new SocketIO($socketPort, $context);
 
 $sender_io->on('connection', function (\PHPSocketIO\Socket $socket) {
-    $socket->on('login', function ($uid) use ($socket) {
+    $socket->on('login', function ($data) use ($socket) {
         global $uidConnectionMap, $last_online_count, $last_online_page_count;
+
+        $user = $data['username']; $token = $data['token'];
+
+        if ($token) {
+            $redisToken = getRedis()->get('socket:'. $user);
+            if (empty($redisToken) || $redisToken != $token) {
+                return ;
+            }
+        }
 
         if (isset($socket->uid)) {
             return;
         }
-        $uid = (string)$uid;
-        if (!isset($uidConnectionMap[$uid])) {
-            $uidConnectionMap[$uid] = 0;
+
+        if (!isset($uidConnectionMap[$user])) {
+            $uidConnectionMap[$user] = 0;
         }
-        ++$uidConnectionMap[$uid];
-        $socket->join($uid);
-        $socket->uid = $uid;
+
+        ++$uidConnectionMap[$user];
+        $socket->join($user);
+        $socket->uid = $user;
 
         $data = [
             'onlineCount' => $last_online_count,
