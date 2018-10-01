@@ -10,14 +10,33 @@ parameters:
     # You should uncomment this if you want to use pdo_sqlite
     #database_path: '%kernel.project_dir%/var/data/data.sqlite'
 
+    redis_dsn: 'redis://localhost'
+
     mailer_transport: smtp
     mailer_host: 127.0.0.1
-    mailer_user: ~
-    mailer_password: ~
+    mailer_user: null
+    mailer_password: null
 
-    # A secret key that's used to generate certain security-related tokens
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: kdidkmA9Iuhd74dBnjid0djjMa
 
-    node_path: /usr/local/bin/node
-    uglifyjs2_path: /usr/local/bin/uglifyjs
-    socket_host: http://localhost:2120
+    node_path: /usr/bin/node
+    uglifyjs2_path: /usr/bin/uglifyjs
+
+    socket_host: 'http://locahost:3120'
+    socket_push_host: 'http://locahost:3121'
+    socket_local_cert: ''
+    socket_local_pk: ''
+
+    domain: wpcraft.cn
+
+    assets_base_url: 'https://static.yeskn.com/wpcraft'
+
+    wpcast:
+        web_path: /alidata/www/wpcraft-blogs
+        web_size: 180
+        web_img_path: /mnt/wpcast-web
+        db_path: /alidata/server/mysql/data
+        db_size: 20
+        db_img_path: /mnt/wpcast-db
+        wordpress_source: /root/wordpress
+        server_user: apache

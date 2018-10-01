@@ -30,7 +30,7 @@
                 </p>
             </div>
             <div class="post-content">
-                {{ post.content|raw }}
+                {{ post.content|markdown|raw }}
             </div>
             <div class="post-tags">
                 {% if post.tags is not empty %}
