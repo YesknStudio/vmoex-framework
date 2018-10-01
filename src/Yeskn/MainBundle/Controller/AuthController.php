@@ -160,15 +160,35 @@ class AuthController extends Controller
             ]);
 
             if (!$openUser) {
+                $userRepository = $this->getDoctrine()->getRepository('YesknMainBundle:User');
+
+                $existUsername = $userRepository->findOneBy(['username' => $response->login]);
+
+                if ($existUsername) {
+                    $username = $response->login . mt_rand(1000, 9999);
+                } else {
+                    $username = $response->login;
+                }
+
+                $existEmail = $userRepository->findOneBy(['email' => $response->email]);
+
+                if ($existEmail) {
+                    $email = '';
+                } else {
+                    $email = $response->email;
+                }
+
                 $user = new User();
-                $user->setUsername($response->login);
+                $user->setUsername($username);
                 $user->setNickname($response->name);
-                $user->setEmail($response->email);
+                $user->setEmail($email);
                 $user->setAvatar($response->avatar_url);
                 $user->setRole('ROLE_USER');
                 $user->setLoginAt(new \DateTime());
                 $user->setRegisterAt(new \DateTime());
                 $user->setRemark($response->bio);
+                $user->setSalt('');
+                $user->setPassword(uniqid());
 
                 $openUser = new OpenUser();
 
