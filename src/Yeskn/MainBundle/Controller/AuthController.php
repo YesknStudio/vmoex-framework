@@ -16,11 +16,17 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Yeskn\MainBundle\Entity\OpenUser;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\MainBundle\Form\UserLoginType;
+use Yeskn\Support\Http\HttpResponse;
 
 class AuthController extends Controller
 {
+    use HttpResponse;
+
     /**
      * @Route("/login", name="login", methods={"GET"})
      */
@@ -145,9 +151,48 @@ class AuthController extends Controller
             ]
         ]);
 
-        $response = json_decode($response->getBody()->getContents(), true);
+        $response = json_decode($response->getBody()->getContents());
 
-        return new JsonResponse($response);
+        // login success
+        if (!empty($response->node_id)) {
+            $openUser = $this->getDoctrine()->getRepository('YesknMainBundle:OpenUser')->findOneBy([
+                'githubNodeId' => $response->node_id
+            ]);
+
+            if (!$openUser) {
+                $user = new User();
+                $user->setUsername($response->login);
+                $user->setNickname($response->name);
+                $user->setEmail($response->email);
+                $user->setAvatar($response->avatar_url);
+                $user->setRole('ROLE_USER');
+                $user->setLoginAt(new \DateTime());
+                $user->setRegisterAt(new \DateTime());
+                $user->setRemark($response->bio);
+
+                $openUser = new OpenUser();
+
+                $openUser->setUser($user);
+                $openUser->setGithubNodeId($response->node_id);
+
+                $this->get('doctrine.orm.entity_manager')->persist($user);
+                $this->get('doctrine.orm.entity_manager')->persist($openUser);
+
+                $this->get('doctrine.orm.entity_manager')->flush();
+            } else {
+                $user = $openUser->getUser();
+            }
+
+            $token = new UsernamePasswordToken($user, $user->getPassword(), "public", $user->getRoles());
+            $this->get("security.token_storage")->setToken($token);
+
+            $event = new InteractiveLoginEvent($request, $token);
+            $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
+            $this->redirectToRoute('homepage');
+        }
+
+        return $this->errorResponse('github授权失败');
     }
 
     /**
