@@ -180,13 +180,13 @@ class AuthController extends Controller
 
                 $user = new User();
                 $user->setUsername($username);
-                $user->setNickname($response->name);
-                $user->setEmail($email);
+                $user->setNickname($response->name ?: $username);
+                $user->setEmail($email ?: '');
                 $user->setAvatar($response->avatar_url);
                 $user->setRole('ROLE_USER');
                 $user->setLoginAt(new \DateTime());
                 $user->setRegisterAt(new \DateTime());
-                $user->setRemark($response->bio);
+                $user->setRemark($response->bio ?: '');
                 $user->setSalt('');
                 $user->setPassword(uniqid());
 
