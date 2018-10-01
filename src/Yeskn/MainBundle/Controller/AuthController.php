@@ -209,7 +209,9 @@ class AuthController extends Controller
             $event = new InteractiveLoginEvent($request, $token);
             $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
-            $this->redirectToRoute('homepage');
+            $this->addFlash('success', '您使用github登录成功！');
+
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->errorResponse('github授权失败');
