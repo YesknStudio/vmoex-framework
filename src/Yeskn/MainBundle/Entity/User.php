@@ -94,7 +94,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string")
+     * @ORM\Column(name="salt", type="string", nullable=true")
      */
     private $salt;
 
