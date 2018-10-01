@@ -173,7 +173,7 @@ class AuthController extends Controller
                 $existEmail = $userRepository->findOneBy(['email' => $response->email]);
 
                 if ($existEmail) {
-                    $email = '';
+                    $email = null;
                 } else {
                     $email = $response->email;
                 }
@@ -181,7 +181,7 @@ class AuthController extends Controller
                 $user = new User();
                 $user->setUsername($username);
                 $user->setNickname($response->name ?: $username);
-                $user->setEmail($email ?: '');
+                $user->setEmail($email ?: null);
                 $user->setAvatar($response->avatar_url);
                 $user->setRole('ROLE_USER');
                 $user->setLoginAt(new \DateTime());
