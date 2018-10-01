@@ -56,4 +56,16 @@ abstract class AbstractCommand extends ContainerAwareCommand
     {
         return $this->getContainer()->get('database_connection');
     }
+
+    /**
+     * @param $service
+     * @return object
+     * @throws \LogicException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     */
+    public function get($service)
+    {
+        return $this->getContainer()->get($service);
+    }
 }

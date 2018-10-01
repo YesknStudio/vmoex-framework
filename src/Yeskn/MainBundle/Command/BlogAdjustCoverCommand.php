@@ -9,6 +9,7 @@
 
 namespace Yeskn\MainBundle\Command;
 
+use Predis\Client;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -27,7 +28,9 @@ class BlogAdjustCoverCommand extends AbstractCommand
         $blogs = $this->doctrine()->getRepository('YesknMainBundle:Blog')->findAll();
 
         foreach ($blogs as $blog) {
+            $this->connection()->executeQuery("use wpcraft");
             $blogName = $blog->getSubdomain();
+
             $this->connection()->executeQuery("use wpcast_{$blogName}");
             $queryBuilder = $this->connection()->createQueryBuilder();
 
@@ -38,15 +41,26 @@ class BlogAdjustCoverCommand extends AbstractCommand
 
             $result = $result->fetchAll(\PDO::FETCH_ASSOC);
 
-            if (!empty($result) && !empty($result[0])) {
-                $template = $result[0]['option_value'];
+            if (empty($result) || empty($result[0])) {
+                continue ;
             }
 
-            $domain = $this->parameter('domain');
+            $template = $result[0]['option_value'];
+
+            /** @var Client $redis */
+            $redis = $this->get('snc_redis.default');
+
+            $redisTheme = $redis->get("blog:{$blogName}:theme");
+
+            if (empty($redisTheme) || $redisTheme != $template) {
+                $redis->set("blog:{$blogName}:theme", $template);
+            } else if ($redisTheme == $template) {
+                continue;
+            }
 
             $wpcast = $this->parameter('wpcast');
 
-            $themePath = $wpcast['web_path'] . '/' . $blogName;
+            $blogPath = $wpcast['web_path'] . '/' . $blogName;
 
             $files = [
                 "/wp-content/themes/{$template}/screenshot.png",
@@ -54,8 +68,8 @@ class BlogAdjustCoverCommand extends AbstractCommand
             ];
 
             foreach ($files as $file) {
-                if (file_exists($themePath . $file)) {
-                    $fileObj = new File($themePath . $file);
+                if (file_exists($blogPath . $file)) {
+                    $fileObj = new File($blogPath . $file);
                     $ext = $fileObj->guessExtension();
 
                     Image::configure(array('driver' => 'gd'));
@@ -64,10 +78,10 @@ class BlogAdjustCoverCommand extends AbstractCommand
                         mkdir($this->parameter('kernel.project_dir') . '/web/upload/blog');
                     }
 
-                    $relative = 'upload/blog/' . $domain .  time() . '.' . $ext;
+                    $relative = 'upload/blog/' . $blogName .  time() . '.' . $ext;
                     $newFile = $this->parameter('kernel.project_dir') . '/web/' . $relative;
 
-                    copy($themePath . $file, $newFile);
+                    copy($blogPath . $file, $newFile);
 
                     $image = Image::make($newFile);
                     $image->resize(325, 225)->save();
@@ -78,7 +92,7 @@ class BlogAdjustCoverCommand extends AbstractCommand
             }
 
             if (empty($img)) {
-                return ;
+                continue ;
             }
 
             $this->connection()->executeQuery("use wpcraft");
