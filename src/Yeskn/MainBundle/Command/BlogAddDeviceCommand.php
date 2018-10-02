@@ -16,11 +16,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 use Yeskn\MainBundle\Entity\Device;
 
-class AddDeviceCommand extends ContainerAwareCommand
+class BlogAddDeviceCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('device:add');
+        $this->setName('blog:add-device');
         $this->addOption('start-index', null, InputOption::VALUE_REQUIRED);
         $this->addOption('amount', null, InputOption::VALUE_REQUIRED, 1);
     }
@@ -45,6 +45,7 @@ class AddDeviceCommand extends ContainerAwareCommand
 
             $device->setDeviceName($deviceName);
             $device->setMachine($machine);
+            $device->setType('');
 
             $em->persist($device);
             $em->flush();
