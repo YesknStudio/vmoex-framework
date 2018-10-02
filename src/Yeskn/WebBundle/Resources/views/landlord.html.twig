@@ -31,8 +31,9 @@
 <div id="open_live2d">召唤伊斯特瓦尔</div>
 
 <script>
-    var message_Path = 'lib-man/live2d/';//资源目录，如果目录不对请更改
+    var message_Path = 'live2d/';//资源目录，如果目录不对请更改
     var talkAPI = "";//如果有类似图灵机器人的聊天接口请填写接口路径
+    var LIVE2D_HOME_PATH = window.vmoex.links.cdn_url;
 
     var l2dHidden = localStorage.getItem('live2dhidden');
     if (l2dHidden === null) {
