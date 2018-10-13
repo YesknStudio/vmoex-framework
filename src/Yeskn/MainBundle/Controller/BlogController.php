@@ -35,6 +35,10 @@ class BlogController extends Controller
         $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
         $blog = $blogRepo->findOneBy(['user' => $this->getUser()], ['id' => 'DESC']);
 
+        if (empty($this->getUser()->getEmail())) {
+            return $this->errorResponse('您尚未绑定邮箱，或者邮箱没有激活，请先完善邮箱信息再执行该操作');
+        }
+
         if ($blog && $blog->getStatus() == 'created') {
             return $this->errorResponse('你已经创建了一个博客，无法再创建更多了');
         } else {
