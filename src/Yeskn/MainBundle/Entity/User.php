@@ -56,6 +56,12 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="is_email_verified", type="boolean", options={"default":false})
+     */
+    private $isEmailVerified = false;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
@@ -146,7 +152,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="Yeskn\MainBundle\Entity\Active", mappedBy="user")
      */
     private $actives;
-    
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -691,5 +697,21 @@ class User implements UserInterface
     public function setThumbUpComments($thumbUpComments)
     {
         $this->thumbUpComments = $thumbUpComments;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmailVerified()
+    {
+        return $this->isEmailVerified;
+    }
+
+    /**
+     * @param bool $isEmailVerified
+     */
+    public function setIsEmailVerified($isEmailVerified)
+    {
+        $this->isEmailVerified = $isEmailVerified;
     }
 }

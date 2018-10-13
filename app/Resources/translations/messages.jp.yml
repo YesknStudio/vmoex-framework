@@ -59,7 +59,7 @@ buy_beer: 虹の恋にビールを飲
 查看所有私信: 查看所有私信
 我的主页: 私のホームページ
 个人设置: 個人設定
-verify_email: "あなたのメールはまだ活性化されていません。<a href=\"javascript:\" class=\"alert-link\">ここでアクティブにする</a>\n"
+verify_email: 'あなたのメールはまだ活性化されていません。<a href="javascript:" class="alert-link">ここでアクティブにする</a>'
 添加新的评论: 新しいコメントを追加
 发表有颜色的评论将消耗5金币哦: 色のコメントを発表すると5金貨が消費されますよ
 好可怕，速度太快了: 怖い、スピードが速い
@@ -165,3 +165,5 @@ user_my_comments: null
 user_my_following: null
 user_my_follower: null
 user_my_blog: null
+email: null
+user_setting_email_verified: null

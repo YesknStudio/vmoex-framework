@@ -9,6 +9,8 @@
 
 namespace Yeskn\Support\Http;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Trait HttpError
  * @package Yeskn\Support\Http
@@ -23,8 +25,11 @@ trait HttpResponse
             return new ApiFail($msg);
         }
 
-        return $this->render('@YesknMain/error.html.twig', [
-            'message' => $msg
-        ]);
+        $this->addFlash('danger', $msg);
+
+        /** @var Request $request */
+        $request = $this->get('request_stack')->getCurrentRequest();
+
+        return $this->redirect($request->headers->get('referer'));
     }
 }

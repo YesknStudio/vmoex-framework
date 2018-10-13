@@ -30,7 +30,7 @@ messages: 私信
 notifications: 通知
 comment: 评论
 hello_stranger: ' 您好，陌生人！'
-hello_stranger_detail: Wpcraft可以快速帮你打造属于自己的博客，基于wordpress，操作简单，支持模板自定义；wpcraft也是一个博客创造者们交流分享的平台。
+hello_stranger_detail: Wpcraft可以快速帮你打造属于自己的博客，基于wordpress，操作简单，但是功能却非常强大
 my.status: 我的状态
 hot.users: 活跃用户
 today.hot.topics: 热门文档
@@ -43,7 +43,7 @@ wpcast_available_with: 'Wpcast 可用于: '
 用户名: 用户名
 邮箱: 邮箱
 密码: 密码
-verify_email: "你的邮箱尚未激活，<a href=\"javascript:\" class=\"alert-link\">点此激活</a>\n"
+verify_email: '你的邮箱尚未激活，<a data-pjax href="/user/setting#emailSetting" class="alert-link">点此激活</a>'
 在线可撩: 在线可撩
 加入于: 加入于
 第count位Vmoex用户: 第count位Vmoex用户
@@ -127,7 +127,7 @@ notice_replied_you: 回复我的
 post_top: 置顶
 like: 赞
 action_too_fast: 好可怕，速度太快了
-banner_announce: '欢迎来到Wpcraft，在这里你可以快速方便的创建自己的wordpress博客，支持更换主题、在线修改网站html/css/js、安装插件，感受创造的魅力！<b>立即<a data-pjax href="/blog/create/step/1">创建我的博客</a></b>'
+banner_announce: 欢迎来到Wpcraft，在这里你可以快速方便的创建自己的博客，感受创作之美！
 all: 全部
 hot: 热门
 site_state: 社区运行状态
@@ -165,3 +165,5 @@ user_my_comments: 我的评论
 user_my_following: 我的关注
 user_my_follower: 关注我的
 user_my_blog: 我创建的博客
+email: 邮箱
+user_setting_email_verified: 邮箱已验证通过

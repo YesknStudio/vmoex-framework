@@ -51,7 +51,7 @@ buy_beer: 請彩虹之戀喝
 查看所有私信: 'All Messages'
 我的主页: 我的主頁
 个人设置: 個人設置
-verify_email: "你的郵箱尚未啟動，<a href=\"javascript:\" class=\"alert-link\">點此啟動</a>\n"
+verify_email: '你的郵箱尚未啟動，<a href="javascript:" class="alert-link">點此啟動</a>'
 添加新的评论: 添加新的評論
 发表有颜色的评论将消耗5金币哦: 發表有顏色的評論將消耗5金幣哦
 好可怕，速度太快了: 好可怕，速度太快了
@@ -165,3 +165,5 @@ user_my_comments: null
 user_my_following: null
 user_my_follower: null
 user_my_blog: null
+email: null
+user_setting_email_verified: null

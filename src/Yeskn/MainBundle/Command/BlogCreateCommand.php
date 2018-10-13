@@ -147,7 +147,7 @@ class BlogCreateCommand extends ContainerAwareCommand
             ]
         ]);
 
-        $client->post($url . '/wp-admin/install.php?step=2', [
+        $res  = $client->post($url . '/wp-admin/install.php?step=2', [
             'form_params' => [
                 'weblog_title' => $title,
                 'user_name' => $username,
@@ -159,6 +159,10 @@ class BlogCreateCommand extends ContainerAwareCommand
                 'Submit' => '安装WordPress',
             ]
         ]);
+
+        error_log($res->getStatusCode());
+        error_log($res->getBody()->getContents());
+
     }
 
     protected function writeln($msg, $percent = null)

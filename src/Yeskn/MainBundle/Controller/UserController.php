@@ -10,17 +10,22 @@
 namespace Yeskn\MainBundle\Controller;
 
 use Intervention\Image\ImageManagerStatic as Image;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\MainBundle\Form\ChangePasswordType;
 use Yeskn\MainBundle\Form\Entity\ChangePassword;
+use Yeskn\Support\AbstractController;
+use Yeskn\Support\Http\ApiFail;
+use Yeskn\Support\Http\ApiOk;
+use Yeskn\Support\Http\HttpResponse;
+use Yeskn\Support\Validator;
 
 /**
  * 个人中心
@@ -30,8 +35,10 @@ use Yeskn\MainBundle\Form\Entity\ChangePassword;
  *
  * @Route("/user")
  */
-class UserController extends Controller
+class UserController extends AbstractController
 {
+    use HttpResponse;
+
     private function getUserHomeInfo()
     {
         /** @var User $user */
@@ -243,4 +250,94 @@ class UserController extends Controller
         return $this->redirectToRoute('user_setting');
     }
 
+    /**
+     * @Route("/setting/send-email-code", name="user_setting_send_email_code")
+     *
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @return ApiFail|ApiOk
+     * @throws \LogicException
+     */
+    public function sendVerifyEmailCodeAction(Request $request,  \Swift_Mailer $mailer)
+    {
+        $user = $this->getUser();
+        $email = $request->get('email');
+
+        if ($user->isEmailVerified()) {
+            return new ApiFail('邮箱已经验证');
+        }
+
+        if (!Validator::isEmail($email)) {
+            return new ApiFail('邮箱格式错误');
+        }
+
+        $userRepo = $this->getDoctrine()->getRepository('YesknMainBundle:User');
+
+        $findOne = $userRepo->findOneBy(['email' => $email]);
+
+        if ($findOne) {
+            return new ApiFail('邮箱已经注册');
+        }
+
+        $code = mt_rand(10000, 99999);
+
+        $request->getSession()->set($user->getUsername() . '_verify_email_code', $code);
+
+        $message = (new \Swift_Message('验证Wpcraft'))
+            ->setFrom('no-replay@wpcraft.cn')
+            ->setTo($email)
+            ->setBody(
+                $this->renderView('emails/verify-email.html.twig', [
+                    'code' => $code
+                ]), 'text/html'
+            );
+
+        $mailer->send($message);
+
+        return new ApiOk();
+    }
+
+    /**
+     * @Route("/setting/verify-email", name="user_setting_verify_email")
+     *
+     * @param Request $request
+     * @return Response
+     * @throws \LogicException
+     */
+    public function verifyEmailAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        if ($user->isEmailVerified()) {
+            return $this->errorResponse('邮箱已经验证');
+        }
+
+        $email = $user->getEmail();
+
+        if (empty($email)) {
+            $email = $request->get('email');
+        }
+
+        if (!Validator::isEmail($email)) {
+            return $this->errorResponse('邮箱格式错误');
+        }
+
+        $code = $request->get('code');
+
+        $sessionCode = $request->getSession()->get($user->getUsername() . '_verify_email_code');
+
+
+        if (empty($sessionCode) || $sessionCode != $code) {
+            return $this->errorResponse('验证码错误');
+        }
+
+        $user->setEmail($email);
+        $user->setIsEmailVerified(true);
+
+        $this->getEm()->flush();
+
+        $this->addFlash('success' ,'邮箱验证成功！');
+
+        return $this->redirectToRoute('user_setting');
+    }
 }

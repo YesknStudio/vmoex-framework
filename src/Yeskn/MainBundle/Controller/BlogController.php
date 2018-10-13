@@ -36,7 +36,7 @@ class BlogController extends Controller
         $blog = $blogRepo->findOneBy(['user' => $this->getUser()], ['id' => 'DESC']);
 
         if (empty($this->getUser()->getEmail())) {
-            return $this->errorResponse('您尚未绑定邮箱，或者邮箱没有激活，请先完善邮箱信息再执行该操作');
+            return $this->errorResponse('您尚未绑定邮箱，或者邮箱没有激活，请先<a data-pjax href="/user/setting#emailSetting">完善邮箱信息</a>再执行该操作');
         }
 
         if ($blog && $blog->getStatus() == 'created') {

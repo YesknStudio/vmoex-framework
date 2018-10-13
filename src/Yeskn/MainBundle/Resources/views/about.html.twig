@@ -3,7 +3,7 @@
 {% block main %}
     <style>
         body {
-            background-image: url("https://ww1.sinaimg.cn/large/0060lm7Tgy1fi01ahtu3sj31hc0u078q.jpg");
+            /*background-image: url("https://ww1.sinaimg.cn/large/0060lm7Tgy1fi01ahtu3sj31hc0u078q.jpg");*/
             background-position: center center;
             background-size: cover;
             background-attachment: fixed;
@@ -16,49 +16,7 @@
                     <i class="fa fa-file-text"></i> {{ 'about_site'|trans }}
                 </div>
                 <div class="panel-body">
-                    {% set locale = app.request.locale %}
-                    {% if locale == 'en' %}
-                        <p>The inspiration for Wpcraft comes from <a href="https://www.v2ex.com/">V2EX创意工作者社区</a>, Most of V2EX is the Internet /IT topic.
-                            So Wpcraft hopes for anime, two yuan, and Opera (and Meng 's Omega [4]) to join, share, share, discover, and create more life.
-                        </p>
-
-                        <p>Wpcraft currently managed by <span style="color: rgb(138, 138, 138)">彩虹の恋しいw</span></p>
-                        <p> </p>
-
-                        <p>Wpcraft's vision: strive to build the best two dimensional community.</p>
-                        {% elseif locale == 'jp'  %}
-                            <p>Vmexのインスピレーション <a href="https://www.v2ex.com/">V2EX创意工作者社区</a>，V 2 EXの大部分はインターネット/ ITの話題となっている。
-                                したがって、Vmexは、アニメ、二次元、番劇を希望している（●萌え萌えの（●´ω｀）φ）が参加し、共同で交流、分かち合い、発見し、より多くの生活をつくることを希望する。
-                            </p>
-
-
-                            <p>Vmexは現在<span style="color: rgb(138, 138, 138)">彩虹の恋しいw</span>メンテナンス</p>
-                            <p> </p>
-
-                            <p>Vmexのビジョン：最高の二次元コミュニティを作りましょう。</p>
-
-                        {% elseif locale == 'zh_TW' %}
-                            <p>Wpcraft的靈感來自 <a href="https://www.v2ex.com/">V2EX创意工作者社区</a>，V2EX大部分為互聯網/IT話題，
-                                囙此Wpcraft希望動漫、二次元、番劇的（還有萌萌噠的（●´ω‘●）φ）愛好者加入，共同交流、分享、發現、創造更多生活中的美好。
-                            </p>
-
-
-                            <p>Wpcraft現時由<span style="color: rgb(138, 138, 138)">彩虹の恋しいw</span>維護</p>
-                            <p> </p>
-
-                            <p>Wpcraft的願景：努力打造最美好的二次元社區。</p>
-                        {% else %}
-                            <p>Wpcraft的灵感来自 <a href="https://www.v2ex.com/">V2EX创意工作者社区</a>，V2EX大部分为互联网/IT话题，
-                                因此Wpcraft希望动漫、二次元、番剧的（还有萌萌哒的(●´ω｀●)φ）爱好者加入，共同交流、分享、发现、创造更多生活中的美好。
-                            </p>
-
-
-                            <p>Wpcraft目前由<span style="color: rgb(138, 138, 138)">彩虹の恋しいw</span>维护</p>
-                            <p> </p>
-
-                            <p>Wpcraft的愿景：努力打造最美好的二次元社区。</p>
-                    {% endif %}
-
+                    wpcraft是有 <a target="_blank" href="https://blog.yeskn.com">Jaggle</a> 发起的一个免费的wordpress博客托管服务和wordpress创造者交流分享的在线社区。
                 </div>
             </div>
         </div>

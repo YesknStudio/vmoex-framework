@@ -17,7 +17,7 @@
             <img class="footer-flag" src="{{ asset('assets/images/flags/en.png') }}" alt="en">
             <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans([], 'messages', 'en') }}</a>
             <span class="snow">·</span>
-            <img class="footer-flag" src="{{ asset('assets/images/flags/zh_TW.png') }}" alt="zh_TW">
+            <img class="footer-flag" src="{{ asset('assets/images/flags/zh_CN.png') }}" alt="zh_TW">
             <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans([], 'messages', 'zh_TW') }}</a>
             <span class="snow">·</span>
             <img class="footer-flag" src="{{ asset('assets/images/flags/jp.png') }}" alt="jp">
@@ -29,6 +29,6 @@
             {{ 'footer_online_user_count'|trans({count:siteState.onlineUserCount})|raw }}，总共<span id="onlineCnt"></span>人，{{ 'footer_oneline_user_most'|trans }} 393
         </p>
         <p class="copy">{{ 'site_copyright'|trans|raw }}</p>
-        <p class="power">Designed with <span>❤</span> 彩虹の恋しい at Shanghai, China</p>
+        <p class="power"><a target="_blank" href="https://yeskn.com">Yeskn Projects</a> <span>❤</span> created by <a target="_blank" href="https://blog.yeskn.com">Jaggle</a> at Shanghai, China</p>
     </div>
 </footer>

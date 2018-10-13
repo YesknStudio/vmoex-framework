@@ -21,9 +21,11 @@
                 <button class="btn btn-default btn-sm pull-right"><span class="gold-amount">{{ app.user.gold }}</span> <img src="{{ asset('assets/images/gold@2x.png') }}" height="16" alt="gold" border="0"></button>
 
             </div>
+            {% if app.user.isEmailVerified == false %}
             <div class="alert alert-warning sidebar-validate-email-box" style="margin-bottom: 0">
                 {{ 'verify_email'|trans|raw }}
             </div>
+            {% endif %}
 
             <div style="padding-top: 10px;text-align: center">
                 <div class="btn-group">

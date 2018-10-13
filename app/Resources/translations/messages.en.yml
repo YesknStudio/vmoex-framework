@@ -58,7 +58,7 @@ buy_beer: 'Buy Me '
 查看所有私信: 'All Messages'
 我的主页: 'My Homepage'
 个人设置: Setting
-verify_email: "Your Email is not activated，<a href=\"javascript:\" class=\"alert-link\">Click to Activate</a>\n"
+verify_email: 'Your Email is not activated，<a href="javascript:" class="alert-link">Click to Activate</a>'
 添加新的评论: 'Add new Comment'
 发表有颜色的评论将消耗5金币哦: 'A color comment will consume 5 gold coins.'
 好可怕，速度太快了: 'It''s awful, the speed is too fast'
@@ -165,3 +165,5 @@ user_my_comments: null
 user_my_following: null
 user_my_follower: null
 user_my_blog: null
+email: null
+user_setting_email_verified: null
