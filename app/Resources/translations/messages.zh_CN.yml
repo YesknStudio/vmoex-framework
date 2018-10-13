@@ -19,7 +19,7 @@ nav_new_fans: 个新的粉丝
 nav_all_notifications: 查看所有通知
 nav_user_home: 个人中心
 nav_user_setting: 个人设置
-footer_online_user_count: "当前会员在线<span id='memberCnt'>count</span>人"
+footer_online_user_count: 当前在线count人
 footer_oneline_user_most: 历史最高
 wpcast_slogan: 9秒助你打造自己的博客
 trends: 动态
@@ -135,7 +135,7 @@ site_since: 社区成立时间
 site_post_count: 主题数量
 site_comment_count: 回复数量
 site_user_count: 注册用户数量
-site_copyright: '@2018 Wpcraft - 9秒助你打造自己的博客'
+site_copyright: '&copy; 2018 Wpcraft - 9秒助你打造自己的博客'
 site_title: 'Wpcraft - 9秒助你打造自己的博客'
 site_name: Wpcraft
 user_place_in_site: 第count位Wpcraft用户
