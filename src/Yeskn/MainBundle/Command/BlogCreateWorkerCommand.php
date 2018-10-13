@@ -23,7 +23,13 @@ class BlogCreateWorkerCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $loop = 0;
+
         while (true) {
+            if ($loop++ >= 10) {
+                exit(-1);
+            }
+
             $do = $this->getContainer()->get('doctrine');
 
             $blog = $do->getRepository('YesknMainBundle:Blog')

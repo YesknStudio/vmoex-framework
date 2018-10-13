@@ -157,7 +157,6 @@ class BlogCreateCommand extends ContainerAwareCommand
                 'pw_weak' => 'on',
                 'admin_email' => $email,
                 'Submit' => '安装WordPress',
-                'language' => 'zh_CN'
             ]
         ]);
     }
