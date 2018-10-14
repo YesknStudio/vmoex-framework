@@ -540,4 +540,12 @@ class Post
     {
         $this->lastCommentAt = $lastCommentAt;
     }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onCreate()
+    {
+        $this->setLastCommentAt(new \DateTime());
+    }
 }
