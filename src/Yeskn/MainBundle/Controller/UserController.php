@@ -312,11 +312,7 @@ class UserController extends AbstractController
             return $this->errorResponse('邮箱已经验证');
         }
 
-        $email = $user->getEmail();
-
-        if (empty($email)) {
-            $email = $request->get('email');
-        }
+        $email = $request->get('email');
 
         if (!Validator::isEmail($email)) {
             return $this->errorResponse('邮箱格式错误');
