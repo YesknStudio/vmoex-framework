@@ -24,5 +24,8 @@ $(function () {
         }
 
         $('#onlineCnt').text(totalCnt);
-    })
+    });
+    socket.on('broadcast', function (data) {
+        success(data.message);
+    });
 });
