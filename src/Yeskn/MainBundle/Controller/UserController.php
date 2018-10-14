@@ -275,7 +275,7 @@ class UserController extends AbstractController
 
         $findOne = $userRepo->findOneBy(['email' => $email]);
 
-        if ($findOne) {
+        if ($findOne && $findOne->getId() != $user->getId()) {
             return new ApiFail('邮箱已经注册');
         }
 
