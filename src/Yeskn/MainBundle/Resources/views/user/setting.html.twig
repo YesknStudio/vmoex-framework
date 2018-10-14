@@ -132,6 +132,7 @@
 
 
     <script>
+        $(document).off('click', '#sendCodeBtn');
         $(document).on('click', '#sendCodeBtn', function () {
             let $btn = $('#sendCodeBtn');
             let email = $('#emailForm').nameVal('email');
