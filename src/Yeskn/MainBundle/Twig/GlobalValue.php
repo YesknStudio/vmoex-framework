@@ -212,11 +212,18 @@ class GlobalValue extends \Twig_Extension
                 'username' => $user->getUsername(),
                 'socketToken'=> ''
             ];
+
+            $noticeCount = $this->em->getRepository('YesknMainBundle:Notice')->getUnreadCount($user->getId());
+            $messageCount = count($this->em->getRepository('YesknMainBundle:Message')->getUnReadMessages($user));
+
         } else {
             $userParam = [
                 'username' => 'guest_' . time(),
                 'socketToken' => ''
             ];
+
+            $noticeCount = 0;
+            $messageCount = 0;
         }
 
         $lastChat = $this->em->getRepository('YesknMainBundle:Chat')->findOneBy([], ['id' => 'DESC']);
@@ -247,8 +254,8 @@ class GlobalValue extends \Twig_Extension
                 'action_too_quick' => $this->translator->trans('action_too_fast'),
             ],
             'disableLog' => true,
-            'noticeCount' => $this->em->getRepository('YesknMainBundle:Notice')->getUnreadCount($user->getId()),
-            'messageCount' => count($this->em->getRepository('YesknMainBundle:Message')->getUnReadMessages($user)),
+            'noticeCount' => $noticeCount,
+            'messageCount' => $messageCount,
             'lastChatId' => $lastChatId
         ];
 
