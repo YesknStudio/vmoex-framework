@@ -223,7 +223,7 @@ class UserController extends AbstractController
 
             $fs = new Filesystem();
 
-            $fileName = md5($user->getUsername()) . '.'.$ext;
+            $fileName = md5($user->getUsername()) . time() . '.'.$ext;
 
             $targetPath = $this->container->getParameter('kernel.project_dir') . '/web/avatar/' . $fileName;
             $fs->copy($path, $targetPath);
