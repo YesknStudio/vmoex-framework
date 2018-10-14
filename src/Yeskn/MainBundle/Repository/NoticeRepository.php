@@ -10,8 +10,22 @@
 namespace Yeskn\MainBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 
 class NoticeRepository extends EntityRepository
 {
-
+    public function getUnreadCount($userId)
+    {
+        try {
+            return (int) $this->createQueryBuilder('p')
+                ->select('COUNT(p)')
+                ->where('p.pushTo = :userId')
+                ->andWhere('p.isRead = false')
+                ->setParameter('userId', $userId)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NoResultException $exception) {
+            return 0;
+        }
+    }
 }

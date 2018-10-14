@@ -34,8 +34,8 @@
 
             <div class="list-group vertical-menu notification-nav">
                 <a data-pjax class="list-group-item {{ scope == 'home' ? 'active':'' }}" href="{{ path('user_home') }}">个人中心</a>
-                <a data-pjax class="list-group-item {{ scope == 'notice' ? 'active':'' }}" href="{{ path('user_notice') }}">我的通知  <span class="badge">0</span></a>
-                <a data-pjax class="list-group-item {{ scope == 'message' ? 'active':'' }}" href="{{ path('user_message') }}">我的信箱  <span class="badge">0</span></a>
+                <a data-pjax class="list-group-item {{ scope == 'notice' ? 'active':'' }}" href="{{ path('user_notice') }}">我的通知  <span class="badge">{{ notice_count }}</span></a>
+                <a data-pjax class="list-group-item {{ scope == 'message' ? 'active':'' }}" href="{{ path('user_message') }}">我的信箱  <span class="badge">{{ message_count }}</span></a>
                 <a data-pjax class="list-group-item {{ scope == 'blog' ? 'active':'' }}" href="{{ path('user_blog') }}">我的博客</a>
                 <a data-pjax class="list-group-item {{ scope == 'setting' ? 'active':'' }}" href="{{ path('user_setting') }}">个人设置</a>
             </div>

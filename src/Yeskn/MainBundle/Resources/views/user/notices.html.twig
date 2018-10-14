@@ -19,7 +19,7 @@
                         <div class="tab-pane fade in active" id="not_read">
                             {% if unreadNotices is not empty %}
                                 <ul class="notifications-list list-group">
-                                    {% for notice in notices %}
+                                    {% for notice in unreadNotices %}
                                         <li class="list-group-item list-group-item-warning">
                                             <div style="padding-bottom: 10px">
                                                 {% if notice.type == constant('Yeskn\\MainBundle\\Entity\\Notice::TYPE_COMMENT_POST') %}
@@ -79,11 +79,15 @@
                 method: "POST",
                 url: '{{ path('set_notice_red') }}',
                 success: function () {
-                    $('li.notifications span.text').text('{{ 'notifications'|trans }}');
-                    $('.nav-notice-label').removeClass('warning-color');
                 }
             });
-            $('.navbar-item-alert span').addClass('nav-common-dot').removeClass('nav-warn-dot').text(0);
+
+            let bellCount = '{{ message_count }}'*1;
+            if (bellCount) {
+                $('.nav-bell-dot').addClass('push-notifications-count');
+            } else {
+                $('.nav-bell-dot').removeClass('push-notifications-count');
+            }
         })
     </script>
 {% endblock %}

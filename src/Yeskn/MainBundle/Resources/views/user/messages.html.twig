@@ -65,11 +65,16 @@
                 method: "POST",
                 url: window.Yeskn.links.G_set_message_red_link,
                 success: function () {
-                    $('li.messages > span.text').text(window.Yeskn.trans.message);
-                    $('.nav-message-label').removeClass('warning-color');
                 }
             });
-            $('.navbar-item-message span').addClass('nav-common-dot').removeClass('nav-warn-dot').text(0);
+
+            let bellCount = '{{ notice_count }}'*1;
+
+            if (bellCount) {
+                $('.nav-bell-dot').addClass('push-notifications-count');
+            } else {
+                $('.nav-bell-dot').removeClass('push-notifications-count');
+            }
         })
     </script>
 

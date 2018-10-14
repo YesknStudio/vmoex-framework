@@ -118,7 +118,8 @@ function handleNewFollower(data) {
     $label.html(text + '(<b style="color: red">new</b>)');
 }
 
-function handleNewChat() {
+function handleNewChat(data) {
+    success(data.username + '：' + data.content);
     $('.nav-chat-dot').addClass('push-notifications-count');
 }
 

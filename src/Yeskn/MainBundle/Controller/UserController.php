@@ -57,6 +57,14 @@ class UserController extends AbstractController
 
         $online = false;
 
+        $noticeCount = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')
+            ->getUnreadCount($user->getId());
+
+        $messages = $this->getDoctrine()->getRepository('YesknMainBundle:Message')
+            ->getUnReadMessages($user);
+
+        $messageCount = count($messages);
+
         /** @var \DateTime $updatedAt */
         $updatedAt = $userActive->getUpdatedAt();
 
@@ -67,7 +75,9 @@ class UserController extends AbstractController
         return [
             'user' => $user,
             'online' => $online,
-            'userActive' => $userActive
+            'userActive' => $userActive,
+            'notice_count' => $noticeCount,
+            'message_count' => $messageCount
         ];
     }
 
@@ -108,6 +118,14 @@ class UserController extends AbstractController
         /** @var Notice[] $unreadNotices */
         $unreadNotices = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')
             ->findBy(['pushTo' => $this->getUser(), 'isRead' => false], ['createdAt' => 'DESC']);
+
+        if (count($unreadNotices) == 0) {
+            $unreadMessageCount = count($this->getDoctrine()->getRepository('YesknMainBundle:Message')
+                ->getUnReadMessages($this->getUser()));
+            if ($unreadMessageCount) {
+                return $this->redirectToRoute('user_message');
+            }
+        }
 
         /** @var Notice[] $readNotices */
         $readNotices = $this->getDoctrine()->getRepository('YesknMainBundle:Notice')

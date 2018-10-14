@@ -8,6 +8,7 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,7 +41,19 @@ class ChatController extends Controller
             $params['show_icon'] = 1;
         }
 
-        return $this->render('@YesknMain/chat/chat.html.twig', $params);
+        $response = $this->render('@YesknMain/chat/chat.html.twig', $params);
+
+        $lastChat = $this->getDoctrine()->getRepository('YesknMainBundle:Chat')->findOneBy([], ['id' => 'DESC']);
+
+        if ($lastChat) {
+            $lastChatId = $lastChat->getId();
+        } else {
+            $lastChatId = 0;
+        }
+
+        $response->headers->setCookie(new Cookie('_last_chat_id', $lastChatId));
+
+        return $response;
     }
 
     /**
@@ -83,7 +96,10 @@ class ChatController extends Controller
         $em->persist($chat);
         $em->flush();
 
-        $this->get('socket.push')->pushAll('new_chat');
+        $this->get('socket.push')->pushAll('new_chat', [
+            'username' => $user->getNickname(),
+            'content' => $chat->getContent()
+        ]);
 
         return new JsonResponse(['ret' => 1]);
     }

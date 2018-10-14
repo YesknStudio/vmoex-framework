@@ -85,6 +85,17 @@
                 $('.loading').remove();
                 $('body').fadeIn(1000);
                 $(function () { $("[data-toggle='tooltip']").tooltip(); });
+                if (window.Yeskn.messageCount || window.Yeskn.noticeCount) {
+                    $('.nav-bell-dot').addClass('push-notifications-count');
+                } else {
+                    $('.nav-bell-dot').removeClass('push-notifications-count');
+                }
+
+                if (window.Yeskn.lastChatId*1 !== '{{ app.request.cookies.get('_last_chat_id') }}'*1) {
+                    $('.nav-chat-dot').addClass('push-notifications-count');
+                } else {
+                    $('.nav-chat-dot').removeClass('push-notifications-count');
+                }
             })
         </script>
     {% endblock %}

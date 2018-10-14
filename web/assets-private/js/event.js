@@ -53,12 +53,6 @@ $(document).on('click', '.set-locale-link', function (e) {
     });
 });
 
-$(document).on('click', '.dropdown-notifications a', function () {
-    var $label = $('.notification-label');
-    var text = $label.attr('data-origin');
-    $label.text(text);
-});
-
 $(document).on('submit', '#site-search', function (e) {
     e.preventDefault();
     var word = $('#search-content').val();
