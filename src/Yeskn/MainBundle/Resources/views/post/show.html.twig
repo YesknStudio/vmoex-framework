@@ -83,7 +83,7 @@
 
                                 <span class="text-small-gray pull-right">#{{ loop.index }}</span>
                             </div>
-                            <div class="comment-content">{{ comment.content|raw }}</div>
+                            <div class="comment-content">{{ comment.content|markdown|raw }}</div>
                             <div class="comment-footer">
                                 {% set hasThumb = comment.thumbUpUsers.contains(app.user) %}
                                 {% set open = hasThumb ? '' : '-o' %}
