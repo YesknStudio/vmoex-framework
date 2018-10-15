@@ -39,17 +39,24 @@ class BlogController extends AbstractController
             return $this->errorResponse('您尚未绑定邮箱，或者邮箱没有激活，请先<a data-pjax href="/user/setting#emailSetting">完善邮箱信息</a>再执行该操作');
         }
 
-        if ($blog && $blog->getStatus() == 'created' && $this->getUser()->getUsername() != 'admin') {
-            return $this->errorResponse('你已经创建了一个博客，无法再创建更多了');
-        } else {
-            if (empty($blog)) {
-                if ($step == 1) {
-                    $blog = new Blog();
-                    $blog->setUser($this->getUser());
-                } else {
-                    return $this->errorResponse('请回到第一步进行创建');
-                }
+        // admin没有限制
+        if ($this->getUser()->getUsername() != 'admin') {
+            if ($blog && $blog->getStatus() == Blog::STATUS_QUEUEING) {
+                return $this->redirectToRoute('blog_create', ['step' => 4]);
             }
+
+            if ($blog && $blog->getStatus() == Blog::STATUS_CREATED) {
+                return $this->errorResponse('你已经创建了一个博客，无法再创建更多了');
+            }
+        }
+
+        if ($step == 1 && $request->isMethod('POST')) {
+            $blog = new Blog();
+            $blog->setUser($this->getUser());
+        }
+
+        if ($step != 1 && empty($blog)) {
+            return $this->redirectToRoute('blog_create', ['step' => 1]);
         }
 
         if ($request->isMethod('POST')) {
