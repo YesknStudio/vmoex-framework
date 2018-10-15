@@ -81,9 +81,9 @@ function go(url) {
 }
 
 function handleNewMessage(data) {
-    success(data.msg);
+    success("您收到了新的通知，请到个人中心查看");
 
-    $('.nav-alert-dot').addClass('push-notifications-count');
+    $('.nav-bell-dot').addClass('push-notifications-count');
 }
 
 function handleNewFollower(data) {
