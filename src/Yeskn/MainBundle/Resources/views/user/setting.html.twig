@@ -147,7 +147,9 @@
             }, function (ret) {
                 if (ret.status) {
                     alert("验证码已发送！");
+
                     let seconds= 60;
+                    $btn.text('重新发送(' + seconds + '秒)');
 
                     let codeInterval = setInterval(function () {
                         if (seconds > 0) {
