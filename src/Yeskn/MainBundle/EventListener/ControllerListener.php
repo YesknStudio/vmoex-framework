@@ -16,6 +16,7 @@ use Yeskn\MainBundle\Repository\ActiveRepository;
 
 class ControllerListener
 {
+    static $increasedTodayActive = false;
     private $tokenStorage;
 
     /**
@@ -34,7 +35,8 @@ class ControllerListener
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user) {
+        if ($user && self::$increasedTodayActive == false) {
+            self::$increasedTodayActive = true;
             $this->repository->increaseTodayActive($user);
         }
     }
