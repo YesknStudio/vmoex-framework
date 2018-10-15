@@ -10,16 +10,16 @@
 namespace Yeskn\MainBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Entity\Blog;
+use Yeskn\Support\AbstractController;
 use Yeskn\Support\Http\ApiFail;
 use Yeskn\Support\Http\ApiOk;
 use Yeskn\Support\Http\HttpResponse;
 
-class BlogController extends Controller
+class BlogController extends AbstractController
 {
     use HttpResponse;
 
@@ -39,7 +39,7 @@ class BlogController extends Controller
             return $this->errorResponse('您尚未绑定邮箱，或者邮箱没有激活，请先<a data-pjax href="/user/setting#emailSetting">完善邮箱信息</a>再执行该操作');
         }
 
-        if ($blog && $blog->getStatus() == 'created') {
+        if ($blog && $blog->getStatus() == 'created' && $this->getUser()->getUsername() != 'admin') {
             return $this->errorResponse('你已经创建了一个博客，无法再创建更多了');
         } else {
             if (empty($blog)) {
