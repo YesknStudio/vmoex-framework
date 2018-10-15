@@ -81,34 +81,9 @@ function go(url) {
 }
 
 function handleNewMessage(data) {
-    info(data.msg);
+    success(data.msg);
 
-    var message  = data.data;
-    var $messageCount = $('#MyMessageCount');
-    var $messageLabel = $('.nav-message-label');
-
-    if ($messageCount.length) {
-        var originCount = parseInt($messageCount.text());
-        if (originCount > 10) {
-            return ;
-        }
-        $messageCount.text(originCount + 1);
-    } else {
-        var messageLabel = $messageLabel.text();
-        var newMessageLabel = messageLabel + '(<b id="MyMessageCount"></b>)';
-        $messageLabel.html(newMessageLabel);
-        $('b#MyMessageCount').text(1);
-    }
-
-    var html = render($('#message-item-tpl').html(), {
-        content: message.content,
-        username: message.sender_username,
-        createdAt: message.createdAt,
-        nickname: message.sender
-    });
-
-    $('li.messages ul').prepend(html);
-    $messageLabel.addClass('warning-color');
+    $('.nav-alert-dot').addClass('push-notifications-count');
 }
 
 function handleNewFollower(data) {
