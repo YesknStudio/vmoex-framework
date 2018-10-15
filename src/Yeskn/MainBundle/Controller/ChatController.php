@@ -65,9 +65,6 @@ class ChatController extends Controller
     public function sendChat(Request $request)
     {
         $content = $request->get('content');
-
-        $chat = new Chat();
-
         $content = strip_tags($content);
 
         if (empty(strip_tags($content)) or mb_strlen($content) >= 200) {
@@ -80,8 +77,10 @@ class ChatController extends Controller
         $user = $this->getUser();
 
         if ($user->getGold() <= 0) {
-            return new JsonResponse(['ret' => 0, 'msg' => 'no gold']);
+            return new JsonResponse(['ret' => 0, 'msg' => '抱歉，您的金币不足']);
         }
+
+        $chat = new Chat();
 
         $chat->setUser($user);
         $chat->setCreatedAt(new \DateTime());

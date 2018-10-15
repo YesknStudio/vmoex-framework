@@ -1,30 +1,3 @@
-// $(document).on('click', 'body', function(e) {
-//     var tc = sessionStorage.getItem('topClick');
-//     var a_idx = parseInt(tc) || 1;
-//
-//     var $i = $("<span/>").text('+'+a_idx+++'♥');
-//     var x = e.pageX,
-//         y = e.pageY;
-//     $i.css({
-//         "z-index": 1001,
-//         "top": y - 20,
-//         "left": x,
-//         "position": "absolute",
-//         "font-weight": "bold",
-//         "color": "#ff6651"
-//     });
-//     $("body").append($i);
-//     $i.animate({
-//             "top": y - 180,
-//             "opacity": 0
-//         },
-//         1500,
-//         function() {
-//             $i.remove();
-//         });
-//     sessionStorage.setItem('topClick', a_idx);
-// });
-
 $(document).on('click', 'li.disabled a', function (e) {
     e.preventDefault();
 });

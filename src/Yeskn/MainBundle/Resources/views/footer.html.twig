@@ -2,8 +2,6 @@
     <div class="container">
         <div class="brand">
             <b><a data-pjax href="{{ path('about') }}">{{ 'about_site'|trans }}</a></b>
-            <span class="snow">·</span>
-            <b><a data-pjax href="{{ path('contribute') }}">{{ 'support'|trans }}</a></b>
         </div>
 
         <br>
@@ -26,7 +24,7 @@
 
         {% set siteState = siteState() %}
         <p style="margin: 20px 5px">
-            {{ 'footer_online_user_count'|trans({count:siteState.onlineUserCount})|raw }}，总共<span id="onlineCnt"></span>人，{{ 'footer_oneline_user_most'|trans }} 393
+            会员在线{{ siteState.onlineUserCount }}人，游客<span id="onlineCnt">1</span>人，{{ 'footer_oneline_user_most'|trans }} 393
         </p>
         <p class="copy">{{ 'site_copyright'|trans|raw }}</p>
         <p class="power"><a target="_blank" href="https://yeskn.com">Yeskn Projects</a> <span>❤</span> created by <a target="_blank" href="https://blog.yeskn.com">Jaggle</a> at Shanghai, China</p>
