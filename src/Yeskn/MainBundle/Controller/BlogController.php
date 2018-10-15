@@ -42,7 +42,9 @@ class BlogController extends AbstractController
         // admin没有限制
         if ($this->getUser()->getUsername() != 'admin') {
             if ($blog && $blog->getStatus() == Blog::STATUS_QUEUEING) {
-                return $this->redirectToRoute('blog_create', ['step' => 4]);
+                return $this->render('@YesknMain/blog/create.html.twig', [
+                    'step' => 4
+                ]);
             }
 
             if ($blog && $blog->getStatus() == Blog::STATUS_CREATED) {
