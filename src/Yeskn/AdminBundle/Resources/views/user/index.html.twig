@@ -27,6 +27,7 @@
                     <th>头像</th>
                     <th>昵称</th>
                     <th>邮箱</th>
+                    <th>活跃时间</th>
                     <th>登陆时间</th>
                     <th>注册时间</th>
                     <th>签名</th>
@@ -43,6 +44,7 @@
                         <td align="center"><img width="25" src="{{ asset(item.avatar) }}" alt=""></td>
                         <td>{{ item.nickname }}</td>
                         <td>{{ item.email }}</td>
+                        <td>{{ actives[item.id] ? actives[item.id].updatedAt|ago : '' }}</td>
                         <td>{{ item.loginAt|ago }}</td>
                         <td>{{ item.registerAt|ago }}</td>
                         <td>{{ item.remark }}</td>

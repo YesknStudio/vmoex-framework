@@ -27,10 +27,20 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $list = $this->getDoctrine()->getRepository('YesknMainBundle:User')->findAll();
+        $list = $this->getDoctrine()->getRepository('YesknMainBundle:User')
+            ->findBy([], ['id' => 'DESC']);
+
+        $activeRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Active');
+
+        $actives = [];
+
+        foreach ($list as $user) {
+            $actives[$user->getId()] = $activeRepo->findOneBy(['user' => $user], ['id' => 'DESC']);
+        }
 
         return $this->render('@YesknAdmin/user/index.html.twig', [
             'list' => $list,
+            'actives' => $actives,
             'form' => $this->createForm(UserType::class, new User())->createView()
         ]);
     }
