@@ -17,7 +17,6 @@
                     <div class="carousel-inner">
                         <div class="item active">
                             {% for key, blog in blog_list if key < 3 %}
-                                <h1>{{ key }}</h1>
                                 {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
                             {% endfor %}
                         </div>
