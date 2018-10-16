@@ -87,10 +87,9 @@ function handleNewMessage(data) {
 }
 
 function handleNewFollower(data) {
-    info(data.msg);
-    var $label = $('.notification-label');
-    var text = $label.attr('data-origin');
-    $label.html(text + '(<b style="color: red">new</b>)');
+    success("有人关注你了，请到个人中心查看");
+
+    $('.nav-bell-dot').addClass('push-notifications-count');
 }
 
 function handleNewChat(data) {

@@ -16,17 +16,18 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="item active">
-                            {% for key, blog in blog_list if key <= 3-1 %}
+                            {% for key, blog in blog_list if key < 3 %}
+                                <h1>{{ key }}</h1>
                                 {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
                             {% endfor %}
                         </div>
                         <div class="item">
-                            {% for key, blog in blog_list if key > 3 and key <= 6 %}
+                            {% for key, blog in blog_list if key >= 3 and key < 6 %}
                                 {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
                             {% endfor %}
                         </div>
                         <div class="item">
-                            {% for key, blog in blog_list if key > 6 and key <= 9 %}
+                            {% for key, blog in blog_list if key >= 6 and key < 9 %}
                                 {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
                             {% endfor %}
                         </div>
