@@ -160,8 +160,6 @@ class BlogCreateCommand extends ContainerAwareCommand
             ]
         ]);
 
-        error_log($res->getStatusCode());
-        error_log($res->getBody()->getContents());
 
     }
 

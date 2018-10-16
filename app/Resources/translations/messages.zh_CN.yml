@@ -127,7 +127,7 @@ notice_replied_you: 回复我的
 post_top: 置顶
 like: 赞
 action_too_fast: 好可怕，速度太快了
-banner_announce: 欢迎来到Wpcraft，在这里你可以快速方便的创建自己的博客，感受创作之美！
+banner_announce: '欢迎来到Wpcraft，在这里你可以快速方便的创建自己的wordpress博客，支持更换主题、在线修改网站html/css/js、安装插件，感受创造的魅力！<b>立即<a data-pjax href="/blog/create/step/1">创建我的博客</a></b>'
 all: 全部
 hot: 热门
 site_state: 社区运行状态
