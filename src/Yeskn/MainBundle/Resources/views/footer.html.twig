@@ -1,34 +1,52 @@
 <footer>
-    <div class="container">
-        <div class="brand">
-            <b><a data-pjax href="{{ path('about') }}">{{ 'about_site'|trans }}</a></b>
-            <span class="snow">·</span>
-            <b><a data-pjax href="{{ path('contribute') }}">{{ 'support'|trans }}</a></b>
+    <div class="container" style="position: relative">
+        <div class="row" style="margin-bottom: 15px">
+            <div class="brand col-sm-12">
+                <b><a data-pjax href="{{ path('about') }}">{{ 'about_site'|trans }}</a></b>
+                <span class="snow">·</span>
+                <b><a data-pjax href="{{ path('contribute') }}">{{ 'support'|trans }}</a></b>
+                <span class="snow">·</span>
+                <b><a target="_blank" href="https://www.vmoex.com">Vmoex二次元社区</a></b>
+                <span class="snow">·</span>
+                <b><a data-pjax href="/tos">服务条款</a></b>
+                <span class="snow">·</span>
+                <b><a target="_blank" href="https://github.com/Jaggle">Github</a></b>
+            </div>
         </div>
 
-        <br>
+        <div class="row" style="margin-bottom: 15px">
+            <div class="language-box col-sm-12">
+                <span style="display: inline-block;margin-right: 10px">{{ 'site_name'|trans }} {{ 'footer_available_with'|trans }}</span>
 
-        <div class="language-box">
-            <span style="display: inline-block;margin-right: 10px">{{ 'site_name'|trans }} {{ 'footer_available_with'|trans }}</span>
-
-            <img class="footer-flag" src="{{ asset('assets/images/flags/zh_CN.png') }}" alt="zh_CN">
-            <a data-pjax href="javascript:"   class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans([], 'messages', 'zh_CN') }}</a>
-            <span class="snow">·</span>
-            <img class="footer-flag" src="{{ asset('assets/images/flags/en.png') }}" alt="en">
-            <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans([], 'messages', 'en') }}</a>
-            <span class="snow">·</span>
-            <img class="footer-flag" src="{{ asset('assets/images/flags/zh_CN.png') }}" alt="zh_TW">
-            <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans([], 'messages', 'zh_TW') }}</a>
-            <span class="snow">·</span>
-            <img class="footer-flag" src="{{ asset('assets/images/flags/jp.png') }}" alt="jp">
-            <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans([], 'messages', 'jp') }}</a>
+                <img class="footer-flag" src="{{ asset('assets/images/flags/zh_CN.png') }}" alt="zh_CN">
+                <a data-pjax href="javascript:"   class="set-locale-link" data-locale="zh_CN">{{ 'chinese'|trans([], 'messages', 'zh_CN') }}</a>
+                <span class="snow">·</span>
+                <img class="footer-flag" src="{{ asset('assets/images/flags/en.png') }}" alt="en">
+                <a href="javascript:" class="set-locale-link" data-locale="en">{{ 'english'|trans([], 'messages', 'en') }}</a>
+                <span class="snow">·</span>
+                <img class="footer-flag" src="{{ asset('assets/images/flags/zh_CN.png') }}" alt="zh_TW">
+                <a href="javascript:" class="set-locale-link" data-locale="zh_TW">{{ 'chinese.tw'|trans([], 'messages', 'zh_TW') }}</a>
+                <span class="snow">·</span>
+                <img class="footer-flag" src="{{ asset('assets/images/flags/jp.png') }}" alt="jp">
+                <a href="javascript:" class="set-locale-link" data-locale="jp">{{ 'japanese'|trans([], 'messages', 'jp') }}</a>
+            </div>
         </div>
 
-        {% set siteState = siteState() %}
-        <p style="margin: 20px 5px">
-            会员在线{{ siteState.onlineUserCount }}人，游客<span id="onlineCnt">1</span>人，{{ 'footer_oneline_user_most'|trans }} 393
-        </p>
-        <p class="copy">{{ 'site_copyright'|trans|raw }}</p>
-        <p class="power"><a target="_blank" href="https://yeskn.com">Yeskn Projects</a> <span>❤</span> created by <a target="_blank" href="https://blog.yeskn.com">Jaggle</a> at Shanghai, China</p>
+        <div class="row">
+            <div class="col-sm-12">
+                {% set siteState = siteState() %}
+                <div>
+                  会员在线{{ siteState.onlineUserCount }}人，游客<span id="onlineCnt">1</span>人，{{ 'footer_oneline_user_most'|trans }} 393
+                </div>
+                <div class="copy">{{ 'site_copyright'|trans|raw }}</div>
+                <div class="power"><a target="_blank" href="https://yeskn.com">Yeskn Projects</a> <span>❤</span> created by <a target="_blank" href="https://blog.yeskn.com">Jaggle</a> at Shanghai, China</div>
+            </div>
+        </div>
+
+        <div class="hidden-sm footer-ad-img" style="position: absolute; right: 0; top: 0;">
+            <a target="_blank" href="https://www.vultr.com/?ref=7228942">
+                <img width="210px" src="https://www.vultr.com/media/logo_onwhite.png" alt="">
+            </a>
+        </div>
     </div>
 </footer>

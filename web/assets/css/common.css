@@ -454,10 +454,6 @@ nav .dropdown-messages, nav .dropdown-notifications {
     #navbar-collapse-user {
         display: none !important;
     }
-
-    footer {
-        /*background: url('https://static.yeskn.com/vmoex/img/763552f474305423.png');*/
-    }
 }
 
 /************************** 手机 ***************/
@@ -615,8 +611,7 @@ nav .dropdown-messages, nav .dropdown-notifications {
 footer {
     box-shadow: 4px 1px 5px rgba(0,0,0,0.15);
     display: flex;
-    min-height: 301px;
-    padding-top: 60px;
+    padding: 60px 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #fff;
@@ -629,28 +624,17 @@ footer a.set-locale-link {
 }
 
 footer .copy {
-    cursor: pointer;
-    padding: 5px;
-    margin: 0;
-    margin-top: 20px;
+    margin: 10px 0;
 }
 
 footer .power {
     color: rgb(138, 138, 138);
-    padding: 5px
+    margin: 10px 0;
 }
 
 footer .power span {
     color: #e27575;
     font-size: 14px;
-}
-
-footer .language-box {
-    padding: 5px;
-}
-
-footer .brand {
-    padding: 5px;
 }
 
 footer .footer-flag {
