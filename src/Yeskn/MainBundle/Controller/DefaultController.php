@@ -51,6 +51,6 @@ class DefaultController extends Controller
      */
     public function contributeAction()
     {
-        return new Response();
+        return $this->render('@YesknMain/contribute.html.twig');
     }
 }

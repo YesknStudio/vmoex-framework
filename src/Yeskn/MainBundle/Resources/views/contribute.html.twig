@@ -1,0 +1,36 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+ {% block page_wraper %}
+     <div class="row content-row">
+         <div class="col-lg-12 content-main" role="main">
+             <div class="panel">
+                 <div class="panel-body">
+                     <div class="row">
+                         <div class="col-sm-12">
+                             <div style="text-align: center; padding: 20px">
+                                 <h3>谢谢你让我把wpcraft做的更好！</h3>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="row">
+                         <div class="col-sm-4 col-lg-offset-2">
+                             <img width="100%" class="img-thumbnail" src="{{ asset('assets/images/zan/wechat.jpg') }}" alt="">
+                         </div>
+
+                         <div class="col-sm-4">
+                             <img width="100%" class="img-thumbnail" src="{{ asset('assets/images/zan/alipay.jpg') }}" alt="">
+                         </div>
+                     </div>
+                     <div class="row">
+                         <div class="col-sm-12">
+                             <h4>赞助记录</h4>
+
+                             <div class="alert alert-warning" role="alert">暂时没有任何赞助。</div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     </div>
+ {% endblock %}
