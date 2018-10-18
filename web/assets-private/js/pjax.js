@@ -15,6 +15,7 @@ if ($.support.pjax) {
 
     $(document).on('pjax:complete', function () {
         NProgress.done();
+        $('body > .modal').remove();
     });
 
     $(document).on('pjax:error', function () {
