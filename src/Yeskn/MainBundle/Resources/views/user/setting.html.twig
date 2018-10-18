@@ -132,38 +132,40 @@
 
 
     <script>
-        $(document).onPjax('click', '#sendCodeBtn', function () {
-            let $btn = $('#sendCodeBtn');
-            let email = $('#emailForm').nameVal('email');
+        $(function () {
+            $(document).onPjax('click', '#sendCodeBtn', function () {
+                let $btn = $('#sendCodeBtn');
+                let email = $('#emailForm').nameVal('email');
 
-            if (email.length === 0) {
-                alert('请填写邮箱地址');
-                return ;
-            }
-
-            $.post("{{ path('user_setting_send_email_code') }}", {
-                email: email
-            }, function (ret) {
-                if (ret.status) {
-                    alert("验证码已发送！");
-
-                    let seconds= 60;
-                    $btn.text('重新发送(' + seconds + '秒)');
-
-                    let codeInterval = setInterval(function () {
-                        if (seconds > 0) {
-                            $btn.text('重新发送(' + seconds-- + '秒)');
-                            $btn.prop('disabled', true);
-                        } else {
-                            $btn.text('重新发送');
-                            clearInterval(codeInterval);
-                            $btn.prop('disabled', false);
-                        }
-                    }, 1000);
-                } else {
-                    alert(ret.message)
+                if (email.length === 0) {
+                    alert('请填写邮箱地址');
+                    return ;
                 }
-            });
+
+                $.post("{{ path('user_setting_send_email_code') }}", {
+                    email: email
+                }, function (ret) {
+                    if (ret.status) {
+                        alert("验证码已发送！");
+
+                        let seconds= 60;
+                        $btn.text('重新发送(' + seconds + '秒)');
+
+                        let codeInterval = setInterval(function () {
+                            if (seconds > 0) {
+                                $btn.text('重新发送(' + seconds-- + '秒)');
+                                $btn.prop('disabled', true);
+                            } else {
+                                $btn.text('重新发送');
+                                clearInterval(codeInterval);
+                                $btn.prop('disabled', false);
+                            }
+                        }, 1000);
+                    } else {
+                        alert(ret.message)
+                    }
+                });
+            })
         })
     </script>
 {% endblock %}
