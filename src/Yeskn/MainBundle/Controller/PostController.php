@@ -67,16 +67,16 @@ class PostController extends Controller
         $post->setViews(intval($post->getViews())+1);
         $em->flush();
 
-        $commentUsers = [];
+        $commentUsers = [$post->getAuthor()->getUsername()];
         /**
          * @var Comment $comment
          */
         foreach ($post->getComments() as $comment) {
-            $name = $comment->getUser()->getNickname();
-            if (array_search($name, $commentUsers) === false) {
-                $commentUsers[] = $name;
-            }
+            $name = $comment->getUser()->getUsername();
+            $commentUsers[] = $name;
         }
+
+        $commentUsers = array_unique($commentUsers);
 
         $response = $this->render('@YesknMain/post/show.html.twig', array(
             'post' => $post,
