@@ -12,17 +12,27 @@ namespace Yeskn\MainBundle\Services;
 use Doctrine\ORM\EntityManagerInterface;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Twig\Render;
 use Yeskn\Support\AbstractService;
 
 class NoticeService extends AbstractService
 {
     private $pushService;
+    private $mailer;
+    private $template;
+    private $render;
 
-    public function __construct(EntityManagerInterface $em, SocketPushService $pushService)
-    {
+    public function __construct(EntityManagerInterface $em
+        , SocketPushService $pushService
+        , \Swift_Mailer $mailer
+        , Render $render
+    ) {
         parent::__construct($em);
 
         $this->pushService = $pushService;
+        $this->mailer = $mailer;
+        $this->render = $render;
+
     }
 
 
@@ -56,6 +66,14 @@ class NoticeService extends AbstractService
      */
     public function add(User $creator, User $pushTo, $type, $content, $object)
     {
+        $notice = $this->databaseNotice($creator,  $pushTo, $type, $content, $object);
+
+        $this->pushNotice($notice, $pushTo);
+        $this->emailNotice($pushTo->getEmail(), $notice);
+    }
+
+    public function databaseNotice(User $creator, User $pushTo, $type, $content, $object)
+    {
         $notice = new Notice();
 
         $notice->setType($type);
@@ -69,6 +87,21 @@ class NoticeService extends AbstractService
         $this->em->persist($notice);
         $this->em->flush();
 
+        return $notice;
+    }
+
+    public function emailNotice($email, Notice $notice)
+    {
+        $message = (new \Swift_Message('Wpcraft通知'))
+            ->setFrom('no-replay@wpcraft.cn')
+            ->setTo($email)
+            ->setBody($this->render->renderNoticeItem($notice), 'text/html');
+
+        $this->mailer->send($message);
+    }
+
+    public function pushNotice(Notice $notice, User $pushTo)
+    {
         $event = $this->convertType2Event($notice->getType());
 
         $this->pushService->push($pushTo->getUsername(), $event, [
