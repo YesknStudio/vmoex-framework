@@ -71,7 +71,7 @@
                                          <span class="category">
                                              <a data-pjax href="{{ path('post_list', {tab:post.tab.alias}) }}" class="badge">{{ post.tab.name|trans }}</a>
                                          </span>
-                                        <span><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
+                                        <span data-toggle="tooltip" title="{{ post.createdAt|date }}"><i class="fa fa-clock-o"></i> {{ post.createdAt|ago }}</span>
                                         <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                                         {% if post.comments.count %}
                                             <span><i class="fa fa-commenting-o"></i>
