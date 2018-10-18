@@ -73,10 +73,10 @@ class PostController extends Controller
          */
         foreach ($post->getComments() as $comment) {
             $name = $comment->getUser()->getUsername();
-            $commentUsers[] = $name;
+            if (array_search($name, $commentUsers) === false) {
+                $commentUsers[] = $name;
+            }
         }
-
-        $commentUsers = array_unique($commentUsers);
 
         $response = $this->render('@YesknMain/post/show.html.twig', array(
             'post' => $post,
