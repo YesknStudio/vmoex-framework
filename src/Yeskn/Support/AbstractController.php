@@ -25,6 +25,16 @@ class AbstractController extends Controller
     }
 
     /**
+     * @param $repo
+     * @return \Doctrine\Common\Persistence\ObjectRepository
+     * @throws \LogicException
+     */
+    public function getRepo($repo)
+    {
+        return $this->getDoctrine()->getRepository($repo);
+    }
+
+    /**
      * @return UserInterface|User
      * @throws \LogicException
      */

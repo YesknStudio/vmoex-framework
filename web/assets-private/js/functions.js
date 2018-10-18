@@ -80,6 +80,12 @@ function go(url) {
     });
 }
 
+function handleNewNotification(data) {
+    success(data.message);
+
+    $('.nav-bell-dot').addClass('push-notifications-count');
+}
+
 function handleNewMessage(data) {
     success("您收到了新的通知，请到个人中心查看");
 

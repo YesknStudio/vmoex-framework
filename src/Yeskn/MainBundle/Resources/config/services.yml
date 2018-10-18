@@ -3,7 +3,7 @@ services:
   _defaults:
       autowire: true      # Automatically injects dependencies in your services.
       autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-      public: false       # Allows optimizing the container by removing unused services; this also means
+      public: true       # Allows optimizing the container by removing unused services; this also means
       # fetching services directly from the container via $container->get() won't work.
       # The best practice is to be explicit about your dependencies anyway.
       bind:
@@ -23,8 +23,9 @@ services:
       public: true
       tags: ['controller.service_arguments']
 
-  Yeskn\MainBundle\Services\AllocateSpaceService:
-    public: true
+  Yeskn\MainBundle\Twig\Render:
+    tags:
+    - { name: twig.extension }
 
   socket.push:
     public: true

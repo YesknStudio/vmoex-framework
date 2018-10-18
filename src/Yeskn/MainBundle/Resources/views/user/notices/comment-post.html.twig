@@ -1,0 +1,9 @@
+<div style="padding-bottom: 10px">
+    <img src="{{ notice.createdBy.avatar }}" alt="" width="30" height="30" style="border-radius: 3px">
+    <a data-pjax href="{{ path('member_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
+    {{ notice.createdAt|ago }}{{ 'notice_replied_you'|trans }} <a data-pjax href="{{ path('post_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+</div>
+
+<blockquote class="home-bq">
+    {{ notice.content.content|raw }}
+</blockquote>

@@ -8,6 +8,10 @@ $(function () {
         });
     });
 
+    // 新的通知
+    socket.on('comment_mention', handleNewNotification);
+    socket.on('comment_post', handleNewNotification);
+
     socket.on('new_message', handleNewMessage);
     socket.on('new_follower', handleNewFollower);
     socket.on('new_chat', handleNewChat);

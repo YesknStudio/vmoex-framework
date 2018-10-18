@@ -10,7 +10,8 @@
 namespace Yeskn\MainBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,8 +19,16 @@ use Yeskn\MainBundle\Entity\Comment;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\Post;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Services\NoticeService;
+use Yeskn\Support\AbstractController;
 
-class CommentController extends Controller
+/**
+ * Class CommentController
+ * @package Yeskn\MainBundle\Controller
+ *
+ * @Security("has_role('ROLE_USER')")
+ */
+class CommentController extends AbstractController
 {
     /**
      * @Route("/topic/comment/thumb_up", name="thumb_up_comment", requirements={
@@ -68,9 +77,10 @@ class CommentController extends Controller
      * @param $postId
      * @return JsonResponse
      */
-    public function addCommentToPostAction(Request $request, $postId)
+    public function addCommentToPostAction(Request $request, $postId, MarkdownParserInterface $markdown)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         /** @var Post $post */
         $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->find($postId);
@@ -79,19 +89,49 @@ class CommentController extends Controller
         }
 
         $content = $request->get('content');
-
         $content = strip_tags($content);
 
-        $content = str_replace('<p></p>', '', $content);
-
-        if (empty(strip_tags($content)) or mb_strlen($content) > 500) {
+        if (empty($content) or mb_strlen($content) > 500) {
             return new JsonResponse(['ret' => 0, 'msg' => '内个啥...长度好像不合适哦！']);
         }
 
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
+        $mentioned = [];
+
+        preg_match_all("/^(@.*?)\s/", $content, $matches);
+
+        $mentioned = array_merge($mentioned, $matches[1]);
+
+        preg_match_all("/\s(@.*?)\s/", $content, $matches);
+
+        $mentioned = array_merge($mentioned, $matches[1]);
+
+        preg_match_all("/\s(@.*?)$/", $content, $matches);
+
+        $mentioned = array_merge($mentioned, $matches[1]);
+
+        if (count($mentioned) != count(array_unique($mentioned))) {
+            return new JsonResponse(['ret' => 0, 'msg' => '请勿重复@其他人！']);
+        }
+
+        $userRepo = $this->getRepo('YesknMainBundle:User');
+
+        $content = $parsedContent = $markdown->transformMarkdown($content);
+
+        foreach ($mentioned as $item) {
+            $username = trim($item, '@');
+
+            /** @var User $findOne */
+            $findOne = $userRepo->findOneBy(['username' => $username]);
+
+            if (empty($findOne)) {
+                continue;
+            }
+
+            $url = $this->generateUrl('member_home', ['username' => $username]);
+            $content = str_replace($item, "<a data-pjax href='{$url}'>$item</a>", $content);
+
+            $this->get(NoticeService::class)->add($user, $findOne, Notice::TYPE_COMMENT_MENTION, $parsedContent, $post);
+        }
 
         $cost = 1;
 

@@ -127,7 +127,7 @@ notice_replied_you: 回复我的
 post_top: 置顶
 like: 赞
 action_too_fast: 好可怕，速度太快了
-banner_announce: '欢迎来到Wpcraft，在这里你可以快速方便的创建自己的wordpress博客，支持更换主题、在线修改网站html/css/js、安装插件，感受创造的魅力！<b>立即<a data-pjax href="/blog/create/step/1">创建我的博客</a></b>'
+banner_announce: 欢迎来到Wpcraft，在这里你可以快速方便的创建自己的博客，感受创作之美！
 all: 全部
 hot: 热门
 site_state: 社区运行状态
@@ -135,7 +135,7 @@ site_since: 社区成立时间
 site_post_count: 主题数量
 site_comment_count: 回复数量
 site_user_count: 注册用户数量
-site_copyright: '&copy; 2018 Wpcraft - 9秒助你打造自己的博客'
+site_copyright: '@2018 Wpcraft - 9秒助你打造自己的博客'
 site_title: 'Wpcraft - 9秒助你打造自己的博客'
 site_name: Wpcraft
 user_place_in_site: 第count位Wpcraft用户
@@ -167,3 +167,5 @@ user_my_follower: 关注我的
 user_my_blog: 我创建的博客
 email: 邮箱
 user_setting_email_verified: 邮箱已验证通过
+community: 社区
+notice_comment_mention_you: 在评论中提到你

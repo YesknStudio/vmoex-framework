@@ -24,6 +24,8 @@ class Notice
     const TYPE_COMMENT_REPLAY = 4;
     const TYPE_THUMBUP_COMMENT = 5;
     const TYPE_BROADCAST = 6;
+    const TYPE_POST_MENTION = 7;
+    const TYPE_COMMENT_MENTION = 8;
 
     /**
      * @var int
@@ -71,12 +73,16 @@ class Notice
     private $content;
 
     /**
+     * @var string
+     * @ORM\Column(name="row_content", type="text",  options={"default":""})
+     */
+    private $rowContent = '';
+
+    /**
      * @var
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
-
-
 
     /**
      * Get id
@@ -254,5 +260,21 @@ class Notice
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRowContent()
+    {
+        return $this->rowContent;
+    }
+
+    /**
+     * @param string $rowContent
+     */
+    public function setRowContent($rowContent)
+    {
+        $this->rowContent = $rowContent;
     }
 }

@@ -124,6 +124,34 @@
 
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $('#editor-comment').atwho({
+                at: "@",
+                data: JSON.parse('{{ commentUsers|raw }}')
+            });
+
+            $(document).onPjax('click', '.comment-reply', function () {
+                window.location.href = '#comment-box';
+
+                let replayU = $(this).attr('data-atu');
+                let $editor = $('#editor-comment');
+                let comment = $editor.val();
+                let lastChar = comment.charAt(comment.length -1);
+
+                console.log(lastChar);
+
+                if (lastChar.length === 0 || lastChar === ' ' || lastChar === "\n") {
+                    $editor.val(comment + '@' + replayU + ' ');
+                } else {
+                    $editor.val(comment + ' @' + replayU + ' ');
+                }
+
+                setEndOfContenteditable(document.getElementById('editor-comment'));
+            })
+        })
+    </script>
 {% endblock %}
 
 {% block sidebar %}

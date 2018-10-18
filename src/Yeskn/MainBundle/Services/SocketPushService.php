@@ -43,6 +43,18 @@ class SocketPushService
         $this->socketPushHost = $container->getParameter('socket_push_host');
     }
 
+    public function push($username, $event, $data)
+    {
+        $this->client->post($this->socketPushHost , [
+            'form_params' => [
+                'type' => 'publish',
+                'to' => $username,
+                'event' => $event,
+                'data' => $data
+            ]
+        ]);
+    }
+
     public function pushAll($event, $data = [])
     {
         $this->client->post($this->socketPushHost , [
