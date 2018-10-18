@@ -17,6 +17,11 @@ $.fn.nameVal = function (name) {
     return $(this).findName(name).val();
 };
 
+$.fn.onPjax = function(event, $target, callback) {
+  $(this).off(event, $target);
+  $(this).on(event, $target, callback);
+};
+
 $.extend({
     round: function (value, precision) {
         if (precision === undefined) {

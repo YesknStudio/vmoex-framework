@@ -99,11 +99,7 @@
     </div>
 
      <script>
-         $(document).off('click', '#processBlogStep1Btn');
-         $(document).off('click', '#processBlogStep2Btn');
-         $(document).off('click', '#processBlogStep3Btn');
-
-         $(document).on('click', '#processBlogStep1Btn', function () {
+         $(document).onPjax('click', '#processBlogStep1Btn', function () {
              $.post('{{ path('blog_create', {step: 1}) }}', {
                  blogName: $('#blogName').val(),
                  blogDesc: $('#blogDesc').val()
@@ -116,7 +112,7 @@
              });
          });
 
-         $(document).on('click', '#processBlogStep2Btn', function () {
+         $(document).onPjax('click', '#processBlogStep2Btn', function () {
              $.post('{{ path('blog_create', {step: 2}) }}', {
                  subDomain: $('#blogDomain').val(),
              }, function (res) {
@@ -128,7 +124,7 @@
              });
          });
 
-         $(document).on('click', '#processBlogStep3Btn', function () {
+         $(document).onPjax('click', '#processBlogStep3Btn', function () {
              $.post('{{ path('blog_create', {step: 3}) }}', {
                  password: $('#blogPassword').val(),
              }, function (res) {

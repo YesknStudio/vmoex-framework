@@ -82,9 +82,14 @@
 
         <script type="text/javascript">
             $(function () {
-                $('.loading').remove();
-                $('body').fadeIn(1000);
-                $(function () { $("[data-toggle='tooltip']").tooltip(); });
+                $('html > .loading').remove();
+                let $body = $('body');
+
+                $body.fadeIn(1000);
+                $body.tooltip({
+                    selector: '[data-toggle=tooltip]'
+                });
+
                 if (window.Yeskn.messageCount || window.Yeskn.noticeCount) {
                     $('.nav-bell-dot').addClass('push-notifications-count');
                 } else {

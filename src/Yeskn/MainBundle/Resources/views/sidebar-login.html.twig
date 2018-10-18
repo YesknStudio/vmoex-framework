@@ -20,8 +20,7 @@
 
 <script>
     $(function () {
-        $(document).off('click', '.login-wechat');
-        $(document).on('click', '.login-wechat', function () {
+        $(document).onPjax('click', '.login-wechat', function () {
             bootoast({
                 message: '微信登录暂时没有开通哦',
                 type: 'warning',

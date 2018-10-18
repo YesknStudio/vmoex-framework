@@ -163,8 +163,7 @@
 
     <script>
         $(function () {
-            $(document).off('click', '#follow-user');
-            $(document).on('click', '#follow-user', function () {
+            $(document).onPjax('click', '#follow-user', function () {
                 $.ajax({
                     method: 'POST',
                     url: '{{ path("follow_user") }}',
@@ -185,8 +184,7 @@
                 })
             });
 
-            $(document).off('submit', '#messageForm');
-            $(document).on('submit', '#messageForm', function (e) {
+            $(document).onPjax('submit', '#messageForm', function (e) {
                 e.preventDefault();
 
                 let $this = $(this);
