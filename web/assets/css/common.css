@@ -668,7 +668,13 @@ footer .footer-flag {
     color: darkgray;
     font-size: 12px;
 }
-
+.text-oneline {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
 .comment-footer span.thumb {
     cursor: pointer;
 }

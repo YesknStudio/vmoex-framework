@@ -8,7 +8,7 @@
                 <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
             </b>
             <br>
-            <span class="text-small-gray">
+            <span class="text-small-gray text-oneline">
                 <a data-pjax href="{{ path('member_home', {username: blog.user.username}) }}">{{ blog.user.nickname }}</a>
                 创建于<span data-toggle="tooltip" title="{{ blog.createdAt|date }}">{{ blog.createdAt|ago }}</span>
             </span>
