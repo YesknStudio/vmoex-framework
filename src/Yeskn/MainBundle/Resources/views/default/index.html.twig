@@ -100,7 +100,7 @@
                                 {% if post.comments.count %}
                                     <span><i class="fa fa-commenting-o"></i>
                                         <a data-pjax href="{{ path('post_show', {id:post.id}) }}#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a>
-                                        最后来自<a href="{{ path('member_home', {username: post.lastCommentUser.username}) }}">{{ post.lastCommentUser.nickname }}</a>
+                                        最后来自<a data-pjax href="{{ path('member_home', {username: post.lastCommentUser.username}) }}">{{ post.lastCommentUser.nickname }}</a>
                                     </span>
                                 {% endif %}
                             </p>
