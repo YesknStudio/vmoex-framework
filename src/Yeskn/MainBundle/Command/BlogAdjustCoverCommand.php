@@ -13,6 +13,7 @@ use Predis\Client;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\File\File;
+use Yeskn\MainBundle\Entity\Blog;
 use Yeskn\Support\Command\AbstractCommand;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -25,7 +26,8 @@ class BlogAdjustCoverCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $blogs = $this->doctrine()->getRepository('YesknMainBundle:Blog')->findAll();
+        $blogs = $this->doctrine()->getRepository('YesknMainBundle:Blog')
+            ->findBy(['status' => Blog::STATUS_CREATED]);
 
         foreach ($blogs as $blog) {
             $this->connection()->executeQuery("use wpcraft");
