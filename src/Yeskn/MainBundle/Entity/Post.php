@@ -572,12 +572,8 @@ class Post implements ObjectManagerAware
      */
     public function getLastCommentUser()
     {
-        static $comment;
-
-        if (empty($comment)) {
-            $comment = $this->em->getRepository('YesknMainBundle:Comment')
-                ->findOneBy(['post' => $this], ['id' => 'DESC']);
-        }
+        $comment = $this->em->getRepository('YesknMainBundle:Comment')
+            ->findOneBy(['post' => $this], ['id' => 'DESC']);
 
         return $comment ? $comment->getUser() : null;
     }
