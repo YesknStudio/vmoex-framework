@@ -39,6 +39,8 @@ class BlogController extends AbstractController
             return $this->errorResponse('您尚未绑定邮箱，或者邮箱没有激活，请先<a data-pjax href="/user/setting#emailSetting">完善邮箱信息</a>再执行该操作');
         }
 
+        $user = $this->getUser();
+
         // admin没有限制
         if ($this->getUser()->getUsername() != 'admin') {
             if ($blog && $blog->getStatus() == Blog::STATUS_QUEUEING) {
@@ -52,9 +54,14 @@ class BlogController extends AbstractController
             }
         }
 
-        if ($step == 1 && empty($blog) && $request->isMethod('POST')) {
-            $blog = new Blog();
-            $blog->setUser($this->getUser());
+        if ($step == 1 && $request->isMethod('POST')) {
+            if (empty($blog)) {
+                $blog = new Blog();
+                $blog->setUser($this->getUser());
+            } else if ($user->getUsername() == 'admin' && $blog->getStatus() == Blog::STATUS_CREATED) {
+                $blog = new Blog();
+                $blog->setUser($this->getUser());
+            }
         }
 
         if ($step != 1 && empty($blog)) {
