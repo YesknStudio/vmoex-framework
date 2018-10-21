@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Yeskn\MainBundle\Entity\Blog;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
@@ -169,7 +170,7 @@ class UserController extends AbstractController
     {
         $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
 
-        $blogList = $blogRepo->findBy(['user' => $this->getUser()], ['createdAt' => 'DESC']);
+        $blogList = $blogRepo->findBy(['user' => $this->getUser(), 'status' => Blog::STATUS_CREATED], ['createdAt' => 'DESC']);
 
         return $this->render('@YesknMain/user/blog.html.twig',
             $this->getUserHomeInfo() + [

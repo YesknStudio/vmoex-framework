@@ -876,3 +876,74 @@ ul.pagination {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
+
+.stepbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.stepbar .step-item {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.stepbar .step-item:first-child {
+}
+
+.stepbar .step-item > div {
+    float: left;
+}
+
+.stepbar .step-item .step {
+    color: #fff;
+    text-align: left;
+    line-height: 25px;
+    height: 25px;
+    background: #74cee2;
+}
+
+.stepbar .step:first-child {
+    padding-left: 10px;
+}
+
+.stepbar .step-item:not(:first-child) {
+}
+
+.stepbar .step-item .step {
+    width: 100px;
+}
+
+.stepbar .step-item:not(.active) .step {
+    background-color: #d0e5f2;
+}
+
+.stepbar .step-item .step:first-child {
+    width: 125px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.stepbar .step-item .step-badge {
+    width: 0;
+    height: 0;
+    border-width: 12.5px;
+    border-style: solid;
+}
+
+.stepbar .step-item .step-badge.step-badge-head {
+    border-color: #74cee2 #74cee2 #74cee2 transparent;
+}
+
+.stepbar .step-item .step-badge.step-badge-tail {
+    border-color: transparent transparent transparent #74cee2;
+}
+
+.stepbar .step-item:not(.active) .step-badge-head {
+    border-color: #d0e5f2 #d0e5f2 #d0e5f2 transparent;
+}
+
+.stepbar .step-item:not(.active) .step-badge-tail {
+    border-color: transparent transparent transparent #d0e5f2;
+}

@@ -2,9 +2,6 @@
 
 namespace Yeskn\MainBundle\Entity;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectManagerAware;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="Yeskn\MainBundle\Repository\PostRepository")
  */
-class Post implements ObjectManagerAware
+class Post
 {
     /**
      * @var EntityManager
@@ -556,25 +553,5 @@ class Post implements ObjectManagerAware
     public function onCreate()
     {
         $this->setLastCommentAt(new \DateTime());
-    }
-
-    public function injectObjectManager(
-        ObjectManager $objectManager,
-        ClassMetadata $classMetadata
-    ) {
-        $this->em = $objectManager;
-    }
-
-    /**
-     * 获取文章最后回复的用户
-     *
-     * @return User
-     */
-    public function getLastCommentUser()
-    {
-        $comment = $this->em->getRepository('YesknMainBundle:Comment')
-            ->findOneBy(['post' => $this], ['id' => 'DESC']);
-
-        return $comment ? $comment->getUser() : null;
     }
 }

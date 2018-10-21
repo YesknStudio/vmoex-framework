@@ -52,7 +52,7 @@ class BlogController extends AbstractController
             }
         }
 
-        if ($step == 1 && $request->isMethod('POST')) {
+        if ($step == 1 && empty($blog) && $request->isMethod('POST')) {
             $blog = new Blog();
             $blog->setUser($this->getUser());
         }
