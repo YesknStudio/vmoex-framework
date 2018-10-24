@@ -37,7 +37,10 @@ class StatusController extends Controller
     {
         $response = new ApiOk();
 
-        $response->headers->setCookie(new Cookie('_hide_announce', 1));
+        $announce = $this->getDoctrine()->getRepository('YesknMainBundle:Announce')
+            ->findOneBy(['show' => 1], ['id' => 'DESC']);
+
+        $response->headers->setCookie(new Cookie('_announce', $announce->getId()));
 
         return $response;
     }

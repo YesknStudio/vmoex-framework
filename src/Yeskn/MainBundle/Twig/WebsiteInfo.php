@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Yeskn\MainBundle\Entity\Announce;
 
 class WebsiteInfo extends \Twig_Extension
 {
@@ -56,7 +57,22 @@ class WebsiteInfo extends \Twig_Extension
 
     public function hideAnnounceAlert()
     {
-        return (boolean) $this->request->cookies->has('_hide_announce');
+        $info = $this->websiteInfo();
+
+        if (empty($info['announce'])) {
+            return true;
+        }
+
+        /** @var Announce $announce */
+        $announce = $info['announce'];
+
+        $cookieId =  $this->request->cookies->get('_announce');
+
+        if ($cookieId != $announce->getId()) {
+            return false;
+        }
+
+        return true;
     }
 
     public function getFunctions()
