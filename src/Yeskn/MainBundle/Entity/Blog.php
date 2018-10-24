@@ -90,6 +90,12 @@ class Blog
     private $status = 'starting';
 
     /**
+     * @var boolean
+     * @ORM\Column(name="is_special", type="boolean", options={"default":false})
+     */
+    private $isSpecial;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -296,5 +302,21 @@ class Blog
     public function setDevices($devices)
     {
         $this->devices = $devices;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSpecial()
+    {
+        return $this->isSpecial;
+    }
+
+    /**
+     * @param bool $isSpecial
+     */
+    public function setIsSpecial($isSpecial)
+    {
+        $this->isSpecial = $isSpecial;
     }
 }
