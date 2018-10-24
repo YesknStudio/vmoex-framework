@@ -44,6 +44,11 @@ class WebsiteInfo extends \Twig_Extension
             foreach ($res as $value) {
                 $return[$value->getName()] = $value->getValue();
             }
+
+            $announce = $this->em->getRepository('YesknMainBundle:Announce')
+                ->findOneBy(['show' => 1], ['id' => 'DESC']);
+
+            $return['announce'] = $announce;
         }
 
         return $return;

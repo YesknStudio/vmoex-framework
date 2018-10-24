@@ -1,0 +1,36 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="chat-panel panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bullhorn fa-fw"></i> {{ '历史公告'|trans }}
+                </div>
+                <div class="panel-body" id="chat-box">
+                    {% if list is not empty %}
+                        <ul class="chat">
+                            {% for item in list %}
+                                <li class="clearfix">
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <small class="text-muted" data-toggle="tooltip" title="{{ item.createdAt|date }}">
+                                                <i class="fa fa-clock-o fa-fw"></i> {{ item.createdAt|ago }}
+                                            </small>
+                                        </div>
+                                        <p class="pull-left" style="margin-top: 5px">{{ item.content|raw }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            {{ 'sorry_no_content'|trans }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
