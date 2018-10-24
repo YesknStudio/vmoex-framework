@@ -91,9 +91,9 @@ class Blog
 
     /**
      * @var boolean
-     * @ORM\Column(name="is_special", type="boolean", options={"default":false})
+     * @ORM\Column(name="priority", type="integer", options={"default":0})
      */
-    private $isSpecial;
+    private $priority;
 
     /**
      * @var \DateTime
@@ -307,16 +307,16 @@ class Blog
     /**
      * @return bool
      */
-    public function isSpecial()
+    public function getPriority()
     {
-        return $this->isSpecial;
+        return $this->priority;
     }
 
     /**
-     * @param bool $isSpecial
+     * @param bool $priority
      */
-    public function setIsSpecial($isSpecial)
+    public function setPriority($priority)
     {
-        $this->isSpecial = $isSpecial;
+        $this->priority = $priority;
     }
 }

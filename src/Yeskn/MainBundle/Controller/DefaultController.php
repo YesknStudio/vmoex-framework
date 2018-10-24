@@ -28,7 +28,7 @@ class DefaultController extends Controller
         $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
 
         $blogList = $blogRepo->findBy(['status' => Blog::STATUS_CREATED], [
-            'isSpecial' => 'DESC',
+            'priority' => 'DESC',
             'createdAt' => 'DESC'
         ]);
 
