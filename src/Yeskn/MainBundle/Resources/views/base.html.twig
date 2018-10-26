@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Yeskn">
     {% block title %} <title>{{ 'site_title'|trans }}</title> {% endblock %}
-    {% if isPJax() == false %}
+    {% if isPjax() == false %}
         {% block stylesheets %}
             {% stylesheets
                 'assets/lib/bootstrap/dist/css/bootstrap.min.css'
