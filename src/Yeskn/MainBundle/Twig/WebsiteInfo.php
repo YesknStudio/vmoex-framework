@@ -75,11 +75,17 @@ class WebsiteInfo extends \Twig_Extension
         return true;
     }
 
+    public function isPjax()
+    {
+        return (bool) $this->request->get('_pjax');
+    }
+
     public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction('websiteInfo', [$this, 'websiteInfo']),
             new \Twig_SimpleFunction('hideAnnounceAlert', [$this,'hideAnnounceAlert']),
+            new \Twig_SimpleFunction('isPjax', [$this, 'isPjax']),
         ];
     }
 }

@@ -195,14 +195,6 @@ class GlobalValue extends \Twig_Extension
         return $user['avatar'];
     }
 
-    public function getFilters()
-    {
-        return array(
-            new \Twig_SimpleFilter('signed', array($this,'signed')),
-            new \Twig_SimpleFilter('ago', array($this,'ago')),
-        );
-    }
-
     public function javascriptVariables($postId)
     {
         $user = $this->tokenStorage->getToken()->getUser();
@@ -260,6 +252,14 @@ class GlobalValue extends \Twig_Extension
         ];
 
         return json_encode($result);
+    }
+
+    public function getFilters()
+    {
+        return array(
+            new \Twig_SimpleFilter('signed', array($this,'signed')),
+            new \Twig_SimpleFilter('ago', array($this,'ago')),
+        );
     }
 
     public function getFunctions()

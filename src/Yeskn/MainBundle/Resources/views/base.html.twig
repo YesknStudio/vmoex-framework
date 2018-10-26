@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     {% include '@YesknMain/javascripts/loading.html.twig' %}
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Yeskn">
     {% block title %} <title>{{ 'site_title'|trans }}</title> {% endblock %}
-    {% if app.request.get('_pjax') is empty %}
+    {% if isPJax() == false %}
         {% block stylesheets %}
             {% stylesheets
                 'assets/lib/bootstrap/dist/css/bootstrap.min.css'
@@ -38,7 +38,7 @@
 
 <body style="display: none">
 
-{% if app.request.get('_pjax') is empty %}
+{% if isPjax() == false %}
     {% block navbar %}
         {% include '@YesknMain/nav.html.twig' %}
     {% endblock %}
@@ -59,7 +59,7 @@
     {% endblock %}
 </div>
 
-{% if app.request.get('_pjax') is empty %}
+{% if isPjax() == false %}
     {% block footer %}
         {% include '@YesknMain/footer.html.twig' %}
     {% endblock %}
