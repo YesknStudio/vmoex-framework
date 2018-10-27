@@ -21,7 +21,7 @@
             <link rel="stylesheet" href="https://static.yeskn.com/bootoast/css/bootoast.css">
         {% endstylesheets %}
     {% endblock %}
-    {% block head_js_link %}
+    {% block head_javascripts %}
         {% javascripts
             'assets/lib/jquery/dist/jquery.min.js'
             filter='uglifyjs2' output='build/js/header.js' %}
@@ -54,7 +54,6 @@
     {% endblock %}
 </div>
 
-
 {% block footer %}
     {% include '@YesknMain/footer.html.twig' %}
 {% endblock %}
@@ -75,30 +74,30 @@
         <script src="{{ asset_url }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
         <script src="https://static.yeskn.com/bootoast/js/bootoast.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('html > .loading').remove();
+                let $body = $('body');
+
+                $body.fadeIn(1000);
+                $body.tooltip({
+                    selector: '[data-toggle=tooltip]'
+                });
+
+                if (window.Yeskn.messageCount || window.Yeskn.noticeCount) {
+                    $('.nav-bell-dot').addClass('push-notifications-count');
+                } else {
+                    $('.nav-bell-dot').removeClass('push-notifications-count');
+                }
+
+                if (window.Yeskn.lastChatId*1 !== '{{ app.request.cookies.get('_last_chat_id') }}'*1) {
+                    $('.nav-chat-dot').addClass('push-notifications-count');
+                } else {
+                    $('.nav-chat-dot').removeClass('push-notifications-count');
+                }
+            })
+        </script>
     {% endjavascripts %}
-    <script type="text/javascript">
-        $(function () {
-            $('html > .loading').remove();
-            let $body = $('body');
-
-            $body.fadeIn(1000);
-            $body.tooltip({
-                selector: '[data-toggle=tooltip]'
-            });
-
-            if (window.Yeskn.messageCount || window.Yeskn.noticeCount) {
-                $('.nav-bell-dot').addClass('push-notifications-count');
-            } else {
-                $('.nav-bell-dot').removeClass('push-notifications-count');
-            }
-
-            if (window.Yeskn.lastChatId*1 !== '{{ app.request.cookies.get('_last_chat_id') }}'*1) {
-                $('.nav-chat-dot').addClass('push-notifications-count');
-            } else {
-                $('.nav-chat-dot').removeClass('push-notifications-count');
-            }
-        })
-    </script>
 {% endblock %}
 </body>
 </html>
