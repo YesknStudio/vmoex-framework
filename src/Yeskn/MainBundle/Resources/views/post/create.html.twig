@@ -34,6 +34,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).onPjax('submit', '#createTopic', function (event) {
+            event.preventDefault();
+            $.pjax.submit(event, '.content-body', {
+                fragment: '.content-body',
+                timeout: 6000
+            })
+        })
+    </script>
 {% endblock %}
 
 {% block sidebar %}
