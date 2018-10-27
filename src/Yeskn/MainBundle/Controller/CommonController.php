@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CommonController extends Controller
 {
@@ -116,5 +117,19 @@ class CommonController extends Controller
         }
 
         return $response;
+    }
+
+    /**
+     * @Route("/test")
+     */
+    public function test()
+    {
+        if ($this->getParameter('kernel.environment') !== 'dev') {
+            die();
+        }
+
+        return $this->render('emails/new-comment.html.twig', [
+            'notice' => $this->getDoctrine()->getRepository('YesknMainBundle:Notice')->findOneBy([])
+        ]);
     }
 }

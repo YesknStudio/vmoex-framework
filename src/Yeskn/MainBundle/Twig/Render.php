@@ -21,6 +21,18 @@ class Render extends \Twig_Extension
         $this->template = $template;
     }
 
+    public function renderEmailNotice(Notice $notice)
+    {
+        switch ($notice->getType()) {
+            case Notice::TYPE_COMMENT_POST:
+                return $this->template->render('emails/new-comment.html.twig', ['notice' => $notice]);
+            case Notice::TYPE_COMMENT_MENTION:
+                return $this->template->render('emails/mention-comment.html.twig', ['notice' => $notice]);
+        }
+
+        throw new \Exception('un-support notice type ' . $notice->getType());
+    }
+
     public function renderNoticeItem(Notice $notice)
     {
         switch ($notice->getType()) {

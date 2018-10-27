@@ -19,7 +19,6 @@ class NoticeService extends AbstractService
 {
     private $pushService;
     private $mailer;
-    private $template;
     private $render;
 
     public function __construct(EntityManagerInterface $em
@@ -63,6 +62,7 @@ class NoticeService extends AbstractService
      * @param User $pushTo
      * @param $type
      * @param $content
+     * @param $object
      */
     public function add(User $creator, User $pushTo, $type, $content, $object)
     {
@@ -95,7 +95,7 @@ class NoticeService extends AbstractService
         $message = (new \Swift_Message('Wpcraft通知'))
             ->setFrom('no-replay@wpcraft.cn')
             ->setTo($email)
-            ->setBody($this->render->renderNoticeItem($notice), 'text/html');
+            ->setBody($this->render->renderEmailNotice($notice), 'text/html');
 
         $this->mailer->send($message);
     }

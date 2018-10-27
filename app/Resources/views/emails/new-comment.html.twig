@@ -1,0 +1,18 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block email_title %}
+    Wpcraft 有人评论了您的帖子
+{% endblock %}
+
+{% block email_content %}
+    <div style="padding-bottom: 10px">
+        <img src="{{ absolute_url(asset(notice.createdBy.avatar)) }}" alt="" width="30" height="30" style="border-radius: 3px;vertical-align:middle">
+        &nbsp;
+        <a data-pjax href="{{ url('member_home', {username: notice.createdBy.username}) }}">{{ notice.createdBy.nickname }}</a>
+        {{ notice.createdAt|ago }}{{ 'notice_replied_you'|trans }} <a data-pjax href="{{ url('post_show', {id: notice.object.id}) }}">{{ notice.object.title }}</a>：
+    </div>
+
+    <blockquote class="home-bq">
+        {{ notice.content.content|raw }}
+    </blockquote>
+{% endblock %}
