@@ -13,8 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class CommonController extends Controller
 {
@@ -118,21 +116,5 @@ class CommonController extends Controller
         }
 
         return $response;
-    }
-
-    /**
-     * @Route("/test")
-     */
-    public function test()
-    {
-        $env = $this->getParameter('kernel.environment');
-
-        if ($env !== 'dev') {
-            return new Response('404 not found');
-        }
-
-        return $this->render('emails/verify-email.html.twig', [
-            'code' => 1233
-        ]);
     }
 }
