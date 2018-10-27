@@ -14,10 +14,29 @@ web_profiler:
 monolog:
     handlers:
         main:
-            type: stream
+            type: fingers_crossed
             path: '%kernel.logs_dir%/%kernel.environment%.log'
-            level: debug
+            action_level: critical
             channels: ['!event']
+            handler:      grouped
+        grouped:
+            type:    group
+            members: [streamed, deduplicated]
+        streamed:
+            type:  stream
+            path:  '%kernel.logs_dir%/%kernel.environment%.log'
+            level: debug
+        deduplicated:
+            type:    deduplication
+            handler: swift
+        swift:
+            type:       swift_mailer
+            from_email: '%mailer_user%'
+            to_email:   '%mailer_user%'
+            subject:    'An Error Occurred! %%message%%'
+            level:      error
+            formatter:  monolog.formatter.html
+            content_type: text/html
         console:
             type: console
             process_psr_3_messages: false
