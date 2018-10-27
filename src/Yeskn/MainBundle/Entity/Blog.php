@@ -93,7 +93,7 @@ class Blog
      * @var boolean
      * @ORM\Column(name="priority", type="integer", options={"default":0})
      */
-    private $priority;
+    private $priority = 0;
 
     /**
      * @var \DateTime
