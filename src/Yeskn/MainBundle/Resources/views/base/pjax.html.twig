@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Yeskn">
+    {% block title %} <title>{{ 'site_title'|trans }}</title> {% endblock %}
+</head>
+
+<body>
+
+<div class="content-body container">
+    {% block page_wraper %}
+        <div class="row content-row">
+            <div class="col-lg-8 content-main" role="main">
+                {% block main %}{% endblock %}
+            </div>
+            <div id="sidebar" class="col-lg-4" role="complementary">
+                {% block sidebar %}
+                    {% include '@YesknMain/sidebar.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+</div>
+
+</body>
+</html>
