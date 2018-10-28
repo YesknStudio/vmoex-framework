@@ -43,3 +43,6 @@ parameters:
 
     github_client_id: ~
     github_client_secret: ~
+
+    baidu_trans.appid: ~
+    baidu_trans.key: ~

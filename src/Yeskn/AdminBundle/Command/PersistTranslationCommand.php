@@ -19,7 +19,7 @@ class PersistTranslationCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('persist-transaction');
+        $this->setName('transaction:persist');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -34,8 +34,8 @@ class PersistTranslationCommand extends ContainerAwareCommand
         $translationRepository = $container->get('doctrine')->getRepository('YesknMainBundle:Translation');
         $em = $container->get('doctrine.orm.entity_manager');
 
-        $messages = [$en, $jp, $cn, $tw];
-        $types = ['English', 'Japanese', 'Chinese', 'Taiwanese'];
+        $messages = [$cn, $en, $jp, $tw];
+        $types = ['Chinese', 'English', 'Japanese', 'Taiwanese'];
 
         foreach ($messages as $typeIndex => $message) {
             $type = $types[$typeIndex];

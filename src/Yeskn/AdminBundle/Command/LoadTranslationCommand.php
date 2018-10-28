@@ -31,7 +31,7 @@ class LoadTranslationCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this->setName('load-translation');
+        $this->setName('translation:load');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

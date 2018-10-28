@@ -10,9 +10,15 @@
 namespace Yeskn\Support\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {
+    protected $input;
+    protected $output;
+
     /**
      * @return \Doctrine\Bundle\DoctrineBundle\Registry|object
      * @throws \LogicException
@@ -67,5 +73,31 @@ abstract class AbstractCommand extends ContainerAwareCommand
     public function get($service)
     {
         return $this->getContainer()->get($service);
+    }
+
+    /**
+     * @param $name
+     * @throws \LogicException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     */
+    public function repo($name)
+    {
+        $this->doctrine()->getRepository($name);
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $this->input = $input;
+        $this->output = $output;
+    }
+
+    /**
+     * @return SymfonyStyle
+     */
+    public function io()
+    {
+        $io = new SymfonyStyle($this->input, $this->output);
+        return $io;
     }
 }

@@ -113,7 +113,7 @@
         <div class="form-group">
             <label class="control-label required" for="editor-trigger">{{ 'post_add_comment'|trans }}</label>
             <textarea class="form-control" name="editor-comment" id="editor-comment" cols="30" rows="5" title=""></textarea>
-            <p class="help-block">{{ 'post_add_comment'|trans }}~</p>
+            <p class="help-block">{{ 'post_add_comment_hint'|trans }}</p>
         </div>
         <div class="form-group">
             {% if app.user %}
@@ -139,8 +139,6 @@
                 let $editor = $('#editor-comment');
                 let comment = $editor.val();
                 let lastChar = comment.charAt(comment.length -1);
-
-                console.log(lastChar);
 
                 if (lastChar.length === 0 || lastChar === ' ' || lastChar === "\n") {
                     $editor.val(comment + '@' + replayU + ' ');
