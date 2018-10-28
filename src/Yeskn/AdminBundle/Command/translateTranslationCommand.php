@@ -73,25 +73,24 @@ class translateTranslationCommand extends AbstractCommand
 
     public function translate($q, $from, $to)
     {
-        $salt = mt_rand(100000, 999999);
-        $encode = urlencode($q);
+        $salt = (string) mt_rand(100000, 999999);
 
         $response = $this->client->post('https://fanyi-api.baidu.com/api/trans/vip/translate', [
             'form_params' => [
-                'q' => $encode,
+                'q' => $q,
                 'from' => $from,
                 'to' => $to,
                 'appid' => $this->baiduId,
                 'salt' => $salt,
-                'sign' => md5($this->baiduId . $q . $salt . $this->baiduKey)
+                'sign' => md5((string) $this->baiduId . $q . $salt . $this->baiduKey)
             ]
         ]);
 
         $result = $response->getBody()->getContents();
         $result = json_decode($result);
 
-        if (property_exists($result, 'dst') && strlen($result->dst) > 0) {
-            return $result->dst;
+        if (property_exists($result, 'trans_result') && strlen($result->trans_result) > 0) {
+            return $result->trans_result[0]['dst'];
         } else {
             throw new \Exception('translate token ' . $q . ' error: ' . json_encode($result));
         }
