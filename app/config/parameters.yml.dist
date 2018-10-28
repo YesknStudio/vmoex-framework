@@ -46,3 +46,5 @@ parameters:
 
     baidu_trans.appid: ~
     baidu_trans.key: ~
+
+    nginx.cname_path: ~

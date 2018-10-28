@@ -1,0 +1,3 @@
+if ($http_host ~* "{{ subdomain }}") {
+    return 301 http://{{ cname }}$request_uri;
+}
