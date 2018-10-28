@@ -9,7 +9,6 @@
 
 namespace Yeskn\MainBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,7 +32,7 @@ class BlogCnameCommand extends AbstractCommand
         $subdomain = $input->getOption('subdomain');
         $cname = $input->getOption('cname');
 
-        $twig = $this->getContainer()->get(EngineInterface::class);
+        $twig = $this->getContainer()->get('templating');
 
         $stub301 = $twig->render('stub/nginx-301.html.twig', [
             'cname' => $cname,
