@@ -87,10 +87,10 @@ class translateTranslationCommand extends AbstractCommand
         ]);
 
         $result = $response->getBody()->getContents();
-        $result = json_decode($result);
+        $result = json_decode($result, true);
 
-        if (!empty($result->trans_result)) {
-            return $result->trans_result[0]['dst'];
+        if (!empty($result['trans_result'])) {
+            return $result['trans_result'][0]['dst'];
         } else {
             throw new \Exception('translate token ' . $q . ' error: ' . json_encode($result));
         }
