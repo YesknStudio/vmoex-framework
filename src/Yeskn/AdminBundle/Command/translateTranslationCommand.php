@@ -62,7 +62,7 @@ class translateTranslationCommand extends AbstractCommand
 
             if (strlen($tran->getTaiwanese()) === 0) {
                 $ret = $this->translate($tran->getChinese(), 'zh', 'cht');
-                $tran->setJapanese($ret);
+                $tran->setTaiwanese($ret);
             }
 
             $this->em()->flush();
