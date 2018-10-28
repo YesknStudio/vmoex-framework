@@ -21,11 +21,11 @@ nav_user_home: 个人中心
 nav_user_setting: 个人设置
 footer_online_user_count: 当前在线count人
 footer_oneline_user_most: 历史最高
-wpcast_slogan: '9秒助你打造自己的博客'
+wpcast_slogan: 9秒助你打造自己的博客
 trends: 动态
 blind.chat: 聊聊
 search: 搜索
-about: '关于'
+about: 关于
 messages: 私信
 notifications: 通知
 comment: 评论
@@ -42,16 +42,16 @@ activity: 活跃度
 wpcast_available_with: 'Wpcast 可用于: '
 用户名: 用户名
 邮箱: 邮箱
-'密码': '密码'
+密码: 密码
 verify_email: '你的邮箱尚未激活，<a data-pjax href="/user/setting#emailSetting" class="alert-link">点此激活</a>'
 在线可撩: 在线可撩
-'加入于': '加入于'
+加入于: 加入于
 第count位Vmoex用户: 第count位Vmoex用户
 最后在线时间：time: 最后在线时间：time
 name发布的帖子: name发布的帖子
 name的回复: name的回复
 'time 发表在': 'time 发表在'
-'name的关注': 'name的关注'
+name的关注: name的关注
 name的粉丝: name的粉丝
 发送成功: 发送成功
 documents: 交流分享
@@ -66,30 +66,30 @@ trends_description: null
 历史最高: null
 致谢: null
 buy_beer: null
-'全部': null
+全部: null
 热门: 热力门
 追剧: null
 福利: null
 插画: null
 歌姬: null
 游戏: null
-'站务公告': null
+站务公告: null
 漫展: null
 查看所有通知: null
 查看所有私信: null
 我的主页: null
 个人设置: null
-'添加新的评论': null
+添加新的评论: null
 发表有颜色的评论将消耗5金币哦: null
 好可怕，速度太快了: null
-'关于作者': null
+关于作者: null
 拉黑: null
 昵称: null
 状态: null
 头像: null
 保存: null
 修改: null
-'修改密码': null
+修改密码: null
 支持我们: null
 个新的粉丝: null
 赞: null
@@ -100,25 +100,25 @@ blind_description: 随便聊聊。
 主题数量: null
 回复数量: null
 注册用户数量: null
-'添加': null
-'请先登录': null
+添加: null
+请先登录: null
 Vmoex当前板块数量: null
 vmoex_available_with: null
 userhome_send_message: 发送私信
-userhome_has_followed: '已经关注'
-userhome_follow: '关注'
+userhome_has_followed: 已经关注
+userhome_follow: 关注
 userhome_block: 屏蔽
 userhome_no_recent_reply: 该用户最近没有回复
 userhome_he_is_cold: '比较高冷?，目前没有关注任何人。'
 userhome_he_has_no_follower: 名声不佳，没有任何粉丝╮(╯_╰)╭
-post_add_comment: '添加评论'
-post_no_comment: '文章没有评论'
+post_add_comment: 添加评论
+post_no_comment: 文章没有评论
 chat_sorry_co_content: 抱歉，暂时没有聊天消息
-chat_please_type: '请输入'
+chat_please_type: 请输入
 send: 发送
 please_login: 请登录
-why_this: '为什么会这样？'
-userhome_no_published_post: '用户目前没有发布文章'
+why_this: 为什么会这样？
+userhome_no_published_post: 用户目前没有发布文章
 reply: 回复
 notice_my_notice: 我的通知
 notice_unread: 未读通知
@@ -128,7 +128,7 @@ post_top: 置顶
 like: 赞
 action_too_fast: 好可怕，速度太快了
 banner_announce: '欢迎来到Wpcraft，在这里你可以快速方便的创建自己的wordpress博客，支持更换主题、在线修改网站html/css/js、安装插件，感受创造的魅力！<b>立即<a data-pjax href="/blog/create/step/1">创建我的博客</a></b>'
-all: '全部'
+all: 全部
 hot: 热门
 site_state: 社区运行状态
 site_since: 社区成立时间
@@ -147,26 +147,26 @@ dsdsd: sdsdsdsd
 user_my_messages: 我的私信
 user_my_received_messages: 我接收的
 user_my_sent_messages: 我发出的
-sorry_no_content: '抱歉，暂时没有任何内容！'
-user_you_send_message_to: '你对receiver说：'
-user_send_message_to_you: '对你说：'
-Title: '标题'
+sorry_no_content: 抱歉，暂时没有任何内容！
+user_you_send_message_to: 你对receiver说：
+user_send_message_to_you: 对你说：
+Title: 标题
 Cover: 封面
-Detail: '详情'
+Detail: 详情
 latest_blogs: 最新创建
 nav_create_blog: 创建博客
 nav_create_post: 创建新主题
-'Old password': '老密码'
-'New Password': '新密码'
-'Repeat Password': '重复密码'
+'Old password': 老密码
+'New Password': 新密码
+'Repeat Password': 重复密码
 home_now_register: 立即注册！
 user_my_posts: 我的帖子
 user_my_comments: 我的评论
-user_my_following: '我的关注'
-user_my_follower: '关注我的'
+user_my_following: 我的关注
+user_my_follower: 关注我的
 user_my_blog: 我创建的博客
 email: 邮箱
 user_setting_email_verified: 邮箱已验证通过
 community: 社区
-notice_comment_mention_you: '在评论中提到你'
-post_add_comment_hint: '请尽量添加有意义的评论。'
+notice_comment_mention_you: 在评论中提到你
+post_add_comment_hint: 请尽量添加有意义的评论。

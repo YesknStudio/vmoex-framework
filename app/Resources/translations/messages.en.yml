@@ -29,7 +29,7 @@ search: Search
 messages: Msg
 notifications: Notice
 hello_stranger: 'Hello, Stranger !'
-hello_stranger_detail: null
+hello_stranger_detail: 'Wpcraft can quickly help you create your own blog, based on Wordpress, simple to operate, but very powerful'
 my.status: 'My Status'
 hot.users: 'Activist Users'
 today.hot.topics: 'Hot Topics Today'
@@ -42,44 +42,44 @@ wpcast_available_with: 'wpcast available with: '
 历史最高: 'The highest in history'
 致谢: Thanks
 buy_beer: 'Buy Me '
-'全部': All
+全部: All
 热门: Hot
 追剧: Tv
 福利: Wel
 插画: Picture
 歌姬: 'Hawayi Music'
 游戏: Game
-'站务公告': Announce
+站务公告: Announce
 漫展: ComicDis
 用户名: Username
 邮箱: Email
-'密码': Password
+密码: Password
 查看所有通知: 'All Notifications'
 查看所有私信: 'All Messages'
 我的主页: 'My Homepage'
 个人设置: Setting
 verify_email: 'Your Email is not activated，<a href="javascript:" class="alert-link">Click to Activate</a>'
-'添加新的评论': 'Add new Comment'
+添加新的评论: 'Add new Comment'
 发表有颜色的评论将消耗5金币哦: 'A color comment will consume 5 gold coins.'
 好可怕，速度太快了: 'It''s awful, the speed is too fast'
-'关于作者': 'the author'
+关于作者: 'the author'
 拉黑: Block
 昵称: Nickname
 状态: Status
 头像: Avatar
 保存: Save
 修改: Modity
-'修改密码': 'Modity Password'
+修改密码: 'Modity Password'
 支持我们: 'Support Us'
 个新的粉丝: ' new follower'
 在线可撩: online
-'加入于': 'joined at '
+加入于: 'joined at '
 第count位Vmoex用户: 'the count''st Vmoex member'
 最后在线时间：time: 'last online time：time'
 name发布的帖子: 'name''s topics'
 name的回复: 'name'' comments'
 'time 发表在': 'time posted at'
-'name的关注': 'name''s following'
+name的关注: 'name''s following'
 name的粉丝: 'name'' followers'
 发送成功: 'send success'
 赞: Like
@@ -92,52 +92,52 @@ blind_description: '"Blind Chat" is an online chat function provided by the Vmoe
 注册用户数量: 'Memember Count'
 documents: Documents
 support: Support
-'添加': null
-'请先登录': null
+添加: null
+请先登录: null
 Vmoex当前板块数量: null
-nav_messages: null
-nav_new_fans: null
-nav_all_notifications: null
-nav_user_home: null
-nav_user_setting: null
-footer_online_user_count: null
-footer_oneline_user_most: null
-wpcast_slogan: null
+nav_messages: 'Check all private letters'
+nav_new_fans: 'A new fan'
+nav_all_notifications: 'View all notices'
+nav_user_home: 'Personal Center'
+nav_user_setting: 'Personal settings'
+footer_online_user_count: 'Current online count people'
+footer_oneline_user_most: 'The highest in history'
+wpcast_slogan: '9 seconds to help you build your own blog.'
 vmoex_available_with: null
-userhome_send_message: null
+userhome_send_message: 'Send a private letter'
 userhome_has_followed: 'has followed'
 userhome_follow: follow
 userhome_block: block
-userhome_no_recent_reply: null
-userhome_he_is_cold: null
-userhome_he_has_no_follower: null
-post_add_comment: null
-post_no_comment: null
-chat_sorry_co_content: null
-chat_please_type: null
-send: null
-please_login: null
-why_this: null
-userhome_no_published_post: null
-reply: null
+userhome_no_recent_reply: 'The user has not responded recently.'
+userhome_he_is_cold: 'Relatively cold, there is no concern for anyone at present.'
+userhome_he_has_no_follower: 'No reputation, no fans.'
+post_add_comment: 'Add comments'
+post_no_comment: 'The article did not comment.'
+chat_sorry_co_content: 'Sorry, there is no chat message for the time being.'
+chat_please_type: 'Please enter'
+send: 'Send out'
+please_login: 'Please log in'
+why_this: 'Why is that?'
+userhome_no_published_post: 'Users do not publish articles at present.'
+reply: Reply
 notice_my_notice: 'My Notice'
-notice_unread: null
+notice_unread: 'Unread notifications'
 notice_read: 'red notice'
-notice_replied_you: null
+notice_replied_you: 'Reply to me'
 post_top: Top
-like: null
-action_too_fast: null
-banner_announce: null
-all: null
+like: Fabulous
+action_too_fast: 'Terrible. It''s too fast.'
+banner_announce: 'Welcome to Wpcraft, where you can quickly and easily create your own Wordpress blog, to support changing themes, online site modification HTML / CSS / js, install plug-ins, feel the charm of creation! <b> immediately <a data-pjax href= "/blog/create/step/1" > create my blog </a></b>'
+all: whole
 hot: Hot
 site_state: dsds
-site_since: null
-site_post_count: null
-site_comment_count: null
-site_user_count: null
-site_copyright: null
-site_title: null
-site_name: null
+site_since: 'Community establishment time'
+site_post_count: 'Number of topics'
+site_comment_count: 'Reply quantity'
+site_user_count: 'Number of registered users'
+site_copyright: '@2018 Wpcraft - 9 seconds to help you build your own blog.'
+site_title: 'Wpcraft - 9 seconds to help you build your own blog.'
+site_name: Wpcraft
 user_place_in_site: 'the count''st Vmoex member'
 footer_available_with: 'available with: '
 yingwe: ds
@@ -150,23 +150,23 @@ user_my_sent_messages: Send
 sorry_no_content: 'Sorry, there is no content yet!'
 user_you_send_message_to: 'you said to receiver: '
 user_send_message_to_you: 'said to you: '
-Title: null
-Cover: null
-Detail: null
-latest_blogs: null
-nav_create_blog: null
-nav_create_post: null
-'Old password': null
-'New Password': null
-'Repeat Password': null
+Title: Title
+Cover: cover
+Detail: details
+latest_blogs: 'The latest creation'
+nav_create_blog: 'Create a blog'
+nav_create_post: 'Create new theme'
+'Old password': 'Old code'
+'New Password': 'New password'
+'Repeat Password': 'Duplicate password'
 home_now_register: 'register now！'
-user_my_posts: null
-user_my_comments: null
-user_my_following: null
-user_my_follower: null
-user_my_blog: null
-email: null
-user_setting_email_verified: null
-community: null
-notice_comment_mention_you: null
-post_add_comment_hint: null
+user_my_posts: 'My post'
+user_my_comments: 'My comments'
+user_my_following: 'My attention'
+user_my_follower: 'Pay attention to me'
+user_my_blog: 'The blog I created'
+email: mailbox
+user_setting_email_verified: 'The mailbox has been verified through.'
+community: Community
+notice_comment_mention_you: 'Mention you in the commentary.'
+post_add_comment_hint: 'Please try to add meaningful comments.'
