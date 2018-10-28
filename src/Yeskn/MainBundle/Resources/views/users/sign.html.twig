@@ -1,0 +1,42 @@
+
+
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'users.sign_rank'|trans }}
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <td>{{ 'users.rank'|trans }}</td>
+                            <td>{{ 'username'|trans }}</td>
+                            <td>{{ 'global.sign'|trans }}</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users if user.signDay > 0 %}
+                            <tr>
+                                <td><b>{{ loop.index }}</b></td>
+                                <td>
+                                    <a data-pjax href="{{ path('member_home', {username: user.username}) }}">
+                                        <img src="{{ asset(user.avatar) }}" alt="" width="25" height="25" class="img-rounded">
+                                        {{ user.nickname }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{ 'continuous_signed count day'|trans({count: user.signDay}) }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
