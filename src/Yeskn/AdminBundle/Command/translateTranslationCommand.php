@@ -89,7 +89,7 @@ class translateTranslationCommand extends AbstractCommand
         $result = $response->getBody()->getContents();
         $result = json_decode($result);
 
-        if (property_exists($result, 'trans_result') && strlen($result->trans_result) > 0) {
+        if (!empty($result->trans_result)) {
             return $result->trans_result[0]['dst'];
         } else {
             throw new \Exception('translate token ' . $q . ' error: ' . json_encode($result));
