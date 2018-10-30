@@ -15,11 +15,18 @@
                                 <div class="panel panel-default">
                                     <img src="{{ asset(blog.cover) }}" alt="" width="225" height="125">
                                     <div class="panel-body " style="padding: 5px">
-                                        <b style="color: grey">
-                                            <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a></b>
-                                        <br>
-                                        <span class="text-small-gray">创建于{{ blog.createdAt|ago }}</span>
-
+                                       <div>
+                                           <b style="color: grey">
+                                               <a target="_blank" href="{{ path('blog_info', {subdomain:blog.subdomain}) }}">{{ blog.title }}</a>
+                                           </b>
+                                           <br>
+                                           <span class="text-small-gray">创建于{{ blog.createdAt|ago }}</span>
+                                       </div>
+                                        <hr>
+                                        <div>
+                                            <button data-blog="{{ blog.subdomain }}" class="btn btn-xs btn-default" data-toggle="modal" data-target="#addCnameModal"><i class="fa fa-gear"></i> 设置域名</button>
+                                            <button class="btn btn-xs btn-default start-ulinks"><i class="fa fa-users"></i> 开启友链</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -29,4 +36,25 @@
             </div>
         </div>
     </div>
+
+    {% include '@YesknMain/modals/add-cname-modal.html.twig' with {
+        modalId: '',
+        title: 'user.blog.set_new_domain'|trans,
+        form: addCnameForm
+    } %}
+
+    <script>
+        $(function () {
+            $(document).onPjax('click', '.start-ulinks', function () {
+                warning("{{ 'global.comming_soon'|trans }}");
+            });
+
+            $('#addCnameModal').appendTo('body');
+
+            $('#addCnameModal').on('show.bs.modal', function (e) {
+                let subdomain = $(e.relatedTarget).attr('data-blog');
+                $(this).find('.subdomain').text(subdomain + '.{{ domain }}');
+            });
+        })
+    </script>
 {% endblock %}

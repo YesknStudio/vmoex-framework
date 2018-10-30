@@ -20,6 +20,7 @@ use Yeskn\MainBundle\Entity\Blog;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Form\BlogAddCnameType;
 use Yeskn\MainBundle\Form\ChangePasswordType;
 use Yeskn\MainBundle\Form\Entity\ChangePassword;
 use Yeskn\Support\AbstractController;
@@ -170,12 +171,15 @@ class UserController extends AbstractController
     {
         $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
 
+        $addCnameForm = $this->createForm(BlogAddCnameType::class);
+
         $blogList = $blogRepo->findBy(['user' => $this->getUser(), 'status' => Blog::STATUS_CREATED], ['createdAt' => 'DESC']);
 
         return $this->render('@YesknMain/user/blog.html.twig',
             $this->getUserHomeInfo() + [
                 'scope' => 'blog',
-                'blog_list' => $blogList
+                'blog_list' => $blogList,
+                'addCnameForm' => $addCnameForm->createView()
             ]);
     }
 

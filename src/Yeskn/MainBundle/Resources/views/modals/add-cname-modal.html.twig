@@ -1,0 +1,30 @@
+{% form_theme form with [
+    'form/vertical-field-1.html.twig',
+    'form/vertical-checkbox-type.html.twig'
+] %}
+
+<div class="modal fade" id="addCnameModal{{ modalId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{ form_start(form, {attr: {class: 'form-horizontal', id: 'addCnameForm', action: path('homepage')}}) }}
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{{ title }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <i class="fa fa-warning"></i>
+                    请确认您的域名已经通过cname解析到 <code class="subdomain"></code>，否则您的博客将无法正常打开；如果您不是很确定，请参考<a href="{{ path('post_show', {id: 4}) }}"><b>此文章</b></a>
+                </div>
+
+                {{ form_widget(form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'cancel'|trans }}</button>
+                <button type="submit" class="btn btn-success">{{ 'ok'|trans }}</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

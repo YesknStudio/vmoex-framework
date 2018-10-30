@@ -77,7 +77,17 @@ class WebsiteInfo extends \Twig_Extension
 
     public function isPjax()
     {
-        return (bool) $this->request->get('_pjax');
+        $request = $this->request;
+
+        if ($request->get('_pjax')) {
+            return true;
+        }
+
+        if ((bool)$request->headers->get('X-PJAX')) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getFunctions()
