@@ -3,7 +3,7 @@
 {% block main %}
     <style>
         body {
-            /*background-image: url("https://ww1.sinaimg.cn/large/0060lm7Tgy1fi01ahtu3sj31hc0u078q.jpg");*/
+            background-image: url("https://ww1.sinaimg.cn/large/0060lm7Tgy1fi01ahtu3sj31hc0u078q.jpg");
             background-position: center center;
             background-size: cover;
             background-attachment: fixed;
@@ -16,47 +16,50 @@
                     <i class="fa fa-file-text"></i> {{ 'about_site'|trans }}
                 </div>
                 <div class="panel-body">
-                <p>
-                    wpcraft是由 <a target="_blank" href="https://blog.yeskn.com">Jaggle</a> 发起的一个免费的wordpress博客托管服务和wordpress创造者交流分享的在线社区。
 
-                    定义说完了，来说说我为什么做这个网站吧，我接触计算机相对很多人来说其实是比较晚的，读大学才有自己的第一台电脑。
-                </p>
+                    {% set locale = app.request.locale %}
+                    {% if locale == 'en' %}
+                        <p>The inspiration for Vmoex comes from <a href="https://www.v2ex.com/">V2EX创意工作者社区</a>, Most of V2EX is the Internet /IT topic.
+                            So Vmoex hopes for anime, two yuan, and Opera (and Meng 's Omega [4]) to join, share, share, discover, and create more life.
+                        </p>
 
-                    <br>
+                        <p>Vmoex currently managed by <span style="color: rgb(138, 138, 138)">彩虹の恋しいw</span></p>
+                        <p> </p>
 
-<p>
-    曾经想当一个作家，后来打算做一个文学网站，当时用wordpress做了第一个网站，叫做清新文艺网（曾经觉得很文艺，小清新，但现在觉得比较幼稚，哈哈，不管怎样已经过去了），
+                        <p>Vmoex's vision: strive to build the best two dimensional community.</p>
+                    {% elseif locale == 'jp'  %}
+                        <p>Vmexのインスピレーション <a href="https://www.v2ex.com/">V2EX创意工作者社区</a>，V 2 EXの大部分はインターネット/ ITの話題となっている。
+                            したがって、Vmexは、アニメ、二次元、番劇を希望している（●萌え萌えの（●´ω｀）φ）が参加し、共同で交流、分かち合い、発見し、より多くの生活をつくることを希望する。
+                        </p>
 
-</p>
-                    <br>
 
-                 <p>
-                     45一个月的服务器费用让我做了一年后没能继续做下去，还记得那是12年4月17日，向所有会员发送了闭站邮件，当时用QQ认识的一些
-                     写作者，现在都没联系了。
-                 </p>
+                        <p>Vmexは現在<span style="color: rgb(138, 138, 138)">彩虹の恋しいw</span>メンテナンス</p>
+                        <p> </p>
 
-                    <br>
+                        <p>Vmexのビジョン：最高の二次元コミュニティを作りましょう。</p>
 
-            <p>
-                所以我一直有一个想法，想让wordpress博客更加简单和方便，作为一个执行力不怎么强的人，直到毕业两年，才做了这个比较简单的
-                雏形，总之，无论如何，目前用户可以注册 加 创建博客，几乎可以在一分钟之内完成。
-            </p>
+                    {% elseif locale == 'zh_TW' %}
+                        <p>Vmoex的靈感來自 <a href="https://www.v2ex.com/">V2EX创意工作者社区</a>，V2EX大部分為互聯網/IT話題，
+                            囙此Vmoex希望動漫、二次元、番劇的（還有萌萌噠的（●´ω‘●）φ）愛好者加入，共同交流、分享、發現、創造更多生活中的美好。
+                        </p>
 
-                    <br>
 
-                 <p>
-                     自己写的代码，能让更多的人看到成果，是一件很值得骄傲的事情啊~ 我打算基础服务可以向所有用户开放，即任何人都可以注册
-                     并创建一个博客，暂时基础版每个用户是200M的空间+50M的数据库空间，如果你打算使用更多的存储空间，
-                     以及顶级域名增加https证书等其他服务，欢迎与我取得联系，我的微信是：singviy，如果你打算想和我一起经营这个项目，也可以与我联系。
-                 </p>
+                        <p>Vmoex現時由<span style="color: rgb(138, 138, 138)">彩虹の恋しいw</span>維護</p>
+                        <p> </p>
 
-                   <br>
+                        <p>Vmoex的願景：努力打造最美好的二次元社區。</p>
+                    {% else %}
+                        <p>Vmoex的灵感来自 <a href="https://www.v2ex.com/">V2EX创意工作者社区</a>，V2EX大部分为互联网/IT话题，
+                            因此Vmoex希望动漫、二次元、番剧的（还有萌萌哒的(●´ω｀●)φ）爱好者加入，共同交流、分享、发现、创造更多生活中的美好。
+                        </p>
 
-                    谢谢你能看到这些文字，没什么好说的凑一下字数2333
-                    <br>
-                    。。。
 
-                    <br>
+                        <p>Vmoex目前由<span style="color: rgb(138, 138, 138)">彩虹の恋しいw</span>维护</p>
+                        <p> </p>
+
+                        <p>Vmoex的愿景：努力打造最美好的二次元社区。</p>
+                    {% endif %}
+
 
                 </div>
             </div>

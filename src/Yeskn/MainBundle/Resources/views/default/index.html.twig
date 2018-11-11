@@ -1,42 +1,6 @@
 {% extends '@YesknMain/base.html.twig' %}
 
 {% block main %}
-
-    <div class="panel panel-default">
-        <div class="panel-heading" style="background: none">
-            <b>{{ '博客精选'|trans }}</b> <span class="text-small-gray">（那些别有用心的博客）</span>
-        </div>
-        <div class="panel-body">
-            <div class="row blog-list">
-                <div class="carousel slide" id="blogCarousel" data-ride="carousel" data-interval="4000">
-                    <ol class="carousel-indicators" style="">
-                        <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#blogCarousel" data-slide-to="1"></li>
-                        <li data-target="#blogCarousel" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            {% for key, blog in blog_list if key < 3 %}
-                                {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
-                            {% endfor %}
-                        </div>
-                        <div class="item">
-                            {% for key, blog in blog_list if key >= 3 and key < 6 %}
-                                {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
-                            {% endfor %}
-                        </div>
-                        <div class="item">
-                            {% for key, blog in blog_list if key >= 6 and key < 9 %}
-                                {% include '@YesknMain/cards/blog-card.html.twig' with {blog:blog} %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <div class="home-content-main" id="home-content-main">
 
         {% if currentTab and currentTab.level == 2 %}

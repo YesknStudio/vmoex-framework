@@ -58,7 +58,6 @@ class GlobalValue extends \Twig_Extension
         $this->translator = $translator;
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
-
         $this->socketHost = $socketHost;
     }
 

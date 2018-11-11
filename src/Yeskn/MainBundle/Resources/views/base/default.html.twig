@@ -19,6 +19,7 @@
             filter='cssrewrite' output='build/css/header.css' %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
             <link rel="stylesheet" href="https://static.yeskn.com/bootoast/css/bootoast.css">
+            <link rel="stylesheet" href="https://static.yeskn.com/live2d/css/live2d.css">
         {% endstylesheets %}
     {% endblock %}
     {% block head_javascripts %}
@@ -72,6 +73,8 @@
         'assets-private/js/common.js'
         filter='uglifyjs2' output='build/js/footer.js' %}
         <script src="{{ asset_url }}"></script>
+        <script src="https://static.yeskn.com/live2d/js/live2d.js"></script>
+        <script src="https://static.yeskn.com/live2d/js/message.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
         <script src="https://static.yeskn.com/bootoast/js/bootoast.js"></script>
         <script type="text/javascript">

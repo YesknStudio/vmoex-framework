@@ -1,6 +1,6 @@
 body {
-    /*cursor: url('https://static.yeskn.com/vmoex/img/p.cur'), url(https://static.yeskn.com/vmoex/img/p.cur), auto;*/
-    /*background: url("https://static.yeskn.com/vmoex/img/bg.jpg") no-repeat top left #f6f6f6;*/
+    cursor: url('https://static.yeskn.com/vmoex/img/p.cur'), url(https://static.yeskn.com/vmoex/img/p.cur), auto;
+    background: url("https://static.yeskn.com/vmoex/img/bg.jpg") no-repeat top left #f6f6f6;
     font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
@@ -453,6 +453,10 @@ nav .dropdown-messages, nav .dropdown-notifications {
 
     #navbar-collapse-user {
         display: none !important;
+    }
+    
+    footer {
+        background: url('https://static.yeskn.com/vmoex/img/763552f474305423.png');
     }
 }
 

@@ -1,6 +1,6 @@
-about_site: 'について Wpcraft'
+about_site: 'について Vmoex'
 click: クリック
-banner.copyright: 'このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。'
+banner.copyright: このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。
 chinese: 中国語の簡体字
 english: 英語
 chinese.tw: 繁体中国語
@@ -16,9 +16,9 @@ register: 登録
 success: 操作が成功する
 fail: 操作に失敗する
 comment: 評論
-vmoex_slogan: '最も美しい2次元のコミュニティを作ります'
-'添加': '追加'
-'请先登录': '先に登録してください'
+vmoex_slogan: 最も美しい2次元のコミュニティを作ります
+添加: 追加
+请先登录: 先に登録してください
 trends_description: このプレートは、あなたが注目しているユーザー、プレート、またはテーマを展示するために使用されています。
 blind_description: 「雑談」は、Vmexコミュニティで提供されたオンライン即時チャットの機能であり、「雑談」を送るごとに金貨1枚が消費される。
 search: 検索
@@ -30,8 +30,8 @@ blind.chat: 聊聊
 板块: のプレート
 Vmoex当前板块数量: Vmex現在のプレートの数
 hello_stranger: こんにちは、知らない人
-hello_stranger_detail: 'Wpcraft可以快速幫你打造屬於自己的部落格，基於wordpress，操作簡單，但是功能卻非常强大'
-my.status: '私の状態'
+hello_stranger_detail: null
+my.status: 私の状態
 hot.users: 活躍するユーザー
 today.hot.topics: 本日の活躍
 newly.comments: 最新のコメント
@@ -40,13 +40,13 @@ create_new_topic: 新しいテーマを作成
 today.activity: 今日活躍度
 'continuous_signed count day': 已連續簽到count天
 wpcast_available_with: Wpcast可用於：
-'全部': すべて
+全部: すべて
 热门: 人気
 福利: 福祉
 插画: イラスト
 歌姬: 歌姫
-游戏: 'ゲーム'
-'站务公告': '駅務公告'
+游戏: ゲーム
+站务公告: 駅務公告
 漫展: 展示する
 当前在线count人: count人のオンラインオンライン
 历史最高: 歴史が最も高い
@@ -54,37 +54,37 @@ wpcast_available_with: Wpcast可用於：
 buy_beer: 虹の恋にビールを飲
 用户名: ユーザー名
 邮箱: 郵便ポスト
-'密码': パスワード
+密码: パスワード
 查看所有通知: すべての通知を調べる
 查看所有私信: 查看所有私信
-我的主页: '私のホームページ'
+我的主页: 私のホームページ
 个人设置: 個人設定
 verify_email: 'あなたのメールはまだ活性化されていません。<a href="javascript:" class="alert-link">ここでアクティブにする</a>'
-'添加新的评论': '新しいコメントを追加'
+添加新的评论: 新しいコメントを追加
 发表有颜色的评论将消耗5金币哦: 色のコメントを発表すると5金貨が消費されますよ
 好可怕，速度太快了: 怖い、スピードが速い
-'关于作者': '作者'
+关于作者: 作者
 拉黑: ラブラック
-昵称: 'ニックネーム'
-状态: '状態'
-头像: '頭像'
+昵称: ニックネーム
+状态: 状態
+头像: 頭像
 保存: 保存
 修改: 修正
-'修改密码': パスワードを修正
+修改密码: パスワードを修正
 支持我们: 私たちを応援する
 个新的粉丝: 新しいファン
 在线可撩: 線上可撩
-'加入于': 'に加える'
+加入于: に加える
 第count位Vmoex用户: count位Vmexユーザー
 最后在线时间：time: 最後のオンライン時間：time
-name发布的帖子: 'nameの招待状'
+name发布的帖子: nameの招待状
 name的回复: nameの返事
 'time 发表在': timeが発表している
-'name的关注': nameの注目
+name的关注: nameの注目
 name的粉丝: nameのファン
 发送成功: 成功を送る
 赞: 賛
-社区运行状态: 'コミュニティの運行状態'
+社区运行状态: コミュニティの運行状態
 社区成立时间: コミュニティの成立時間
 主题数量: テーマの数
 回复数量: 回答数
@@ -111,14 +111,14 @@ userhome_block: シールド
 userhome_no_recent_reply: このユーザーは最近返事がない
 userhome_he_is_cold: 比較的に寒いですか？今は誰にも注目していません。
 userhome_he_has_no_follower: 評判が悪くて、何のファンもいない
-post_add_comment: 'コメントを追加'
-post_no_comment: '文章にはコメントがない'
+post_add_comment: コメントを追加
+post_no_comment: 文章にはコメントがない
 chat_sorry_co_content: 申し訳ございませんが、しばらくチャットがありません。
-chat_please_type: '入力してください'
+chat_please_type: 入力してください
 send: 送信する
-please_login: 'ログインしてください'
+please_login: ログインしてください
 why_this: どうしてそうなるの？
-userhome_no_published_post: 'ユーザーは現在、文章を発表していません。'
+userhome_no_published_post: ユーザーは現在、文章を発表していません。
 reply: 返事をする
 notice_my_notice: 私の知らせ
 notice_unread: 未読の通知
@@ -127,17 +127,17 @@ notice_replied_you: 私に返事する
 post_top: 棚を置く
 like: 称賛する
 action_too_fast: 怖い、スピードが速い
-banner_announce: 'Wpcrentを歓迎して、ここであなたは迅速に便利なのは自分のワーカーのブログを作成することができて、支持のテーマを支持して、オンラインでウェブサイトを修正します/ css / js、プラグインをインストールして、創造の魅力を感じます！< b >すぐ< a data- pjax href =“/ブログ/ cret / steer / 1”>私のブログ< / a > < / b >を作成します'
+banner_announce: null
 all: すべて
 hot: 人気
-site_state: 'コミュニティの運行状態'
+site_state: コミュニティの運行状態
 site_since: コミュニティの成立時間
 site_post_count: テーマの数
 site_comment_count: 回答数
 site_user_count: 登録ユーザーの数
-site_copyright: '@ 2018 Wpcrft - 9秒で自分のブログを作ります'
-site_title: 'Wpcrft - 9秒で自分のブログを作ってあげます'
-site_name: Wpcrort
+site_copyright: null
+site_title: null
+site_name: Vmoex
 user_place_in_site: Cunt位Wpcrftユーザー
 footer_available_with: 使用可能：
 yingwe: sdsd
@@ -147,7 +147,7 @@ dsdsd: sdsdsdsd
 user_my_messages: 私の私信
 user_my_received_messages: 私が受け取った
 user_my_sent_messages: 私が出したのは
-sorry_no_content: '申し訳ありませんが、何の内容もありません。'
+sorry_no_content: 申し訳ありませんが、何の内容もありません。
 user_you_send_message_to: あなたはレコードに対して
 user_send_message_to_you: あなたに言いました。
 Title: タイトル
@@ -160,7 +160,7 @@ nav_create_post: 新しいテーマを作成
 'New Password': 新しいパスワード
 'Repeat Password': パスワードを繰り返す
 home_now_register: すぐに登録します！
-user_my_posts: '私の招待状'
+user_my_posts: 私の招待状
 user_my_comments: 私のコメント
 user_my_following: 私の関心
 user_my_follower: 私のことに気をつけて
@@ -169,7 +169,7 @@ email: 郵便ポスト
 user_setting_email_verified: メールアドレスの検証
 community: コミュニティ
 notice_comment_mention_you: コメントで述べている
-post_add_comment_hint: 'できるだけ意味のあるコメントを追加してください。'
+post_add_comment_hint: できるだけ意味のあるコメントを追加してください。
 users.gold_rank: null
 users.rank: null
 username: null
