@@ -1,8 +1,5 @@
 parameters:
 
-    # 当前站点的域名
-    domain: ~
-
     # 数据库配置
     database_host: 127.0.0.1
     database_port: 3306
@@ -26,20 +23,20 @@ parameters:
     node_path: /usr/bin/node
     uglifyjs2_path: /usr/bin/uglifyjs
 
-    # websocket地址，domain为当前网站的域名，如果为htts，则需要在下面设置证书
-    socket_host: 'http://domain:3120'
+    # websocket地址，localhost为当前网站的域名，如果为htts，则需要在下面设置证书
+    socket_host: 'http://localhost:3120'
 
     # websocket的证书，websocket为https时必填
     socket_local_cert: ''
     socket_local_pk: ''
 
-    # 内部推送地址，无需更改
+    # 内部推送地址，无需更改localhost，因为推送都在服务器上进行
     socket_push_host: 'http://locahost:3121'
 
     # 资源文件的cdn地址，不填则不用cdn
     assets_base_url: ~
 
-    # github登录配置
+    # github登录配置，不填无法使用github登录
     github_client_id: ~
     github_client_secret: ~
     github_redirect_url: ~

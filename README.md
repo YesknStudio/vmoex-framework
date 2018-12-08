@@ -9,15 +9,20 @@ vmoex是一个开源的二次元社区程序。
 
 [戳我见效果](https://www.vmoex.com/)
 
-## 使用指南
+## 安装指南
 
 
 ```bash
 cd /path/to/webroot/path
 git clone git@github.com:yeskn-studio/vmoex-framework.git
+
 cd vmoex-framework
 chown -R [webuser] var
+
+# 修改app/config/parameter.yaml.dist
+
 composer install
 bower install
+
 php bin/console server:run
 ```
