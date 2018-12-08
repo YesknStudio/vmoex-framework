@@ -1,4 +1,4 @@
-# 安装指南
+# 安装手册
 
     cd /path/to/webroot/path
     
@@ -69,7 +69,7 @@
 
 ## 部署在nginx上
 
-在上面的安装指南中运行的是dev模式，适合开发时环境，如果在真是环境运行，请务必使用类似nginx的web server来运行，nginx配置示例：
+在上面的安装指南中运行的是dev模式，适合开发时环境，如果在真实环境运行，请务必使用类似nginx的web server来运行，nginx配置示例：
 
 ```nginx
 server {
