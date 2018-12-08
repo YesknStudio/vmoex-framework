@@ -37,11 +37,11 @@ vmoex是一个开源的二次元社区程序。
 
 **安装前端依赖**
 
-    bower install
+    bower install （root用户请运行：bower install --allow-root）
     
 **创建数据库**
 
-    php bin/console doctrine:schema:create （如果你已经手动创建了数据库，可跳过）
+    php bin/console doctrine:database:create （如果你已经手动创建了数据库，可跳过）
 
 **导入数据**
 
@@ -53,7 +53,8 @@ vmoex是一个开源的二次元社区程序。
     
 **清理缓存**
 
-    sudo -u [webuser] php bin/console cache:clear --env=dev    
+    chown -R [webuser] var （上面已经执行过，这里再执行一次）
+    sudo -u [webuser] php bin/console cache:clear --env=dev
     
 **创建静态资源文件**
 
@@ -61,7 +62,7 @@ vmoex是一个开源的二次元社区程序。
     
 **启动websocket**
 
-    php bin/push-service start -d
+    php bin/push-service.php start -d
 
 **服务器上运行（dev**
 

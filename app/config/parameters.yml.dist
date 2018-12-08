@@ -16,22 +16,25 @@ parameters:
     mailer_user: ~
     mailer_password: ~
 
-    # 没有规律的32个以上的字符
+    # 没有规律的32个左右的字符
     secret: ~
 
     # 以下两项用于合并压缩js代码，必填
+    # 查看命令的执行路径： `which node`，`which uglifyjs`
+    # uglifyjs的安装命令 `npm install -g uglifyjs`
+
     node_path: /usr/bin/node
     uglifyjs2_path: /usr/bin/uglifyjs
 
-    # websocket地址，localhost为当前网站的域名，如果为htts，则需要在下面设置证书
-    socket_host: 'http://localhost:3120'
+    # websocket地址，127.0.0.1为当前网站的域名或者ip，如果为htts，则需要在下面设置证书
+    socket_host: 'http://127.0.0.1:3120'
 
     # websocket的证书，websocket为https时必填
     socket_local_cert: ~
     socket_local_pk: ~
 
-    # 内部推送地址，无需更改localhost，因为推送都在服务器上进行
-    socket_push_host: 'http://locahost:3121'
+    # 内部推送地址，无需更改127.0.0.1，因为推送都在服务器上进行
+    socket_push_host: 'http://127.0.0.1:3121'
 
     # 资源文件的cdn地址，或者直接用当前网站地址
     assets_base_url: http://127.0.0.1:8000
