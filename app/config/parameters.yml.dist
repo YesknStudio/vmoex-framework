@@ -27,8 +27,8 @@ parameters:
     socket_host: 'http://localhost:3120'
 
     # websocket的证书，websocket为https时必填
-    socket_local_cert: ''
-    socket_local_pk: ''
+    socket_local_cert: ~
+    socket_local_pk: ~
 
     # 内部推送地址，无需更改localhost，因为推送都在服务器上进行
     socket_push_host: 'http://locahost:3121'
