@@ -27,13 +27,13 @@ if (!empty($parameters['socket_local_cert'])) {
         ]
     );
 
-    preg_match('/:(\d+)\/?$/', $parameters['socket_host'], $mat);
-    $socketPort = $mat[1];
-    preg_match('/:(\d+)\/?$/', $parameters['socket_push_host'], $mat);
-    $socketPushPort = $mat[1];
 } else {
     $context = [];
 }
+if (preg_match('/:(\d+)\/?$/', $parameters['socket_host'], $mat));
+	$socketPort = $mat[1];
+if (preg_match('/:(\d+)\/?$/', $parameters['socket_push_host'], $mat));
+	$socketPushPort = $mat[1];
 
 /**
  * @return \Predis\Client
