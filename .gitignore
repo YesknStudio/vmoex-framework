@@ -13,7 +13,10 @@
 !/var/sessions
 /var/sessions/*
 !var/sessions/.gitkeep
-!var/SymfonyRequirements.php
+var/SymfonyRequirements.php
+!/var/data
+/var/data/*
+!/var/data/vmoex.sql
 /vendor/
 /web/bundles/
 .idea
