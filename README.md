@@ -51,6 +51,14 @@ vmoex是一个开源的二次元社区程序。
 
     php bin/console change-password -u admin -p [password]
     
+**清理缓存**
+
+    sudo -u [webuser] php bin/console cache:clear --env=dev    
+    
+**创建静态资源文件**
+
+    php bin/console assetic:dump --env=dev
+    
 **启动websocket**
 
     php bin/push-service start -d
