@@ -1,23 +1,18 @@
 services:
 
   _defaults:
-      autowire: true      # Automatically injects dependencies in your services.
-      autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-      public: true       # Allows optimizing the container by removing unused services; this also means
-      # fetching services directly from the container via $container->get() won't work.
-      # The best practice is to be explicit about your dependencies anyway.
+      autowire: true
+      autoconfigure: true
+      public: true
       bind:
         $socketHost: "%socket_host%"
         $projectDir: "%kernel.project_dir%"
+        $emailUser: "%mailer_user%"
 
   Yeskn\MainBundle\:
       resource: '../../../MainBundle/*'
-      # you can exclude directories or files
-      # but if a service is unused, it's removed anyway
       exclude: '../../../MainBundle/{Entity,Repository,Tests}'
 
-    # controllers are imported separately to make sure they're public
-    # and have a tag that allows actions to type-hint services
   Yeskn\MainBundle\Controller\:
       resource: '../../../MainBundle/Controller'
       public: true

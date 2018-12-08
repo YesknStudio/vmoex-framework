@@ -1,8 +1,3 @@
-yeskn_oauth:
-    resource: "@YesknOAuthBundle/Controller/"
-    type:     annotation
-    prefix:   /oauth
-
 yeskn_admin:
     resource: "@YesknAdminBundle/Controller/"
     type:     annotation

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of project wpcraft.
+ * This file is part of project yeskn-studio/vmoex-framework.
  *
  * Author: Jake
  * Create: 2018-10-18 22:05:39
@@ -20,11 +20,13 @@ class NoticeService extends AbstractService
     private $pushService;
     private $mailer;
     private $render;
+    private $emailUser;
 
     public function __construct(EntityManagerInterface $em
         , SocketPushService $pushService
         , \Swift_Mailer $mailer
         , Render $render
+        , $emailUser
     ) {
         parent::__construct($em);
 
@@ -92,8 +94,8 @@ class NoticeService extends AbstractService
 
     public function emailNotice($email, Notice $notice)
     {
-        $message = (new \Swift_Message('Wpcraft通知'))
-            ->setFrom('no-replay@wpcraft.cn')
+        $message = (new \Swift_Message('Vmoex Notice'))
+            ->setFrom($this->emailUser)
             ->setTo($email)
             ->setBody($this->render->renderEmailNotice($notice), 'text/html');
 

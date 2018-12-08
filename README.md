@@ -11,4 +11,13 @@ vmoex是一个开源的二次元社区程序。
 
 ## 使用指南
 
-common soon~~~
+
+```bash
+cd /path/to/webroot/path
+git clone git@github.com:yeskn-studio/vmoex-framework.git
+cd vmoex-framework
+chown -R [webuser] var
+composer install
+bower install
+php bin/console server:run
+```

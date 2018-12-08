@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of project yeskn-studio/wpcraft.
+ * This file is part of project project yeskn-studio/vmoex-framework.
  *
  * Author: Jake
  * Create: 2018-09-14 15:24:09
@@ -306,8 +306,8 @@ class UserController extends AbstractController
 
         $request->getSession()->set($user->getUsername() . '_verify_email_code', $code);
 
-        $message = (new \Swift_Message('验证Wpcraft'))
-            ->setFrom('no-replay@wpcraft.cn')
+        $message = (new \Swift_Message('Verify You!'))
+            ->setFrom($this->getParameter('mailer_user'))
             ->setTo($email)
             ->setBody(
                 $this->renderView('emails/verify-email.html.twig', [

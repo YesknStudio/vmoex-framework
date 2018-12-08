@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of project yeskn-studio/wpcraft.
+ * This file is part of project project yeskn-studio/vmoex-framework.
  *
  * Author: Jake
  * Create: 2018-09-14 15:20:04
@@ -29,7 +29,7 @@ class MessageController extends Controller
 {
     /**
      * @Route("/send-message", name="send_message", methods={"POST"})
-     * 
+     *
      * @param $request
      * @return JsonResponse
      */

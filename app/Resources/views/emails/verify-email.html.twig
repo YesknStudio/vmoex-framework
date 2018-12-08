@@ -1,9 +1,9 @@
 {% extends 'emails/base.html.twig' %}
 
 {% block email_title %}
-    Wpcraft 邮箱验证
+    {{ 'site_name'|trans }} 邮箱验证
 {% endblock %}
 
 {% block email_content %}
-    您的验证码是 <b>{{ code }}</b>，欢迎使用Wpcraft!
+    您的验证码是 <b>{{ code }}</b>，欢迎使用{{ 'site_name'|trans }}!
 {% endblock %}

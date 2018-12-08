@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of project yeskn-studio/wpcraft.
+ * This file is part of project project yeskn-studio/vmoex-framework.
  *
  * Author: Jake
  * Create: 2018-09-14 15:26:13
@@ -113,7 +113,7 @@ class AuthController extends Controller
     {
         return $this->redirect('https://github.com/login/oauth/authorize?' . http_build_query([
             'client_id' => $this->getParameter('github_client_id'),
-            'redirect_uri' => 'https://www.wpcraft.cn/oauth/github',
+            'redirect_uri' => $this->getParameter('github_redirect_url'),
             'scopes' => 'user',
             'state' => 'github'
         ]));
@@ -133,7 +133,7 @@ class AuthController extends Controller
                 'client_id' => $this->getParameter('github_client_id'),
                 'client_secret' => $this->getParameter('github_client_secret'),
                 'code' => $code,
-                'redirect_uri' => 'https://www.wpcraft.cn/oauth/github',
+                'redirect_uri' => $this->getParameter('github_redirect_url'),
                 'state' => 'github'
             ],
             'headers' => [

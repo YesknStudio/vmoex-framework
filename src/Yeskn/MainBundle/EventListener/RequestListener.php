@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of project yeskn-studio/wpcraft.
+ * This file is part of project project yeskn-studio/vmoex-framework.
  *
  * Author: Jake
  * Create: 2018-06-09 20:14:51

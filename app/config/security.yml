@@ -1,11 +1,8 @@
-# To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
 security:
     encoders:
         Yeskn\MainBundle\Entity\User: bcrypt
         Symfony\Component\Security\Core\User\User: plaintext
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         database_provider:
             entity:
@@ -18,7 +15,6 @@ security:
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -40,7 +36,7 @@ security:
             remember_me:
                 secret: '%secret%'
                 name: _token
-                lifetime: 604800 # 1 week in seconds
+                lifetime: 604800
                 path: /
 
     access_control:
