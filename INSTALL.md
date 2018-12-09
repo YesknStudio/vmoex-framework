@@ -19,7 +19,7 @@
 
 **修改配置文件**
 
-    vim app/config/parameter.yml.dist
+    vim app/config/parameters.yml.dist
 
 **安装php依赖**
 
@@ -107,5 +107,5 @@ nginx配置好后，还无法直接访问网站，请执行如下操作：
 
 ## 配置文件
 
-app/config/parameter.yml.dist并不是真正生效的配置文件，真正生效的是自动生成的app/config/parameter.yml，
+app/config/parameters.yml.dist并不是真正生效的配置文件，真正生效的是自动生成的app/config/parameters.yml，
 需修改配置时请修改此文件，修改完后，需要重新清理缓存或者生成静态资源文件。
