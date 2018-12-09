@@ -21,7 +21,7 @@
                 <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: 'hot'}) }}">{{ 'hot'|trans }}</a>
 
                 {% for tabItem in tabs %}
-                    <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: tabItem.alias}) }}#home-content-main">{{ tabItem.name|trans }}</a>
+                    <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
                 {% endfor %}
 
                 {% set routeName = app.request.attributes.get('_forwarded').get('_route') %}
