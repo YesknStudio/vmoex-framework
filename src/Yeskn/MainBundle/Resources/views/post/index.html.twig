@@ -28,8 +28,8 @@
 
                 <div class="pull-right visible-lg panel-sort-btns">
                     <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'pub'}) }}#home-content-main" class="btn btn-default {% if sortBy == 'pub' %}current{% endif %}">最新发布</a>
-                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'com'}) }}#home-content-main" class="btn btn-default {% if sortBy == 'com' %}current{% endif %}">最新评论</a>
+                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'pub'}) }}" class="btn btn-default {% if sortBy == 'pub' %}current{% endif %}">最新发布</a>
+                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'com'}) }}" class="btn btn-default {% if sortBy == 'com' %}current{% endif %}">最新评论</a>
                     </div>
                 </div>
             </div>

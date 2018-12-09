@@ -17,8 +17,8 @@
             </div>
         {% else %}
             <div class="tab-list">
-                <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('homepage', {tab: 'all'}) }}#home-content-main">{{ 'all'|trans }}</a>
-                <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: 'hot'}) }}#home-content-main">{{ 'hot'|trans }}</a>
+                <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('homepage', {tab: 'all'}) }}">{{ 'all'|trans }}</a>
+                <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: 'hot'}) }}">{{ 'hot'|trans }}</a>
 
                 {% for tabItem in tabs %}
                     <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: tabItem.alias}) }}#home-content-main">{{ tabItem.name|trans }}</a>
@@ -28,8 +28,8 @@
 
                 <div class="pull-right visible-lg panel-sort-btns">
                     <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'pub'}) }}#home-content-main" class="btn btn-default {% if sortBy == 'pub' %}current{% endif %}">最新发布</a>
-                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'com'}) }}#home-content-main" class="btn btn-default {% if sortBy == 'com' %}current{% endif %}">最新评论</a>
+                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'pub'}) }}" class="btn btn-default {% if sortBy == 'pub' %}current{% endif %}">最新发布</a>
+                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'com'}) }}" class="btn btn-default {% if sortBy == 'com' %}current{% endif %}">最新评论</a>
                     </div>
                 </div>
             </div>
