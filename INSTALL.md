@@ -14,7 +14,8 @@
 
 **修改runtime目录权限**
 
-    chown -R [webuser] var
+    chown -R [webuser] var （各类日志缓存存放目录）
+    chown -R [webuser] web/avatar （用户头像）
 
 **修改配置文件**
 
