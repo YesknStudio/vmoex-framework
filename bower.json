@@ -6,7 +6,7 @@
     "jquery-pjax": "v2.0.1",
     "nprogress": "v0.2.0",
     "startbootstrap-sb-admin-2": "BlackrockDigital/startbootstrap-sb-admin-2#^3.3.7",
-    "eds-ui": "1.0.1",
+    "eds-ui": "1.0.2",
     "jquery.atwho": "*"
   }
 }
