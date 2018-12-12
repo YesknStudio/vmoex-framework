@@ -45,4 +45,14 @@ class AbstractController extends Controller
 
         return $user;
     }
+
+    /**
+     * @param $id
+     * @return string
+     * @throws \Symfony\Component\Translation\Exception\InvalidArgumentException
+     */
+    public function trans($id)
+    {
+        return $this->get('translator')->trans($id);
+    }
 }

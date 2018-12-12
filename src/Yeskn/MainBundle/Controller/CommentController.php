@@ -44,13 +44,13 @@ class CommentController extends AbstractController
             ->findOneBy(['id' => $request->get('cid')]);
 
         if (empty($comment)) {
-            return new JsonResponse(['ret' => 0, 'msg' => 'comment not exits']);
+            return new JsonResponse(['ret' => 0, 'msg' => $this->trans('comment_not_exist')]);
         }
 
         $user = $this->getUser();
 
         if (empty($user)) {
-            return new JsonResponse(['ret' => 0, 'msg' => 'no login']);
+            return new JsonResponse(['ret' => 0, 'msg' => $this->trans('please_login')]);
         }
 
         /** @var ArrayCollection $thumbUsers */
@@ -86,14 +86,14 @@ class CommentController extends AbstractController
         /** @var Post $post */
         $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->find($postId);
         if (empty($post)) {
-            return new JsonResponse(['err' => '文章不存在']);
+            return new JsonResponse(['err' => $this->trans('post_not_exist')]);
         }
 
         $content = $request->get('content');
         $content = strip_tags($content);
 
         if (empty($content) or mb_strlen($content) > 500) {
-            return new JsonResponse(['ret' => 0, 'msg' => '内个啥...长度好像不合适哦！']);
+            return new JsonResponse(['ret' => 0, 'msg' => $this->trans('length_not_support')]);
         }
 
         $mentioned = [];
@@ -111,7 +111,10 @@ class CommentController extends AbstractController
         $mentioned = array_merge($mentioned, $matches[1]);
 
         if (count($mentioned) != count(array_unique($mentioned))) {
-            return new JsonResponse(['ret' => 0, 'msg' => '请勿重复@其他人！']);
+            return new JsonResponse([
+                'ret' => 0,
+                'msg' => $this->trans('do_not_repeat_mention_others')
+            ]);
         }
 
         $userRepo = $this->getRepo('YesknMainBundle:User');
@@ -137,7 +140,10 @@ class CommentController extends AbstractController
         $cost = 1;
 
         if ($user->getGold() < $cost) {
-            return new JsonResponse(['ret' => 0, 'msg' => 'no gold']);
+            return new JsonResponse([
+                'ret' => 0,
+                'msg' => $this->trans('no_enough_gold')
+            ]);
         }
 
         $comment = new Comment();
