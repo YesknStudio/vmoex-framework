@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Yeskn\MainBundle\Entity\Translation;
 use Yeskn\Support\Command\AbstractCommand;
 
-class translateTranslationCommand extends AbstractCommand
+class TranslationTransCommand extends AbstractCommand
 {
     /**
      * @var Client
@@ -28,6 +28,7 @@ class translateTranslationCommand extends AbstractCommand
     protected function configure()
     {
         $this->setName('translation:trans');
+        $this->setDescription('translate zh_CN token to another lang(if these are empty)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

@@ -15,11 +15,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 use Yeskn\MainBundle\Entity\Translation;
 
-class PersistTranslationCommand extends ContainerAwareCommand
+class TranslationPersistCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('transaction:persist');
+        $this->setName('translation:persist');
+        $this->setDescription('persist translation from file to db');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

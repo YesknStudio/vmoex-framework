@@ -38,6 +38,8 @@ class EncodePasswordCommand extends ContainerAwareCommand
 
         $this->addOption('username', 'u', InputOption::VALUE_REQUIRED);
         $this->addOption('password', 'p', InputOption::VALUE_REQUIRED);
+
+        $this->setDescription('change someone\'s password');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Yeskn\AdminBundle\Services\LoadTranslationService;
 
-class LoadTranslationCommand extends ContainerAwareCommand
+class TranslationLoadCommand extends ContainerAwareCommand
 {
     /**
      * @var LoadTranslationService
@@ -32,6 +32,7 @@ class LoadTranslationCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('translation:load');
+        $this->setDescription('load translation from db to file');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
