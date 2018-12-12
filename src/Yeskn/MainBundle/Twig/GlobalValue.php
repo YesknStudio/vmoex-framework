@@ -261,18 +261,6 @@ class GlobalValue extends \Twig_Extension
         );
     }
 
-    public function randToken($length = 9)
-    {
-        $res = '';
-        $str = 'abcdefghijklmnopqrstuvwsyz1234567890';
-
-        while (strlen($res) < $length) {
-            $res .= substr($str, rand(0, 36), 1);
-        }
-
-        return $str;
-    }
-
     public function getFunctions()
     {
         return array(
@@ -284,7 +272,6 @@ class GlobalValue extends \Twig_Extension
             new \Twig_SimpleFunction('onlineUserCount',array($this,'onlineUserCount'),array('needs_environment' => true, 'is_safe' => 'html')),
             new \Twig_SimpleFunction('siteState',array($this,'siteState'),array('needs_environment' => true, 'is_safe' => 'html')),
             new \Twig_SimpleFunction('javascriptVariables',array($this,'javascriptVariables')),
-            new \Twig_SimpleFunction('randToken',array($this,'randToken')),
         );
     }
 }

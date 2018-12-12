@@ -27,12 +27,6 @@ class VersionStrategyService implements VersionStrategyInterface
 
     public function applyVersion($path)
     {
-        $pathinfo = pathinfo($path);
-
-        $ver = file_get_contents($this->varDir . '/assets_version');
-
-        $path = $pathinfo['dirname'] . '/' .$pathinfo['filename'] . $ver . '.' . $pathinfo['extension'];
-
-        return $path;
+        return $path . '?v=' . file_get_contents($this->varDir . '/assets_version');
     }
 }
