@@ -4,7 +4,7 @@
 
 vmoex是一个开源的二次元社区程序。
 
-![](https://static.yeskn.com/vmoex-screenshot.png)
+![](https://static.yeskn.com/vmoex-screenshot.png?v=2)
 
 ## 疗效 
 
