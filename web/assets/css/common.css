@@ -1,5 +1,5 @@
 body {
-    cursor: url('https://static.yeskn.com/vmoex/img/p.cur'), url(https://static.yeskn.com/vmoex/img/p.cur), auto;
+    cursor: url("/assets/images/pointer.cur"), url("/assets/images/pointer.cur"), auto;
     background: #f6f6f6;
     font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
     -webkit-font-smoothing:antialiased;
