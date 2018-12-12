@@ -10,7 +10,7 @@
 namespace Yeskn\MainBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
+use Knp\Bundle\MarkdownBundle\Parser\MarkdownParser;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,9 +75,10 @@ class CommentController extends AbstractController
      *
      * @param $request
      * @param $postId
+     * @param $markdown
      * @return JsonResponse
      */
-    public function addCommentToPostAction(Request $request, $postId, MarkdownParserInterface $markdown)
+    public function addCommentToPostAction(Request $request, $postId, MarkdownParser $markdown)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();

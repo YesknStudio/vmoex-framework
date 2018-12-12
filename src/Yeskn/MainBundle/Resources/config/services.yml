@@ -33,3 +33,7 @@ services:
   Yeskn\MainBundle\EventListener\AjaxAuthenticationListener:
     tags:
     - { name: kernel.event_listener, event: kernel.exception, method: onCoreException, priority: 1000 }
+
+  Knp\Bundle\MarkdownBundle\Parser\MarkdownParser:
+    arguments:
+      - { header: false, list: false, table: false }
