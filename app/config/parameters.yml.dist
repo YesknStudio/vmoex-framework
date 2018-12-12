@@ -1,6 +1,6 @@
 parameters:
 
-    # 数据库配置
+    # 数据库配置，mysql建议使用5.7版本
     database_host: 127.0.0.1
     database_port: 3306
     database_name: vmoex-framework
@@ -10,7 +10,7 @@ parameters:
     # redis配置
     redis_dsn: 'redis://passwd@localhost'
 
-    # 邮箱smtp配置
+    # 邮箱smtp配置，不配置则无法向用户发送验证、通知邮件
     mailer_transport: smtp
     mailer_host: ~
     mailer_user: ~
@@ -26,14 +26,14 @@ parameters:
     node_path: /usr/bin/node
     uglifyjs2_path: /usr/bin/uglifyjs
 
-    # websocket地址，127.0.0.1为当前网站的域名或者ip，如果为htts，则需要在下面设置证书
+    # websocket地址，127.0.0.1为当前网站的域名或者ip，如果为htts，则需要在下面设置证书; 需确保3120端口可外网访问
     socket_host: 'http://127.0.0.1:3120'
 
     # websocket的证书，websocket为https时必填
     socket_local_cert: ~
     socket_local_pk: ~
 
-    # 内部推送地址，无需更改127.0.0.1，因为推送都在服务器上进行
+    # 内部推送地址，无需更改127.0.0.1，因为推送都在服务器上进行; 需确保3121端口可外网访问
     socket_push_host: 'http://127.0.0.1:3121'
 
     # 资源文件的cdn地址，或者直接用当前网站地址
