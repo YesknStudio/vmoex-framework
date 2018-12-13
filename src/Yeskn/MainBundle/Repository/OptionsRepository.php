@@ -11,7 +11,7 @@ namespace Yeskn\MainBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class ManageRepository extends EntityRepository
+class OptionsRepository extends EntityRepository
 {
 
 }

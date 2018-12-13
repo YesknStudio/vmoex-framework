@@ -38,7 +38,7 @@ class WebsiteInfo extends \Twig_Extension
         static $return = [];
 
         if (empty($return)) {
-            $res = $this->em->getRepository('YesknMainBundle:Manage')->findAll();
+            $res = $this->em->getRepository('YesknMainBundle:Options')->findAll();
 
             $return = [];
 

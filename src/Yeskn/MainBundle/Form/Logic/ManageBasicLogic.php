@@ -11,7 +11,7 @@ namespace Yeskn\MainBundle\Form\Logic;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Yeskn\MainBundle\Entity\Manage;
+use Yeskn\MainBundle\Entity\Options;
 use Yeskn\MainBundle\Form\Entity\BasicManage;
 
 class ManageBasicLogic
@@ -42,7 +42,7 @@ class ManageBasicLogic
     {
         $basicMange = new BasicManage();
 
-        $repo = $this->em->getRepository('YesknMainBundle:Manage');
+        $repo = $this->em->getRepository('YesknMainBundle:Options');
 
         foreach ($this->options as $option) {
             $entity = $repo->findOneBy(['name' => $option]);
@@ -67,13 +67,13 @@ class ManageBasicLogic
 
     public function setBasicManage(BasicManage $basicManage)
     {
-        $repo = $this->em->getRepository('YesknMainBundle:Manage');
+        $repo = $this->em->getRepository('YesknMainBundle:Options');
 
         foreach ($this->options as $option) {
             $entity = $repo->findOneBy(['name' => $option]);
 
             if (empty($entity)) {
-                $entity = new Manage();
+                $entity = new Options();
             }
 
             $entity->setName($option);

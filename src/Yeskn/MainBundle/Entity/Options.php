@@ -12,10 +12,10 @@ namespace Yeskn\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="manage")
- * @ORM\Entity(repositoryClass="Yeskn\MainBundle\Repository\ManageRepository")
+ * @ORM\Table(name="options")
+ * @ORM\Entity(repositoryClass="Yeskn\MainBundle\Repository\OptionsRepository")
  */
-class Manage
+class Options
 {
     /**
      * @var int
