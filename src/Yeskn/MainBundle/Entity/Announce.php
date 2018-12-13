@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="announce")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="Yeskn\MainBundle\Repository\AnnounceRepository")
  */
 class Announce
@@ -34,7 +35,7 @@ class Announce
 
     /**
      * @var boolean
-     * @ORM\Column(name="show", type="boolean", options={"default":false})
+     * @ORM\Column(name="`show`", type="boolean", options={"default":false})
      */
     private $show;
 
@@ -128,5 +129,14 @@ class Announce
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onCreate()
+    {
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 }

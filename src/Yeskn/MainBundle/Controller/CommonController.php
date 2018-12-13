@@ -22,7 +22,6 @@ class CommonController extends Controller
         $tab = $request->get('tab');
         $page = $request->get('page', 1);
         $scope = $request->get('scope');
-        $blogList = $request->get('blogList');
         $sortBy = $request->get('sortBy');
 
         $pagesize = 25;
@@ -101,7 +100,6 @@ class CommonController extends Controller
 
         if ($scope == 'home') {
             $tpl =  '@YesknMain/default/index.html.twig';
-            $params['blog_list'] = $blogList;
         } else {
             $tpl = '@YesknMain/post/index.html.twig';
         }

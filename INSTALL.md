@@ -36,6 +36,10 @@
 **导入数据**
 
     php bin/console doctrine:database:init
+    
+**载入翻译数据**
+
+    php bin/console translation:persist
 
 **修改管理员密码**
 

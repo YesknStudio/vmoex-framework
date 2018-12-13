@@ -69,6 +69,7 @@ class Notice
     /**
      * @var
      * @ORM\OneToOne(targetEntity="Yeskn\MainBundle\Entity\Comment")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $content;
 

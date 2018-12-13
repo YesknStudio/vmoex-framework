@@ -10,10 +10,8 @@
 namespace Yeskn\MainBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Yeskn\MainBundle\Entity\Blog;
 
 class DefaultController extends Controller
 {
@@ -24,19 +22,10 @@ class DefaultController extends Controller
     {
         $tab = $request->get('tab');
         $page = $request->get('page', 1);
-
-        $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
-
-        $blogList = $blogRepo->findBy(['status' => Blog::STATUS_CREATED], [
-            'priority' => 'DESC',
-            'createdAt' => 'DESC'
-        ]);
-
         return $this->forward('YesknMainBundle:Common:homeList', [
             'tab' => $tab,
             'page' => $page,
             'scope' => 'home',
-            'blogList' => $blogList,
             'sortBy' => $request->get('sortBy', 'com')
         ]);
     }
