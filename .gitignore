@@ -24,7 +24,10 @@ web/assets/lib/*
 !web/assets/lib/live2d
 web/avatar/*
 !web/avatar/default.png
-web/upload
+web/upload/*
+!web/upload/cover
+web/upload/cover/*
+!web/upload/cover/.gitkeep
 web/js
 web/css
 web/build
