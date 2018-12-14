@@ -1,21 +1,18 @@
 # 安装手册
 
     cd /path/to/webroot/path
-    
-    git clone git@github.com:yeskn-studio/vmoex-framework.git
+
+    git clone git@github.com:yeskn-studio/vmoex-framework.git && cd vmoex-framework
 
 **或者指定版本，比如：**
 
-    git clone --branch v2.1.1 git@github.com:yeskn-studio/vmoex-framework.git
-    
-**切换目录**
-
-    cd vmoex-framework
+    git clone --branch v2.1.1 git@github.com:yeskn-studio/vmoex-framework.git && cd vmoex-framework
 
 **修改runtime目录权限**
 
     chown -R [webuser] var （各类日志缓存存放目录）
     chown -R [webuser] web/avatar （用户头像）
+    chown -R [webuser] web/upload
 
 **修改配置文件**
 
@@ -93,7 +90,7 @@ server {
         include        fastcgi_params;
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-        access_log     /var/log/nginx/access.log main;
+        access_log     /var/log/nginx/vmoex-access.log main;
     }
 }
 ```
