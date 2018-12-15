@@ -72,11 +72,5 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": null
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/yeskn-studio/assetic-bundle"
-        }
-    ]
+    }
 }
