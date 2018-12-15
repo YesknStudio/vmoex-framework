@@ -1,4 +1,7 @@
 <h1 align="center">Vmoex - 期望成为最美好的二次元社区</h1>
+<p align="center">
+    <a href="https://travis-ci.org/yeskn-studio/vmoex-framework"><img src="https://travis-ci.org/yeskn-studio/vmoex-framework.svg?branch=master"></a>
+</p>
 
 <p align="center">
 vmoex是一个开源的二次元社区程序。
