@@ -3,7 +3,7 @@ imports:
 
 parameters:
     test_database_path: var/data/test.sqlite
-    secret: e01b91e2f072deac5abf039b4f6e6d9149442398
+    secret: e01b91e2f072deac5abf039b4f6e6d9149442399
 
 assetic:
     debug:          '%kernel.debug%'
