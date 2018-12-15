@@ -6,10 +6,18 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yeskn\Support\Http\ApiFail;
 
 class AjaxAuthenticationListener
 {
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * Handles security related exceptions.
      *
@@ -25,7 +33,7 @@ class AjaxAuthenticationListener
                 || $exception instanceof AccessDeniedException
                 || $exception instanceof AuthenticationCredentialsNotFoundException
             ) {
-                $response = new ApiFail('please login');
+                $response = new ApiFail($this->translator->trans('please_login'));
                 $response->setStatusCode(200);
 
                 $event->allowCustomResponseCode();

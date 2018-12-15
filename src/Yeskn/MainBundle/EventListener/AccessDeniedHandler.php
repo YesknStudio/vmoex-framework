@@ -12,14 +12,22 @@ namespace Yeskn\MainBundle\EventListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yeskn\Support\Http\ApiFail;
 
 class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function handle(Request $request, AccessDeniedException $accessDeniedException)
     {
         if ($request->isXmlHttpRequest()) {
-            return new ApiFail('please login');
+            return new ApiFail($this->translator->trans('access_denied'));
         }
 
         return $accessDeniedException;

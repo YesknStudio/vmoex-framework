@@ -9,12 +9,19 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Yeskn\MainBundle\Entity\Sign;
 use Yeskn\MainBundle\Entity\User;
 
+/**
+ * Class SignController
+ * @package Yeskn\MainBundle\Controller
+ *
+ * @Security("has_role('ROLE_USER')")
+ */
 class SignController extends Controller
 {
     /**
