@@ -40,8 +40,7 @@ class StatusControllerTest extends WebTestCase
     public function provideUrls()
     {
         return array(
-//            array('/status'),
-            array('/am-i-logged-in'),
+            array('/status'),
         );
     }
 }

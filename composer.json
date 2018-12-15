@@ -1,5 +1,6 @@
 {
-    "name": "project yeskn-studio/vmoex-framework",
+    "name": "yeskn-studio/vmoex-framework",
+    "description": "一个二次元向的社区程序",
     "license": "MIT",
     "type": "project",
     "autoload": {

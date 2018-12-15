@@ -1,5 +1,13 @@
+parameters:
+    test_database_path: var/data/test.sqlite
+
 imports:
     - { resource: config_dev.yml }
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters: ~
 
 framework:
     test: ~
@@ -19,3 +27,12 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    Symfony\Bundle\AsseticBundle\AsseticBundle:
+        public: true
