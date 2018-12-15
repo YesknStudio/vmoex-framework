@@ -16,6 +16,7 @@
 var/SymfonyRequirements.php
 !/var/data
 /var/data/*
+!/var/data/test.sqlite
 !/var/data/vmoex.sql
 /vendor/
 /web/bundles/
