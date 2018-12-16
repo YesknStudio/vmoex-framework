@@ -9,12 +9,19 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Entity\User;
 
+/**
+ * Class FollowController
+ * @package Yeskn\MainBundle\Controller
+ *
+ * @Security("has_role('ROLE_USER')")
+ */
 class FollowController extends Controller
 {
 
@@ -32,13 +39,6 @@ class FollowController extends Controller
          * @var User $me
          */
         $me = $this->getUser();
-
-        if (empty($me)) {
-            return new JsonResponse([
-                'ret' => 0,
-                'msg' => '请先登录再进行操作哦'
-            ]);
-        }
 
         /** @var User $ta */
         $ta = $this->getDoctrine()->getRepository('YesknMainBundle:User')

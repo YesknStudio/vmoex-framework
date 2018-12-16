@@ -3,20 +3,20 @@
 /**
  * This file is part of project project yeskn-studio/vmoex-framework.
  *
- * Author: Jake
+ * Author: Jaggle
  * Create: 2018-09-14 15:24:09
  */
 
 namespace Yeskn\MainBundle\Controller;
 
 use Intervention\Image\ImageManagerStatic as Image;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Yeskn\MainBundle\Entity\Blog;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
@@ -36,6 +36,7 @@ use Yeskn\Support\Validator;
  * @package Yeskn\MainBundle\Controller
  *
  * @Route("/user")
+ * @Security("has_role('RROLE_USER')")
  */
 class UserController extends AbstractController
 {
