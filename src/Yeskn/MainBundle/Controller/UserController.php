@@ -36,7 +36,7 @@ use Yeskn\Support\Validator;
  * @package Yeskn\MainBundle\Controller
  *
  * @Route("/user")
- * @Security("has_role('RROLE_USER')")
+ * @Security("has_role('ROLE_USER')")
  */
 class UserController extends AbstractController
 {
