@@ -166,25 +166,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/blog", name="user_blog")
-     */
-    public function blogAction()
-    {
-        $blogRepo = $this->getDoctrine()->getRepository('YesknMainBundle:Blog');
-
-        $addCnameForm = $this->createForm(BlogAddCnameType::class);
-
-        $blogList = $blogRepo->findBy(['user' => $this->getUser(), 'status' => Blog::STATUS_CREATED], ['createdAt' => 'DESC']);
-
-        return $this->render('@YesknMain/user/blog.html.twig',
-            $this->getUserHomeInfo() + [
-                'scope' => 'blog',
-                'blog_list' => $blogList,
-                'addCnameForm' => $addCnameForm->createView()
-            ]);
-    }
-
-    /**
      * @Route("/change-password", name="user_change_password")
      */
     public function changePasswordAction(Request $request)
