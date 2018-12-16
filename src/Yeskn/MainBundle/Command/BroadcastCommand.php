@@ -3,7 +3,7 @@
 /**
  * This file is part of project yeskn-studio/vmoex-framework.
  *
- * Author: Jake
+ * Author: Jaggle
  * Create: 2018-10-14 10:31:38
  */
 
@@ -15,11 +15,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Yeskn\MainBundle\Services\SocketPushService;
 use Yeskn\Support\Command\AbstractCommand;
 
-class PushMessageCommand extends AbstractCommand
+class BroadcastCommand extends AbstractCommand
 {
     protected function configure()
     {
-        $this->setName('push-message');
+        $this->setName('broadcast');
+        $this->setDescription('broadcast message to all online users');
         $this->addOption('message', null, InputOption::VALUE_REQUIRED);
     }
 
