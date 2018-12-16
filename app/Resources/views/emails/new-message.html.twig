@@ -1,0 +1,18 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block email_title %}
+    Wpcraft 有人给您发送了私信
+{% endblock %}
+
+{% block email_content %}
+    <div style="padding-bottom: 10px">
+        <img src="{{ absolute_url(asset(message.sender.avatar)) }}" alt="" width="30" height="30" style="border-radius: 3px;vertical-align:middle">
+
+        <a data-pjax href="{{ url('member_home', {username: message.sender.username}) }}">{{ message.sender.nickname }}</a>
+        {{ message.createdAt|ago }}：
+    </div>
+
+    <blockquote class="home-bq">
+        {{ message.content|raw }}
+    </blockquote>
+{% endblock %}

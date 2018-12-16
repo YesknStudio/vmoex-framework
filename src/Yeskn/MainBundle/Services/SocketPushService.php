@@ -85,6 +85,11 @@ class SocketPushService
                 ]
             ]
         ]);
+
+        $this->container->get(NoticeService::class)->emailMessage(
+            $message->getReceiver()->getEmail(),
+            $message
+        );
     }
 
     public function pushCreateBlogEvent($username, $msg, $ret = 1, $percent = null)

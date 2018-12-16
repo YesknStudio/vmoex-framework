@@ -10,6 +10,7 @@
 namespace Yeskn\MainBundle\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\MainBundle\Twig\Render;
@@ -98,6 +99,16 @@ class NoticeService extends AbstractService
             ->setFrom($this->emailUser)
             ->setTo($email)
             ->setBody($this->render->renderEmailNotice($notice), 'text/html');
+
+        $this->mailer->send($message);
+    }
+
+    public function emailMessage($email, Message $message)
+    {
+        $message = (new \Swift_Message('Vmoex通知'))
+            ->setFrom($this->emailUser)
+            ->setTo($email)
+            ->setBody($this->render->renderEmailMessage($message), 'text/html');
 
         $this->mailer->send($message);
     }

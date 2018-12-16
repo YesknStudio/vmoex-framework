@@ -10,6 +10,7 @@
 namespace Yeskn\MainBundle\Twig;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 
 class Render extends \Twig_Extension
@@ -31,6 +32,11 @@ class Render extends \Twig_Extension
         }
 
         throw new \Exception('un-support notice type ' . $notice->getType());
+    }
+
+    public function renderEmailMessage(Message $message)
+    {
+        return $this->template->render('emails/new-message.html.twig', ['message' => $message]);
     }
 
     public function renderNoticeItem(Notice $notice)
