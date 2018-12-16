@@ -34,7 +34,7 @@ class NoticeService extends AbstractService
         $this->pushService = $pushService;
         $this->mailer = $mailer;
         $this->render = $render;
-
+        $this->emailUser = $emailUser;
     }
 
 
