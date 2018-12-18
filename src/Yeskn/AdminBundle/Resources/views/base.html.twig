@@ -59,6 +59,19 @@
        $(".alert-success").slideUp(500);
    }, 2000);
 
+   function showAlertModal(modalId, message)
+   {
+       $.get('{{ path('admin_alert_modal') }}', {
+           modalId: modalId,
+           message: message
+       }, function (res) {
+           $('body').append(res);
+
+           let $modal = $('#alertModal'+modalId);
+           $modal.modal();
+       })
+   }
+
    $(document).on('click', '[data-delete]', function (e) {
        e.preventDefault();
        let href = $(this).attr('href');
@@ -77,15 +90,7 @@
                        window.location.reload();
                    } else {
                        $modal.modal('hide');
-                       $.get('{{ path('admin_alert_modal') }}', {
-                           modalId: modalId,
-                           message: res.message
-                       }, function (res) {
-                           $('body').append(res);
-
-                           let $modal = $('#alertModal'+modalId);
-                           $modal.modal();
-                       })
+                      showAlertModal(modalId, res.message);
                    }
                });
            });

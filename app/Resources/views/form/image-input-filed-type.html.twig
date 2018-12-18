@@ -1,7 +1,7 @@
 {% block image_input_widget %}
     {% spaceless %}
         {% if data %}
-            <img src="{{ asset(data.path ~ '/' ~ data.fileName) }}" alt="" style="padding: 10px">
+            <img src="{{ asset(data.path ~ '/' ~ data.fileName) }}" alt="" style="padding: 10px" width="100%">
         {% endif %}
         {{ form_widget(form, {attr: {class: 'form-control'}}) }}
         {{ form_errors(form) }}

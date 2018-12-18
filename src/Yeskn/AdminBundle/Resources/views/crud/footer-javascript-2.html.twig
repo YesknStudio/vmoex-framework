@@ -41,6 +41,10 @@
                 .build();
 
             $.get(url, function (res) {
+                if (res.status === 0) {
+                    showAlertModal(formId, res.message);
+                }
+
                 $('body').append(res);
 
                 $('#entityModal'+formId).last().modal();
