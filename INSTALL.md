@@ -13,6 +13,7 @@
     chown -R [webuser] var （各类日志缓存存放目录）
     chown -R [webuser] web/avatar （用户头像）
     chown -R [webuser] web/upload
+    chown -R [webuser] app/Resources/translations (翻译文件的目录)
 
 **修改配置文件**
 
