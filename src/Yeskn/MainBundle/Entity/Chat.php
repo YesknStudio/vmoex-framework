@@ -36,6 +36,7 @@ class Chat
      *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User",inversedBy="chats")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 

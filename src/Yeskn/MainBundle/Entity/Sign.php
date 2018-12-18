@@ -30,6 +30,7 @@ class Sign
      * @var User
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id" , referencedColumnName="id")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 
@@ -45,7 +46,7 @@ class Sign
      */
     private $gotGold;
 
-    
+
 
     /**
      * Get id

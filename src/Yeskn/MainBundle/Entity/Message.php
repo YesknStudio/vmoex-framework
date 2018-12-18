@@ -29,6 +29,7 @@ class Message
      *
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User", inversedBy="sentMessages")
      * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
+    * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $sender;
 
@@ -36,6 +37,7 @@ class Message
      * @var
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User",inversedBy="receivedMessages")
      * @ORM\JoinColumn(name="receiver_id" , referencedColumnName="id")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $receiver;
 

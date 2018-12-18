@@ -30,6 +30,7 @@ class Active
      *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User",inversedBy="actives")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 
