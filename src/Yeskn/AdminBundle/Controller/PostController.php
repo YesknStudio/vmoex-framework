@@ -45,7 +45,7 @@ class PostController extends Controller
             return $this->redirectToRoute('admin_post_index');
         }
 
-        return $this->render('@YesknAdmin/Post/create.html.twig', array(
+        return $this->render('@YesknAdmin/post/create.html.twig', array(
             'post' => $post,
             'form' => $form->createView(),
         ));
