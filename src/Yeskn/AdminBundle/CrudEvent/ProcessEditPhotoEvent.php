@@ -52,7 +52,7 @@ class ProcessEditPhotoEvent extends AbstractCrudEntityEvent
             Image::configure(array('driver' => 'gd'));
 
             $image = Image::make($targetPath);
-            $image->resize(200, 100)->save();
+            $image->save();
 
             $entityObj->setFile($fileName);
         } else if (!empty($this->oldFile)) {
