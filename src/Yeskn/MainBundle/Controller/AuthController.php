@@ -11,7 +11,6 @@ namespace Yeskn\MainBundle\Controller;
 
 use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,10 +39,10 @@ class AuthController extends Controller
         //last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('@YesknMain/auth/login.html.twig', array(
+        return $this->render('@YesknMain/auth/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error
-        ));
+        ]);
     }
 
     /**
@@ -100,14 +99,15 @@ class AuthController extends Controller
             return $this->redirectToRoute('login');
         }
 
-        return $this->render(
-            '@YesknMain/auth/register.html.twig',
-            array('form' => $form->createView())
-        );
+        return $this->render('@YesknMain/auth/register.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
      * @Route("/login/github", name="login_from_github")
+     *
+     * @return RedirectResponse
      */
     public function loginFromGithubAction()
     {
@@ -121,6 +121,9 @@ class AuthController extends Controller
 
     /**
      * @Route("/oauth/github", name="oauth_github")
+     *
+     * @param Request $request
+     * @return RedirectResponse|\Yeskn\Support\Http\ApiFail
      */
     public function oauthGithub(Request $request)
     {

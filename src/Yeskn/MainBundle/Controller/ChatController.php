@@ -2,24 +2,32 @@
 /**
  * This file is part of project project yeskn-studio/vmoex-framework.
  *
- * Author: Jake
+ * Author: Jaggle
  * Create: 2018-05-26 17:39:30
  */
 
 namespace Yeskn\MainBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yeskn\MainBundle\Entity\Chat;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\Support\Http\ApiFail;
+use Yeskn\Support\Http\ApiOk;
 
 class ChatController extends Controller
 {
     /**
      * @Route("/chat", name="bind_chat")
+     *
+     * @param Request $request
+     * @return Response
      */
     public function bindChatAction(Request $request)
     {
@@ -43,7 +51,8 @@ class ChatController extends Controller
 
         $response = $this->render('@YesknMain/chat/chat.html.twig', $params);
 
-        $lastChat = $this->getDoctrine()->getRepository('YesknMainBundle:Chat')->findOneBy([], ['id' => 'DESC']);
+        $lastChat = $this->getDoctrine()
+            ->getRepository('YesknMainBundle:Chat')->findOneBy([], ['id' => 'DESC']);
 
         if ($lastChat) {
             $lastChatId = $lastChat->getId();
@@ -58,17 +67,19 @@ class ChatController extends Controller
 
     /**
      * @Route("/bind-chat/send", methods={"POST"}, name="send_chat")
+     * @Security("has_role('RROLE_USER')")
      *
      * @param $request
+     * @param TranslatorInterface $trans
      * @return JsonResponse
      */
-    public function sendChat(Request $request)
+    public function sendChat(Request $request, TranslatorInterface $trans)
     {
         $content = $request->get('content');
         $content = strip_tags($content);
 
         if (empty(strip_tags($content)) or mb_strlen($content) >= 200) {
-            return new JsonResponse(['ret' => 0, 'msg' => '内个啥...长度好像不合适哦！']);
+            return new ApiFail($trans->trans('length_not_support'));
         }
 
         /**
@@ -77,7 +88,7 @@ class ChatController extends Controller
         $user = $this->getUser();
 
         if ($user->getGold() <= 0) {
-            return new JsonResponse(['ret' => 0, 'msg' => '抱歉，您的金币不足']);
+            return new ApiFail($trans->trans('no_enough_gold'));
         }
 
         $chat = new Chat();
@@ -100,6 +111,6 @@ class ChatController extends Controller
             'content' => $chat->getContent()
         ]);
 
-        return new JsonResponse(['ret' => 1]);
+        return new ApiOk();
     }
 }
