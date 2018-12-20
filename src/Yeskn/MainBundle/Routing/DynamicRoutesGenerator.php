@@ -3,38 +3,40 @@
 /**
  * This file is part of project yeskn-studio/vmoex-framework.
  *
- * Author: Jake
- * Create: 2018-09-18 00:41:31
+ * Author: Jaggle
+ * Create: 2018-12-20 22:38:23
  */
 
 namespace Yeskn\MainBundle\Routing;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Config\Loader\Loader;
-use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 use Yeskn\MainBundle\Entity\Page;
+use Yeskn\Support\Routing\DynamicRoutesGeneratorInterface;
 
-class DynamicLoader extends Loader
+class DynamicRoutesGenerator implements DynamicRoutesGeneratorInterface
 {
     private $em;
-    private $isLoaded = false;
 
-
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->em = $manager;
+        $this->em = $em;
     }
 
-    public function load($resource, $type = null)
+    /**
+     * @return RouteCollection
+     * @throws \UnexpectedValueException
+     */
+    public function generateRoutes()
     {
         $routes = new RouteCollection();
+
+        $pages = $this->em->getRepository(Page::class)->findBy(['status' => 1]);
 
         $defaults = array(
             '_controller' => 'YesknMainBundle:Page:render',
         );
-
-        $pages = $this->em->getRepository(Page::class)->findBy(['status' => 1]);
 
         foreach ($pages as $page) {
             $route = new Route($page->getUri(), $defaults, []);
@@ -42,13 +44,6 @@ class DynamicLoader extends Loader
             $routes->add($routeName, $route);
         }
 
-        $this->isLoaded = true;
-
         return $routes;
-    }
-
-    public function supports($resource, $type = null)
-    {
-        return 'extra' === $type;
     }
 }

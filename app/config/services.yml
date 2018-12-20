@@ -4,10 +4,6 @@ services:
         autoconfigure: true
         public: false
 
-    Yeskn\Support\EventListener\ExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
-
     Yeskn\MainBundle\Twig\WebsiteInfo:
         tags:
             - { name: twig.extension }
@@ -23,9 +19,5 @@ services:
     Yeskn\MainBundle\EventListener\ResponseListener:
         tags:
         - { name: kernel.event_listener, event: kernel.response }
-
-    Yeskn\MainBundle\Routing\DynamicLoader:
-        tags:
-            - routing.loader
 
     Symfony\Bridge\Twig\Extension\AssetExtension: "@twig.extension.assets"

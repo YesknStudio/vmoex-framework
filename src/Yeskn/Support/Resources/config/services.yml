@@ -1,14 +1,22 @@
 services:
 
   _defaults:
-    autowire: true      # Automatically injects dependencies in your services.
-    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-    public: false       # Allows optimizing the container by removing unused services; this also means
+    autowire: true
+    autoconfigure: true
+    public: false
     bind:
       $projectDir: '%kernel.project_dir%'
 
   Yeskn\Support\:
     resource: '../../../Support/*'
+
+  Yeskn\Support\EventListener\ExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+
+  Yeskn\Support\Routing\DynamicRouteLoader:
+    tags:
+      - routing.loader
 
   Yeskn\Support\EventListener\ConsoleCommandListener:
     tags:

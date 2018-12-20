@@ -13,6 +13,8 @@ services:
       resource: '../../../MainBundle/*'
       exclude: '../../../MainBundle/{Entity,Repository,Tests}'
 
+  Yeskn\Support\Routing\DynamicRoutesGeneratorInterface: '@Yeskn\MainBundle\Routing\DynamicRoutesGenerator'
+
   Yeskn\MainBundle\Controller\:
       resource: '../../../MainBundle/Controller'
       public: true
