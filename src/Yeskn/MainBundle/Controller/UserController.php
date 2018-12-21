@@ -20,13 +20,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
-use Yeskn\MainBundle\Form\BlogAddCnameType;
 use Yeskn\MainBundle\Form\ChangePasswordType;
 use Yeskn\MainBundle\Form\Entity\ChangePassword;
 use Yeskn\Support\AbstractController;
 use Yeskn\Support\Http\ApiFail;
 use Yeskn\Support\Http\ApiOk;
-use Yeskn\Support\Http\HttpResponse;
 use Yeskn\Support\Validator;
 
 /**
@@ -40,8 +38,6 @@ use Yeskn\Support\Validator;
  */
 class UserController extends AbstractController
 {
-    use HttpResponse;
-
     private function getUserHomeInfo()
     {
         /** @var User $user */
@@ -97,6 +93,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/setting", name="user_setting")
+     *
+     * @param $request
+     * @return Response
      */
     public function settingAction(Request $request)
     {
@@ -167,6 +166,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/change-password", name="user_change_password")
+     *
+     * @param $request
+     * @return Response
      */
     public function changePasswordAction(Request $request)
     {
@@ -194,6 +196,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/setting/modify", name="modify_user_info")
+     *
+     * @param $request
+     * @return Response
      */
     public function modifyUserInfo(Request $request)
     {

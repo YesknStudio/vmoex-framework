@@ -10,8 +10,10 @@
 namespace Yeskn\Support;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\Support\Http\ApiFail;
 
 class AbstractController extends Controller
 {
@@ -54,5 +56,26 @@ class AbstractController extends Controller
     public function trans($id)
     {
         return $this->get('translator')->trans($id);
+    }
+
+    /**
+     * @param $msg
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|ApiFail
+     * @throws \LogicException
+     */
+    public function errorResponse($msg)
+    {
+        $isXhr = $this->get('request_stack')->getCurrentRequest()->isXmlHttpRequest();
+
+        if ($isXhr) {
+            return new ApiFail($msg);
+        }
+
+        $this->addFlash('danger', $msg);
+
+        /** @var Request $request */
+        $request = $this->get('request_stack')->getCurrentRequest();
+
+        return $this->redirect($request->headers->get('referer'));
     }
 }

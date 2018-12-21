@@ -10,7 +10,6 @@
 namespace Yeskn\MainBundle\Controller;
 
 use GuzzleHttp\Client;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,12 +19,10 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Yeskn\MainBundle\Entity\OpenUser;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\MainBundle\Form\UserLoginType;
-use Yeskn\Support\Http\HttpResponse;
+use Yeskn\Support\AbstractController;
 
-class AuthController extends Controller
+class AuthController extends AbstractController
 {
-    use HttpResponse;
-
     /**
      * @Route("/login", name="login", methods={"GET"})
      */
@@ -217,7 +214,7 @@ class AuthController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->errorResponse('github授权失败');
+        throw new HttpException('使用Github登录失败');
     }
 
     /**
