@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
+use Yeskn\Support\Http\ApiFail;
 
 class LocaleController extends Controller
 {
@@ -23,7 +25,7 @@ class LocaleController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function setLocale(Request $request)
+    public function setLocale(Request $request, TranslatorInterface $trans)
     {
         $locale = $request->get('locale');
 
@@ -34,6 +36,6 @@ class LocaleController extends Controller
             return $response;
         }
 
-        return new JsonResponse(['ret' => 0, 'msg' => 'locale invalid']);
+        return new ApiFail($trans->trans('locale invalid'));
     }
 }

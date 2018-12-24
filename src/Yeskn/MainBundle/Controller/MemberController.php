@@ -9,11 +9,12 @@
 
 namespace Yeskn\MainBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Form\UserMessageType;
+use Yeskn\Support\AbstractController;
 
 /**
  * Class MemberController
@@ -21,22 +22,20 @@ use Yeskn\MainBundle\Form\UserMessageType;
  *
  * @Route("/member")
  */
-class MemberController extends Controller
+class MemberController extends AbstractController
 {
     /**
      * @Route("/{username}", name="member_home")
      *
      * @param $username
-     * @return  Response
+     * @return Response
      */
-    public function homeAction($username)
+    public function homeAction($username, TranslatorInterface $trans)
     {
         $user = $this->getDoctrine()->getRepository('YesknMainBundle:User')
             ->findOneBy(['username' => $username]);
         if (!$user) {
-            return $this->render('@YesknMain/error.html.twig', [
-                'message' => '用户不存在'
-            ]);
+            return $this->errorResponse($trans->trans('user_not_exist'));
         }
 
         $userActive = $this->getDoctrine()->getRepository('YesknMainBundle:Active')

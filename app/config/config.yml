@@ -92,3 +92,17 @@ snc_redis:
                 read_write_timeout: 30
     session:
         client: session
+    doctrine:
+        metadata_cache:
+            client: cache
+            entity_manager: default
+            document_manager: default
+        result_cache:
+            client: cache
+            entity_manager: default
+        query_cache:
+            client: cache
+            entity_manager: default
+        second_level_cache:
+            client: cache
+            entity_manager: default

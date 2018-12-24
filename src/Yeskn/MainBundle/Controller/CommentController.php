@@ -21,6 +21,8 @@ use Yeskn\MainBundle\Entity\Post;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\MainBundle\Services\NoticeService;
 use Yeskn\Support\AbstractController;
+use Yeskn\Support\Http\ApiFail;
+use Yeskn\Support\Http\ApiOk;
 
 /**
  * Class CommentController
@@ -31,27 +33,23 @@ use Yeskn\Support\AbstractController;
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/topic/comment/thumb_up", name="thumb_up_comment", requirements={
-     *     "cid": "[1-9]\d*",
-     * })
+     * @Route("/topic/comment/thumb_up", name="thumb_up_comment")
      *
      * @param $request
      * @return JsonResponse
      */
     public function thumbPostComment(Request $request)
     {
+        $cid = $request->get('cid');
+
         $comment = $this->getDoctrine()->getRepository('YesknMainBundle:Comment')
-            ->findOneBy(['id' => $request->get('cid')]);
+            ->find($cid);
 
         if (empty($comment)) {
-            return new JsonResponse(['ret' => 0, 'msg' => $this->trans('comment_not_exist')]);
+            return new ApiFail($this->trans('comment_not_exist'));
         }
 
         $user = $this->getUser();
-
-        if (empty($user)) {
-            return new JsonResponse(['ret' => 0, 'msg' => $this->trans('please_login')]);
-        }
 
         /** @var ArrayCollection $thumbUsers */
         $thumbUsers = $comment->getThumbUpUsers();
@@ -67,7 +65,7 @@ class CommentController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->flush();
 
-        return new JsonResponse(['ret' => 1, 'info' => $action]);
+        return new ApiOk(['info' => $action]);
     }
 
     /**
@@ -82,18 +80,23 @@ class CommentController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $cost = 1;
 
         /** @var Post $post */
         $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->find($postId);
         if (empty($post)) {
-            return new JsonResponse(['err' => $this->trans('post_not_exist')]);
+            return new ApiFail($this->trans('post_not_exist'));
         }
 
         $content = $request->get('content');
         $content = strip_tags($content);
 
         if (empty($content) or mb_strlen($content) > 500) {
-            return new JsonResponse(['ret' => 0, 'msg' => $this->trans('length_not_support')]);
+            return new ApiFail($this->trans('length_not_support'));
+        }
+
+        if ($user->getGold() < $cost) {
+            return new ApiFail( $this->trans('no_enough_gold'));
         }
 
         $mentioned = [];
@@ -111,10 +114,7 @@ class CommentController extends AbstractController
         $mentioned = array_merge($mentioned, $matches[1]);
 
         if (count($mentioned) != count(array_unique($mentioned))) {
-            return new JsonResponse([
-                'ret' => 0,
-                'msg' => $this->trans('do_not_repeat_mention_others')
-            ]);
+            return new ApiFail($this->trans('do_not_repeat_mention_others'));
         }
 
         $userRepo = $this->getRepo('YesknMainBundle:User');
@@ -134,16 +134,8 @@ class CommentController extends AbstractController
             $url = $this->generateUrl('member_home', ['username' => $username]);
             $content = str_replace($item, "<a data-pjax href='{$url}'>$item</a>", $content);
 
-            $this->get(NoticeService::class)->add($user, $findOne, Notice::TYPE_COMMENT_MENTION, $parsedContent, $post);
-        }
-
-        $cost = 1;
-
-        if ($user->getGold() < $cost) {
-            return new JsonResponse([
-                'ret' => 0,
-                'msg' => $this->trans('no_enough_gold')
-            ]);
+            $this->get(NoticeService::class)
+                ->add($user, $findOne, Notice::TYPE_COMMENT_MENTION, $parsedContent, $post);
         }
 
         $comment = new Comment();
@@ -177,6 +169,6 @@ class CommentController extends AbstractController
 
         $em->flush();
 
-        return new JsonResponse(['ret' => 1]);
+        return new ApiOk();
     }
 }
