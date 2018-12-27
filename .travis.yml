@@ -1,7 +1,7 @@
 language: php
 php:
   - '7.2'
-script: phpunit --configuration phpunit.xml.dist
+script: phpunit --configuration phpunit.xml.dist src
 env:
   - SYMFONY_ENV=test
 install:
