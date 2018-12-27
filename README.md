@@ -4,6 +4,10 @@
 </p>
 
 <p align="center">
+    <a href='https://coveralls.io/github/yeskn-studio/vmoex-framework?branch=master'><img src='https://coveralls.io/repos/github/yeskn-studio/vmoex-framework/badge.svg?branch=master' alt='Coverage Status' /></a>
+</p>
+
+<p align="center">
 vmoex是一个开源的二次元社区程序。
 </p>
 
