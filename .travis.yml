@@ -1,10 +1,14 @@
 language: php
 php:
   - '7.2'
-script: phpunit --configuration phpunit.xml.dist src
+script:
+  - vendor/bin/phpunit --coverage-clover=coverage.xml --configuration phpunit.xml.dist src
 env:
   - SYMFONY_ENV=test
 install:
   - composer update
 services:
   - redis-server
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
