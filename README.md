@@ -1,5 +1,8 @@
 <h1 align="center">Vmoex - 期望成为最美好的二次元社区</h1>
 <p align="center">
+    <a href="LICENSE" target="_blank">
+        <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
+    </a>
     <a href="https://travis-ci.org/yeskn-studio/vmoex-framework">
     <img src="https://travis-ci.org/yeskn-studio/vmoex-framework.svg?branch=master">
     </a>
