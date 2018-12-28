@@ -6,3 +6,5 @@ env:
   - SYMFONY_ENV=test
 install:
   - composer update
+services:
+  - redis-server
