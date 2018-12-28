@@ -1,12 +1,17 @@
 language: php
+
 php:
   - '7.2'
+
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml --configuration phpunit.xml.dist src
+
 env:
   - SYMFONY_ENV=test
+
 install:
   - composer update
+
 services:
   - redis-server
 
