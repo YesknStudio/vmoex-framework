@@ -25,9 +25,9 @@ class ParameterConfigTest extends KernelTestCase
 
     public function testSecret()
     {
-
         $container = $this->realKernel->getContainer();
 
         $this->assertEquals('e01b91e2f072deac5abf039b4f6e6d9149442399', $container->getParameter('secret'));
+        $this->assertEquals('redis://localhost:6379', $container->getParameter('redis_dsn'));
     }
 }
