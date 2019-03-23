@@ -1,16 +1,20 @@
 {% extends '@YesknAdmin/base.html.twig' %}
 {% form_theme form 'form/vertical-field-2.html.twig' 'form/vertical-checkbox-type.html.twig' %}
+{% form_theme form.content 'form/vertical-html-textarea.html.twig' %}
 
 {% block page_wraper %}
     {{ form_start(form, {attr: {class: 'form-horizontal'}}) }}
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">{{ title is defined ? title : '创建新的文章' }}
-                    <span class="pull-right">
-                        <button type="button" class="btn btn-default"><i class="fa fa-save"></i> 存草稿</button>
-                        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 发布</button>
-                </span>
-                </h2>
+                <h3 class="page-header">
+                    文章列表 &raquo; {{ title is defined ? title : '创建新的文章' }}
+                        <div class="pull-right">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> 存草稿</button>
+                                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> 立即发布</button>
+                            </div>
+                        </div>
+                </h3>
             </div>
         </div>
         <div class="row">
@@ -24,4 +28,35 @@
             </div>
         </div>
     {{ form_end(form) }}
+
+{% endblock %}
+
+{% block footer_javascript %}
+    {{ parent() }}
+
+    <script>
+        $(function () {
+            window.YesknPlugins.get('WangEditor', function (wangEditor) {
+                const vmoexEditor = new wangEditor('#formHtmlEditor');
+                vmoexEditor.customConfig.printLog = false;
+                vmoexEditor.customConfig.menus = [
+                    'source',
+                    '|',
+                    'bold',
+                    'quote',
+                    'underline',
+                    'italic',
+                    'strikethrough',
+                    'eraser',
+                    'forecolor',
+                    'bgcolor',
+                    'insertcode'
+                ];
+                vmoexEditor.create();
+                return $('#editor');
+            }, function ($elm) {
+                $elm.empty();
+            });
+        });
+    </script>
 {% endblock %}

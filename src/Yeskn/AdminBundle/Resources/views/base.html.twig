@@ -24,6 +24,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <script src="{{ asset('assets/lib/jquery/dist/jquery.min.js') }}"></script>
+        <script>
+            window.YesknPlugins = {{ javascriptPlugins()|raw }};
+        </script>
+
     {% endblock %}
 </head>
 
@@ -48,7 +54,7 @@
 </div>
 
 {% block foot_js_link %}
-    <script src="{{ asset('assets/lib/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets-private/js/common.js') }}"></script>
     <script src="{{ asset('assets/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/lib/metisMenu/dist/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/lib/startbootstrap-sb-admin-2/dist/js/sb-admin-2.min.js') }}"></script>

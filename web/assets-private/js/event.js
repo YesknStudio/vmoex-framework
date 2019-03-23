@@ -113,7 +113,7 @@ $(document).on('click', '#sendChat', function () {
         url: window.Yeskn.links.send_chat,
         data: {content: $('#btn-input').val()},
         success: function (data) {
-            data.ret ? reload() : error(data.msg);
+            data.status ? reload() : error(data.message);
         }
     })
 });

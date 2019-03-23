@@ -7,10 +7,6 @@
 
 <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
-
         function ajaxForm(formId) {
             edsUI.form(formId, function (result) {
                 if(result.status) {
