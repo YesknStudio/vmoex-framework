@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "at.js": "^1.5.4",
-    "bootstrap": ">=3.4.1",
+    "bootstrap": "^3.4.1",
     "bootstrap-social": "^5.1.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
@@ -17,6 +17,7 @@
     "popper.js": "^1.14.7",
     "socket.io-client": "^2.2.0",
     "startbootstrap-sb-admin-2": "3.3.7",
-    "wangeditor": "^3.1.1"
+    "wangeditor": "^3.1.1",
+    "eds-ui": "github:jaggle/eds-ui"
   }
 }
