@@ -14,7 +14,7 @@ $(document).on('click', 'nav.navbar-static-top a', function (e) {
 
 $(document).on('click', '.set-locale-link', function (e) {
     e.preventDefault();
-    var locale = $(this).attr('data-locale');
+    const locale = $(this).attr('data-locale');
 
     $.post(window.Yeskn.links.G_set_locale_link, {locale:locale}, function (data) {
         if (data.ret) {
@@ -71,17 +71,17 @@ $(document).on('click', '.thumb-up', function () {
 });
 
 $(document).on('click', '#addCommentToPost', function () {
-    var $this = $(this);
+    const $this = $(this);
 
     if ($this.hasClass('disabled')) {
         warning(window.Yeskn.trans.action_too_quick);
         return ;
     }
 
-    var postId = $this.attr('data-postId');
+    const postId = $this.attr('data-postId');
 
     $this.addClass('disabled');
-    var content = $('#editor-comment').val();
+    const content = $('#editor-comment').val();
 
     $.ajax({
         method: 'POST',
@@ -90,10 +90,10 @@ $(document).on('click', '#addCommentToPost', function () {
             content: content
         },
         success: function (data) {
-            if (data.ret) {
+            if (data.status) {
                 reload();
             } else {
-                error(data.msg);
+                error(data.message);
                 $this.removeClass('disabled');
             }
 
