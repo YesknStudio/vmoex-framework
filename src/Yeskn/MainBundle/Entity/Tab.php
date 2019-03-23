@@ -46,7 +46,7 @@ class Tab
 
     /**
      * @var Tab
-     * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\Tab", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\Tab")
      *
      * @ORM\JoinColumn(name="parent_id", nullable=true)
      */

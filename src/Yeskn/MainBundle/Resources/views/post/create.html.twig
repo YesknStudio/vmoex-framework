@@ -16,7 +16,8 @@
 
                         <div class="form-group">
                             <label class="control-label required" for="editor-trigger">内容</label>
-                            <textarea class="form-control" name="content" id="content" cols="30" rows="10" title=""></textarea>
+                            <textarea class="form-control hide" name="content" id="content" cols="30" rows="10" title=""></textarea>
+                            <div id="editor"></div>
                         </div>
 
                         <div class="form-group">
@@ -43,7 +44,29 @@
                     fragment: '.content-body',
                     timeout: 600000
                 })
-            })
+            });
+
+            window.YesknPlugins.get('WangEditor', function (wangEditor) {
+                const vmoexEditor = new wangEditor('#editor');
+                vmoexEditor.customConfig.printLog = false;
+                vmoexEditor.customConfig.menus = [
+                    'source',
+                    '|',
+                    'bold',
+                    'quote',
+                    'underline',
+                    'italic',
+                    'strikethrough',
+                    'eraser',
+                    'forecolor',
+                    'bgcolor',
+                    'insertcode'
+                ];
+                vmoexEditor.create();
+                return $('#editor');
+            }, function ($elm) {
+                $elm.empty();
+            });
         })
     </script>
 {% endblock %}
