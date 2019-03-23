@@ -1,0 +1,65 @@
+/*!
+ * Bootoast CSS
+ * @author odahcam
+ * @version 1.0.0
+ **/
+
+.bootoast {
+    opacity: 0;
+    filter: alpha(opacity=0)
+}
+
+.bootoast>.glyphicon {
+    display: inline-block;
+    float: left;
+    font-size: 20px;
+    margin-right: 14px;
+}
+
+.bootoast>.bootoast-alert-container {
+    display: block;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.bootoast>.bootoast-alert-container>.bootoast-alert-content {
+    display: table;
+    width: 100%;
+    height: 100%
+}
+
+.bootoast-container {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    top: initial;
+    bottom: initial;
+    width: 390px;
+    max-width: 95%;
+    z-index: 2060
+}
+
+.bootoast-container.top {
+    top: 20px
+}
+
+.bootoast-container.bottom {
+    bottom: 20px
+}
+
+.bootoast-container.right {
+    left: initial
+}
+
+.bootoast-container.left {
+    right: initial
+}
+
+.bootoast-container.center {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+       -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+         -o-transform: translateX(-50%);
+            transform: translateX(-50%)
+}
