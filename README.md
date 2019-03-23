@@ -42,6 +42,31 @@ vmoex是一个开源的二次元社区程序。
 - 支持markdown ✅
 - 会员主页、关注他人、发送私信给他人 ✅
 
+## 使用的第三方库
+
+### 前端
+
+- jquery
+- bootstrap / bootstrap-social
+- jquery-pjax
+- sb-admin2 （管理端）
+- nprogress
+- socket.io (socketio client side)
+- wangEditor
+- at.js
+
+### 后端
+
+- symfony3.4
+- workerman/phpsocket.io (socketio server side)
+- snc/redis-bundle
+- guzzlehttp/guzzle
+- knplabs/knp-markdown-bundle (markdown support)
+- intervention/image (图片处理)
+- yzalis/identicon （头像生成）
+
+> 😘 感谢第三方插件和框架~
+
 ## 看板娘
 
 ![](web/assets/images/vmoex-screenshot-kanbanniang.png)
