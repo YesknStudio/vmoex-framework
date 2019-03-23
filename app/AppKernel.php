@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Yeskn\MainBundle\YesknMainBundle(),
             new Yeskn\AdminBundle\YesknAdminBundle(),
-            new Yeskn\OAuthBundle\YesknOAuthBundle(),
             new Yeskn\Support\YesknSupportBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
         ];
