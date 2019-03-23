@@ -28,7 +28,7 @@ vmoex是一个开源的二次元社区程序。
 - PHP   7.2+
 - MySQL 5.7+
 - Node  6.14+
-- bower 1.8+
+- yarn 1.7+
 - Redis 3.2+
 
 ## 功能

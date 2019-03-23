@@ -25,7 +25,7 @@
 
 **安装前端依赖**
 
-    bower install （root用户请运行：bower install --allow-root）
+    yarn install
     
 **创建数据库**
 
