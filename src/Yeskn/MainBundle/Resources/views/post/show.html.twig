@@ -127,9 +127,11 @@
 
     <script>
         $(function () {
-            $('#editor-comment').atwho({
-                at: "@",
-                data: JSON.parse('{{ commentUsers|raw }}')
+            window.YesknPlugins.get('atwho', function () {
+                $('#editor-comment').atwho({
+                    at: "@",
+                    data: JSON.parse('{{ commentUsers|raw }}')
+                });
             });
 
             $(document).onPjax('click', '.comment-reply', function () {

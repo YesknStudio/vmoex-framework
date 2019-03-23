@@ -12,7 +12,6 @@
         {% stylesheets
             'assets/lib/bootstrap/dist/css/bootstrap.min.css'
             'assets/lib/bootstrap-social/bootstrap-social.css'
-            'assets/lib/jquery.atwho/dist/css/jquery.atwho.min.css'
             'assets/lib/font-awesome/css/font-awesome.min.css'
             'assets/lib/nprogress/nprogress.css'
             'assets/lib/bootoast/css/bootoast.css'
@@ -28,18 +27,7 @@
             <script src="{{ asset_url }}"></script>
             <script>
                 window.Yeskn = {{ javascriptVariables(1)|raw }};
-                window.YesknPlugins = {
-                    WangEditor: {
-                        scripts: ['/assets/lib/wangeditor/release/wangEditor.min.js'],
-                        links: ['/assets/lib/wangeditor/release/wangEditor.min.css'],
-                        object: 'wangEditor'
-                    },
-                    landLord: {
-                        scripts: ['/assets/lib/live2d/js/live2d.js', '/assets/lib/live2d/js/message.js'],
-                        links: ['/assets/lib/live2d/css/live2d.css'],
-                        object: null,
-                    }
-                };
+                window.YesknPlugins = {{ javascriptPlugins()|raw }};
             </script>
         {% endjavascripts %}
     {% endblock %}
@@ -79,39 +67,14 @@
         'assets-private/js/socket.js'
         'assets/lib/bootstrap/dist/js/bootstrap.min.js'
         'assets/lib/nprogress/nprogress.js'
-        'assets/lib/Caret.js/dist/jquery.caret.min.js'
-        'assets/lib/jquery.atwho/dist/js/jquery.atwho.min.js'
         'assets/lib/jquery-pjax/jquery.pjax.js'
         'assets/lib/bootoast/js/bootoast.js'
         'assets/lib/socket.io-client/dist/socket.io.js'
         'assets-private/js/pjax.js'
         filter='uglifyjs2' output='build/js/footer.js' %}
         <script src="{{ asset_url }}"></script>
-        <script type="text/javascript">
-            $(function () {
-                $('html > .loading').remove();
-                let $body = $('body');
 
-                $body.fadeIn(1000);
-                $body.tooltip({
-                    selector: '[data-toggle=tooltip]'
-                });
-
-                if (window.Yeskn.messageCount || window.Yeskn.noticeCount) {
-                    $('.nav-bell-dot').addClass('push-notifications-count');
-                } else {
-                    $('.nav-bell-dot').removeClass('push-notifications-count');
-                }
-
-                if (window.Yeskn.lastChatId*1 !== '{{ app.request.cookies.get('_last_chat_id') }}'*1) {
-                    $('.nav-chat-dot').addClass('push-notifications-count');
-                } else {
-                    $('.nav-chat-dot').removeClass('push-notifications-count');
-                }
-
-                window.YesknPlugins.get('landLord');
-            });
-        </script>
+        {% include '@YesknMain/base/script.html.twig' %}
     {% endjavascripts %}
 {% endblock %}
 </body>

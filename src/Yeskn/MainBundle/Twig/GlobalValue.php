@@ -253,6 +253,30 @@ class GlobalValue extends \Twig_Extension
         return json_encode($result);
     }
 
+    public function javascriptPlugins()
+    {
+        return json_encode([
+            'WangEditor' => [
+                'scripts' => ['/assets/lib/wangeditor/release/wangEditor.min.js'],
+                'links' => ['/assets/lib/wangeditor/release/wangEditor.min.css'],
+                'identifier' => 'wangEditor' // 插件提供的构造函数
+            ],
+            'landLord' => [
+                'scripts'=> ['/assets/lib/live2d/js/live2d.js', '/assets/lib/live2d/js/message.js'],
+                'links' => ['/assets/lib/live2d/css/live2d.css'],
+                'identifier' => null,
+            ],
+            'atwho' => [
+                'scripts' => [
+                    '/assets/lib/Caret.js/dist/jquery.caret.min.js',
+                    '/assets/lib/jquery.atwho/dist/js/jquery.atwho.min.js'
+                ],
+                'links' => ['/assets/lib/jquery.atwho/dist/css/jquery.atwho.min.css'],
+                'identifier'=> null
+            ]
+        ]);
+    }
+
     public function getFilters()
     {
         return array(
@@ -272,6 +296,7 @@ class GlobalValue extends \Twig_Extension
             new \Twig_SimpleFunction('onlineUserCount',array($this,'onlineUserCount'),array('needs_environment' => true, 'is_safe' => 'html')),
             new \Twig_SimpleFunction('siteState',array($this,'siteState'),array('needs_environment' => true, 'is_safe' => 'html')),
             new \Twig_SimpleFunction('javascriptVariables',array($this,'javascriptVariables')),
+            new \Twig_SimpleFunction('javascriptPlugins',array($this,'javascriptPlugins')),
         );
     }
 }
