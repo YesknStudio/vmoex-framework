@@ -11,7 +11,6 @@
 **修改runtime目录权限**
 
     chown -R [webuser] var （各类日志缓存存放目录）
-    chown -R [webuser] web/avatar （用户头像）
     chown -R [webuser] web/upload
     chown -R [webuser] app/Resources/translations (翻译文件的目录)
 
@@ -96,7 +95,7 @@ server {
 }
 ```
 
-nginx配置好后，还无法直接访问网站，请执行如下操作：
+**nginx配置好后，还无法直接访问网站**，请执行如下操作：
 
 **清理prod模式下的缓存**
 
@@ -107,7 +106,7 @@ nginx配置好后，还无法直接访问网站，请执行如下操作：
 
     php bin/console assetic:dump --env=prod
 
-## 配置文件
+## 注意！！
 
 app/config/parameters.yml.dist并不是真正生效的配置文件，真正生效的是自动生成的app/config/parameters.yml，
 需修改配置时请修改此文件，修改完后，需要重新清理缓存或者生成静态资源文件。

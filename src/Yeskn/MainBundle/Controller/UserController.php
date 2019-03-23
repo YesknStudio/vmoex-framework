@@ -235,10 +235,11 @@ class UserController extends AbstractController
 
             $fileName = md5($user->getUsername()) . time() . '.'.$ext;
 
-            $targetPath = $this->container->getParameter('kernel.project_dir') . '/web/avatar/' . $fileName;
+            $targetPath = $this->container->getParameter('kernel.project_dir')
+                . '/web/upload/avatar/' . $fileName;
             $fs->copy($path, $targetPath);
 
-            $avatarPath = 'avatar/' . $fileName;
+            $avatarPath = 'upload/avatar/' . $fileName;
 
             Image::configure(array('driver' => 'gd'));
 
