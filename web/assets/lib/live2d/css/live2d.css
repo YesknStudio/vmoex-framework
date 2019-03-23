@@ -149,7 +149,7 @@
 }
 
 
-.hide-button {
+#landlord .hide-button {
     position: absolute;
     top: 10px;
     right: 0;
@@ -168,7 +168,7 @@
     cursor: pointer;
 }
 
-.hide-button:hover {
+#landlord .hide-button:hover {
     border: 1px solid #f4a7b9;
     background: #f4f6f8;
 }

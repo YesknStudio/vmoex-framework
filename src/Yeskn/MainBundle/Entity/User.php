@@ -153,6 +153,11 @@ class User implements UserInterface
      */
     private $actives;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Yeskn\MainBundle\Entity\Chat", mappedBy="user")
+     */
+    private $chats;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -160,6 +165,7 @@ class User implements UserInterface
         $this->followers = new ArrayCollection();
         $this->following = new ArrayCollection();
         $this->actives = new ArrayCollection();
+        $this->chats = new ArrayCollection();
     }
 
     /**
@@ -681,6 +687,22 @@ class User implements UserInterface
     public function getActives()
     {
         return $this->actives;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChats()
+    {
+        return $this->chats;
+    }
+
+    /**
+     * @param mixed $chats
+     */
+    public function setChats($chats)
+    {
+        $this->chats = $chats;
     }
 
     /**
