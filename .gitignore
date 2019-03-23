@@ -21,8 +21,7 @@ var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
 .idea
-web/assets/lib/*
-!web/assets/lib/live2d
+
 web/avatar/*
 !web/avatar/default.png
 web/upload/*
@@ -32,3 +31,5 @@ web/upload/cover/*
 web/js
 web/css
 web/build
+node_modules
+yarn.lock
