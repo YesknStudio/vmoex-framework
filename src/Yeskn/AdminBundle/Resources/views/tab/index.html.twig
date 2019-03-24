@@ -57,39 +57,7 @@
 {% endblock %}
 
 {% block footer_javascript %}
-    <script>
-        $(document).ready(function() {
-            function ajaxForm(formId) {
-                edsUI.form(formId, function (result) {
-                    if(result.status) {
-                        window.location = '{{ path('admin_tab_index') }}';
-                    } else {
-                        edsUI.mask().alert(result.message);
-                    }
-
-                    return false;
-                }, ['#saveModalFormBtn','text']);
-            }
-
-            ajaxForm('#modalForm');
-
-            $('[data-edit]').click(function (e) {
-                e.preventDefault();
-
-                var formId =  Math.round(Math.random()*100000000000);
-
-                let url = edsUI.location.init($(this).attr('href'))
-                    .setParameter('r', formId)
-                    .build();
-
-                $.get(url, function (res) {
-                    $('body').append(res);
-
-                    $('#entityModal'+formId).last().modal();
-
-                    ajaxForm('#modalForm'+formId);
-                });
-            });
-        });
-    </script>
+    {% include '@YesknAdmin/crud/footer-javascript-crud.html.twig' with {
+        entity: 'tab'
+    } %}
 {% endblock %}

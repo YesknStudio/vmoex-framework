@@ -35,9 +35,11 @@
                         <td>{{ item.name }}</td>
                         <td>{{ item.slug }}</td>
                         <td>{{ item.status ? '启用' : '不启用' }}</td>
-                        <td width="115" align="center">
-                            <a data-edit role="button" class="btn btn-xs btn-warning" href="{{ path('admin_edit', {entity: 'category',id:item.id}) }}"><i class="fa fa-edit"></i> 编辑</a>
-                            <a data-delete role="button" class="btn btn-xs btn-danger" href="{{ path('admin_delete',{entity: 'post', id:item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
+                        <td align="center">
+                            <div class="btn-group">
+                                <a data-edit role="button" class="btn btn-sm btn-warning" href="{{ path('admin_edit', {entity: 'category',id:item.id}) }}"><i class="fa fa-edit"></i> 编辑</a>
+                                <a data-delete role="button" class="btn btn-sm btn-danger" href="{{ path('admin_delete',{entity: 'post', id:item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}

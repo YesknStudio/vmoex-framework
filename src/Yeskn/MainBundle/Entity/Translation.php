@@ -12,7 +12,9 @@ namespace Yeskn\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="translation")
+ * @ORM\Table(name="translation", uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="message_unique",columns={"message_id"})
+ * })
  * @ORM\Entity(repositoryClass="Yeskn\MainBundle\Repository\TranslationRepository")
  * @ORM\HasLifecycleCallbacks()
  */
