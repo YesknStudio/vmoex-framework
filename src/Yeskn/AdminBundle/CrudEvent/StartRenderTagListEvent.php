@@ -16,8 +16,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderTagListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '标签';
-
     /**
      * @var Tag[]
      */
@@ -52,7 +50,6 @@ class StartRenderTagListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '名称', '别名', '创建时间', '状态'],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids
         ];

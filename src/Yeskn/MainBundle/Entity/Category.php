@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+    const NAME = '分类';
+
     /**
      * @var int
      *

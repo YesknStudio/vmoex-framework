@@ -17,6 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Options
 {
+    const NAME = '设置';
+
     /**
      * @var int
      *

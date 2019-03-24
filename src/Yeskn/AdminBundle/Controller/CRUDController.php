@@ -57,7 +57,7 @@ class CRUDController extends Controller
             'create_btn' => empty($data['create_btn']) ? [] : $data['create_btn'],
             'list' => $data['list'],
             'ids' => $data['ids'],
-            'entityName' => $data['entityName'],
+            'entityName' => $entityClass::NAME,
             'form' => $this->createForm($typeClass, new $entityClass)->createView(),
             'extra' => empty($data['extra']) ? [] : $data['extra'],
             'allPage' => ceil($total / $pageLimit),
@@ -109,6 +109,8 @@ class CRUDController extends Controller
     public function editAction(Request $request, $entity)
     {
         $entity = ucfirst($entity);
+        $entityClass = "Yeskn\\MainBundle\\Entity\\" . $entity;
+
         $repo = $this->getDoctrine()->getRepository('YesknMainBundle:' . $entity);
 
         if ($id = $request->get('id')) {
@@ -117,7 +119,6 @@ class CRUDController extends Controller
             $this->startEntityEditEvent($entity, $entityObj);
 
         } else {
-            $entityClass = "Yeskn\\MainBundle\\Entity\\" . $entity;
             $entityObj = new $entityClass;
         }
 
@@ -142,7 +143,7 @@ class CRUDController extends Controller
 
         return $this->render('@YesknAdmin/modals/entity-modal.html.twig', [
             'form' => $form->createView(),
-            'title' => '编辑板块',
+            'title' => '编辑' . $entityClass::NAME,
             'action' => $this->generateUrl('admin_edit', [
                 'entity' => $entity,
                 'id' => $id

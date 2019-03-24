@@ -18,6 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Announce
 {
+    const NAME = '公告';
+
     /**
      * @var int
      *

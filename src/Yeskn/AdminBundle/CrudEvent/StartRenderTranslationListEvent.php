@@ -16,8 +16,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderTranslationListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '翻译';
-
     /**
      * @var Translation[]
      */
@@ -53,7 +51,7 @@ class StartRenderTranslationListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', 'messageId', '中文简体', '英文', '中文繁体', '日语'],
-            'entityName' => $this->entityName,
+            'column_width' => [0 => '5'],
             'list' => $result,
             'ids' => $ids
         ];

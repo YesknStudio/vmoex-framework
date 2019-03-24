@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Post
 {
+    const NAME = '帖子';
+
     /**
      * @var EntityManager
      */

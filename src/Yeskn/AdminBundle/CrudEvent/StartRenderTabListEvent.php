@@ -18,8 +18,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderTabListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '板块';
-
     /**
      * @var Tab[]
      */
@@ -56,7 +54,6 @@ class StartRenderTabListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '名称', '图标', '层级', '别名', '描述'],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids
         ];

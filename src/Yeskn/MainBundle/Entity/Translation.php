@@ -20,6 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Translation
 {
+    const NAME = '翻译';
+
     /**
      * @var int
      *

@@ -17,8 +17,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderGoodsListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '商品';
-
     /**
      * @var Goods[]
      */
@@ -55,7 +53,6 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '标题', '图片', '价格', '邮费', '数量'],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids,
             'extra' => [

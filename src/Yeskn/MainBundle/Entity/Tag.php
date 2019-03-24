@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tag
 {
+    const NAME = '标签';
+
     /**
      * @var int
      *

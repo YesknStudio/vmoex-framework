@@ -18,6 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comment
 {
+    const NAME = '评论';
+
     /**
      * @var int
      *

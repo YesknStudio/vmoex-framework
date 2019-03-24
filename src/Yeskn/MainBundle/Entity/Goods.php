@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Goods
 {
+    const NAME = '商品';
+
     /**
      * @var int
      *

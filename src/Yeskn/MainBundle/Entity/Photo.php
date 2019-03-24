@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Photo
 {
+    const NAME = '照片';
+
     /**
      * @var int
      *

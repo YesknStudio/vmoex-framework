@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Active
 {
+    const NAME = '活动';
+
     /**
      * @var int
      *

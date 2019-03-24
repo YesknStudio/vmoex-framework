@@ -20,6 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Tab
 {
+    const NAME = '板块';
+
     /**
      * @var int
      *

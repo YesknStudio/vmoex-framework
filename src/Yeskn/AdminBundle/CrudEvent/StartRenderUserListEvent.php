@@ -17,8 +17,6 @@ use Symfony\Bridge\Twig\Extension\AssetExtension;
 
 class StartRenderUserListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '用户';
-
     /**
      * @var User[]
      */
@@ -57,7 +55,6 @@ class StartRenderUserListEvent extends AbstractCrudListEvent
         return [
             'columns' => ['ID', '用户名', '头像', '昵称', '邮箱', '注册时间', '金币'],
             'column_width' => [0 => 5, 2 => 10, 4 => 15],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids
         ];

@@ -16,6 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Chat
 {
+    const NAME = '聊天';
+
     /**
      * @var int
      *

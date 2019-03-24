@@ -15,8 +15,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderPhotoListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '照片';
-
     /**
      * @var Photo[]
      */
@@ -49,7 +47,6 @@ class StartRenderPhotoListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '名称', '文件', '发布日期'],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids,
             'extra' => [

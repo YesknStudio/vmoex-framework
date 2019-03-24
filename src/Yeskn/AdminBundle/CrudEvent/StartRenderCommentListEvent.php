@@ -16,8 +16,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderCommentListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '评论';
-
     /**
      * @var Comment[]
      */
@@ -54,7 +52,6 @@ class StartRenderCommentListEvent extends AbstractCrudListEvent
         return [
             'columns' => ['ID', '作者', '内容', '文章标题', '发布日期'],
             'column_width' => [0 => 5, 1 => 10, 4 => 10, 5 => 15],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids
         ];

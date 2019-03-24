@@ -16,8 +16,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderAnnounceListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '公告';
-
     /**
      * @var Announce[]
      */
@@ -52,7 +50,6 @@ class StartRenderAnnounceListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '内容', '状态', '创建时间', '更新时间'],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids
         ];

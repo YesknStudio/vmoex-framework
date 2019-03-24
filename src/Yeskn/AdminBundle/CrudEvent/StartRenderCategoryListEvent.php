@@ -16,8 +16,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderCategoryListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '分类';
-
     /**
      * @var Category[]
      */
@@ -51,7 +49,6 @@ class StartRenderCategoryListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '名称', '别名', '状态'],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids
         ];

@@ -15,8 +15,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderPageListEvent extends AbstractCrudListEvent
 {
-    private $entityName = '页面';
-
     /** @var Page[] */
     protected $list;
 
@@ -46,7 +44,6 @@ class StartRenderPageListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '标题', '状态', '创建时间'],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids
         ];

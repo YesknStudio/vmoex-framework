@@ -16,8 +16,6 @@ use Yeskn\MainBundle\Twig\GlobalValue;
 
 class StartRenderPostListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '文章';
-
     /**
      * @var Post[]
      */
@@ -59,7 +57,6 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
         return [
             'columns' => ['ID', '标题', '作者', '发布日期', '更新日期', '点击', '状态'],
             'column_width' => [0 => '5', 1 => 25, 6 => 8, 7 => 20],
-            'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids,
             'create_btn' => 'yeskn_admin_post_create'

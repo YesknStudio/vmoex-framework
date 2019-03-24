@@ -17,6 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Page
 {
+    const NAME = '页面';
+
     /**
      * @var int
      *
