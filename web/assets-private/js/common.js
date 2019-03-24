@@ -45,8 +45,9 @@ window.YesknPlugins.get = function (name, callback, refresh) {
     const self = window.YesknPlugins;
 
     if (self[name].initialized === true) {
-        refresh && refresh(self[name].result);
-        return  callback && callback(eval(self[name].identifier));
+        if (refresh) refresh(self[name].result);
+        if (callback) self[name].result = callback(eval(self[name].identifier));
+        return self[name];
     }
 
     const scripts = self[name].scripts;
@@ -61,7 +62,7 @@ window.YesknPlugins.get = function (name, callback, refresh) {
 
         if (key * 1 === scripts.length - 1) {
             scriptElm.onload = function () {
-                self[name].result = callback && callback(eval(self[name].identifier));
+                if (callback) self[name].result = callback(eval(self[name].identifier));
             };
         }
     }

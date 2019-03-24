@@ -24,3 +24,14 @@ h3.page-header{
 .small-font {
     font-size: 14px;
 }
+
+h3.page-header {
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+table.table {
+    table-layout: fixed;
+}
+table.table td{
+    vertical-align: middle !important;
+}

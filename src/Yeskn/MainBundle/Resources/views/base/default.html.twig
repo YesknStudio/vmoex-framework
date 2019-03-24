@@ -73,9 +73,8 @@
         'assets-private/js/pjax.js'
         filter='uglifyjs2' output='build/js/footer.js' %}
         <script src="{{ asset_url }}"></script>
-
-        {% include '@YesknMain/base/script.html.twig' %}
     {% endjavascripts %}
+    {% include '@YesknMain/base/script.html.twig' %}
 {% endblock %}
 </body>
 </html>
