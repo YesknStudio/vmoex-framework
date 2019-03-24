@@ -25,8 +25,6 @@ class StartRenderTabListEvent extends AbstractCrudListEvent
      */
     protected $list;
 
-    private $router;
-
     private $globalValue;
 
     private $translator;

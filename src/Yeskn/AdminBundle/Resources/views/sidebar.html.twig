@@ -15,23 +15,23 @@
             <li>
                 <a href="#"><i class="fa fa-file-text fa-fw"></i> 文章管理<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="{{ path('admin_post_index') }}"> 文章列表</a></li>
-                    <li><a href="{{ path('admin_tag_index') }}"> 标签列表</a></li>
-                    <li><a href="{{ path('admin_category_index') }}"> 分类列表</a></li>
-                    <li><a href="{{ path('admin_tab_index') }}"> 板块列表</a></li>
+                    <li><a href="{{ path('admin_list', {entity: 'post'}) }}"> 文章列表</a></li>
+                    <li><a href="{{ path('admin_list', {entity: 'tag'}) }}"> 标签列表</a></li>
+                    <li><a href="{{ path('admin_list', {entity: 'category'}) }}"> 分类列表</a></li>
+                    <li><a href="{{ path('admin_list', {entity: 'tab'}) }}"> 板块列表</a></li>
                 </ul>
             </li>
             <li>
-                <a href="{{ path('admin_translation_index') }}"><i class="fa fa-wordpress fa-fw"></i> 翻译管理</a>
+                <a href="{{ path('admin_list', {entity: 'translation'}) }}"><i class="fa fa-wordpress fa-fw"></i> 翻译管理</a>
             </li>
             <li>
                 <a href="{{ path('admin_list', {entity: 'announce'}) }}"><i class="fa fa-wordpress fa-fw"></i> 公告管理</a>
             </li>
             <li>
-                <a href="{{ path('admin_user_index') }}"><i class="fa fa-user fa-fw"></i> 用户管理</a>
+                <a href="{{ path('admin_list', {entity: 'user'}) }}"><i class="fa fa-user fa-fw"></i> 用户管理</a>
             </li>
             <li>
-                <a href="{{ path('admin_comment_index') }}"><i class="fa fa-edit fa-fw"></i> 评论管理</a>
+                <a href="{{ path('admin_list', {entity: 'comment'}) }}"><i class="fa fa-edit fa-fw"></i> 评论管理</a>
             </li>
             <li>
                 <a href="{{ path('admin_list', {entity: 'goods'}) }}"><i class="fa fa-edit fa-fw"></i> 商品管理</a>

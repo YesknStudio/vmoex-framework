@@ -9,18 +9,17 @@
 
 namespace Yeskn\AdminBundle\CrudEvent;
 
-use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Yeskn\MainBundle\Entity\Goods;
+use Yeskn\MainBundle\Entity\Translation;
 use Yeskn\MainBundle\Twig\GlobalValue;
 
-class StartRenderGoodsListEvent extends AbstractCrudListEvent
+class StartRenderTranslationListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '商品';
+    public $entityName = '翻译';
 
     /**
-     * @var Goods[]
+     * @var Translation[]
      */
     protected $list;
 
@@ -28,12 +27,11 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
 
     private $translator;
 
-    public function __construct(RouterInterface $router, GlobalValue $globalValue, TranslatorInterface $translator, AssetExtension $asset)
+    public function __construct(RouterInterface $router, GlobalValue $globalValue, TranslatorInterface $translator)
     {
         $this->router = $router;
         $this->globalValue = $globalValue;
         $this->translator = $translator;
-        $this->asset = $asset;
     }
 
     public function execute()
@@ -45,24 +43,19 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
 
             $result[] = [
                 $tag->getId(),
-                $tag->getTitle(),
-                $this->imgColumn($this->asset->getAssetUrl($tag->getCover())),
-                $tag->getPrice(),
-                $tag->getPostFee(),
-                $tag->getCount()
+                $tag->getMessageId(),
+                $tag->getChinese(),
+                $tag->getEnglish(),
+                $tag->getTaiwanese(),
+                $tag->getJapanese(),
             ];
         }
 
         return [
-            'columns' => ['ID', '标题', '图片', '价格', '邮费', '数量'],
+            'columns' => ['ID', 'messageId', '中文简体', '英文', '中文繁体', '日语'],
             'entityName' => $this->entityName,
             'list' => $result,
-            'ids' => $ids,
-            'extra' => [
-                'columnAttr' => [
-                    2 => 'align=center'
-                ]
-            ]
+            'ids' => $ids
         ];
     }
 }

@@ -23,8 +23,6 @@ class StartRenderAnnounceListEvent extends AbstractCrudListEvent
      */
     protected $list;
 
-    private $router;
-
     private $globalValue;
 
     private $translator;

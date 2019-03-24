@@ -23,8 +23,6 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
      */
     protected $list;
 
-    private $router;
-
     private $globalValue;
 
     private $translator;
@@ -54,16 +52,17 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
                 $this->globalValue->ago($post->getCreatedAt()),
                 $this->globalValue->ago($post->getUpdatedAt()),
                 $post->getViews(),
-                $post->getStatus(),
                 $this->translator->trans($post->getStatus())
             ];
         }
 
         return [
             'columns' => ['ID', '标题', '作者', '发布日期', '更新日期', '点击', '状态'],
+            'column_width' => [0 => '5', 1 => 25, 6 => 8, 7 => 20],
             'entityName' => $this->entityName,
             'list' => $result,
-            'ids' => $ids
+            'ids' => $ids,
+            'create_btn' => 'yeskn_admin_post_create'
         ];
     }
 }

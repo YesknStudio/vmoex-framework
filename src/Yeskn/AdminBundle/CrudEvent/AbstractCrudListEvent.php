@@ -10,6 +10,7 @@
 namespace Yeskn\AdminBundle\CrudEvent;
 
 use Symfony\Bridge\Twig\Extension\AssetExtension;
+use Symfony\Component\Routing\RouterInterface;
 
 abstract class AbstractCrudListEvent implements CrudListEventInterface
 {
@@ -19,6 +20,11 @@ abstract class AbstractCrudListEvent implements CrudListEventInterface
     protected $asset;
 
     protected $list;
+
+    /**
+     * @var RouterInterface
+     */
+    protected $router;
 
     public function setList(array $list)
     {
@@ -38,6 +44,11 @@ abstract class AbstractCrudListEvent implements CrudListEventInterface
 
         $val = $this->asset->getAssetUrl($val);
         return sprintf('<img width="%spx" height="%spx" src="%s" />', $width, $width, $val);
+    }
+
+    public function linkColumn($text, $route, $params)
+    {
+        return sprintf("<a href='%s'>%s</a>", $this->router->generate($route, $params), $text);
     }
 
     abstract function execute();

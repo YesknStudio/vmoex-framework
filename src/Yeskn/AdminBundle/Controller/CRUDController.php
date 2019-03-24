@@ -48,6 +48,8 @@ class CRUDController extends Controller
         return $this->render('@YesknAdmin/crud/list.html.twig', [
             'entity' => strtolower($entity),
             'columns' => $data['columns'],
+            'column_width' => empty($data['column_width']) ? [] : $data['column_width'],
+            'create_btn' => empty($data['create_btn']) ? [] : $data['create_btn'],
             'list' => $data['list'],
             'ids' => $data['ids'],
             'entityName' => $data['entityName'],

@@ -11,15 +11,15 @@ namespace Yeskn\AdminBundle\CrudEvent;
 
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Yeskn\MainBundle\Entity\Tag;
+use Yeskn\MainBundle\Entity\Category;
 use Yeskn\MainBundle\Twig\GlobalValue;
 
-class StartRenderTagListEvent extends AbstractCrudListEvent
+class StartRenderCategoryListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '标签';
+    public $entityName = '分类';
 
     /**
-     * @var Tag[]
+     * @var Category[]
      */
     protected $list;
 
@@ -38,20 +38,19 @@ class StartRenderTagListEvent extends AbstractCrudListEvent
     {
         $ids = $result = [];
 
-        foreach ($this->list as $tag) {
-            $ids[] = $tag->getId();
+        foreach ($this->list as $category) {
+            $ids[] = $category->getId();
 
             $result[] = [
-                $tag->getId(),
-                $tag->getName(),
-                $tag->getSlug(),
-                $this->globalValue->ago($tag->getCreatedAt()),
-                $this->translator->trans($tag->getStatus())
+                $category->getId(),
+                $category->getName(),
+                $category->getSlug(),
+                $this->translator->trans($category->getStatus() ? '启用' : '不启用')
             ];
         }
 
         return [
-            'columns' => ['ID', '名称', '别名', '创建时间', '状态'],
+            'columns' => ['ID', '名称', '别名', '状态'],
             'entityName' => $this->entityName,
             'list' => $result,
             'ids' => $ids

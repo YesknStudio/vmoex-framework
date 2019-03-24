@@ -9,18 +9,18 @@
 
 namespace Yeskn\AdminBundle\CrudEvent;
 
-use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Yeskn\MainBundle\Entity\Goods;
+use Yeskn\MainBundle\Entity\User;
 use Yeskn\MainBundle\Twig\GlobalValue;
+use Symfony\Bridge\Twig\Extension\AssetExtension;
 
-class StartRenderGoodsListEvent extends AbstractCrudListEvent
+class StartRenderUserListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '商品';
+    public $entityName = '用户';
 
     /**
-     * @var Goods[]
+     * @var User[]
      */
     protected $list;
 
@@ -28,8 +28,8 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
 
     private $translator;
 
-    public function __construct(RouterInterface $router, GlobalValue $globalValue, TranslatorInterface $translator, AssetExtension $asset)
-    {
+    public function __construct(RouterInterface $router, GlobalValue $globalValue, TranslatorInterface $translator
+    , AssetExtension $asset){
         $this->router = $router;
         $this->globalValue = $globalValue;
         $this->translator = $translator;
@@ -45,24 +45,21 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
 
             $result[] = [
                 $tag->getId(),
-                $tag->getTitle(),
-                $this->imgColumn($this->asset->getAssetUrl($tag->getCover())),
-                $tag->getPrice(),
-                $tag->getPostFee(),
-                $tag->getCount()
+                $this->linkColumn($tag->getUsername(), 'member_home', ['username' => $tag->getUsername()]),
+                $this->imgColumn($tag->getAvatar(), 50),
+                $tag->getNickname(),
+                $tag->getEmail(),
+                $this->globalValue->ago($tag->getRegisterAt()),
+                $tag->getGold()
             ];
         }
 
         return [
-            'columns' => ['ID', '标题', '图片', '价格', '邮费', '数量'],
+            'columns' => ['ID', '用户名', '头像', '昵称', '邮箱', '注册时间', '金币'],
+            'column_width' => [0 => 5, 2 => 10, 4 => 15],
             'entityName' => $this->entityName,
             'list' => $result,
-            'ids' => $ids,
-            'extra' => [
-                'columnAttr' => [
-                    2 => 'align=center'
-                ]
-            ]
+            'ids' => $ids
         ];
     }
 }

@@ -22,8 +22,6 @@ class StartRenderPageListEvent extends AbstractCrudListEvent
 
     private $globalValue;
 
-    private $router;
-
     public function __construct(GlobalValue $globalValue, RouterInterface $router)
     {
         $this->globalValue = $globalValue;

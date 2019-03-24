@@ -9,18 +9,17 @@
 
 namespace Yeskn\AdminBundle\CrudEvent;
 
-use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Yeskn\MainBundle\Entity\Goods;
+use Yeskn\MainBundle\Entity\Comment;
 use Yeskn\MainBundle\Twig\GlobalValue;
 
-class StartRenderGoodsListEvent extends AbstractCrudListEvent
+class StartRenderCommentListEvent extends AbstractCrudListEvent
 {
-    public $entityName = '商品';
+    public $entityName = '评论';
 
     /**
-     * @var Goods[]
+     * @var Comment[]
      */
     protected $list;
 
@@ -28,12 +27,11 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
 
     private $translator;
 
-    public function __construct(RouterInterface $router, GlobalValue $globalValue, TranslatorInterface $translator, AssetExtension $asset)
+    public function __construct(RouterInterface $router, GlobalValue $globalValue, TranslatorInterface $translator)
     {
         $this->router = $router;
         $this->globalValue = $globalValue;
         $this->translator = $translator;
-        $this->asset = $asset;
     }
 
     public function execute()
@@ -42,27 +40,23 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
 
         foreach ($this->list as $tag) {
             $ids[] = $tag->getId();
+            $post = $tag->getPost();
 
             $result[] = [
                 $tag->getId(),
-                $tag->getTitle(),
-                $this->imgColumn($this->asset->getAssetUrl($tag->getCover())),
-                $tag->getPrice(),
-                $tag->getPostFee(),
-                $tag->getCount()
+                $tag->getUser()->getNickname(),
+                $tag->getContent(),
+                $this->linkColumn($post->getTitle(), 'post_show',  ['id' => $post->getId()]),
+                $this->globalValue->ago($tag->getCreatedAt()),
             ];
         }
 
         return [
-            'columns' => ['ID', '标题', '图片', '价格', '邮费', '数量'],
+            'columns' => ['ID', '作者', '内容', '文章标题', '发布日期'],
+            'column_width' => [0 => 5, 1 => 10, 4 => 10, 5 => 15],
             'entityName' => $this->entityName,
             'list' => $result,
-            'ids' => $ids,
-            'extra' => [
-                'columnAttr' => [
-                    2 => 'align=center'
-                ]
-            ]
+            'ids' => $ids
         ];
     }
 }
