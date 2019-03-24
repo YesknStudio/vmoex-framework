@@ -1,18 +1,15 @@
+{% set siteState = siteState() %}
+
 <footer>
     <div class="container" style="position: relative">
         <div class="row" style="margin-bottom: 15px">
             <div class="brand col-sm-12">
-                <b><a data-pjax href="{{ path('about') }}">{{ 'about_site'|trans }}</a></b>
-                <span class="snow">·</span>
-                <b><a data-pjax href="{{ path('contribute') }}">{{ 'support'|trans }}</a></b>
-                <span class="snow">·</span>
-                <b><a target="_blank" href="https://www.wpcraft.cn">wpcraft博客创造者社区</a></b>
-                <span class="snow">·</span>
-                <b><a data-pjax href="/tos">服务条款</a></b>
-                <span class="snow">·</span>
-                <b><a data-pjax href="{{ path('announce_history') }}">历史公告</a></b>
-                <span class="snow">·</span>
-                <b><a target="_blank" href="https://github.com/Jaggle">Github</a></b>
+                {% set footerLinks = siteState.footerLinks %}
+                {% for link in footerLinks %}
+                    <b><a {% if link.isPjax %}data-pjax{% endif %} href="{{ link.link }}">
+                            {{ link.name|trans }}</a></b>
+                    <span class="snow">·</span>
+                {% endfor %}
             </div>
         </div>
 
@@ -36,7 +33,6 @@
 
         <div class="row">
             <div class="col-sm-12">
-                {% set siteState = siteState() %}
                 <div>
                   会员在线{{ siteState.onlineUserCount }}人，游客<span id="onlineCnt">1</span>人，{{ 'footer_oneline_user_most'|trans }} 24
                 </div>

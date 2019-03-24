@@ -46,8 +46,12 @@ abstract class AbstractCrudListEvent implements CrudListEventInterface
         return sprintf('<img width="%spx" height="%spx" src="%s" />', $width, $width, $val);
     }
 
-    public function linkColumn($text, $route, $params)
+    public function linkColumn($text, $route, $params = null)
     {
+        if (is_null($params)) {
+            return sprintf("<a href='%s'>%s</a>", $route, $text);
+        }
+
         return sprintf("<a href='%s'>%s</a>", $this->router->generate($route, $params), $text);
     }
 
