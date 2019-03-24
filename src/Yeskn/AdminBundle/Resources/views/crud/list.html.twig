@@ -38,7 +38,7 @@
                         <td style="width: 10%" align="center">
                             <div class="btn-group" role="group" aria-label="...">
                                 {% if edit_btn is not empty %}
-                                    <a role="button" class="btn btn-warning btn-sm" href="{{ path('admin_post_edit', {id: entity,id:ids[key]}) }}"><i class="fa fa-edit"></i> 编辑</a>
+                                    <a role="button" class="btn btn-warning btn-sm" href="{{ path('yeskn_admin_post_edit', {id: entity,id:ids[key]}) }}"><i class="fa fa-edit"></i> 编辑</a>
                                     {% else %}
                                         <a data-edit role="button" class="btn btn-warning btn-sm" href="{{ path('admin_edit', {entity: entity,id:ids[key]}) }}"><i class="fa fa-edit"></i> 编辑</a>
                                 {% endif %}

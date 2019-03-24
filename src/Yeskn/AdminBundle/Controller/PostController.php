@@ -42,7 +42,7 @@ class PostController extends Controller
             $entityManager->flush();
 
             $this->addFlash('success', '创建文章成功');
-            return $this->redirectToRoute('admin_post_index');
+            return $this->redirectToRoute('admin_list', ['entity' => 'post']);
         }
 
         return $this->render('@YesknAdmin/post/create.html.twig', array(

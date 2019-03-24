@@ -41,16 +41,14 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
 
             $result[] = [
                 $post->getId(),
-                sprintf('<a href="%s">%s</a>', $this->router->generate('post_show', [
-                    'id' => $post->getId()
-                ]), $post->getTitle()),
-                sprintf('<a href="%s">%s</a>', $this->router->generate('member_home', [
+                $this->linkColumn($post->getTitle(), 'post_show', ['id' => $post->getId()]),
+                $this->linkColumn($post->getAuthor()->getNickname(), 'member_home', [
                     'username' => $post->getAuthor()->getUsername()
-                ]), $post->getAuthor()->getNickname()),
+                ]),
                 $this->globalValue->ago($post->getCreatedAt()),
                 $this->globalValue->ago($post->getUpdatedAt()),
                 $post->getViews(),
-                $this->translator->trans($post->getStatus())
+                $this->translator->trans($this->statusLabel($post->getStatus()))
             ];
         }
 
@@ -62,5 +60,14 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
             'create_btn' => 'yeskn_admin_post_create',
             'edit_btn' => 'yeskn_admin_post_edit'
         ];
+    }
+
+    public function statusLabel($status)
+    {
+        $mappings = [
+            'published' => '已发布'
+        ];
+
+        return $mappings[$status];
     }
 }

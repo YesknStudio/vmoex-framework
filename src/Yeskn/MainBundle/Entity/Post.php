@@ -19,11 +19,6 @@ class Post
     const NAME = '帖子';
 
     /**
-     * @var EntityManager
-     */
-    private $em;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
