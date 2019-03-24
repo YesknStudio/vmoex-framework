@@ -22,7 +22,7 @@ class StartRenderPhotoListEvent extends AbstractCrudListEvent
      */
     protected $list;
 
-    private $asset;
+    protected $asset;
 
     private $globalValue;
 
@@ -42,9 +42,7 @@ class StartRenderPhotoListEvent extends AbstractCrudListEvent
             $result[] = [
                 $photo->getId(),
                 $photo->getName(),
-                sprintf('<img width="100" src="%s" />',
-                    $this->asset->getAssetUrl($photo->getFile())
-                ),
+                $this->imgColumn($photo->getFile()),
                 $this->globalValue->ago($photo->getCreatedAt())
             ];
         }

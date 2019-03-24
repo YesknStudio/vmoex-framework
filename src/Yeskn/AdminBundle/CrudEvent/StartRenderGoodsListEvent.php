@@ -30,8 +30,6 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
 
     private $translator;
 
-    private $asset;
-
     public function __construct(RouterInterface $router, GlobalValue $globalValue, TranslatorInterface $translator, AssetExtension $asset)
     {
         $this->router = $router;
@@ -50,9 +48,7 @@ class StartRenderGoodsListEvent extends AbstractCrudListEvent
             $result[] = [
                 $tag->getId(),
                 $tag->getTitle(),
-                sprintf('<img width="100" src="%s" />',
-                    $this->asset->getAssetUrl($tag->getCover())
-                ),
+                $this->imgColumn($this->asset->getAssetUrl($tag->getCover())),
                 $tag->getPrice(),
                 $tag->getPostFee(),
                 $tag->getCount()

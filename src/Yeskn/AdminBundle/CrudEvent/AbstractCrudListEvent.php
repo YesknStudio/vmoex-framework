@@ -9,8 +9,15 @@
 
 namespace Yeskn\AdminBundle\CrudEvent;
 
+use Symfony\Bridge\Twig\Extension\AssetExtension;
+
 abstract class AbstractCrudListEvent implements CrudListEventInterface
 {
+    /**
+     * @var AssetExtension
+     */
+    protected $asset;
+
     protected $list;
 
     public function setList(array $list)
@@ -20,9 +27,17 @@ abstract class AbstractCrudListEvent implements CrudListEventInterface
         return $this;
     }
 
-    public function getList()
+    protected function getList()
     {
         return $this->list;
+    }
+
+    public function imgColumn($val, $width = 100)
+    {
+        if (empty($val)) return '';
+
+        $val = $this->asset->getAssetUrl($val);
+        return sprintf('<img width="%spx" height="%spx" src="%s" />', $width, $width, $val);
     }
 
     abstract function execute();
