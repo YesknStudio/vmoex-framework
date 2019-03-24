@@ -46,7 +46,7 @@ class StartRenderTagListEvent extends AbstractCrudListEvent
                 $tag->getName(),
                 $tag->getSlug(),
                 $this->globalValue->ago($tag->getCreatedAt()),
-                $this->translator->trans($tag->getStatus())
+                $this->translator->trans($tag->getStatus() ? '启用' : '不启用')
             ];
         }
 
