@@ -21,7 +21,7 @@ parameters:
 
     # 以下两项用于合并压缩js代码，必填
     # 查看命令的执行路径： `which node`，`which uglifyjs`
-    # uglifyjs的安装命令 `npm install -g uglifyjs`
+    # uglifyjs（ES版本）的安装命令 `npm install uglify-es -g`
 
     node_path: /usr/bin/node
     uglifyjs2_path: /usr/bin/uglifyjs
