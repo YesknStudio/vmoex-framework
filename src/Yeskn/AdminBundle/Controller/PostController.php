@@ -85,46 +85,4 @@ class PostController extends Controller
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-     * @Route("/delete/{id}")
-     * @inheritdoc
-     */
-    public function deleteAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->find($id);
-        if ($post) {
-            $em->remove($post);
-            $em->flush();
-            $this->addFlash('success','delete success');
-            return $this->redirectToRoute('admin_post_index');
-        } else {
-            $this->addFlash('error','no post found for id' . $id);
-            return $this->redirectToRoute('admin_post_index');
-        }
-    }
-
-    /**
-     * @Route("/preview")
-     */
-    public function previewAction()
-    {
-
-    }
-
-    /**
-     * @Route("/", name="admin_post_index")
-     */
-    public function listAction()
-    {
-        /**
-         * @var Post[] $posts
-         */
-        $posts = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->findBy([], ['updatedAt' => 'DESC']);
-
-        return $this->render('@YesknAdmin/post/index.html.twig', array(
-            'list' => $posts
-        ));
-    }
 }
