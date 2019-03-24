@@ -25,7 +25,7 @@
                     <th>层级</th>
                     <th>别名</th>
                     <th>描述</th>
-                    <th>操作</th>
+                    <th style="width: 15%">操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,9 +37,11 @@
                         <td>{{ item.level }}</td>
                         <td>{{ item.alias }}</td>
                         <td>{{ item.description }}</td>
-                        <td width="115" align="center">
-                            <a data-edit class="btn btn-warning btn-xs" href="{{ path('admin_edit', {entity: 'tab', id: item.id}) }}"><i class="fa fa-edit"></i> 修改</a>
-                            <a data-delete class="btn btn-danger btn-xs" href="{{ path('admin_delete', {entity: 'tab', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
+                        <td align="center">
+                            <div class="btn-group">
+                                <a data-edit class="btn btn-warning btn-sm" href="{{ path('admin_edit', {entity: 'tab', id: item.id}) }}"><i class="fa fa-edit"></i> 修改</a>
+                                <a data-delete class="btn btn-danger btn-sm" href="{{ path('admin_delete', {entity: 'tab', id: item.id}) }}"><i class="fa fa-remove"></i> 删除</a>
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
