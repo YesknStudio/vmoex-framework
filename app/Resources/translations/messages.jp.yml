@@ -182,3 +182,4 @@ do_not_repeat_mention_others: 他の人を繰り返してはいけません！
 no_enough_gold: 金貨が足りない
 comment_not_exist: コメントは存在しません
 cant_modify_current_user_in_admin: null
+hours: 時間

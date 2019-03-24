@@ -184,3 +184,4 @@ comment_not_exist: 评论不存在
 cant_modify_current_user_in_admin: 不能在管理端修改当前个人信息，请在用户端个人中心修改
 user_not_exist: 用户不存在
 locale_invalid: 非法的语言
+hours: 小时

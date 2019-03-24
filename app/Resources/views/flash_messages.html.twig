@@ -1,32 +1,21 @@
-{#
-   This is a template fragment designed to be included in other templates
-   See http://symfony.com/doc/current/book/templating.html#including-other-templates
-
-   A common practice to better distinguish between templates and fragments is to
-   prefix fragments with an underscore. That's why this template is called
-   '_flash_messages.html.twig' instead of 'flash_messages.html.twig'
-#}
-
 {% if app.session.started and app.session.flashBag.peekAll is not empty %}
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="messages">
-                {% for type, messages in app.session.flashBag.all %}
-                    {% for message in messages %}
-                        {% if type == 'message' %}
-                            {%  set type = 'info' %}
-                        {% endif %}
-                        {# Bootstrap alert, see http://getbootstrap.com/components/#alerts #}
-                        <div class="alert alert-dismissible alert-{{ type }}" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-
-                            {{ message|trans|raw }}
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            {% if type == 'message' %}
+                {%  set type = 'info' %}
+            {% endif %}
+            <script>
+                $(function () {
+                    bootoast({
+                        message: '{{ message|trans|raw }}',
+                        type: '{{ type }}',
+                        position: 'top-center',
+                        timeout: 2,
+                        animationDuration: 300,
+                        dismissable: true
+                    });
+                })
+            </script>
+        {% endfor %}
+    {% endfor %}
 {% endif %}

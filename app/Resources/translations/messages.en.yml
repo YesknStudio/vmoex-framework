@@ -182,3 +182,4 @@ do_not_repeat_mention_others: 'Don''t repeat @others!'
 no_enough_gold: 'Shortage of gold coins'
 comment_not_exist: 'Comments do not exist'
 cant_modify_current_user_in_admin: null
+hours: h

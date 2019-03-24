@@ -23,6 +23,7 @@
                 {% for tabItem in tabs %}
                     <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
                 {% endfor %}
+                <a data-pjax href="{{ path('tabs_index') }}">{{ '更多'|trans }}&raquo;</a>
 
                 {% set routeName = app.request.attributes.get('_forwarded').get('_route') %}
 

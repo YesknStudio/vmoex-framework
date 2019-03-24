@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="{{ asset('assets/lib/startbootstrap-sb-admin-2/dist/css/sb-admin-2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/lib/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/lib/metisMenu/dist/metisMenu.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/lib/bootoast/css/bootoast.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/lib/eds-ui/dist/css/edsUI.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
     {% endblock %}
@@ -29,6 +30,12 @@
         <script src="{{ asset('assets/lib/jquery/dist/jquery.min.js') }}"></script>
         <script>
             window.YesknPlugins = {{ javascriptPlugins()|raw }};
+            window.YesknMessages = {
+                warning: [],
+                success: [],
+                info: [],
+                error: [],
+            }
         </script>
 
     {% endblock %}
@@ -59,14 +66,14 @@
     <script src="{{ asset('assets/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/lib/metisMenu/dist/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets-private/js/sb-admin-2.js') }}"></script>
+    <script src="{{ asset('assets/lib/bootoast/js/bootoast.js') }}"></script>
     <script src="{{ asset('assets/lib/eds-ui/dist/js/edsUI.min.js') }}"></script>
 {% endblock %}
 {% block footer_javascript %}{% endblock %}
-<script>
-   setTimeout(function () {
-       $(".alert-success").slideUp(500);
-   }, 2000);
 
+{% include 'flash_messages.html.twig' %}
+
+<script>
    function showAlertModal(modalId, message)
    {
        $.get('{{ path('admin_alert_modal') }}', {
