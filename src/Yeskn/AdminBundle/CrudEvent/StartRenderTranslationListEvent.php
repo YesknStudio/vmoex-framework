@@ -51,6 +51,7 @@ class StartRenderTranslationListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', 'messageId', '中文简体', '英文', '中文繁体', '日语'],
+            'entitySubTitle' => '如果你需要修改网站的词条的话。',
             'column_width' => [0 => '5'],
             'list' => $result,
             'ids' => $ids

@@ -44,6 +44,7 @@ class StartRenderPageListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '标题', '状态', '创建时间'],
+            'entitySubTitle' => '可动态为网站添加路由。',
             'list' => $result,
             'ids' => $ids
         ];

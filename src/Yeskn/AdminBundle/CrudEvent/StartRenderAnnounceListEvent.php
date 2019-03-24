@@ -50,6 +50,7 @@ class StartRenderAnnounceListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '内容', '状态', '创建时间', '更新时间'],
+            'entitySubTitle' => '公告用于展示在首页导航下方，用户点击后可关闭并不再显示。',
             'list' => $result,
             'ids' => $ids
         ];

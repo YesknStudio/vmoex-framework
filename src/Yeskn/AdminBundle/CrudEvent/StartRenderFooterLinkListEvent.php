@@ -50,6 +50,7 @@ class StartRenderFooterLinkListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '文本', '链接', '权重','是否站内'],
+            'entitySubTitle' => '可自定义网站底部的导航链接, 非站内链接将在新窗口打开。',
             'column_width' => [0 => 5],
             'list' => $result,
             'ids' => $ids

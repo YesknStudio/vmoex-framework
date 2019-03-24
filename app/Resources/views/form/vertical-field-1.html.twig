@@ -2,7 +2,7 @@
     {% spaceless %}
         <div class="form-group">
             {{ form_label(form, '', {label_attr: {class: 'col-sm-2'}}) }}
-            <div class="col-sm-6">
+            <div class="col-sm-9">
                 {{ form_widget(form) }}
                 {% for attrname, attrvalue in attr %}
                     {% if attrname == 'help' %}
