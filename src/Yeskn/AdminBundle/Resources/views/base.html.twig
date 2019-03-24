@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Vmoex Admin Panel">
     <meta name="author" content="Jake">
-    {% block title %}  <title>{{ 'site_name'|trans }} Admin</title> {% endblock %}
+    {% block title %} <title>{{ 'site_name'|trans }} Admin</title> {% endblock %}
     {% block head_css_link %}
-        <link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/dist/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/lib/startbootstrap-sb-admin-2/dist/css/sb-admin-2.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/lib/font-awesome/css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/lib/metisMenu/dist/metisMenu.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/lib/bootoast/css/bootoast.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/lib/eds-ui/dist/css/edsUI.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+        {% stylesheets
+            'assets/lib/bootstrap/dist/css/bootstrap.min.css'
+            'assets/lib/startbootstrap-sb-admin-2/dist/css/sb-admin-2.min.css'
+            'assets/lib/font-awesome/css/font-awesome.min.css'
+            'assets/lib/metisMenu/dist/metisMenu.min.css'
+            'assets/lib/bootoast/css/bootoast.css'
+            'assets/lib/eds-ui/dist/css/edsUI.css'
+            'assets/css/admin.css'
+            filter='cssrewrite' output='build/css/build-admin.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
     {% endblock %}
 
     {% block header_stylesheet %}{% endblock %}
@@ -37,7 +41,6 @@
                 error: [],
             }
         </script>
-
     {% endblock %}
 </head>
 
@@ -62,13 +65,19 @@
 </div>
 
 {% block foot_js_link %}
-    <script src="{{ asset('assets-private/js/common.js') }}"></script>
-    <script src="{{ asset('assets/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/lib/metisMenu/dist/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('assets-private/js/sb-admin-2.js') }}"></script>
-    <script src="{{ asset('assets/lib/bootoast/js/bootoast.js') }}"></script>
-    <script src="{{ asset('assets/lib/eds-ui/dist/js/edsUI.min.js') }}"></script>
+    {% javascripts
+        'assets-private/js/common.js'
+        'assets/lib/bootstrap/dist/js/bootstrap.min.js'
+        'assets/lib/metisMenu/dist/metisMenu.min.js'
+        'assets-private/js/sb-admin-2.js'
+        'assets/lib/bootoast/js/bootoast.js'
+        'assets/lib/eds-ui/dist/js/edsUI.min.js'
+        'assets/lib/echarts/dist/echarts.min.js'
+        filter='uglifyjs2' output='build/js/build-admin-footer.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
+
 {% block footer_javascript %}{% endblock %}
 
 {% include 'flash_messages.html.twig' %}
@@ -111,7 +120,6 @@
            });
        })
    })
-
 </script>
 </body>
 </html>

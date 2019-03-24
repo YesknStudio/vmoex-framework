@@ -1,100 +1,178 @@
 {% extends '@YesknAdmin/base.html.twig' %}
 
 {% block page_wraper %}
-    <div class="row">
-        <div class="col-lg-12">
-            <h3 class="page-header">控制台</h3>
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">总览</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-comments fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">{{ count.post }}</div>
+                                <div>帖子数量</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ path('admin_post_index') }}">
+                        <div class="panel-footer">
+                            <span class="pull-left">查看详情</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-tasks fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">{{ count.user }}</div>
+                                <div>用户数量</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ path('admin_user_index') }}">
+                        <div class="panel-footer">
+                            <span class="pull-left">查看详情</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-shopping-cart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">{{ count.todayLoginUserCount }}</div>
+                                <div>今日登录用户</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">查看详情</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-support fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">{{ count.comment }}</div>
+                                <div>评论总数</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ path('admin_comment_index') }}">
+                        <div class="panel-footer">
+                            <span class="pull-left">查看详情</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ count.post }}</div>
-                            <div>帖子数量</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="{{ path('admin_post_index') }}">
-                    <div class="panel-footer">
-                        <span class="pull-left">查看详情</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+    <div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">趋势</h3>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-tasks fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ count.user }}</div>
-                            <div>用户数量</div>
-                        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">登录用户</div>
+                    <div class="panel-body">
+                        <div id="loginTrends" style="width: 100%;height:400px;"></div>
                     </div>
                 </div>
-                <a href="{{ path('admin_user_index') }}">
-                    <div class="panel-footer">
-                        <span class="pull-left">查看详情</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ count.todayLoginUserCount }}</div>
-                            <div>今日登录用户</div>
-                        </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">评论数量</div>
+                    <div class="panel-body">
+                        <div id="commentTrends" style="width: 100%;height:400px;"></div>
                     </div>
                 </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">查看详情</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-support fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ count.comment }}</div>
-                            <div>评论总数</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="{{ path('admin_comment_index') }}">
-                    <div class="panel-footer">
-                        <span class="pull-left">查看详情</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block footer_javascript %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        const loginChart = echarts.init(document.getElementById('loginTrends'), 'light');
+
+        // 指定图表的配置项和数据
+        let option = {
+            tooltip: {},
+            legend: {
+                data:['登录数']
+            },
+            xAxis: {
+                data: ["周一","周二","周三","周四","周五","周六"]
+            },
+            yAxis: {},
+            series: [{
+                name: '登录数',
+                type: 'line',
+                data: [5, 7, 36, 10, 14, 20]
+            }]
+        };
+
+        loginChart.setOption(option);
+
+        const commentChart = echarts.init(document.getElementById('commentTrends'), 'light');
+
+        option = {
+            tooltip: {},
+            legend: {
+                data:['评论数']
+            },
+            xAxis: {
+                data: ["周一","周二","周三","周四","周五","周六"]
+            },
+            yAxis: {},
+            series: [{
+                name: '评论数',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        commentChart.setOption(option);
+    </script>
 {% endblock %}
