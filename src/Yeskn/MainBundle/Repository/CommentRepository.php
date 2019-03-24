@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityRepository;
 
 class CommentRepository extends EntityRepository
 {
+    use RepositoryTrait;
     /**
      * @return mixed
      * @throws \Doctrine\ORM\NoResultException

@@ -13,5 +13,5 @@ use Doctrine\ORM\EntityRepository;
 
 class GoodsRepository extends EntityRepository
 {
-
+    use RepositoryTrait;
 }

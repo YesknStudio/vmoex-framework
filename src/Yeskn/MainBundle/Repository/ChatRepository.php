@@ -14,6 +14,7 @@ use Yeskn\MainBundle\Entity\Chat;
 
 class ChatRepository extends EntityRepository
 {
+    use RepositoryTrait;
     /**
      * @param $count
      * @return Chat[]

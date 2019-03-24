@@ -1,6 +1,11 @@
-a {
+a, .pagination>li>a, .pagination>li>span {
     color: #737373;
 }
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background: #5bc0de;
+    border-color: #46b8da;
+}
+
 h3.page-header{
     margin-top: 15px;
 }

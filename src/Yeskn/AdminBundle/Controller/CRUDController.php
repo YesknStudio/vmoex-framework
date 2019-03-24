@@ -30,15 +30,20 @@ class CRUDController extends Controller
      * @Route("/{entity}/list", methods={"GET"}, name="admin_list")
      *
      * @param $entity
+     * @param $request
      *
      * @return Response
      */
-    public function listAction($entity)
+    public function listAction($entity, Request $request)
     {
+        $pageLimit = $request->query->get('pageLimit', 20);
+        $currentPage = $request->query->get('currentPage', 1);
+
         $entity = ucfirst($entity);
         $repo = $this->getDoctrine()->getRepository('YesknMainBundle:' . $entity);
 
-        $list = $repo->findBy([], ['id' => 'DESC']);
+        $list = $repo->findBy([], ['id' => 'DESC'], $pageLimit, ($currentPage - 1) * $pageLimit);
+        $total = $repo->total();
 
         $typeClass = "Yeskn\MainBundle\Form\\{$entity}Type";
         $entityClass = "Yeskn\MainBundle\Entity\\{$entity}";
@@ -54,7 +59,9 @@ class CRUDController extends Controller
             'ids' => $data['ids'],
             'entityName' => $data['entityName'],
             'form' => $this->createForm($typeClass, new $entityClass)->createView(),
-            'extra' => empty($data['extra']) ? [] : $data['extra']
+            'extra' => empty($data['extra']) ? [] : $data['extra'],
+            'allPage' => ceil($total / $pageLimit),
+            'pageLimit' => $pageLimit
         ]);
     }
 

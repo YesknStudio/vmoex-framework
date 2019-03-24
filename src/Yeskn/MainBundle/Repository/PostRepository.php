@@ -15,6 +15,7 @@ use Yeskn\MainBundle\Entity\Tab;
 
 class PostRepository extends EntityRepository
 {
+    use RepositoryTrait;
     /**
      * @param Tab $tab
      * @param $sort

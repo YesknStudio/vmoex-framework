@@ -17,6 +17,8 @@ use Yeskn\MainBundle\Entity\User;
 
 class ActiveRepository extends EntityRepository
 {
+    use RepositoryTrait;
+
     /**
      * @param $user
      * @return Active

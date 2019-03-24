@@ -13,5 +13,5 @@ use Doctrine\ORM\EntityRepository;
 
 class TranslationRepository extends EntityRepository
 {
-
+    use RepositoryTrait;
 }

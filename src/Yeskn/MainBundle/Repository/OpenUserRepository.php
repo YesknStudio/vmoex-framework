@@ -13,5 +13,5 @@ use Doctrine\ORM\EntityRepository;
 
 class OpenUserRepository extends EntityRepository
 {
-
+    use RepositoryTrait;
 }

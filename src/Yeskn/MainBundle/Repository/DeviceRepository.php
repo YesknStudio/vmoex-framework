@@ -13,5 +13,5 @@ use Doctrine\ORM\EntityRepository;
 
 class DeviceRepository extends EntityRepository
 {
-
+    use RepositoryTrait;
 }

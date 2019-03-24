@@ -14,6 +14,8 @@ use Doctrine\ORM\NoResultException;
 
 class NoticeRepository extends EntityRepository
 {
+    use RepositoryTrait;
+
     public function getUnreadCount($userId)
     {
         try {

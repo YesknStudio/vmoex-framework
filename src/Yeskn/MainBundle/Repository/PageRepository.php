@@ -13,5 +13,5 @@ use Doctrine\ORM\EntityRepository;
 
 class PageRepository extends EntityRepository
 {
-
+    use RepositoryTrait;
 }

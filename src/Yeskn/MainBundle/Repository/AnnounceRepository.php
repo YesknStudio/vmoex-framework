@@ -13,5 +13,5 @@ use Doctrine\ORM\EntityRepository;
 
 class AnnounceRepository extends EntityRepository
 {
-
+    use RepositoryTrait;
 }

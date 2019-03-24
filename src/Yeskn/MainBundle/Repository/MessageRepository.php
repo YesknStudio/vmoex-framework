@@ -14,6 +14,8 @@ use Yeskn\MainBundle\Entity\Message;
 
 class MessageRepository extends EntityRepository
 {
+    use RepositoryTrait;
+
     /**
      * @param $user
      * @return Message[]

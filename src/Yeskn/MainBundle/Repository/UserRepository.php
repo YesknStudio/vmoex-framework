@@ -15,6 +15,8 @@ use Yeskn\MainBundle\Entity\User;
 
 class UserRepository extends EntityRepository implements UserLoaderInterface
 {
+    use RepositoryTrait;
+
     public function loadUserByUsername($username)
     {
         return $this->loadUserByUsernameOrEmail($username);

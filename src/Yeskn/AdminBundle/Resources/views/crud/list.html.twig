@@ -45,6 +45,15 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+            {% include '@YesknAdmin/pagination.html.twig' with {
+                entity: entity,
+                pageData: {
+                    currentPage: app.request.query.get('currentPage') ?: 1,
+                    allPage: allPage,
+                    pageLimit: app.request.query.get('pageLimit') ?: 20
+                }
+            } %}
         </div>
     </div>
 

@@ -13,5 +13,5 @@ use Doctrine\ORM\EntityRepository;
 
 class OptionsRepository extends EntityRepository
 {
-
+    use RepositoryTrait;
 }

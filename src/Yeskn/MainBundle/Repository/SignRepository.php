@@ -13,5 +13,5 @@ use Doctrine\ORM\EntityRepository;
 
 class SignRepository extends EntityRepository
 {
-
+    use RepositoryTrait;
 }
