@@ -6,125 +6,14 @@
         <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="{{ url('homepage') }}">{{ 'site_name'|trans }}</a>
+    <a class="navbar-brand" href="{{ url('homepage') }}">{{ 'site_name'|trans }}</a>
 </div>
 <ul class="nav navbar-top-links navbar-right">
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-envelope fa-fw"></i>  私信 <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-messages">
-            <li>
-                <a href="#">
-                    <div>
-                        <strong>南瓜</strong>
-                        <span class="pull-right text-muted">
-                                    <em>昨天</em>
-                                </span>
-                    </div>
-                    <div>很简洁的一个博客系统.</div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <strong>星月</strong>
-                        <span class="pull-right text-muted">
-                                    <em>昨天</em>
-                                </span>
-                    </div>
-                    <div>滋磁滋磁</div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <strong>海风</strong>
-                        <span class="pull-right text-muted">
-                                    <em>昨天</em>
-                                </span>
-                    </div>
-                    <div>你的博客挺不错的~</div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a class="text-center" href="#">
-                    <strong>查看所有私信</strong>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </li>
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-bell fa-fw"></i>  通知 <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-alerts">
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-comment fa-fw"></i> 新的评论
-                        <span class="pull-right text-muted small">4分钟前</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-twitter fa-fw"></i> 3个新的粉丝
-                        <span class="pull-right text-muted small">12分钟前</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-envelope fa-fw"></i> 消息已发送
-                        <span class="pull-right text-muted small">4分钟前</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-tasks fa-fw"></i> 新的任务
-                        <span class="pull-right text-muted small">4分钟前</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a href="#">
-                    <div>
-                        <i class="fa fa-upload fa-fw"></i> 服务器重启
-                        <span class="pull-right text-muted small">4分钟前</span>
-                    </div>
-                </a>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a class="text-center" href="#">
-                    <strong>查看所有通知</strong>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </li>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="fa fa-user fa-fw"></i>  功能 <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
-            <li><a href="{{ absolute_url(path('user_setting')) }}"><i class="fa fa-user fa-fw"></i>我的资料</a>
-            </li>
-            <li><a href="#"><i class="fa fa-gear fa-fw"></i>系统设置</a>
-            </li>
-            <li class="divider"></li>
             <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
             </li>
         </ul>
