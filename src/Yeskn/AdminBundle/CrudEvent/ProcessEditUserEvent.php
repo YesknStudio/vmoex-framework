@@ -66,7 +66,7 @@ class ProcessEditUserEvent extends AbstractCrudEntityEvent
         /** @var File $file */
         if ($file = $user->getAvatar()) {
             $extension = $file->guessExtension();
-            $fileName = 'avatar/' . time() . mt_rand(1000, 9999) . '.' . $extension;
+            $fileName = 'upload/avatar/' . time() . mt_rand(1000, 9999) . '.' . $extension;
 
             $targetPath = $this->webRoot .  '/' . $fileName;
 

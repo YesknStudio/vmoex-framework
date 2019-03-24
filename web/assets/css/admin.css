@@ -38,3 +38,14 @@ table.table {
 table.table td{
     vertical-align: middle !important;
 }
+
+@media (min-width: 768px) {
+    .navbar-header {
+        width: 250px;
+        text-align: center;
+    }
+    .navbar-brand {
+        line-height: 50px;
+        float: none;
+    }
+}
