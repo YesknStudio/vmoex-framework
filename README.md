@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-vmoex是一个开源的二次元社区程序。
+vmoex是一个开源的二次元社区程序，同时也是一个多用户多角色的内容管理系统。
 </p>
 
 ![](web/assets/images/vmoex-screenshot.png)
