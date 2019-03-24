@@ -21,7 +21,7 @@
 
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-11">
                         {{ form_widget(form) }}
                     </div>
                 </div>
@@ -36,26 +36,37 @@
 
     <script>
         $(function () {
-            window.YesknPlugins.get('WangEditor', function (wangEditor) {
+            $('form[name="post"]').submit(function () {
+                $(this).find('#post_content').val(editorPlugin.result.txt.html());
+            });
+            const editorPlugin = window.YesknPlugins.get('WangEditor', function (wangEditor) {
                 const vmoexEditor = new wangEditor('#formHtmlEditor');
                 vmoexEditor.customConfig.printLog = false;
                 vmoexEditor.customConfig.menus = [
-                    'source',
-                    '|',
-                    'bold',
-                    'quote',
-                    'underline',
-                    'italic',
-                    'strikethrough',
-                    'eraser',
-                    'forecolor',
-                    'bgcolor',
-                    'insertcode'
+                    'head',  // 标题
+                    'bold',  // 粗体
+                    'fontSize',  // 字号
+                    'fontName',  // 字体
+                    'italic',  // 斜体
+                    'underline',  // 下划线
+                    'strikeThrough',  // 删除线
+                    'foreColor',  // 文字颜色
+                    'backColor',  // 背景颜色
+                    'link',  // 插入链接
+                    'list',  // 列表
+                    'justify',  // 对齐方式
+                    'quote',  // 引用
+                    'emoticon',  // 表情
+                    'image',  // 插入图片
+                    'table',  // 表格
+                    'video',  // 插入视频
+                    'code',  // 插入代码
+                    'undo',  // 撤销
+                    'redo'  // 重复
                 ];
                 vmoexEditor.create();
-                return $('#editor');
-            }, function ($elm) {
-                $elm.empty();
+
+                return vmoexEditor;
             });
         });
     </script>
