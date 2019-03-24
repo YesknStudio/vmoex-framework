@@ -55,6 +55,7 @@ class CRUDController extends Controller
             'columns' => $data['columns'],
             'column_width' => empty($data['column_width']) ? [] : $data['column_width'],
             'create_btn' => empty($data['create_btn']) ? [] : $data['create_btn'],
+            'edit_btn' => empty($data['edit_btn']) ? [] : $data['edit_btn'],
             'list' => $data['list'],
             'ids' => $data['ids'],
             'entityName' => $entityClass::NAME,

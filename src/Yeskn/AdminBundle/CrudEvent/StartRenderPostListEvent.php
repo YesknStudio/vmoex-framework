@@ -59,7 +59,8 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
             'column_width' => [0 => '5', 1 => 25, 6 => 8, 7 => 20],
             'list' => $result,
             'ids' => $ids,
-            'create_btn' => 'yeskn_admin_post_create'
+            'create_btn' => 'yeskn_admin_post_create',
+            'edit_btn' => 'yeskn_admin_post_edit'
         ];
     }
 }
