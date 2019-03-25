@@ -11,7 +11,7 @@
         <div id="HtmlEditor{{ timestamp }}">
             <p> {{ data|raw }}</p>
         </div>
-        <textarea {{ block('widget_attributes') }} class="hide" title="content"></textarea>
+        <textarea {{ block('widget_attributes') }} class="hide" title="content">{{ data|raw }}</textarea>
         {{ form_errors(form) }}
     {% endspaceless %}
 

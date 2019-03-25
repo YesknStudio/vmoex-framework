@@ -11,11 +11,11 @@ namespace Yeskn\MainBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Yeskn\MainBundle\Entity\Page;
+use Yeskn\MainBundle\Form\Type\TinyHtmlTextareaType;
 
 class PageType extends AbstractType
 {
@@ -34,8 +34,10 @@ class PageType extends AbstractType
             'required'=>false
         ]);
 
-        $builder->add('content', TextareaType::class, [
-            'label' => '内容'
+        $builder->add('content', TinyHtmlTextareaType::class, [
+            'label' => '内容',
+            'required' => true,
+            'height' => 300
         ]);
     }
 
