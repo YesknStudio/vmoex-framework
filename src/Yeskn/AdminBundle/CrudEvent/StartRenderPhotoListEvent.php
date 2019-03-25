@@ -47,6 +47,7 @@ class StartRenderPhotoListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', '名称', '文件', '发布日期'],
+            'entitySubTitle' => '上传图片用于在其他地方插入',
             'list' => $result,
             'ids' => $ids,
             'extra' => [

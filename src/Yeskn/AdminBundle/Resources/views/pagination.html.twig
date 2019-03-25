@@ -1,60 +1,68 @@
 <ul class="pagination">
-    {% if pageData.currentPage == 1 %}
-        <li class="disabled">
-            <a href="#">&laquo;</a>
-        </li>
-    {% else %}
-        <li>
-            <a href="{{ path('admin_list', {
-                entity: entity,
-                currentPage: pageData.currentPage - 1,
-                pageLimit: pageData.pageLimit
-            }) }}">&laquo;</a>
-        </li>
-    {% endif %}
-
-    {% if pageData.currentPage > 3 %}
-        <li class="disabled">
-            <a href="#">...</a>
-        </li>
-    {% endif %}
-
-    {% for p in 1..pageData.allPage %}
-        {% if p < pageData.currentPage - 2 %}
-            {# 为了便于理解，这个期间不会显示出来  #}
-        {% endif %}
-
-        {% if p == pageData.currentPage %}
-            <li class="active"><a href="javascript:">{{ p }}</a></li>
-        {% endif %}
-
-        {% if p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage + 2 %}
-            <li><a href="{{ path('admin_list', {
+    {% if pageData.allPage > 0 %}
+        {% if pageData.currentPage == 1 %}
+            <li class="disabled">
+                <a href="#">&laquo;</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path('admin_list', {
                     entity: entity,
-                    currentPage: p,
+                    currentPage: pageData.currentPage - 1,
                     pageLimit: pageData.pageLimit
-                }) }}">{{ p }}</a></li>
+                }) }}">&laquo;</a>
+            </li>
         {% endif %}
 
-        {% if p > pageData.currentPage + 2 %}
-            {# 为了便于理解，这个期间不会显示出来  #}
+        {% if pageData.currentPage > 3 %}
+            <li class="disabled">
+                <a href="javascript:">...</a>
+            </li>
         {% endif %}
-    {% endfor %}
 
-    {% if pageData.allPage > pageData.currentPage + 2 %}
-        <li class="disabled">
-            <a href="#">...</a>
-        </li>
+        {% for p in 1..pageData.allPage %}
+            {% if p < pageData.currentPage - 2 %}
+                {# 为了便于理解，这个期间不会显示出来  #}
+            {% endif %}
+
+            {% if p == pageData.currentPage %}
+                <li class="active"><a href="javascript:">{{ p }}</a></li>
+            {% endif %}
+
+            {% if p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage + 2 %}
+                <li><a href="{{ path('admin_list', {
+                        entity: entity,
+                        currentPage: p,
+                        pageLimit: pageData.pageLimit
+                    }) }}">{{ p }}</a></li>
+            {% endif %}
+
+            {% if p > pageData.currentPage + 2 %}
+                {# 为了便于理解，这个期间不会显示出来  #}
+            {% endif %}
+        {% endfor %}
+
+        {% if pageData.allPage > pageData.currentPage + 2 %}
+            <li class="disabled">
+                <a href="javascript:">...</a>
+            </li>
+        {% endif %}
+
+        {% if pageData.currentPage == pageData.allPage  %}
+            <li class="disabled">
+                <a href="javascript:">&raquo;</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path('admin_list', {
+                    entity:entity,
+                    currentPage: pageData.currentPage + 1,
+                    pageLimit: pageData.pageLimit
+                }) }}" data-pjax>&raquo;
+                </a>
+            </li>
+        {% endif %}
     {% endif %}
-
-    <li {% if pageData.currentPage == pageData.allPage %} class="disabled" {% endif %}>
-        <a href="{{ path('admin_list', {
-            entity:entity,
-            currentPage: pageData.currentPage + 1,
-            pageLimit: pageData.pageLimit
-        }) }}" data-pjax>&raquo;
-        </a>
-    </li>
 </ul>
 
 <div style="display: inline-block; margin: 0 0 60px 10px; vertical-align: middle">总共 {{ allPage }} 页。</div>
