@@ -47,7 +47,12 @@ class PostType extends AbstractType
            ->add('isTop',CheckboxType::class,array('label' => '置顶','required'=>false))
            ->add('cover',ImageInputType::class, [
                'label' => '封面图',
-               'required' => $entity->getCover() ? false : true
+               'width' => 500,
+               'height' => 250,
+               'required' => $entity->getCover() ? false : true,
+               'attr' =>  [
+                   'help' => '请上传500*250px尺寸的照片。'
+               ]
            ]);
        ;
     }
