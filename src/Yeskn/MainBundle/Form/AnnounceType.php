@@ -14,13 +14,15 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Yeskn\MainBundle\Entity\Announce;
+use Yeskn\MainBundle\Form\Type\TinyHtmlTextareaType;
 
 class AnnounceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', null, [
+        $builder->add('content', TinyHtmlTextareaType::class, [
             'label' => '内容',
+            'height' => '100',
             'required' => true,
         ]);
         $builder->add('show', CheckboxType::class, [

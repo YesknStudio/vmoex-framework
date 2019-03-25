@@ -1,0 +1,51 @@
+{% block tiny_html_textarea_widget %}
+    <style>
+        {% if height %}
+        .w-e-text-container {
+            height: {{ height }}px !important;
+        }
+        {% endif %}
+    </style>
+    {% set timestamp = date().timestamp ~ random(10000, 99999) %}
+    {% spaceless %}
+        <div id="HtmlEditor{{ timestamp }}">
+            <p> {{ data|raw }}</p>
+        </div>
+        <textarea {{ block('widget_attributes') }} class="hide" title="content"></textarea>
+        {{ form_errors(form) }}
+    {% endspaceless %}
+
+    <script>
+        $(function () {
+            const htmlEditor = window.YesknPlugins.get('WangEditor', function (wangEditor) {
+                const vmoexEditor = new wangEditor('#HtmlEditor{{ timestamp }}');
+                vmoexEditor.customConfig.printLog = false;
+                vmoexEditor.customConfig.menus = [
+                    'bold',  // 粗体
+                    'fontSize',  // 字号
+                    'italic',  // 斜体
+                    'underline',  // 下划线
+                    'foreColor',  // 文字颜色
+                    'link',  // 插入链接
+                    'emoticon',  // 表情
+                    'image',  // 插入图片
+                ];
+
+                vmoexEditor.customConfig.onchange = function (html) {
+                    const formId = '{{ id }}'.split('_')[0];
+                    const $form = $('#HtmlEditor{{ timestamp }}').closest('form[name="' + formId + '"]');
+
+                    $form.find('#{{ id }}').val(html);
+                };
+
+                vmoexEditor.create();
+
+                return vmoexEditor;
+            });
+        })
+    </script>
+{% endblock tiny_html_textarea_widget %}
+
+
+
+{# 简单的富文本输入框，目前的实现效果不是很好，form field 不应该包含js代码 #}

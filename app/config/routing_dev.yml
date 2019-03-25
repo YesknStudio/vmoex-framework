@@ -1,16 +1,6 @@
 _main:
     resource: routing.yml
 
-yeskn_admin:
-    resource: "@YesknAdminBundle/Controller/"
-    type:     annotation
-    prefix:   /admin
-
-yeskn_main:
-    resource: "@YesknMainBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 _wdt:
     resource: '@WebProfilerBundle/Resources/config/routing/wdt.xml'
     prefix: /_wdt

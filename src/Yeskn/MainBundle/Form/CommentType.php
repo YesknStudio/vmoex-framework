@@ -11,12 +11,12 @@ namespace Yeskn\MainBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Yeskn\MainBundle\Entity\Comment;
 use Yeskn\MainBundle\Entity\Post;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Form\Type\TinyHtmlTextareaType;
 
 class CommentType extends AbstractType
 {
@@ -30,8 +30,9 @@ class CommentType extends AbstractType
             'required' => true
         ]);
 
-        $builder->add('content', TextareaType::class, [
+        $builder->add('content', TinyHtmlTextareaType::class, [
             'label' => '内容',
+            'height' => '200',
             'required' => true,
         ]);
 

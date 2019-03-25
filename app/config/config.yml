@@ -42,6 +42,7 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - "form/image-input-filed-type.html.twig"
+        - "form/tiny-html-textarea-field-type.html.twig"
         - "bootstrap_3_layout.html.twig"
 
 doctrine:
@@ -53,6 +54,9 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: 'utf8mb4'
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'

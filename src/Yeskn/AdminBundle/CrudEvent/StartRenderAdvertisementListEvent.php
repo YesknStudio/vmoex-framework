@@ -11,14 +11,14 @@ namespace Yeskn\AdminBundle\CrudEvent;
 
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Entity\Advertisement;
 use Yeskn\MainBundle\Twig\GlobalValue;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 
-class StartRenderUserListEvent extends AbstractCrudListEvent
+class StartRenderAdvertisementListEvent extends AbstractCrudListEvent
 {
     /**
-     * @var User[]
+     * @var Advertisement[]
      */
     protected $list;
 
@@ -43,18 +43,16 @@ class StartRenderUserListEvent extends AbstractCrudListEvent
 
             $result[] = [
                 $tag->getId(),
-                $this->linkColumn($tag->getUsername(), 'member_home', ['username' => $tag->getUsername()]),
-                $this->imgColumn($tag->getAvatar(), 50),
-                $tag->getNickname(),
-                $tag->getEmail(),
-                $this->globalValue->ago($tag->getRegisterAt()),
-                $tag->getGold()
+                $tag->getTitle(),
+                $tag->getType(),
+                $tag->getLocation(),
+                $tag->isEnable() ? '是' : '否',
             ];
         }
 
         return [
-            'columns' => ['ID', '用户名', '头像', '昵称', '邮箱', '注册时间', '金币'],
-            'column_width' => [0 => 5, 2 => 10, 4 => 15, 6 => 5],
+            'columns' => ['ID', '标题', '类型', '位置', '启用'],
+            'column_width' => [0 => 5],
             'list' => $result,
             'ids' => $ids
         ];

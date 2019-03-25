@@ -42,6 +42,7 @@ table.table {
 }
 table.table td{
     vertical-align: middle !important;
+    overflow-x: hidden;
 }
 
 @media (min-width: 768px) {

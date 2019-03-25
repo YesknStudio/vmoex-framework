@@ -40,7 +40,6 @@
         $(function () {
             $(document).onPjax('submit', '#createTopic', function (event) {
                 event.preventDefault();
-                $('#content').val(htmlEditor.result.txt.html());
 
                 $.pjax.submit(event, '.content-body', {
                     fragment: '.content-body',
@@ -48,7 +47,7 @@
                 })
             });
 
-            const htmlEditor = window.YesknPlugins.get('WangEditor', function (wangEditor) {
+            window.YesknPlugins.get('WangEditor', function (wangEditor) {
                 const vmoexEditor = new wangEditor('#editor');
                 vmoexEditor.customConfig.printLog = false;
                 vmoexEditor.customConfig.menus = [
@@ -71,9 +70,11 @@
                     'video',  // 插入视频
                     'code',  // 插入代码
                 ];
-                vmoexEditor.create();
+                vmoexEditor.customConfig.onchange = function (html) {
+                    $('#content').val(html);
+                };
 
-                return vmoexEditor;
+                vmoexEditor.create();
             }, function () {
                 $('#editor').empty();
             });

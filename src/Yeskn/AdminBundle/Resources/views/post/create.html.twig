@@ -36,10 +36,7 @@
 
     <script>
         $(function () {
-            $('form[name="post"]').submit(function () {
-                $(this).find('#post_content').val(editorPlugin.result.txt.html());
-            });
-            const editorPlugin = window.YesknPlugins.get('WangEditor', function (wangEditor) {
+            window.YesknPlugins.get('WangEditor', function (wangEditor) {
                 const vmoexEditor = new wangEditor('#formHtmlEditor');
                 vmoexEditor.customConfig.printLog = false;
                 vmoexEditor.customConfig.menus = [
@@ -64,9 +61,10 @@
                     'undo',  // 撤销
                     'redo'  // 重复
                 ];
+                vmoexEditor.customConfig.onchange = function (html) {
+                    $('#post_content').val(html);
+                };
                 vmoexEditor.create();
-
-                return vmoexEditor;
             });
         });
     </script>
