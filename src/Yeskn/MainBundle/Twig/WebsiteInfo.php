@@ -93,7 +93,7 @@ class WebsiteInfo extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('websiteInfo', [$this, 'websiteInfo']),
+            new \Twig_SimpleFunction('options', [$this, 'websiteInfo']),
             new \Twig_SimpleFunction('hideAnnounceAlert', [$this,'hideAnnounceAlert']),
             new \Twig_SimpleFunction('isPjax', [$this, 'isPjax']),
         ];

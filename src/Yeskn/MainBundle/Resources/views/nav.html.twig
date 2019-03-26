@@ -23,9 +23,9 @@
             {% endif %}
 
             <a data-pjax class="navbar-brand" href="{{ path('homepage') }}" style="padding-top: 8px">
-                <img alt="Brand" src="{{ asset(websiteInfo().siteLogo) }}" width="95px" height="30px">
+                <img alt="Brand" src="{{ asset(options().siteLogo) }}" width="95px" height="30px">
 
-                <span class="vmoex-version">{{ websiteInfo().siteVersion }}</span>
+                <span class="vmoex-version">{{ options().siteVersion }}</span>
             </a>
         </div>
 
@@ -147,11 +147,11 @@
     </div>
 </nav>
 
-{% if websiteInfo().announce and hideAnnounceAlert() == false %}
+{% if options().announce and hideAnnounceAlert() == false %}
     <div class="container">
         <div id="navSiteAnnounceAlert" class="alert alert-warning alert-dismissible" role="alert" style="margin-bottom: 10px">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <i class="fa fa-bullhorn"></i> {{ websiteInfo().announce.content|raw }}
+            <i class="fa fa-bullhorn"></i> {{ options().announce.content|raw }}
         </div>
     </div>
 {% endif %}

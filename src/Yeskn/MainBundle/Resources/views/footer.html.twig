@@ -43,4 +43,6 @@
     </div>
 </footer>
 
-{% include '@YesknMain/landlord.html.twig' %}
+{% if options().girl_enable %}
+    {% include '@YesknMain/landlord.html.twig' %}
+{% endif %}

@@ -20,6 +20,8 @@
             $('.nav-chat-dot').removeClass('push-notifications-count');
         }
 
-        window.YesknPlugins.get('landLord');
+        {% if options().girl_enable %}
+            window.YesknPlugins.get('landLord');
+        {% endif %}
     });
 </script>
