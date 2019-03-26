@@ -31,7 +31,15 @@
                         <div class="panel-body">
                             {% for stab in tabs %}
                                 {% if stab.level == 2 and stab.parent == tab %}
-                                    <a data-pjax class="btn btn-default btn-sm tabs-item-button" href="{{ path('homepage', {tab:stab.alias}) }}" role="button">{{ stab.name|trans }}</a>
+                                    {% if stab.avatar %}
+                                        <div style="width: 100px;float: left;height: 150px;text-align: center; padding: 10px">
+                                            <img src="{{ stab.avatar }}" alt="" width="100%">
+                                            <a data-pjax class="tabs-item-button" href="{{ path('homepage', {tab:stab.alias}) }}" role="button">
+                                                {{ stab.name|trans }}
+                                            </a>
+                                        </div>
+
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         </div>
