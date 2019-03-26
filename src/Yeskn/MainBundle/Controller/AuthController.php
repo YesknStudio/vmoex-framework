@@ -78,10 +78,12 @@ class AuthController extends AbstractController
             $fileName = md5($user->getUsername()) . '.png';
             $file = $this->container->getParameter('kernel.project_dir') . '/web/avatar/' . $fileName;
 
-            $identicon = new \Identicon\Identicon();
-            $avatar = $identicon->getImageData($user->getUsername(), 100);
+            // 使用随机二次元头像
+            $i = mt_rand(1, 99999);
 
-            file_put_contents($file, $avatar);
+            file_put_contents($file,
+                file_get_contents("https://www.thiswaifudoesnotexist.net/example-{$i}.jpg")
+            );
 
             $user->setAvatar('avatar/' . $fileName);
             $user->setNickname($user->getUsername());
