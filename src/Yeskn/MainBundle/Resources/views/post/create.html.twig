@@ -15,14 +15,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label required" for="editor-trigger">内容</label>
+                            <label class="control-label required" for="content">内容</label>
                             <textarea class="form-control hide" name="content" id="content" cols="30" rows="10" title=""></textarea>
                             <div id="editor"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="select-node">选择板块</label>
-                            <select name="tab" id="select-tab" class="form-control" title="">
+                            <select name="tab" id="select-node" class="form-control" title="">
                                 {% for tab in tabs %}
                                     <option value="{{ tab.alias }}">{{ tab.name }}</option>
                                 {% endfor %}
@@ -70,6 +70,13 @@
                     'video',  // 插入视频
                     'code',  // 插入代码
                 ];
+                vmoexEditor.customConfig.uploadImgServer = '/admin/upload/images';
+                vmoexEditor.customConfig.uploadFileName = 'file';
+                vmoexEditor.customConfig.uploadImgParams = {
+                    // 如果版本 <=v3.1.0 ，属性值会自动进行 encode ，此处无需 encode
+                    // 如果版本 >=v3.1.1 ，属性值不会自动 encode ，如有需要自己手动 encode
+                    token: 'abcdef12345'
+                };
                 vmoexEditor.customConfig.onchange = function (html) {
                     $('#content').val(html);
                 };

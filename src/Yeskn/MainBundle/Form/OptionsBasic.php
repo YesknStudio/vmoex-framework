@@ -15,10 +15,10 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Yeskn\MainBundle\Form\DataTransfer\DatetimeToStringTransfer;
-use Yeskn\MainBundle\Form\Entity\BasicManage;
 use Yeskn\MainBundle\Form\Type\ImageInputType;
+use Yeskn\Support\ParameterBag;
 
-class ManageBasicType extends AbstractType
+class OptionsBasic extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -56,7 +56,7 @@ class ManageBasicType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => BasicManage::class
+            'data_class' => ParameterBag::class
         ));
     }
 }
