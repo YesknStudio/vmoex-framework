@@ -52,7 +52,8 @@
                 <a href="#"><i class="fa fa-gear fa-fw"></i> 网站管理<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="{{ path('admin_manage_basic') }}">基本管理</a></li>
-                    <li><a href="{{ path('admin_manage_girl') }}">看板娘</a></li>
+                    <li><a href="{{ path('admin_options_general', {optionGroup: 'girl'}) }}">看板娘</a></li>
+                    <li><a href="{{ path('admin_options_general', {optionGroup: 'maintain'}) }}">维护模式</a></li>
                 </ul>
             </li>
         </ul>

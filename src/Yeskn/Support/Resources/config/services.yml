@@ -12,7 +12,15 @@ services:
 
   Yeskn\Support\EventListener\ExceptionListener:
     tags:
-      - { name: kernel.event_listener, event: kernel.exception }
+      - { name: kernel.event_listener, event: kernel.exception, priority: 990}
+
+  Yeskn\Support\EventListener\MaintainExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, priority: 980 }
+
+  Yeskn\Support\EventListener\ControllerCheckForMaintenanceMode:
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller, priority: 1000 }
 
   Yeskn\Support\Routing\DynamicRouteLoader:
     tags:

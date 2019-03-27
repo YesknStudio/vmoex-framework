@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Form\Logic\OptionsLogic;
 use Yeskn\MainBundle\Form\OptionsBasic;
-use Yeskn\MainBundle\Form\OptionsGirlType;
 use Yeskn\Support\File\ImageHandler;
 
 /**
@@ -59,7 +58,7 @@ class OptionsController extends Controller
                 $basic->set('siteLogo', $oldLogo);
             }
 
-            $optionsLogic->setBasicOptions($basic->all());
+            $optionsLogic->setOptions($basic->all());
 
             $this->addFlash('success', '设置成功');
 
@@ -72,33 +71,39 @@ class OptionsController extends Controller
     }
 
     /**
-     * @Route("/girl", name="admin_manage_girl")
+     * @Route("/general/{optionGroup}", name="admin_options_general")
      *
      * @param Request $request
+     * @param $optionGroup
      * @param $optionsLogic
      * @return Response
      */
-    public function girlAction(Request $request, OptionsLogic $optionsLogic)
+    public function generalAction(Request $request, $optionGroup, OptionsLogic $optionsLogic)
     {
-        $girl = $optionsLogic->getOptions(['girl_enable']);
-
-        $girlForm = $this->createForm(
-            OptionsGirlType::class,
-            $girl
+        $options = $optionsLogic->getOptions(
+            $optionsLogic->getGroupOptionKeys($optionGroup)
         );
 
-        $girlForm->handleRequest($request);
+        $form = $this->createForm(
+            $optionsLogic->getGroupFormType($optionGroup),
+            $options
+        );
 
-        if ($girlForm->isValid() &&$girlForm->isSubmitted()) {
-            $optionsLogic->setBasicOptions($girl->all());
+        $form->handleRequest($request);
+
+        if ($form->isValid() && $form->isSubmitted()) {
+            $optionsLogic->setOptions($options->all(), $optionGroup);
 
             $this->addFlash('success', '设置成功');
 
-            return $this->redirectToRoute('admin_manage_girl');
+            return $this->redirectToRoute('admin_options_general', [
+                'optionGroup' => $optionGroup
+            ]);
         }
 
-        return $this->render('@YesknAdmin/manage/girl.html.twig', [
-            'form' => $girlForm->createView()
+        return $this->render('@YesknAdmin/manage/general.html.twig', [
+            'groupName' => $optionsLogic->getGroupName($optionGroup),
+            'form' => $form->createView()
         ]);
     }
 }
