@@ -37,7 +37,7 @@ vmoex是一个开源的二次元社区程序，同时也是一个多用户多角
 
 ## 疗效
 
-[戳我见效果](https://www.vmoex.com/)
+[戳我见效果](https://framework.vmoex.com/)
 
 ## 依赖
 
