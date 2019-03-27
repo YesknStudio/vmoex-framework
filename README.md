@@ -88,7 +88,7 @@ vmoex是一个开源的二次元社区程序，同时也是一个多用户多角
 
 ![](web/assets/images/vmoex-screenshot-kanbanniang.png)
 
-由[维基萌](https://www.wikimoe.com/)提供。
+由[维基萌](https://www.wikimoe.com/)提供(😘)。
 
 ## 帮助与反馈
 
