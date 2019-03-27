@@ -15,7 +15,23 @@
 vmoex是一个开源的二次元社区程序，同时也是一个多用户多角色的内容管理系统。
 </p>
 
+首页：
+
 ![](web/assets/images/vmoex-screenshot.png)
+
+管理后台：
+
+![](web/assets/images/vmoex-admin.png)
+
+移动端：
+
+![](web/assets/images/vmoex-mobile.png)
+
+个人中心：
+
+![](web/assets/images/vmoex-home.png)
+
+## 安装
 
 安装文档请参考：[INSTALL.md](INSTALL.md)
 
