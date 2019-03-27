@@ -10,6 +10,7 @@
 namespace Yeskn\MainBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Yeskn\MainBundle\Entity\User;
 
@@ -25,17 +26,28 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     /**
      * @param $email
      * @param $username
+     * @param $userId
      * @return mixed
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function checkEmailAndUsername($email, $username)
+    public function checkEmailAndUsername($email, $username, $userId = null)
     {
-        return $this->createQueryBuilder('p')
+        $query = $this->createQueryBuilder('p')
             ->select('COUNT(p)')
-            ->where('p.email = :email')->setParameter('email', $email)
-            ->orWhere('p.username = :username')->setParameter('username', $username)
-            ->getQuery()
+            ->where('1=1');
+
+        if ($userId) {
+            $query->andWhere('p.id != :userId')->setParameter('userId', $userId);
+        }
+
+        $or = $query->expr()->orx();
+        $or->add($query->expr()->eq('p.username', "'{$username}'"));
+        $or->add($query->expr()->eq('p.email', "'{$email}'"));
+
+        $query->andWhere($or);
+
+        return $query->getQuery()
             ->getSingleScalarResult();
     }
 

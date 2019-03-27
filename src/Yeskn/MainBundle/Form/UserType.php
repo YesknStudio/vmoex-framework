@@ -24,6 +24,8 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $creating = !(boolean)$builder->getData()->getId();
+
         $builder->add('username', TextType::class, [
             'label' => '用户名',
             'required' => true,
@@ -36,10 +38,8 @@ class UserType extends AbstractType
 
         $builder->add('password', TextType::class, [
             'label' => '密码',
-            'required' => false,
-            'attr' => [
-                'placeholder' => '不修改此项时请不填'
-            ]
+            'required' => $creating,
+            'attr' => !$creating ? ['help' => '不修改此项时请不填'] : []
         ]);
 
         $builder->add('email', EmailType::class, [
@@ -49,7 +49,7 @@ class UserType extends AbstractType
 
         $builder->add('remark', TextareaType::class, [
             'label' => '签名',
-            'required' => false
+            'required' => false,
         ]);
 
         $builder->add('role', ChoiceType::class, [
@@ -60,12 +60,17 @@ class UserType extends AbstractType
                 '普通用户' => 'ROLE_USER',
                 '管理员' => 'ROLE_ADMIN',
                 '超级管理员' => 'ROLE_SUPER_ADMIN'
+            ],
+            'attr' => [
+                'help' => '不能选择比当前角色等级高的角色'
             ]
         ]);
 
         $builder->add('avatar', ImageInputType::class, [
             'label' => '头像',
-            'required' => false
+            'required' => false,
+            'height' => 200,
+            'width' => 200
         ]);
 
         $builder->add('gold', IntegerType::class, [

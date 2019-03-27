@@ -9,11 +9,14 @@
 
 namespace Yeskn\AdminBundle\CrudEvent;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Yeskn\MainBundle\Entity\User;
 use Intervention\Image\ImageManagerStatic as Image;
+use Yeskn\MainBundle\Services\RandomAvatarService;
 
 class ProcessEditUserEvent extends AbstractCrudEntityEvent
 {
@@ -31,11 +34,19 @@ class ProcessEditUserEvent extends AbstractCrudEntityEvent
 
     private $webRoot;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, $projectDir)
-    {
+    private $avatarService;
+
+    private $em;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, $projectDir
+        , RandomAvatarService $avatarService
+        , EntityManagerInterface $em
+    ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->oldValue = StartEditUserEvent::$odlProperty;
         $this->webRoot = $projectDir . '/web';
+        $this->avatarService = $avatarService;
+        $this->em = $em;
     }
 
     public function execute()
@@ -43,16 +54,12 @@ class ProcessEditUserEvent extends AbstractCrudEntityEvent
         $user = $this->entity;
 
         if (empty($user->getId())) {
-            if (empty($user->getPassword())) {
-                throw new \Exception('新增用户时，密码不能为空');
-            }
-
-            if (empty($user->getAvatar())) {
-                throw new \Exception('新增用户时，头像不能为空');
-            }
-
             $user->setRegisterAt(new \DateTime());
             $user->setLoginAt(new \DateTime());
+        }
+
+        if (empty($user->getAvatar()) && empty($this->oldValue['avatar'])) {
+            $this->avatarService->handle($user);
         }
 
         if (!empty($user->getPassword())) {
@@ -63,22 +70,32 @@ class ProcessEditUserEvent extends AbstractCrudEntityEvent
             $user->setPassword($this->oldValue['password']);
         }
 
-        /** @var File $file */
+        $check = $this->em->getRepository('YesknMainBundle:User')
+            ->checkEmailAndUsername($user->getEmail(), $user->getUsername(), $user->getId());
+
+        if ($check) {
+            throw new BadRequestHttpException('用户名或者邮箱已经注册');
+        }
+
+        $user->setRemark($user->getRemark() ?: '');
+
         if ($file = $user->getAvatar()) {
-            $extension = $file->guessExtension();
-            $fileName = 'upload/avatar/' . time() . mt_rand(1000, 9999) . '.' . $extension;
+            if ($file instanceof UploadedFile) {
+                $extension = $file->guessExtension();
+                $fileName = 'upload/avatar/' . time() . mt_rand(1000, 9999) . '.' . $extension;
 
-            $targetPath = $this->webRoot .  '/' . $fileName;
+                $targetPath = $this->webRoot .  '/' . $fileName;
 
-            $fs = new Filesystem();
-            $fs->copy($file->getRealPath(), $targetPath);
+                $fs = new Filesystem();
+                $fs->copy($file->getRealPath(), $targetPath);
 
-            Image::configure(array('driver' => 'gd'));
+                Image::configure(array('driver' => 'gd'));
 
-            $image = Image::make($targetPath);
-            $image->resize(100, 100)->save();
+                $image = Image::make($targetPath);
+                $image->resize(100, 100)->save();
 
-            $user->setAvatar($fileName);
+                $user->setAvatar($fileName);
+            }
         } else {
             $user->setAvatar($this->oldValue['avatar']);
         }
