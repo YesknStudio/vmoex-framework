@@ -19,6 +19,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Yeskn\MainBundle\Entity\OpenUser;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\MainBundle\Form\UserLoginType;
+use Yeskn\MainBundle\Services\RandomAvatarService;
 use Yeskn\Support\AbstractController;
 
 class AuthController extends AbstractController
@@ -75,17 +76,11 @@ class AuthController extends AbstractController
             $user->setPassword($password);
             $user->setRegisterAt(new \DateTime());
 
-            $fileName = md5($user->getUsername()) . '.png';
-            $file = $this->container->getParameter('kernel.project_dir') . '/web/avatar/' . $fileName;
+            /** @var RandomAvatarService $randomAvatarService */
+            $randomAvatarService = $this->get(RandomAvatarService::class);
 
-            // 使用随机二次元头像
-            $i = mt_rand(1, 99999);
+            $randomAvatarService->handle($user);
 
-            file_put_contents($file,
-                file_get_contents("https://www.thiswaifudoesnotexist.net/example-{$i}.jpg")
-            );
-
-            $user->setAvatar('avatar/' . $fileName);
             $user->setNickname($user->getUsername());
             $user->setLoginAt(new \DateTime());
             $user->setRole('ROLE_USER');
