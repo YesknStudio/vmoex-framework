@@ -1,5 +1,5 @@
 {% block form_row %}
-    {% spaceless %}
+    {% filter spaceless %}
         <div class="form-group">
             {{ form_label(form, '', {label_attr: {class: 'col-sm-2'}}) }}
             <div class="col-sm-10">
@@ -7,5 +7,5 @@
             </div>
             {{ form_errors(form) }}
         </div>
-    {% endspaceless %}
+    {% endfilter %}
 {% endblock form_row %}

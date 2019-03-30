@@ -8,7 +8,6 @@
 
 namespace Yeskn\MainBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,8 +24,7 @@ use Yeskn\Support\Http\ApiOk;
 class ChatController extends Controller
 {
     /**
-     * @Route("/chat", name="bind_chat")
-     * @Method("GET")
+     * @Route("/chat", name="bind_chat", methods={"GET"})
      *
      * @param Request $request
      * @return Response

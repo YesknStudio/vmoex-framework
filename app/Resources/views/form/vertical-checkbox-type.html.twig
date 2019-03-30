@@ -1,5 +1,5 @@
 {% block checkbox_widget %}
-    {% spaceless %}
+    {% filter spaceless %}
         <div class="col-sm-offset-2 col-sm-10">
             <div class="checkbox">
                 <label>
@@ -14,5 +14,5 @@
                 {{ form_errors(form) }}
             </div>
         </div>
-    {% endspaceless %}
+    {% endfilter %}
 {% endblock checkbox_widget %}

@@ -1,5 +1,5 @@
 {% block form_row %}
-    {% spaceless %}
+    {% filter spaceless %}
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-10">
                 {{ form_widget(form) }}
@@ -9,5 +9,5 @@
             </div>
             {{ form_errors(form) }}
         </div>
-    {% endspaceless %}
+    {% endfilter %}
 {% endblock form_row %}
