@@ -183,3 +183,4 @@ no_enough_gold: 'Shortage of gold coins'
 comment_not_exist: 'Comments do not exist'
 cant_modify_current_user_in_admin: 'cant modify current user in admin'
 hours: h
+access_denied: 'access denied'

@@ -185,3 +185,4 @@ cant_modify_current_user_in_admin: 不能在管理端修改当前个人信息，
 user_not_exist: 用户不存在
 locale_invalid: 非法的语言
 hours: 小时
+access_denied: 访问被拒绝
