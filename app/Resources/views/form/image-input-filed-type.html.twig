@@ -1,5 +1,5 @@
 {% block image_input_widget %}
-    {% spaceless %}
+    {% filter spaceless %}
         {% if data %}
             <div style="padding: 10px; text-align: center">
                 <img src="{{ asset(data.path ~ '/' ~ data.fileName) }}"
@@ -13,5 +13,5 @@
             <span class="help-block small-font">{{ attr['help'] }}</span>
         {% endif %}
         {{ form_errors(form) }}
-    {% endspaceless %}
+    {% endfilter %}
 {% endblock image_input_widget %}
