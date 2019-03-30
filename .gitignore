@@ -36,3 +36,4 @@ web/build
 node_modules
 yarn.lock
 yarn-error.log
+coverage.xml
