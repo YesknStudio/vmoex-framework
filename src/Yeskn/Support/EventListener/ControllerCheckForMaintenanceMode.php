@@ -10,7 +10,7 @@
 namespace Yeskn\Support\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -22,24 +22,23 @@ class ControllerCheckForMaintenanceMode extends AbstractControllerListener
 {
     private $varDir;
     private $checker;
-    private $container;
+    private $firewallMap;
 
     public function __construct(TokenStorageInterface $tokenStorage, EntityManagerInterface $em
         , $projectDir
         , AuthorizationCheckerInterface $checker
-        , ContainerInterface $container
+        , FirewallMap $firewallMap
     ) {
         parent::__construct($tokenStorage, $em);
         $this->varDir = rtrim($projectDir, '/') . '/var';
         $this->checker = $checker;
-        $this->container = $container;
+        $this->firewallMap = $firewallMap;
     }
 
     public function onKernelController(FilterControllerEvent $event)
     {
         $fs = new Filesystem();
-        $config = $this->container
-            ->get('security.firewall.map')->getFirewallConfig($event->getRequest());
+        $config = $this->firewallMap->getFirewallConfig($event->getRequest());
 
         if ($config->isSecurityEnabled() && $fs->exists($this->varDir . '/maintain')) {
             $isSuperAdmin = $this->checker->isGranted('ROLE_SUPER_ADMIN', $this->getUser());

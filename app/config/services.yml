@@ -21,3 +21,4 @@ services:
         - { name: kernel.event_listener, event: kernel.response }
 
     Symfony\Bridge\Twig\Extension\AssetExtension: "@twig.extension.assets"
+    Symfony\Bundle\SecurityBundle\Security\FirewallMap: "@security.firewall.map"
