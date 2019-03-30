@@ -10,10 +10,11 @@
 namespace Yeskn\MainBundle\Twig;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Twig\Extension\AbstractExtension;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 
-class Render extends \Twig_Extension
+class Render extends AbstractExtension
 {
     private $template;
 

@@ -13,9 +13,10 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Twig\Extension\AbstractExtension;
 use Yeskn\MainBundle\Entity\Announce;
 
-class WebsiteInfo extends \Twig_Extension
+class WebsiteInfo extends AbstractExtension
 {
     /**
      * @var EntityManager
