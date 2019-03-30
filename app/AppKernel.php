@@ -48,6 +48,13 @@ class AppKernel extends Kernel
         return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
     }
 
+    protected function getKernelParameters()
+    {
+        $params = parent::getKernelParameters();
+        $params['kernel.config_dir'] = $this->getRootDir() . '/config';
+        return $params;
+    }
+
     public function getLogDir()
     {
         return dirname(__DIR__).'/var/logs';
