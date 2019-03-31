@@ -7,8 +7,8 @@ parameters:
     database_user: root
     database_password: ~
 
-    # redis配置，用于session，数据库缓存
-    redis_dsn: 'redis://passwd@localhost'
+    # redis配置，下面passwd为redis的密码（请务必设置redis密码！）
+    redis_dsn: 'redis://<passwd>@localhost'
 
     # 邮箱smtp配置，不配置则无法向用户发送验证、通知邮件
     mailer_transport: smtp

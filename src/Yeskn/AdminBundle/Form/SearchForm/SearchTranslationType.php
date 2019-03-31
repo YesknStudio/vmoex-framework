@@ -19,7 +19,7 @@ class SearchTranslationType extends DefaultSearchType
         parent::buildForm( $builder, $options);
 
         $builder->add('messageId', SearchType::class, [
-            'label' => 'ID',
+            'label' => 'messageId',
             'required' => false
         ]);
         $builder->add('chinese', SearchType::class, [
