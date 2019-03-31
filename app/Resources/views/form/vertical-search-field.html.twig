@@ -1,0 +1,14 @@
+{% block form_row %}
+    {% filter spaceless %}
+        <div class="form-group" style="width: 33.3%">
+            {{ form_label(form, '', {label_attr: {class: 'col-sm-3'}}) }}
+            <div class="col-sm-9">
+                {{ form_widget(form) }}
+                {% if attr['help'] is defined %}
+                    <span class="help-block small-font">{{ attr['help'] }}</span>
+                {% endif %}
+            </div>
+            {{ form_errors(form) }}
+        </div>
+    {% endfilter %}
+{% endblock form_row %}

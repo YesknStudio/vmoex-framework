@@ -9,6 +9,7 @@
 
 namespace Yeskn\AdminBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\AdminBundle\CrudEvent\AbstractCrudEntityEvent;
 use Yeskn\AdminBundle\CrudEvent\AbstractCrudListEvent;
 use Yeskn\AdminBundle\CrudEvent\CrudEventInterface;
+use Yeskn\AdminBundle\QueryBuilder\BuilderFactory;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\Support\Http\ApiOk;
 use Yeskn\Support\Http\Session\Flash;
+use Yeskn\Support\ParameterBag;
 
 class CRUDController extends Controller
 {
@@ -36,19 +39,45 @@ class CRUDController extends Controller
      */
     public function listAction($entity, Request $request)
     {
-        $pageLimit = $request->query->get('pageLimit', 20);
-        $currentPage = $request->query->get('currentPage', 1);
+        $pageSize = $request->query->get('pageSize', 20);
+        $pageNo = $request->query->get('pageNo', 1);
+        $search = $request->query->get('search_' . $entity, []);
+        $queryParams = [
+            'pageNo' => $pageNo,
+            'pageSize' => $pageSize
+        ];
 
         $entity = ucfirst($entity);
-        $repo = $this->getDoctrine()->getRepository('YesknMainBundle:' . $entity);
 
-        $list = $repo->findBy([], ['id' => 'DESC'], $pageLimit, ($currentPage - 1) * $pageLimit);
-        $total = $repo->total();
+        /** @var EntityRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('YesknMainBundle:' . $entity);
+        $builder = $repository->createQueryBuilder('p');
+
+        $searchClass = "Yeskn\AdminBundle\Form\SearchForm\Search{$entity}Type";
+
+        if (class_exists($searchClass)) {
+            $searchForm = $this->createForm($searchClass, new ParameterBag($search));
+
+            $allowedKeys = array_keys($searchForm->all());
+
+            foreach ($search as $key => $value) {
+                if (in_array($key, $allowedKeys)) {
+                    $queryParams[$key] = $value;
+                }
+            }
+        }
+
+        $query = BuilderFactory::createQueryBuilder($entity, $builder, $queryParams);
+
+        $list = $query->getList();
+        $total = $query->getTotal();
 
         $typeClass = "Yeskn\MainBundle\Form\\{$entity}Type";
         $entityClass = "Yeskn\MainBundle\Entity\\{$entity}";
 
         $data = $this->startEntitiesRenderEvent($entity, $list);
+
+        $createForm = $this->createForm($typeClass, new $entityClass);
 
         return $this->render('@YesknAdmin/crud/list.html.twig', [
             'entity' => lcfirst($entity),
@@ -60,10 +89,10 @@ class CRUDController extends Controller
             'list' => $data['list'],
             'ids' => $data['ids'],
             'entityName' => $entityClass::NAME,
-            'form' => $this->createForm($typeClass, new $entityClass)->createView(),
+            'form' => $createForm->createView(),
             'extra' => empty($data['extra']) ? [] : $data['extra'],
-            'allPage' => ceil($total / $pageLimit),
-            'pageLimit' => $pageLimit
+            'allPage' => ceil($total / $pageSize),
+            'searchForm' => !empty($searchForm) ? $searchForm->createView() : null,
         ]);
     }
 
