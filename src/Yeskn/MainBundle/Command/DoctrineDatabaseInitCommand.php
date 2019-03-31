@@ -29,6 +29,6 @@ class DoctrineDatabaseInitCommand extends AbstractCommand
         $conn->executeQuery($sql);
 
 
-        $output->writeln('finished!');
+        $output->writeln('<info>ok, that\'s  awesome!</info>');
     }
 }

@@ -8,12 +8,6 @@
     cd /path/to/webroot/path
     git clone git@github.com:yeskn-studio/vmoex-framework.git && cd vmoex-framework
 
-**修改runtime目录权限**
-
-    chown -R [webuser] var （各类日志缓存存放目录）
-    chown -R [webuser] web/upload
-    chown -R [webuser] app/Resources/translations (翻译文件的目录)
-
 **修改配置文件**
 
     vim app/config/parameters.yml.dist
@@ -22,7 +16,16 @@
 
 **安装php依赖**
 
-    composer install （期间会提示配置，检查无误可一路回车，可能耗时比较长，请耐心等待，如果失败，建议修改composer的源）
+    composer install
+    
+    可能耗时比较长，请耐心等待，如果失败，建议修改composer的源， 期间会提示输入配置，检查无误可一路回车。
+    
+**修改runtime目录权限**
+
+    sudo chown -R [webuser] var （各类日志缓存存放目录）
+    sudo chown -R [webuser] web/upload
+    sudo chown -R [webuser] web/build
+    sudo chown -R [webuser] app/Resources/translations (翻译文件的目录)
 
 **安装前端依赖**
 
