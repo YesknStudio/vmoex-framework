@@ -9,9 +9,9 @@
 
 namespace Yeskn\Support;
 
-use \Symfony\Component\DependencyInjection\ParameterBag\ParameterBag as DIParameterBag;
+use Symfony\Component\HttpFoundation\ParameterBag as HttpParameterBag;
 
-class ParameterBag extends DIParameterBag
+class ParameterBag extends HttpParameterBag
 {
     public function __get($name)
     {

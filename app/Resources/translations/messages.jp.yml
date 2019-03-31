@@ -183,3 +183,4 @@ no_enough_gold: 金貨が足りない
 comment_not_exist: コメントは存在しません
 cant_modify_current_user_in_admin: null
 hours: 時間
+access_denied: 访问被拒绝

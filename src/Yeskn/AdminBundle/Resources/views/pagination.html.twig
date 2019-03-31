@@ -1,6 +1,6 @@
 <ul class="pagination">
     {% if pageData.allPage > 0 %}
-        {% if pageData.currentPage == 1 %}
+        {% if pageData.pageNo == 1 %}
             <li class="disabled">
                 <a href="#">&laquo;</a>
             </li>
@@ -8,47 +8,47 @@
             <li>
                 <a href="{{ path('admin_list', {
                     entity: entity,
-                    currentPage: pageData.currentPage - 1,
-                    pageLimit: pageData.pageLimit
+                    pageNo: pageData.pageNo - 1,
+                    pageSize: pageData.pageSize
                 }) }}">&laquo;</a>
             </li>
         {% endif %}
 
-        {% if pageData.currentPage > 3 %}
+        {% if pageData.pageNo > 3 %}
             <li class="disabled">
                 <a href="javascript:">...</a>
             </li>
         {% endif %}
 
         {% for p in 1..pageData.allPage %}
-            {% if p < pageData.currentPage - 2 %}
+            {% if p < pageData.pageNo - 2 %}
                 {# 为了便于理解，这个期间不会显示出来  #}
             {% endif %}
 
-            {% if p == pageData.currentPage %}
+            {% if p == pageData.pageNo %}
                 <li class="active"><a href="javascript:">{{ p }}</a></li>
             {% endif %}
 
-            {% if p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage + 2 %}
+            {% if p >= pageData.pageNo - 2 and p != pageData.pageNo and p <= pageData.pageNo + 2 %}
                 <li><a href="{{ path('admin_list', {
                         entity: entity,
-                        currentPage: p,
-                        pageLimit: pageData.pageLimit
+                        pageNo: p,
+                        pageSize: pageData.pageSize
                     }) }}">{{ p }}</a></li>
             {% endif %}
 
-            {% if p > pageData.currentPage + 2 %}
+            {% if p > pageData.pageNo + 2 %}
                 {# 为了便于理解，这个期间不会显示出来  #}
             {% endif %}
         {% endfor %}
 
-        {% if pageData.allPage > pageData.currentPage + 2 %}
+        {% if pageData.allPage > pageData.pageNo + 2 %}
             <li class="disabled">
                 <a href="javascript:">...</a>
             </li>
         {% endif %}
 
-        {% if pageData.currentPage == pageData.allPage  %}
+        {% if pageData.pageNo == pageData.allPage  %}
             <li class="disabled">
                 <a href="javascript:">&raquo;</a>
             </li>
@@ -56,8 +56,8 @@
             <li>
                 <a href="{{ path('admin_list', {
                     entity:entity,
-                    currentPage: pageData.currentPage + 1,
-                    pageLimit: pageData.pageLimit
+                    pageNo: pageData.pageNo + 1,
+                    pageSize: pageData.pageSize
                 }) }}" data-pjax>&raquo;
                 </a>
             </li>
@@ -65,4 +65,4 @@
     {% endif %}
 </ul>
 
-<div style="display: inline-block; margin: 0 0 60px 10px; vertical-align: middle">总共 {{ allPage }} 页。</div>
+<div style="margin-left: 10px">总共 {{ allPage }} 页。</div>

@@ -55,3 +55,18 @@ table.table td{
         float: none;
     }
 }
+
+.search-form label{
+    padding-top: 7px;
+}
+
+.search-form .pagination-container {
+    float: right;
+}
+
+.search-form .pagination-container ul {
+    margin: 0 !important;
+}
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}

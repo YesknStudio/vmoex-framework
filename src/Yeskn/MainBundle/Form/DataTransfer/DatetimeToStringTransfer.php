@@ -14,14 +14,14 @@ use Symfony\Component\Form\DataTransformerInterface;
 class DatetimeToStringTransfer implements DataTransformerInterface
 {
     /**
-     * @param \DateTime|null $value
+     * @param mixed $value
      *
      * @return string
      */
     public function transform($value)
     {
         if (is_string($value)) {
-            return new \DateTime('Y-m-d');
+            return new \DateTime($value);
         }
 
         return $value;
@@ -29,7 +29,7 @@ class DatetimeToStringTransfer implements DataTransformerInterface
 
     /**
      * @param mixed $value
-     * @return \DateTime|mixed
+     * @return \DateTime
      */
     public function reverseTransform($value)
     {

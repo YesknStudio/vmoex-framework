@@ -10,6 +10,7 @@
 namespace Yeskn\MainBundle\Services;
 
 use Yeskn\MainBundle\Entity\User;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class RandomAvatarService
 {
@@ -17,7 +18,7 @@ class RandomAvatarService
 
     public function __construct($projectDir)
     {
-        $this->avaDir = $projectDir . '/web/avatar';
+        $this->avaDir = $projectDir . '/web/upload/avatar';
     }
 
     public function handle(User $user)
@@ -32,6 +33,11 @@ class RandomAvatarService
             file_get_contents("https://www.thiswaifudoesnotexist.net/example-{$i}.jpg")
         );
 
-        $user->setAvatar('avatar/' . $fileName);
+        Image::configure(array('driver' => 'gd'));
+
+        $image = Image::make($file);
+        $image->resize(200, 200)->save();
+
+        $user->setAvatar('upload/avatar/' . $fileName);
     }
 }

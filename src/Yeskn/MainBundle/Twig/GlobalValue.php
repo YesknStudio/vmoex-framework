@@ -12,9 +12,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
+use Twig\Extension\AbstractExtension;
 use Yeskn\MainBundle\Entity\User;
 
-class GlobalValue extends \Twig_Extension
+class GlobalValue extends AbstractExtension
 {
     /**
      * @var EntityManager

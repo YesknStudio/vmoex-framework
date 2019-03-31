@@ -1,12 +1,12 @@
 # 安装手册
 
+> 以下文档中 `webuser`均指运行的web server的用户，如果不用`sudo -u <webuser>`执行命令的话，
+> 会导致某些runtime目录的权限不对，导致网页打不开。
+> 
+> 在vmoex的根目录下，执行`php bin/console` 命令时建议都带上`sudo -u <webuser>` 前缀
+
     cd /path/to/webroot/path
-
     git clone git@github.com:yeskn-studio/vmoex-framework.git && cd vmoex-framework
-
-**或者指定版本，比如：**
-
-    git clone --branch v2.1.1 git@github.com:yeskn-studio/vmoex-framework.git && cd vmoex-framework
 
 **修改runtime目录权限**
 
@@ -17,39 +17,36 @@
 **修改配置文件**
 
     vim app/config/parameters.yml.dist
+    
+请按照文件中的注释修改成自己服务器的配置。
 
 **安装php依赖**
 
-    composer install （期间会提示配置，检查无误可一路回车）
+    composer install （期间会提示配置，检查无误可一路回车，可能耗时比较长，请耐心等待，如果失败，建议修改composer的源）
 
 **安装前端依赖**
 
-    yarn install
+    yarn install （耐心等待...)
     
 **创建数据库**
 
-    php bin/console doctrine:database:create （如果你已经手动创建了数据库，可跳过）
+    sudo -u [webuser] php bin/console doctrine:database:create （如果你已经手动创建了数据库，可跳过）
 
 **导入数据**
 
-    php bin/console doctrine:database:init
-    
-**载入翻译数据**
-
-    php bin/console translation:persist
+    sudo -u [webuser] php bin/console doctrine:database:init
 
 **修改管理员密码**
 
-    php bin/console change-password -u admin -p [password]
+    sudo -u [webuser] php bin/console change-password -u admin -p [password]
     
 **清理缓存**
 
-    chown -R [webuser] var （上面已经执行过，这里再执行一次）
     sudo -u [webuser] php bin/console cache:clear --env=dev
     
 **创建静态资源文件**
 
-    php bin/console assetic:dump --env=dev
+    sudo -u [webuser] php bin/console assetic:dump --env=dev
     
 **启动websocket**
 
@@ -99,14 +96,13 @@ server {
 
 **清理prod模式下的缓存**
 
-    chown -R [webuser] var
     sudo -u [webuser] php bin/console cache:clear --env=prod
     
 **生成prod模式下的静态资源文件**
 
-    php bin/console assetic:dump --env=prod
+     sudo -u [webuser] php bin/console assetic:dump --env=prod
 
 ## 注意！！
 
-app/config/parameters.yml.dist并不是真正生效的配置文件，真正生效的是自动生成的app/config/parameters.yml，
-需修改配置时请修改此文件，修改完后，需要重新清理缓存或者生成静态资源文件。
+**app/config/parameters.yml.dist**并不是真正生效的配置文件，真正生效的是自动生成的**app/config/parameters.yml**，
+需修改配置时请修改此文件，修改完后，**需要重新清理缓存**或者生成静态资源文件。
