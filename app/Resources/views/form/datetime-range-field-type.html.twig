@@ -1,0 +1,21 @@
+{% block datetime_range_widget %}
+    {% set id = form.vars.id %}
+    {% filter spaceless %}
+        <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value|join(' - ') }}" {% endif %} class="form-control" disabled/>
+        {{ form_errors(form) }}
+    {% endfilter %}
+
+    <script>
+        $(function () {
+            window.YesknPlugins.get('laydate', function (laydate) {
+                $('#{{ id }}').removeAttr('disabled');
+                laydate.render({
+                    elem: '#{{ id }}',
+                    theme: '#737373',
+                    type: '{{ field_type }}',
+                    range: !!'{{ date_range }}'
+                  });
+                })
+        })
+    </script>
+{% endblock %}

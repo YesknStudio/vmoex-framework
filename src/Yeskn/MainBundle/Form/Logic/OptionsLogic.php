@@ -38,7 +38,7 @@ class OptionsLogic
     ];
 
     private $maintainOptions = [
-        'maintain_enable', 'maintain_start', 'maintain_stop'
+        'maintain_enable', 'maintain_time'
     ];
 
     private $groupNames = [
@@ -125,6 +125,10 @@ class OptionsLogic
             return boolval($value);
         }
 
+        if ($key == 'maintain_time') {
+            return explode(' - ', $value);
+        }
+
         return $value;
     }
 
@@ -137,6 +141,10 @@ class OptionsLogic
         if ($key == 'siteSince') {
             /** @var \DateTime $value */
             return $value->format('Y-m-d');
+        }
+
+        if ($key == 'maintain_time') {
+            return implode(' - ', $value);
         }
 
         return $value;
@@ -159,8 +167,12 @@ class OptionsLogic
             return true;
         }
 
-        unset($options['maintain_enable']);
-        $fs->dumpFile($this->varDir . '/maintain', json_encode($options));
+        $fileContent = [
+            'maintain_start' => $options['maintain_time'][0],
+            'maintain_stop' => $options['maintain_time'][1]
+        ];
+
+        $fs->dumpFile($this->varDir . '/maintain', json_encode($fileContent));
 
         return true;
     }

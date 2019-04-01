@@ -1,3 +1,6 @@
+# 注意：如果你在安装过程（composer install）中忘记了设置某个配置项，再修改本文件是没有用的，
+# 请修改文件app/config/parameter.yml
+
 parameters:
 
     # 数据库配置，mysql建议使用5.7版本
@@ -17,7 +20,7 @@ parameters:
     mailer_password: ~
 
     # 没有规律的32个左右的字符
-    secret: ~
+    secret: i9did8d9Jd8dhs0dkw8d7djKN8dA071A
 
     # 以下两项用于合并压缩js代码，必填
     # 查看命令的执行路径： `which node`，`which uglifyjs`

@@ -28,10 +28,13 @@ class PostQueryBuilder extends DefaultQueryBuilder
                 ->setParameter('author', "%{$params['author']}%");
         }
 
-        if (!empty($params['createdAt'])) {
+        if (!empty($params['createdAt'][0])) {
             $this->queryBuilder
-                ->andWhere('p.createdAt >= :createdAt')
-                ->setParameter('createdAt', $params['createdAt']);
+                ->andWhere('p.createdAt >= :createdAt0')
+                ->setParameter('createdAt0', $params['createdAt'][0]);
+            $this->queryBuilder
+                ->andWhere('p.createdAt <= :createdAt1')
+                ->setParameter('createdAt1', $params['createdAt'][1]);
         }
 
         return $this->queryBuilder;
