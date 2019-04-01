@@ -41,7 +41,7 @@ class CRUDController extends Controller
     {
         $pageSize = $request->query->get('pageSize', 20);
         $pageNo = $request->query->get('pageNo', 1);
-        $search = $request->query->get('search_' . $entity, []);
+
         $queryParams = [
             'pageNo' => $pageNo,
             'pageSize' => $pageSize
@@ -56,13 +56,14 @@ class CRUDController extends Controller
         $searchClass = "Yeskn\AdminBundle\Form\SearchForm\Search{$entity}Type";
 
         if (class_exists($searchClass)) {
-            $searchForm = $this->createForm($searchClass, new ParameterBag($search));
+            $searchForm = $this->createForm($searchClass);
+            $searchForm->handleRequest($request);
 
             $allowedKeys = array_keys($searchForm->all());
 
-            foreach ($search as $key => $value) {
+            foreach ($allowedKeys as $key) {
                 if (in_array($key, $allowedKeys)) {
-                    $queryParams[$key] = $value;
+                    $queryParams[$key] = $searchForm->get($key)->getNormData();
                 }
             }
         }

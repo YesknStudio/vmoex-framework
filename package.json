@@ -9,6 +9,7 @@
     "jquery": "^3.3.1",
     "jquery-pjax": "^2.0.1",
     "jquery.caret": "^0.3.1",
+    "laydate": "github:yeskn-studio/laydate",
     "metismenu": "1.1.3",
     "nprogress": "^0.2.0",
     "popper.js": "^1.14.7",

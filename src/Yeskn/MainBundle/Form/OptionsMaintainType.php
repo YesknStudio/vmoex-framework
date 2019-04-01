@@ -9,10 +9,10 @@
 
 namespace Yeskn\MainBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Yeskn\MainBundle\Form\Type\DatetimeRangeType;
 use Yeskn\Support\ParameterBag;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -27,19 +27,9 @@ class OptionsMaintainType extends AbstractType
             'label' => '启用',
             'required' => false,
         ]);
-        $builder->add('maintain_start', DateTimeType::class, [
-            'label' => '开始时间',
-            'input' => 'string',
-            'widget' => 'single_text',
-            'with_seconds' => true,
+        $builder->add('maintain_time', DatetimeRangeType::class, [
+            'label' => '时间段',
             'required' => true
-        ]);
-        $builder->add('maintain_stop', DateTimeType::class, [
-            'label' => '结束时间',
-            'input' => 'string',
-            'widget' => 'single_text',
-            'with_seconds' => true,
-            'required' => true,
         ]);
         $builder->add('submit', SubmitType::class, [
             'label' => '提交'

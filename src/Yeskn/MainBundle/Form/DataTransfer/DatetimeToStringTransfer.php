@@ -13,30 +13,36 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class DatetimeToStringTransfer implements DataTransformerInterface
 {
+    private $withTime;
+
+    public function __construct($withTime)
+    {
+        $this->withTime = $withTime;
+    }
+
     /**
-     * @param mixed $value
+     * 把格式化类型转成模板类型
+     *
+     * @param \DateTime $value
      *
      * @return string
      */
     public function transform($value)
     {
-        if (is_string($value)) {
-            return new \DateTime($value);
-        }
-
-        return $value;
+        return $value->format($this->withTime
+            ? 'Y-m-d H:i:s'
+            : 'Y-m-d'
+        );
     }
 
     /**
-     * @param mixed $value
+     * 把显示类型转成格式化类型
+     *
+     * @param string $value
      * @return \DateTime
      */
     public function reverseTransform($value)
     {
-        if (is_object($value)) {
-            return $value;
-        }
-
         return new \DateTime($value);
     }
 }

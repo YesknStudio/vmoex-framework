@@ -11,10 +11,9 @@ namespace Yeskn\MainBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Yeskn\MainBundle\Form\DataTransfer\DatetimeToStringTransfer;
+use Yeskn\MainBundle\Form\Type\DatetimeRangeType;
 use Yeskn\MainBundle\Form\Type\ImageInputType;
 use Yeskn\Support\ParameterBag;
 
@@ -32,13 +31,11 @@ class OptionsBasic extends AbstractType
                 ]
             ])
         );
-        $builder->add(
-            $builder->create('siteSince', DateType::class, [
-                'label' => '成立时间',
-                'widget' => 'single_text'
-            ])
-            ->addModelTransformer(new DatetimeToStringTransfer())
-        );
+        $builder->add('siteSince', DatetimeRangeType::class, [
+            'label' => '成立时间',
+            'field_type' => 'date',
+            'date_range' => false
+        ]);
         $builder->add('siteVersion', null, ['label' => '网站版本']);
 
         $builder->add('siteAnnounce', CheckboxType::class, [

@@ -11,7 +11,7 @@ services:
 
   Yeskn\MainBundle\:
       resource: '../../../MainBundle/*'
-      exclude: '../../../MainBundle/{Entity,Repository,Tests}'
+      exclude: '../../../MainBundle/{Entity,Repository,Tests,Form/DataTransfer}'
 
   Yeskn\Support\Routing\DynamicRoutesGeneratorInterface: '@Yeskn\MainBundle\Routing\DynamicRoutesGenerator'
 

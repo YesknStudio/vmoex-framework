@@ -276,7 +276,13 @@ class GlobalValue extends AbstractExtension
                 ],
                 'links' => ['/assets/lib/jquery.atwho/dist/css/jquery.atwho.min.css'],
                 'identifier'=> null
-            ]
+            ],
+            'laydate' => [
+                'scripts' => [
+                    '/assets/lib/laydate/dist/laydate.js'
+                ],
+                'identifier' => 'laydate'
+            ],
         ]);
     }
 

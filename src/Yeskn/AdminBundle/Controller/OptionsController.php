@@ -39,12 +39,9 @@ class OptionsController extends Controller
     {
         $basic = $optionsLogic->getBasicOptions();
 
-        $oldLogo = $basic->get('siteLogo');
-
-        if ($oldLogo) {
+        if ($oldLogo = $basic->get('siteLogo')) {
             $basic->set('siteLogo', new File($oldLogo, false));
         }
-
         $basicForm = $this->createForm(OptionsBasic::class, $basic);
 
         $basicForm->handleRequest($request);
