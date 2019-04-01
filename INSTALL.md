@@ -20,40 +20,36 @@
     
     可能耗时比较长，请耐心等待，如果失败，建议修改composer的源， 期间会提示输入配置，检查无误可一路回车。
     
-**修改runtime目录权限**
-
-    sudo chown -R [webuser] var （各类日志缓存存放目录）
-    sudo chown -R [webuser] web/upload
-    sudo chown -R [webuser] web/build
-    sudo chown -R [webuser] app/Resources/translations (翻译文件的目录)
-
 **安装前端依赖**
 
     yarn install （耐心等待...)
     
 **创建数据库**
 
-    sudo -u [webuser] php bin/console doctrine:database:create （如果你已经手动创建了数据库，可跳过）
+    php bin/console doctrine:database:create （如果你已经手动创建了数据库，可跳过）
 
 **导入数据**
 
-    sudo -u [webuser] php bin/console doctrine:database:init
+    php bin/console doctrine:database:init
 
 **修改管理员密码**
 
-    sudo -u [webuser] php bin/console change-password -u admin -p [password]
-    
-**清理缓存**
-
-    sudo -u [webuser] php bin/console cache:clear --env=dev
+    php bin/console change-password -u admin -p 123456
     
 **创建静态资源文件**
 
-    sudo -u [webuser] php bin/console assetic:dump --env=dev
+    php bin/console assetic:dump --env=prod
     
 **启动websocket**
 
     php bin/push-service.php start -d
+    
+**修改文件权限**
+
+    sudo chown -R <webuser> var（各类日志缓存存放目录）
+    sudo chown -R <webuser> web/upload
+    sudo chown -R <webuser> web/build
+    sudo chown -R [webuser] app/Resources/translations (翻译文件的目录)
 
 **服务器上运行（dev）**
 
@@ -61,7 +57,7 @@
 
 **本地运行（dev）**
 
-    php bin/console server:run 127.0.0.1:8000
+    sudo -u <webuser> php bin/console server:run 127.0.0.1:8000
 
 提示：以上两种方式运行时，看板娘可能无法加载，请使用nginx来运行
 
