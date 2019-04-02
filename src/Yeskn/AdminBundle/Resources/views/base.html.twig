@@ -99,6 +99,8 @@
 
    $(document).on('click', '[data-delete]', function (e) {
        e.preventDefault();
+       const entity = $(this).attr('data-delete');
+
        let href = $(this).attr('href');
        let modalId = Math.round(Math.random() * 100000000);
        $.post('{{ path('admin_confirm_modal') }}', {
@@ -112,7 +114,11 @@
            $modal.find('[type="submit"]').on('click', function () {
                $.post(href, {}, function (res) {
                    if (res.status) {
-                       window.location.reload();
+                       if (entity) {
+                           window.location.href = '/admin/' + entity + '/list';
+                       } else {
+                           window.location.reload();
+                       }
                    } else {
                        $modal.modal('hide');
                        showAlertModal(modalId, res.message);

@@ -50,11 +50,6 @@ class StartRenderPhotoListEvent extends AbstractCrudListEvent
             'entitySubTitle' => '上传图片用于在其他地方插入',
             'list' => $result,
             'ids' => $ids,
-            'extra' => [
-                'columnAttr' => [
-                    2 => 'align=center'
-                ]
-            ]
         ];
     }
 }

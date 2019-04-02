@@ -10,7 +10,7 @@
 namespace Yeskn\MainBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -56,6 +56,6 @@ class DatetimeRangeType extends AbstractType implements FormTypeInterface
 
     public function getParent()
     {
-        return TextType::class;
+        return SearchType::class;
     }
 }

@@ -10,7 +10,7 @@
 namespace Yeskn\AdminBundle\Form\SearchForm;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Yeskn\MainBundle\Form\Type\DatetimeRangeType;
 
@@ -20,11 +20,11 @@ class SearchPostType extends DefaultSearchType
     {
         parent::buildForm( $builder, $options);
 
-        $builder->add('title', TextType::class, [
+        $builder->add('title', SearchType::class, [
             'label' => '标题',
             'required' => false
         ]);
-        $builder->add('author', TextType::class, [
+        $builder->add('author', SearchType::class, [
             'label' => '作者',
             'required' => false
         ]);

@@ -51,10 +51,8 @@ class ProcessEditPostEvent extends AbstractCrudEntityEvent
             $image->resize(200, 100)->save();
 
             $entityObj->setCover($fileName);
-        } else if (!empty($this->oldCover)) {
-            $entityObj->setCover($this->oldCover);
         } else {
-            throw new \Exception('封面图不能为空');
+            $entityObj->setCover($this->oldCover);
         }
     }
 }

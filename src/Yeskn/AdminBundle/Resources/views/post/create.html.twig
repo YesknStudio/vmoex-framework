@@ -11,6 +11,11 @@
                         <div class="pull-right">
                             <div class="btn-group" role="group" aria-label="...">
                                 <button type="button" class="btn btn-info btn-sm"><i class="fa fa-save"></i> 存草稿</button>
+                                {% if post.id is not empty %}
+                                    <a data-delete="post" role="button" class="btn btn-danger btn-sm" href="{{ path('admin_delete',{entity: 'post', id:post.id}) }}">
+                                        <i class="fa fa-remove"></i> 删除
+                                    </a>
+                                {% endif %}
                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> 立即发布</button>
                             </div>
                         </div>

@@ -9,10 +9,9 @@
 
 namespace Yeskn\AdminBundle\Form\SearchForm;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Yeskn\MainBundle\Form\Type\DatetimeRangeType;
 
 class SearchUserType extends DefaultSearchType
 {
@@ -20,26 +19,24 @@ class SearchUserType extends DefaultSearchType
     {
         parent::buildForm( $builder, $options);
 
-        $builder->add('id', TextType::class, [
+        $builder->add('id', SearchType::class, [
             'label' => 'ID',
             'required' => false
         ]);
-        $builder->add('username', TextType::class, [
+        $builder->add('username', SearchType::class, [
             'label' => '用户名',
             'required' => false
         ]);
-        $builder->add('createdAt', DateTimeType::class, [
+        $builder->add('registerAt', DatetimeRangeType::class, [
             'label' => '注册时间',
-            'input' => 'string',
-            'widget' => 'single_text',
-            'with_seconds' => true,
+            'field_type' => 'date',
             'required' => false,
         ]);
-        $builder->add('nickname', TextType::class, [
+        $builder->add('nickname', SearchType::class, [
             'label' => '昵称',
             'required' => false,
         ]);
-        $builder->add('email', ChoiceType::class, [
+        $builder->add('email', SearchType::class, [
             'label' => '邮箱',
             'required' => false,
         ]);

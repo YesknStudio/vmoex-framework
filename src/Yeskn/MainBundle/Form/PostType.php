@@ -49,7 +49,7 @@ class PostType extends AbstractType
                'label' => '封面图',
                'width' => 500,
                'height' => 250,
-               'required' => $entity->getCover() ? false : true,
+               'required' => false,
                'attr' =>  [
                    'help' => '请上传500*250px尺寸的照片。'
                ]

@@ -76,7 +76,7 @@ class DefaultQueryBuilder
             $queryBuilder->setFirstResult(($params['pageNo'] - 1) * $params['pageSize']);
         }
 
-        return $queryBuilder->getQuery()->getResult();
+        return $queryBuilder->orderBy('p.id', 'DESC')->getQuery()->getResult();
     }
 
     public function getTotal()

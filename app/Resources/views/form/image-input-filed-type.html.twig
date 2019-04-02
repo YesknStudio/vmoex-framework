@@ -9,6 +9,9 @@
             </div>
         {% endif %}
         {{ form_widget(form, {attr: {class: 'form-control'}}) }}
+        {% if attr['help'] is defined %}
+            <span class="help-block small-font">{{ attr['help'] }}</span>
+        {% endif %}
         {{ form_errors(form) }}
     {% endfilter %}
 {% endblock image_input_widget %}

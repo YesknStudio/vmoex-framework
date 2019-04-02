@@ -12,7 +12,7 @@ namespace Yeskn\AdminBundle\QueryBuilder;
 class UserQueryBuilder extends DefaultQueryBuilder
 {
     protected $reservedKeys = [
-        'username', 'nickname', 'role', 'createdAt'
+        'username', 'nickname', 'role', 'registerAt'
     ];
 
     public function reservedQuery(array $params)
@@ -25,6 +25,13 @@ class UserQueryBuilder extends DefaultQueryBuilder
         if (!empty($params['nickname'])) {
             $this->queryBuilder->andWhere('p.nickname LIKE :nickname');
             $this->queryBuilder->setParameter('nickname', "%{$params['nickname']}%");
+        }
+
+        if (!empty($params['registerAt'][0])) {
+            $this->queryBuilder
+                ->andWhere('p.registerAt >= :createdAt0')->setParameter('createdAt0', $params['registerAt'][0])
+                ->andWhere('p.registerAt <= :createdAt1')->setParameter('createdAt1', $params['registerAt'][1])
+            ;
         }
 
         return $this->queryBuilder;
