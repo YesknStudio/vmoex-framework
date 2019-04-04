@@ -27,7 +27,7 @@ vmoex是一个开源的二次元社区程序，同时也是一个多用户多角
 
 ## 安装
 
-安装文档请参考：[INSTALL.md](INSTALL.md)
+[安装文档请戳我](https://vmoex-docs.yeskn.com)
 
 ## 疗效
 
