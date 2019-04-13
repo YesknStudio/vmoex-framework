@@ -12,13 +12,20 @@
                 </span>
                     <div class="chat-body clearfix">
                         <div class="header">
-                            <strong class="primary-font"><a href="{{ path('member_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
+                            <strong class="primary-font">
+                                <a href="{{ path('member_home', {username: comment.user.username}) }}" data-pjax>
+                                    {{ comment.user.nickname }}
+                                </a>
+                            </strong>
+                            &raquo; <a  data-pjax  href="{{ path('post_show', {id:comment.post.id}) }}#comments">
+                                {{ comment.post.title|ellipsis(6) }}
+                            </a>
                             <small class="pull-right text-muted" data-toggle="tooltip" title="{{ comment.createdAt|date }}">
                                 <i class="fa fa-clock-o fa-fw"></i> {{ comment.createdAt|ago }}
                             </small>
                         </div>
                         <div style="margin-top: 5px">
-                            <a data-pjax href="{{ path('post_show', {id:comment.post.id}) }}#comments">{{ comment.content|raw }}</a>
+                        {{ comment.content|raw }}
                         </div>
                     </div>
                 </li>

@@ -14,6 +14,7 @@ use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Yeskn\MainBundle\Entity\User;
+use Twig;
 
 class GlobalValue extends AbstractExtension
 {
@@ -85,6 +86,15 @@ class GlobalValue extends AbstractExtension
         } catch (NonUniqueResultException $exception) {
             return true;
         }
+    }
+
+    public function ellipsis($string, $length)
+    {
+        if (mb_strlen($string) > $length) {
+            return mb_substr($string, 0, $length) . '...';
+        }
+
+        return $string;
     }
 
     public function ago(\DateTime $dateTime)
@@ -286,23 +296,24 @@ class GlobalValue extends AbstractExtension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('signed', array($this,'signed')),
-            new \Twig_SimpleFilter('ago', array($this,'ago')),
+            new Twig\TwigFilter('signed', array($this,'signed')),
+            new Twig\TwigFilter('ago', array($this,'ago')),
+            new Twig\TwigFilter('ellipsis', array($this,'ellipsis')),
         );
     }
 
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('hotPosts',array($this,'hotPosts'),array('needs_environment' => true, 'is_safe' => 'html')),
-            new \Twig_SimpleFunction('hotTags',array($this,'hotTags'),array('needs_environment' => true, 'is_safe' => 'html')),
-            new \Twig_SimpleFunction('hotComments',array($this,'hotComments'),array('needs_environment' => true, 'is_safe' => 'html')),
-            new \Twig_SimpleFunction('unReadMessages',array($this,'unReadMessages'),array('needs_environment' => true, 'is_safe' => 'html')),
-            new \Twig_SimpleFunction('hotUsers',array($this,'hotUsers'),array('needs_environment' => true, 'is_safe' => 'html')),
-            new \Twig_SimpleFunction('onlineUserCount',array($this,'onlineUserCount'),array('needs_environment' => true, 'is_safe' => 'html')),
-            new \Twig_SimpleFunction('siteState',array($this,'siteState'),array('needs_environment' => true, 'is_safe' => 'html')),
-            new \Twig_SimpleFunction('javascriptVariables',array($this,'javascriptVariables')),
-            new \Twig_SimpleFunction('javascriptPlugins',array($this,'javascriptPlugins')),
+            new Twig\TwigFunction('hotPosts',array($this,'hotPosts'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new Twig\TwigFunction('hotTags',array($this,'hotTags'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new Twig\TwigFunction('hotComments',array($this,'hotComments'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new Twig\TwigFunction('unReadMessages',array($this,'unReadMessages'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new Twig\TwigFunction('hotUsers',array($this,'hotUsers'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new Twig\TwigFunction('onlineUserCount',array($this,'onlineUserCount'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new Twig\TwigFunction('siteState',array($this,'siteState'),array('needs_environment' => true, 'is_safe' => 'html')),
+            new Twig\TwigFunction('javascriptVariables',array($this,'javascriptVariables')),
+            new Twig\TwigFunction('javascriptPlugins',array($this,'javascriptPlugins')),
         );
     }
 }
