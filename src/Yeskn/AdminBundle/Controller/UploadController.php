@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\Support\AbstractController;
-use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * Class UploadController
@@ -34,8 +33,6 @@ class UploadController extends AbstractController
     public function uploadAction(Request $request)
     {
         $name = $request->get('name', 'file');
-        $width = $request->get('width', 100);
-        $height = $request->get('height', 100);
 
         $file = $request->files->get($name);
 
@@ -46,11 +43,6 @@ class UploadController extends AbstractController
 
         $fs = new Filesystem();
         $fs->copy($file->getRealPath(), $targetPath);
-
-        Image::configure(array('driver' => 'gd'));
-
-        $image = Image::make($targetPath);
-        $image->resize($width, $height)->save();
 
         return new JsonResponse([
             'errno' => '0',

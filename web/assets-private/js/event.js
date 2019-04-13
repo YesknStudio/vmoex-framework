@@ -81,14 +81,19 @@ $(document).on('click', '#addCommentToPost', function () {
     const postId = $this.attr('data-postId');
 
     $this.addClass('disabled');
-    const content = $('#editor-comment').val();
+    const content = $('#editor-comment').html();
+    const $colorDots = $('.color-dots');
+
+    let data = {content: content};
+
+    if ($colorDots.attr('data-color')) {
+        data.color = $colorDots.attr('data-color');
+    }
 
     $.ajax({
         method: 'POST',
         url: path(window.Yeskn.links.add_comment_to_post, {1: postId}),
-        data: {
-            content: content
-        },
+        data: data,
         success: function (data) {
             if (data.status) {
                 reload();
@@ -96,7 +101,6 @@ $(document).on('click', '#addCommentToPost', function () {
                 error(data.message);
                 $this.removeClass('disabled');
             }
-
         }
     })
 });
@@ -144,6 +148,18 @@ $(document).on('click', '.comment-reply', function () {
     $('#editor-comment p:last-child').append('<span data-at="'+replayU+'">@'+replyTo + "</span>&nbsp;");
     $('#editor-comment').focus();
     setEndOfContenteditable(document.getElementById('editor-comment'));
+});
+
+$(document).on('click', '.color-dots div', function () {
+    $(this).parent().attr('data-color', $(this).css('background-color'));
+    const $container = $('#editor-comment');
+    const text = $container.text();
+    const $span = $('<sapn></sapn>');
+    $span.text(text);
+    $span.css({
+        'color': $(this).css('background-color')
+    });
+    $container.html($span);
 });
 
 $(document).on('click', 'nav .nav-search-bar span', function () {

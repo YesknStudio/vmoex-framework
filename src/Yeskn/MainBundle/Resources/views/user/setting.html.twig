@@ -22,7 +22,7 @@
                             <div style="margin-top:30px">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <form action="{{ path('modify_user_info') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <form data-pjax-form action="{{ path('modify_user_info') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <div class="form-group">
                                                 <label for="username" class="col-sm-2 control-label">{{ '用户名'|trans }}</label>
                                                 <div class="col-sm-10">
@@ -70,7 +70,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row">
-                                            {{ form_start(form, {attr: {class: 'form-horizontal', id: 'modalForm', action: path('user_change_password')}}) }}
+                                            {{ form_start(form, {attr: {class: 'form-horizontal', id: 'modalForm', action: path('user_change_password'), 'data-pjax-form': 1}}) }}
                                             {{ form_widget(form) }}
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-6">
@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        <form id="emailForm" action="{{ path('user_setting_verify_email') }}" class="form-horizontal" style="margin-top: 30px">
+                                        <form data-pjax-form id="emailForm" action="{{ path('user_setting_verify_email') }}" class="form-horizontal" style="margin-top: 30px">
                                             {% if app.user.isEmailVerified == false %}
                                                 <div class="form-group">
                                                     <label for="email" class="col-sm-2 control-label">邮箱</label>

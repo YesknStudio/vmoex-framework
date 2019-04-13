@@ -195,7 +195,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/setting/modify", name="modify_user_info")
+     * @Route("/setting/modify", name="modify_user_info", methods={"POST"})
      *
      * @param $request
      * @return Response

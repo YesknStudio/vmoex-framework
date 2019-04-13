@@ -30,10 +30,8 @@ class PostQueryBuilder extends DefaultQueryBuilder
 
         if (!empty($params['createdAt'][0])) {
             $this->queryBuilder
-                ->andWhere('p.createdAt >= :createdAt0')
-                ->setParameter('createdAt0', $params['createdAt'][0]);
-            $this->queryBuilder
-                ->andWhere('p.createdAt <= :createdAt1')
+                ->andWhere('p.createdAt >= :createdAt0 and p.createdAt <= :createdAt1')
+                ->setParameter('createdAt0', $params['createdAt'][0])
                 ->setParameter('createdAt1', $params['createdAt'][1]);
         }
 

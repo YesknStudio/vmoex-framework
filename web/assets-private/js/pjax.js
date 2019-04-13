@@ -10,8 +10,7 @@ if ($.support.pjax) {
 
     $(document).on('pjax:send', function () {});
 
-    $(document).on('pjax:success', function (data, status, xhr, options) {
-    });
+    $(document).on('pjax:success', function () {});
 
     $(document).on('pjax:complete', function () {
         NProgress.done();
@@ -24,5 +23,16 @@ if ($.support.pjax) {
 
     $(document).on('pjax:end', function () {
         NProgress.done();
+    });
+
+    /**
+     * pjax form handler
+     */
+    $(document).onPjax('submit', '[data-pjax-form]', function (event) {
+        event.preventDefault();
+
+        $.pjax.submit(event, '.content-body', {
+            fragment: '.content-body'
+        })
     });
 }

@@ -89,7 +89,10 @@ class CommentController extends AbstractController
         }
 
         $content = $request->get('content');
-        $content = strip_tags($content);
+        $color = $request->get('color');
+
+        $content = str_replace('&nbsp;', ' ', $content);
+        $content = strip_tags($content, 'img');
 
         if (empty($content) or mb_strlen($content) > 500) {
             return new ApiFail($this->trans('length_not_support'));
@@ -120,9 +123,10 @@ class CommentController extends AbstractController
         $userRepo = $this->getRepo('YesknMainBundle:User');
 
         $content = $parsedContent = $markdown->transformMarkdown($content);
+        $content = preg_replace('/<p>(.*?)<\/p>/', '$1', $content);// 不需要markdown为我添加p标签！！！
 
         foreach ($mentioned as $item) {
-            $username = trim($item, '@');
+            $username = trim($item, '@ ');
 
             /** @var User $findOne */
             $findOne = $userRepo->findOneBy(['username' => $username]);
@@ -136,6 +140,11 @@ class CommentController extends AbstractController
 
             $this->get(NoticeService::class)
                 ->add($user, $findOne, Notice::TYPE_COMMENT_MENTION, $parsedContent, $post);
+        }
+
+
+        if ($color) {
+            $content = "<span style='color:{$color}'>{$content}</span>";
         }
 
         $comment = new Comment();

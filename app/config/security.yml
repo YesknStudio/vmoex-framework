@@ -41,4 +41,3 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: /sign, roles: ROLE_USER }

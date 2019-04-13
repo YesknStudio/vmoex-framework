@@ -420,6 +420,13 @@ li.messages ul li div a {
 .comment-box #editor-comment p {
     margin: 0;
 }
+.comment-box .color-dots div {
+    cursor: pointer;
+    margin:5px;
+    border-radius:4px;
+    width: 15px;
+    height: 15px;
+}
 .my-messages ul.messages {
     list-style-type: none;
     padding-left: 0;

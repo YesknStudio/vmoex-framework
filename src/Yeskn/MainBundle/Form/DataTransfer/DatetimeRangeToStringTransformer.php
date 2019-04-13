@@ -20,6 +20,6 @@ class DatetimeRangeToStringTransformer implements DataTransformerInterface
 
     public function reverseTransform($value)
     {
-        return explode(' - ', $value);
+        return $value ? explode(' - ', $value) : null;
     }
 }

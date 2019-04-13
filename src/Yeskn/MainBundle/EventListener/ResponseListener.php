@@ -16,15 +16,6 @@ class ResponseListener
     {
         $response = $event->getResponse();
 
-        $response->headers->remove('X-Powered-By');
-        $response->headers->set('X-Powered-By', 'Vmoex/0.1.12');
-
-//        $locale = $event->getRequest()->cookies->get('_locale');
-//
-//        if (empty($locale)) {
-//            $locale = 'zh_CN';
-//        }
-//
-//        $response->headers->setCookie(new Cookie('_locale', $locale));
+        $response->headers->set('X-PJAX-URL', $event->getRequest()->getPathInfo());
     }
 }

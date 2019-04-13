@@ -83,7 +83,6 @@ class PostRepository extends EntityRepository
      * @param int $cursor
      * @param int $limit
      * @return array
-     * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function queryPosts($word, $cursor = 0, $limit = 15)
@@ -107,7 +106,6 @@ class PostRepository extends EntityRepository
 
     /**
      * @return int
-     * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function countPost()

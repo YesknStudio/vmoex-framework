@@ -166,8 +166,6 @@ class GlobalValue extends AbstractExtension
 
     /**
      * @return array
-     * @throws NoResultException
-     * @throws NonUniqueResultException
      */
     public function siteState()
     {
@@ -175,7 +173,6 @@ class GlobalValue extends AbstractExtension
 
         if (empty($site)) {
             $site = [
-                'startedAt' => new \DateTime('2018-05-25'),
                 'topicCount' => $this->em->getRepository('YesknMainBundle:Post')->countPost(),
                 'userCount' => $this->em->getRepository('YesknMainBundle:User')->countUser(),
                 'commentCount' => $this->em->getRepository('YesknMainBundle:Comment')->countComment(),

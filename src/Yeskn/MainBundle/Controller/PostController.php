@@ -9,7 +9,9 @@
 
 namespace Yeskn\MainBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Yeskn\MainBundle\Entity\Comment;
 use Yeskn\MainBundle\Entity\Post;
+use Yeskn\MainBundle\Utils\HtmlPurer;
 
 /**
  * Class PostController
@@ -90,6 +93,7 @@ class PostController extends Controller
      * 创建主题
      *
      * @Route("/create", name="create_post")
+     * @Security("has_role('ROLE_USER')")
      *
      * @param $request
      * @return RedirectResponse|Response
@@ -108,13 +112,15 @@ class PostController extends Controller
         $title = strip_tags($request->get('title'));
         $content = $request->get('content');
 
-        $content = strip_tags($content);
-
         $content = nl2br($content);
 
         if (empty($title) or empty(strip_tags($content))) {
             return new JsonResponse(['ret' => 0, 'msg' => '内容为空!']);
         }
+
+        $htmlPure = new HtmlPurer($this->container);
+
+        $content = $htmlPure->pureHtmlText($content)->getResult(true);
 
         $tab = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
             ->findOneBy(['alias' => $request->get('tab')]);
@@ -142,5 +148,36 @@ class PostController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
+    }
+
+    /**
+     * 上传图片
+     *
+     * @Route("/images", methods={"POST"})
+     * @Security("has_role('ROLE_USER')")
+     *
+     * @param $request
+     * @return Response
+     */
+    public function uploadImage(Request $request)
+    {
+        $name = $request->get('name', 'file');
+
+        $file = $request->files->get($name);
+
+        $extension = $file->guessExtension();
+        $fileName = 'upload/images/' . time() . mt_rand(1000, 9999) . '.' . $extension;
+
+        $targetPath = $this->getParameter('kernel.project_dir') .  '/web/' . $fileName;
+
+        $fs = new Filesystem()  ;
+        $fs->copy($file->getRealPath(), $targetPath);
+
+        return new JsonResponse([
+            'errno' => '0',
+            'data' => [
+                $this->getParameter('assets_base_url') . '/' . $fileName
+            ]
+        ]);
     }
 }

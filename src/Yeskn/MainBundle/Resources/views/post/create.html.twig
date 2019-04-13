@@ -8,7 +8,7 @@
                     创建新主题
                 </div>
                 <div class="panel-body">
-                    <form action="{{ path('create_post') }}" method="post" id="createTopic">
+                    <form data-pjax-form action="{{ path('create_post') }}" method="post" id="createTopic">
                         <div class="form-group">
                             <label class="control-label required" for="post_title">标题</label>
                             <input type="text" id="post_title" name="title" required="required" maxlength="100" autofocus="autofocus" class="form-control">
@@ -38,15 +38,6 @@
 
     <script>
         $(function () {
-            $(document).onPjax('submit', '#createTopic', function (event) {
-                event.preventDefault();
-
-                $.pjax.submit(event, '.content-body', {
-                    fragment: '.content-body',
-                    timeout: 600000
-                })
-            });
-
             window.YesknPlugins.get('WangEditor', function (wangEditor) {
                 const vmoexEditor = new wangEditor('#editor');
                 vmoexEditor.customConfig.printLog = false;
@@ -70,7 +61,7 @@
                     'video',  // 插入视频
                     'code',  // 插入代码
                 ];
-                vmoexEditor.customConfig.uploadImgServer = '/admin/upload/images';
+                vmoexEditor.customConfig.uploadImgServer = '/post/images';
                 vmoexEditor.customConfig.uploadFileName = 'file';
                 vmoexEditor.customConfig.uploadImgParams = {
                     // 如果版本 <=v3.1.0 ，属性值会自动进行 encode ，此处无需 encode
