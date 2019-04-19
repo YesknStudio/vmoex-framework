@@ -16,7 +16,7 @@
             'assets/lib/bootoast/css/bootoast.css'
             'assets/lib/eds-ui/dist/css/edsUI.css'
             'assets/css/admin.css'
-            filter='cssrewrite' output='build/css/build-admin.css' %}
+            filter='cssrewrite' output='build/css/*.css' %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
     {% endblock %}
@@ -24,13 +24,6 @@
     {% block header_stylesheet %}{% endblock %}
 
     {% block head_js_link %}
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
         <script src="{{ asset('assets/lib/jquery/dist/jquery.min.js') }}"></script>
         <script>
             window.YesknPlugins = {{ javascriptPlugins()|raw }};
@@ -74,7 +67,7 @@
         'assets/lib/bootoast/js/bootoast.js'
         'assets/lib/eds-ui/dist/js/edsUI.min.js'
         'assets/lib/echarts/dist/echarts.min.js'
-        filter='uglifyjs2' output='build/js/build-admin-footer.js' %}
+        filter='uglifyjs2' output='build/js/*.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
