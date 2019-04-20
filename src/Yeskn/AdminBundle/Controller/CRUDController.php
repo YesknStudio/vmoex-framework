@@ -78,7 +78,9 @@ class CRUDController extends Controller
 
         $data = $this->startEntitiesRenderEvent($entity, $list);
 
-        $createForm = $this->createForm($typeClass, new $entityClass);
+        if (class_exists($typeClass)) {
+            $createForm = $this->createForm($typeClass, new $entityClass);
+        }
 
         return $this->render('@YesknAdmin/crud/list.html.twig', [
             'entity' => lcfirst($entity),
@@ -90,7 +92,7 @@ class CRUDController extends Controller
             'list' => $data['list'],
             'ids' => $data['ids'],
             'entityName' => $entityClass::NAME,
-            'form' => $createForm->createView(),
+            'form' => !empty($createForm) ? $createForm->createView() : null,
             'extra' => empty($data['extra']) ? [] : $data['extra'],
             'allPage' => ceil($total / $pageSize),
             'searchForm' => !empty($searchForm) ? $searchForm->createView() : null,

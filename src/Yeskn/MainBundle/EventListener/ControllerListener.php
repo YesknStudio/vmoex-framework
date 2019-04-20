@@ -11,9 +11,11 @@ namespace Yeskn\MainBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Yeskn\MainBundle\Entity\User;
+use Yeskn\MainBundle\Entity\Visit;
 use Yeskn\Support\AbstractControllerListener;
 
 class ControllerListener extends AbstractControllerListener
@@ -21,6 +23,19 @@ class ControllerListener extends AbstractControllerListener
     static $increasedTodayActive = false;
 
     private $firewallMap;
+
+    private function addVisitRecord(Request $request)
+    {
+        $visit = new Visit();
+
+        $visit->setIp($request->getClientIp());
+        $visit->setAgent($request->headers->get('User-Agent'));
+        $visit->setPath($request->getUri());
+        $visit->setCreatedAt(new \DateTime());
+
+        $this->em->persist($visit);
+        $this->em->flush();
+    }
 
     public function __construct(TokenStorageInterface $tokenStorage
         , EntityManagerInterface $em
@@ -40,6 +55,8 @@ class ControllerListener extends AbstractControllerListener
         ) {
             return ;
         }
+
+        $this->addVisitRecord($event->getRequest());
 
         /** @var User $user */
         $user = $this->getUser();
