@@ -28,16 +28,14 @@ class Message
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User")
-     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
-    * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $sender;
 
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User")
-     * @ORM\JoinColumn(name="receiver_id" , referencedColumnName="id")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\JoinColumn(name="receiver_id" , referencedColumnName="id", onDelete="CASCADE")
      */
     private $receiver;
 

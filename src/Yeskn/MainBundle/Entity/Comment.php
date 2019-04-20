@@ -60,16 +60,14 @@ class Comment
     /**
      * @var User
      *
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User",inversedBy="comments")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 
     /**
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE")
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\Post", inversedBy="comments")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $post;
 

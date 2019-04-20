@@ -29,8 +29,7 @@ class Sign
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id" , referencedColumnName="id")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\JoinColumn(name="user_id" , referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
 
