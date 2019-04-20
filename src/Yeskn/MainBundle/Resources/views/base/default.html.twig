@@ -16,14 +16,14 @@
             'assets/lib/nprogress/nprogress.css'
             'assets/lib/bootoast/css/bootoast.css'
             'assets/css/common.css'
-            filter='cssrewrite' output='build/css/header.css' %}
+            filter='cssrewrite' output='build/css/*.css' %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
     {% endblock %}
     {% block head_javascripts %}
         {% javascripts
             'assets/lib/jquery/dist/jquery.min.js'
-            filter='uglifyjs2' output='build/js/header.js' %}
+            filter='uglifyjs2' output='build/js/*.js' %}
             <script src="{{ asset_url }}"></script>
             <script>
                 window.Yeskn = {{ javascriptVariables(1)|raw }};
@@ -71,7 +71,7 @@
         'assets/lib/bootoast/js/bootoast.js'
         'assets/lib/socket.io-client/dist/socket.io.js'
         'assets-private/js/pjax.js'
-        filter='uglifyjs2' output='build/js/footer.js' %}
+        filter='uglifyjs2' output='build/js/*.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     {% include '@YesknMain/base/script.html.twig' %}
