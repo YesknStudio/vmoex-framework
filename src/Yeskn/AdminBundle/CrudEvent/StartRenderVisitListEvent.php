@@ -61,7 +61,7 @@ class StartRenderVisitListEvent extends AbstractCrudListEvent
 
         return [
             'columns' => ['ID', 'ip', '用户','url', 'agent', '时间'],
-            'column_width' => [0 => 5, 1 => 10, 4 => 10],
+            'column_width' => [0 => 5, 1 => 10, 2 => 5, 4 => 10],
             'list' => $result,
             'ids' => $ids,
             'extra' => [
