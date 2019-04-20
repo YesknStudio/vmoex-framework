@@ -1,6 +1,5 @@
 body {
     cursor: url('/pointer.cur'), url('/pointer.cur'), auto;
-    background: #f6f6f6;
     font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
@@ -602,6 +601,11 @@ nav .dropdown-messages, nav .dropdown-notifications {
         padding-left: 0;
     }
 }
+
+#sidebar .panel-heading {
+    background: none;
+}
+
 .content .topic-header > h2 {
     text-align: left;
     font-weight: normal;
@@ -816,8 +820,6 @@ ul.pagination {
     background-color: #80bd01;
     border-color: #80bd01;
 }
-
-/** sidebar --------------------- **/
 
 .hot-topic-list {
     padding-left: 0;

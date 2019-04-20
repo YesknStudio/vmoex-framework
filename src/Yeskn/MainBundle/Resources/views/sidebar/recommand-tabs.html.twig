@@ -1,0 +1,19 @@
+{% set tabs = tabsWidget() %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-support"></i> {{ '推荐主题'|trans }}
+    </div>
+    <div class="panel-body">
+        <ul style="list-style: none;float: left;padding: 0;margin: 0">
+            {% for tab in tabs %}
+                <li style="display: inline-block;margin-right: 10px;margin-bottom: 10px">
+                    <a data-pjax href="{{ path('post_list', {tab: tab.alias}) }}">
+                        <img src="{{ asset(tab.avatar) }}" alt="" width="25" height="25" class="img-circle">
+                        {{ tab.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

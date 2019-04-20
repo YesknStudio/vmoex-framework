@@ -1,0 +1,13 @@
+{% set ads = adsWidget() %}
+
+{% for ad in ads if ad.location == 'sidebar2' %}
+    <div class="panel panel-default" style="text-decoration: none">
+        <div class="panel-body ">
+            <div style="margin-bottom: 5px">
+                <a target="_blank" href="/">
+                    {{ ad.content|raw }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

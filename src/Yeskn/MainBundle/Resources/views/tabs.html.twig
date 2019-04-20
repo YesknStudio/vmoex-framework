@@ -33,7 +33,7 @@
                                 {% if stab.level == 2 and stab.parent == tab %}
                                     {% if stab.avatar %}
                                         <div style="width: 100px;float: left;height: 150px;text-align: center; padding: 10px">
-                                            <img src="{{ stab.avatar }}" alt="" width="100%">
+                                            <img src="{{ stab.avatar }}" alt="" width="100%" class="img-circle">
                                             <a data-pjax class="tabs-item-button" href="{{ path('homepage', {tab:stab.alias}) }}" role="button">
                                                 {{ stab.name|trans }}
                                             </a>
