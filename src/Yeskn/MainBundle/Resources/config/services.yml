@@ -22,7 +22,7 @@ services:
 
   Yeskn\MainBundle\Twig\Render:
     tags:
-    - { name: twig.extension }
+      - { name: twig.extension }
 
   socket.push:
     public: true
@@ -30,12 +30,16 @@ services:
 
   Yeskn\MainBundle\Twig\GlobalValue:
       tags:
-      - { name: twig.extension }
+        - { name: twig.extension }
 
   Yeskn\MainBundle\EventListener\AjaxAuthenticationListener:
     tags:
-    - { name: kernel.event_listener, event: kernel.exception, method: onCoreException, priority: 1000 }
+      - { name: kernel.event_listener, event: kernel.exception, method: onCoreException, priority: 1000 }
 
   Knp\Bundle\MarkdownBundle\Parser\MarkdownParser:
     arguments:
       - { header: false, list: false, table: false }
+
+  Yeskn\MainBundle\EventListener\TerminateListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminate }

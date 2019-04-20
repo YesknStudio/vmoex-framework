@@ -35,6 +35,13 @@ class Visit
     private $ip;
 
     /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id" , referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    private $user;
+
+    /**
      * @var string
      * @ORM\Column(name="path", type="string")
      */
@@ -130,5 +137,21 @@ class Visit
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }

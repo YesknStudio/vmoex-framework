@@ -41,20 +41,32 @@ class StartRenderVisitListEvent extends AbstractCrudListEvent
         foreach ($this->list as $tag) {
             $ids[] = $tag->getId();
 
-            $result[] = [
+            $one = [
                 $tag->getId(),
                 $tag->getIp(),
+                '',
                 $tag->getPath(),
                 $tag->getAgent(),
                 $this->globalValue->ago($tag->getCreatedAt()),
             ];
+
+            if ($user = $tag->getUser()) {
+                $one[2] = $this->linkColumn($tag->getUser()->getNickname(), 'member_home', [
+                    'username' => $tag->getUser()->getUsername()
+                ]);
+            }
+
+            $result[] = $one;
         }
 
         return [
-            'columns' => ['ID', 'ip', 'url', 'agent', '时间'],
-            'column_width' => [0 => 5],
+            'columns' => ['ID', 'ip', '用户','url', 'agent', '时间'],
+            'column_width' => [0 => 5, 1 => 10, 4 => 10],
             'list' => $result,
-            'ids' => $ids
+            'ids' => $ids,
+            'extra' => [
+                'hide_options_column' => true
+            ]
         ];
     }
 }

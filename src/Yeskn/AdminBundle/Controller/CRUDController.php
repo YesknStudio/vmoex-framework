@@ -82,21 +82,23 @@ class CRUDController extends Controller
             $createForm = $this->createForm($typeClass, new $entityClass);
         }
 
-        return $this->render('@YesknAdmin/crud/list.html.twig', [
+        $params = [
             'entity' => lcfirst($entity),
-            'entitySubTitle' => empty($data['entitySubTitle']) ? '' : $data['entitySubTitle'],
+            'entitySubTitle' => '',
             'columns' => $data['columns'],
-            'column_width' => empty($data['column_width']) ? [] : $data['column_width'],
-            'create_btn' => empty($data['create_btn']) ? '' : $data['create_btn'],
-            'edit_btn' => empty($data['edit_btn']) ? '' : $data['edit_btn'],
-            'list' => $data['list'],
-            'ids' => $data['ids'],
+            'column_width' => [],
+            'create_btn' => '',
+            'edit_btn' => '',
             'entityName' => $entityClass::NAME,
             'form' => !empty($createForm) ? $createForm->createView() : null,
-            'extra' => empty($data['extra']) ? [] : $data['extra'],
+            'extra' => [],
             'allPage' => ceil($total / $pageSize),
             'searchForm' => !empty($searchForm) ? $searchForm->createView() : null,
-        ]);
+        ];
+
+        $params = array_merge($params, $data);
+
+        return $this->render('@YesknAdmin/crud/list.html.twig', $params);
     }
 
     /**

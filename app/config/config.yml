@@ -39,7 +39,7 @@ framework:
 
 twig:
     debug: '%kernel.debug%'
-    strict_variables: '%kernel.debug%'
+    strict_variables: false
     form_themes:
         - "form/image-input-filed-type.html.twig"
         - "form/tiny-html-textarea-field-type.html.twig"

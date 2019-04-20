@@ -32,7 +32,9 @@
                         {% set lkey = key %}
                         <th {% if column_width[key] is defined %}width="{{ column_width[key] }}%"{% endif %}>{{ column }}</th>
                     {% endfor %}
-                    <th {% if column_width[columns|length] is defined %}width="{{ column_width[columns|length] }}%"{% endif %}>操作</th>
+                    {% if extra.hide_options_column is empty %}
+                        <th {% if column_width[columns|length] is defined %}width="{{ column_width[columns|length] }}%"{% endif %}>操作</th>
+                    {% endif %}
                 </tr>
                 </thead>
                 <tbody>
@@ -42,16 +44,18 @@
                             {%  set columnAttr = extra.columnAttr[key] is defined ? extra.columnAttr[key] : ''  %}
                             <td {{ columnAttr }}>{{ one|raw }}</td>
                         {% endfor %}
-                        <td style="width: 10%" align="center">
-                            <div class="btn-group" role="group" aria-label="...">
-                                {% if edit_btn is not empty %}
-                                    <a role="button" class="btn btn-warning btn-sm" href="{{ path('yeskn_admin_post_edit', {id: entity,id:ids[key]}) }}"><i class="fa fa-edit"></i> 编辑</a>
+                        {% if extra.hide_options_column is empty %}
+                            <td style="width: 10%" align="center">
+                                <div class="btn-group" role="group" aria-label="...">
+                                    {% if edit_btn is not empty %}
+                                        <a role="button" class="btn btn-warning btn-sm" href="{{ path('yeskn_admin_post_edit', {id: entity,id:ids[key]}) }}"><i class="fa fa-edit"></i> 编辑</a>
                                     {% else %}
                                         <a data-edit role="button" class="btn btn-warning btn-sm" href="{{ path('admin_edit', {entity: entity,id:ids[key]}) }}"><i class="fa fa-edit"></i> 编辑</a>
-                                {% endif %}
-                                <a data-delete role="button" class="btn btn-danger btn-sm" href="{{ path('admin_delete',{entity: entity, id:ids[key]}) }}"><i class="fa fa-remove"></i> 删除</a>
-                            </div>
-                        </td>
+                                    {% endif %}
+                                    <a data-delete role="button" class="btn btn-danger btn-sm" href="{{ path('admin_delete',{entity: entity, id:ids[key]}) }}"><i class="fa fa-remove"></i> 删除</a>
+                                </div>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
