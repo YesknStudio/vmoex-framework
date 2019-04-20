@@ -5,6 +5,8 @@ body {
     -moz-osx-font-smoothing:grayscale;
     -moz-font-feature-settings:"liga","kern";
     text-rendering:optimizelegibility;
+    background-image: url("/assets/images/bg.jpg");
+    background-attachment:fixed;
 }
 .modal-open-noscroll {
     padding-right: 0 !important;
