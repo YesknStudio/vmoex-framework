@@ -43,8 +43,8 @@ class TranslationTransCommand extends AbstractCommand
         /** @var Translation[] $trans */
         $trans = $transRepo->findAll();
 
-        $this->baiduId = $this->parameter('baidu_trans.appid');
-        $this->baiduKey = $this->parameter('baidu_trans.key');
+        $this->baiduId = $this->getOption('baiduTransAppId');
+        $this->baiduKey = $this->getOption('baiduTransKey');
 
         foreach ($trans as $tran) {
             if (empty($tran->getChinese())) {

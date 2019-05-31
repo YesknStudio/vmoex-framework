@@ -31,6 +31,11 @@ class OptionsLogic
         'siteSince',
         'siteVersion',
         'siteAnnounce',
+        'githubClientId',
+        'githubClientSecret',
+        'githubRedirectUrl',
+        'baiduTransAppId',
+        'baiduTransKey',
     ];
 
     private $girlOptions = [

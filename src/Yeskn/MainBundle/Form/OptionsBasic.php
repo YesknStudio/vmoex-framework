@@ -38,6 +38,13 @@ class OptionsBasic extends AbstractType
         ]);
         $builder->add('siteVersion', null, ['label' => '网站版本']);
 
+        $builder->add('githubClientId', null, ['label' => 'github clientId']);
+        $builder->add('githubClientSecret', null, ['label' => 'github clientSecret']);
+        $builder->add('githubRedirectUrl', null, ['label' => 'github 跳转地址']);
+
+        $builder->add('baiduTransAppId', null, ['label' => '百度翻译AppId']);
+        $builder->add('baiduTransKey', null, ['label' => '百度翻译Key']);
+
         $builder->add('siteAnnounce', CheckboxType::class, [
             'label' => '开启公告',
             'required' => false,

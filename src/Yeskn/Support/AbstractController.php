@@ -14,9 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\Support\Http\ApiFail;
+use Yeskn\Support\Traits\OptionsTrait;
 
 class AbstractController extends Controller
 {
+    use OptionsTrait;
+
     /**
      * @return \Doctrine\Common\Persistence\ObjectManager
      * @throws \LogicException

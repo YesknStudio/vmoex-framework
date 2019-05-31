@@ -13,9 +13,12 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Yeskn\Support\Traits\OptionsTrait;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {
+    use OptionsTrait;
+
     protected $input;
     protected $output;
 
@@ -28,6 +31,14 @@ abstract class AbstractCommand extends ContainerAwareCommand
     public function doctrine()
     {
         return $this->getContainer()->get('doctrine');
+    }
+
+    /**
+     * alias for $this->doctrine()
+     */
+    public function getDoctrine()
+    {
+        return $this->doctrine();
     }
 
     /**

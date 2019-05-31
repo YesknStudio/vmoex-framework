@@ -23,7 +23,6 @@ use Yeskn\AdminBundle\QueryBuilder\BuilderFactory;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\Support\Http\ApiOk;
 use Yeskn\Support\Http\Session\Flash;
-use Yeskn\Support\ParameterBag;
 
 class CRUDController extends Controller
 {

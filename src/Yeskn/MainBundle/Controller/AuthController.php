@@ -106,8 +106,8 @@ class AuthController extends AbstractController
     public function loginFromGithubAction()
     {
         return $this->redirect('https://github.com/login/oauth/authorize?' . http_build_query([
-            'client_id' => $this->getParameter('github_client_id'),
-            'redirect_uri' => $this->getParameter('github_redirect_url'),
+            'client_id' => $this->getOption('githubClientId'),
+            'redirect_uri' => $this->getOption('githubRedirectUrl'),
             'scopes' => 'user',
             'state' => 'github'
         ]));
@@ -127,10 +127,10 @@ class AuthController extends AbstractController
 
         $response = $http->post('https://github.com/login/oauth/access_token', [
             'form_params' => [
-                'client_id' => $this->getParameter('github_client_id'),
-                'client_secret' => $this->getParameter('github_client_secret'),
+                'client_id' => $this->getOption('githubClientId'),
+                'client_secret' => $this->getOption('githubClientSecret'),
                 'code' => $code,
-                'redirect_uri' => $this->getParameter('github_redirect_url'),
+                'redirect_uri' => $this->getOption('githubRedirectUrl'),
                 'state' => 'github'
             ],
             'headers' => [
