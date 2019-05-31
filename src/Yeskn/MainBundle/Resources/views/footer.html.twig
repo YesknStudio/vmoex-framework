@@ -40,6 +40,15 @@
                 <div class="power"><a target="_blank" href="https://yeskn.com">Yeskn Projects</a> <span>❤</span> created by <a target="_blank" href="https://blog.yeskn.com">Jaggle</a> at Shanghai, China</div>
             </div>
         </div>
+
+        {% set ads = adsWidget() %}
+        {% for ad in ads if ad.location == 'footer1' %}
+            <div class="visible-lg footer-ad-img" style="position: absolute; right: 0; top: 0;">
+                <a target="_blank" href="https://www.vultr.com/?ref=7228942">
+                    <img width="210px" src="{{ asset('assets/images/ad/vultr.png') }}" alt="">
+                </a>
+            </div>
+        {% endfor %}
     </div>
 </footer>
 
