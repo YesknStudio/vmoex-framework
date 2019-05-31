@@ -1,11 +1,11 @@
 body {
-    cursor: url('https://framework.vmoex.com/pointer.cur'), url('https://framework.vmoex.com/pointer.cur'), auto;
+    cursor: url('/pointer.cur'), url('/pointer.cur'), auto;
     font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     -moz-font-feature-settings:"liga","kern";
     text-rendering:optimizelegibility;
-    background-image: url("https://framework.vmoex.com/assets/images/bg.jpg");
+    background-image: url("/assets/images/bg.jpg");
     background-attachment:fixed;
 }
 .modal-open-noscroll {
