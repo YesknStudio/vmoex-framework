@@ -14,7 +14,7 @@
             <li><a href="{{ path('admin_index') }}"><i class="fa fa-dashboard fa-fw"></i> 控制台</a></li>
             <li>
                 <a href="#"><i class="fa fa-file-text fa-fw"></i> 文章管理<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+                <ul class="nav nav-second-level collapse">
                     <li><a href="{{ path('admin_list', {entity: 'post'}) }}"> 文章列表</a></li>
                     <li><a href="{{ path('admin_list', {entity: 'tag'}) }}"> 标签列表</a></li>
                     <li><a href="{{ path('admin_list', {entity: 'category'}) }}"> 分类列表</a></li>
@@ -53,7 +53,7 @@
             </li>
             <li>
                 <a href="#"><i class="fa fa-gear fa-fw"></i> 网站管理<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+                <ul class="nav nav-second-level collapse">
                     <li><a href="{{ path('admin_manage_basic') }}">基本管理</a></li>
                     <li><a href="{{ path('admin_options_general', {optionGroup: 'girl'}) }}">看板娘</a></li>
                     <li><a href="{{ path('admin_options_general', {optionGroup: 'maintain'}) }}">维护模式</a></li>
