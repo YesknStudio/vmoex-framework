@@ -16,6 +16,6 @@ class ResponseListener
     {
         $response = $event->getResponse();
 
-        $response->headers->set('X-PJAX-URL', $event->getRequest()->getPathInfo());
+        $response->headers->set('X-PJAX-URL', $event->getRequest()->getRequestUri());
     }
 }
