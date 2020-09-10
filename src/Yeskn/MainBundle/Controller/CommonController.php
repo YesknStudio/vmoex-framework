@@ -11,7 +11,6 @@ namespace Yeskn\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class CommonController extends Controller
@@ -45,11 +44,13 @@ class CommonController extends Controller
 
         $tabObj = null;
 
-        if ($tab and $tab != 'all' and $tab != 'hot') {
+        if ($tab && !in_array($tab, ['hot', 'all'])) {
             $tabObj = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
                 ->findOneBy(['alias' => $tab]);
             if (empty($tabObj)) {
-                return new JsonResponse('tab not exists');
+                // wrong error message
+                $this->addFlash('error', '嘤嘤嘤，板块不存在呢~');
+                return $this->redirectToRoute('homepage');
             }
         }
 
@@ -72,9 +73,10 @@ class CommonController extends Controller
                     ->getQuery()
                     ->getArrayResult();
 
-                $subIds = array_column($subItems, 'id') + [$tabObj->getId()];
+                $subIds = array_column($subItems, 'id');
+                array_push($subIds, $tabObj->getId());
 
-                $countQuery->orWhere($countQuery->expr()->in('a.tab', $subIds));
+                $countQuery->andWhere($countQuery->expr()->in('a.tab', $subIds));
             } else {
                 $countQuery->andWhere('a.tab = :tab')->setParameter('tab', $tab);
             }
@@ -85,7 +87,7 @@ class CommonController extends Controller
         $allTabs = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
             ->findBy(['level' => 1]);
 
-        $pageData['allPage'] = ceil($count/$pagesize);
+        $pageData['allPage'] = ceil($count / $pagesize);
         $pageData['currentPage'] = $page;
 
         $params = [

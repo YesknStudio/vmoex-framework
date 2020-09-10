@@ -104,10 +104,7 @@
 
                     {% if p == pageData.currentPage %}
                         <li class="active"><a href="javascript:">{{ p }}</a></li>
-                    {% endif %}
-
-
-                    {% if p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage+2 %}
+                    {% else if p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage+2 %}
                         <li><a href="{{ path(route, {'page':p, tab:tab}) }}" data-pjax>{{ p }}</a></li>
                     {% endif %}
 
