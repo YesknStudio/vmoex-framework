@@ -11,7 +11,7 @@ function render(template, parameters) {
 
 function error(msg) {
     bootoast({
-        message:msg,
+        message: msg,
         type: 'danger',
         position: 'top-center',
         icon: undefined,

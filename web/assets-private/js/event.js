@@ -49,13 +49,13 @@ $(document).on('click', '.thumb-up', function () {
             cid: $this.attr('data-cid')
         },
         success: function (data) {
-            if (data.ret) {
+            if (data.status) {
                 var count = $this.find('.thumb-count').text();
                 if (count === window.Yeskn.trans.thumbup) {
                     count = 0;
                 }
                 count = parseInt(count ? count : 0);
-                var res = data.info ? count+1 : count-1;
+                var res = data.detail.info ? count + 1 : count - 1;
                 $this.find('.thumb-count').text(res);
 
                 if (data.info) {
@@ -64,7 +64,7 @@ $(document).on('click', '.thumb-up', function () {
                     $this.find('i.fa').removeClass('fa-thumbs-up').addClass('fa-thumbs-o-up').removeClass('text-success');
                 }
             } else {
-                error(data.msg);
+                error(data.message);
             }
         }
     })
