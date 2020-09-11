@@ -54,35 +54,8 @@ class CommonController extends Controller
             }
         }
 
-        $posts = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
-            ->getIndexList($tabObj, $sort, $pagesize, $pagesize*($page-1));
-
-        $countQuery = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
-            ->createQueryBuilder('a')
-            ->select('COUNT(a)')
-            ->where('a.isDeleted = false');
-
-        if (!empty($tabObj)) {
-            if ($tabObj->getLevel() == 1) {
-                $subItems = $this->get('doctrine.orm.entity_manager')->getRepository('YesknMainBundle:Tab')
-                    ->createQueryBuilder('t')
-                    ->select('t.id')
-                    ->where('t.parent = :parent')
-                    ->andWhere('t.level = 2')
-                    ->setParameter('parent', $tab)
-                    ->getQuery()
-                    ->getArrayResult();
-
-                $subIds = array_column($subItems, 'id');
-                array_push($subIds, $tabObj->getId());
-
-                $countQuery->andWhere($countQuery->expr()->in('a.tab', $subIds));
-            } else {
-                $countQuery->andWhere('a.tab = :tab')->setParameter('tab', $tab);
-            }
-        }
-
-        $count = $countQuery->getQuery()->getSingleScalarResult();
+        list($count, $posts) = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
+            ->getIndexList($tabObj, $sort, [$page, $pagesize]);
 
         $allTabs = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
             ->findBy(['level' => 1]);
