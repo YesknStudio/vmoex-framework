@@ -27,7 +27,6 @@ class PostRepository extends EntityRepository
     public function getIndexList($tab, $sort, array $page)
     {
         list($pageNo, $pageSize) = $page;
-        list($sort, $order) = $sort;
 
         $cursor =  $pageSize * ($pageNo - 1);
 
@@ -35,11 +34,13 @@ class PostRepository extends EntityRepository
 
         $total = $qb->select('count(p)')->getQuery()->getSingleScalarResult();
 
-        $qb->select('p')
-            ->orderBy('p.isTop', 'desc')
-            ->addOrderBy('p.' . $sort,$order)
-            ->setFirstResult($cursor)
-            ->setMaxResults($pageSize);
+        $qb->select('p')->orderBy('p.isTop', 'desc');
+
+        foreach ($sort as $key => $order) {
+            $qb->add('p.' . $key, $order);
+        }
+
+        $qb->setFirstResult($cursor)->setMaxResults($pageSize);
 
         return [$total, $qb->getQuery()->getResult()];
     }
