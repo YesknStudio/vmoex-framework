@@ -79,6 +79,9 @@ class AbstractController extends Controller
         /** @var Request $request */
         $request = $this->get('request_stack')->getCurrentRequest();
 
-        return $this->redirect($request->headers->get('referer'));
+        $referer = $request->headers->get('referer');
+        $url = $referer ? $referer : $this->generateUrl('homepage');
+
+        return $this->redirect($url);
     }
 }
