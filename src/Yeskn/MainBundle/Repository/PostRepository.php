@@ -68,10 +68,11 @@ class PostRepository extends EntityRepository
                 $tabCond->add($qb->expr()->in('p.tab', $subQuery));
             }
 
-            $qb->andWhere($tabCond);
+            $qb->andWhere($tabCond)
+                ->setParameter('parent', $tab);
         }
 
-        return $qb->setParameter('parent', $tab);
+        return $qb;
     }
 
     /**
