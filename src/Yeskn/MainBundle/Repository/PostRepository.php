@@ -67,10 +67,10 @@ class PostRepository extends EntityRepository
                     ->andWhere('t.level = 2')
                     ->getDQL();
                 $tabCond->add($qb->expr()->in('p.tab', $subQuery));
+                $qb->setParameter('parent', $tab);
             }
 
-            $qb->andWhere($tabCond)
-                ->setParameter('parent', $tab);
+            $qb->andWhere($tabCond);
         }
 
         return $qb;
