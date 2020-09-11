@@ -9,11 +9,11 @@
 
 namespace Yeskn\MainBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
+use Yeskn\Support\AbstractController;
 
-class CommonController extends Controller
+class CommonController extends AbstractController
 {
     public function homeListAction(Request $request)
     {
@@ -48,9 +48,7 @@ class CommonController extends Controller
             $tabObj = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
                 ->findOneBy(['alias' => $tab]);
             if (empty($tabObj)) {
-                // wrong error message
-                $this->addFlash('error', '嘤嘤嘤，板块不存在呢~');
-                return $this->redirectToRoute('homepage');
+                return $this->errorResponse('嘤嘤嘤，板块不存在呢~');
             }
         }
 
