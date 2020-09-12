@@ -10,7 +10,6 @@
 namespace Yeskn\MainBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Yeskn\MainBundle\Entity\Post;
 use Yeskn\MainBundle\Entity\Tab;
@@ -37,7 +36,7 @@ class PostRepository extends EntityRepository
         $qb->select('p')->orderBy('p.isTop', 'desc');
 
         foreach ($sort as $key => $order) {
-            $qb->add('p.' . $key, $order);
+            $qb->addOrderBy('p.' . $key, $order);
         }
 
         $qb->setFirstResult($cursor)->setMaxResults($pageSize);
