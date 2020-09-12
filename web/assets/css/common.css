@@ -160,8 +160,6 @@ article.main{
     margin: 10px;
 }
 .tab-header .tab-avatar {
-    float: none;
-    display: table-cell;
     padding: 10px;
 }
 .tab-header .tab-avatar img {
@@ -169,9 +167,8 @@ article.main{
     height: 72px;
 }
 .tab-header .tab-info {
-    float: none;
-    display: table-cell;
-    vertical-align: middle;
+    margin-left: -30px;
+    padding: 10px 10px 10px 0;
 }
 article div.item-title {
     font-size: 16px;
