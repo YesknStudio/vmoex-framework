@@ -43,5 +43,9 @@ class SearchPostType extends DefaultSearchType
                 '草稿' => 'draft'
             ]
         ]);
+        $builder->add('tabName', SearchType::class, [
+            'label' => '板块',
+            'required' => false
+        ]);
     }
 }

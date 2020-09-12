@@ -12,7 +12,7 @@ namespace Yeskn\AdminBundle\QueryBuilder;
 class PostQueryBuilder extends DefaultQueryBuilder
 {
     protected $reservedKeys = [
-        'title', 'author', 'createdAt'
+        'title', 'author', 'createdAt', 'tabName'
     ];
 
     public function reservedQuery(array $params)
@@ -33,6 +33,12 @@ class PostQueryBuilder extends DefaultQueryBuilder
                 ->andWhere('p.createdAt >= :createdAt0 and p.createdAt <= :createdAt1')
                 ->setParameter('createdAt0', $params['createdAt'][0])
                 ->setParameter('createdAt1', $params['createdAt'][1]);
+        }
+
+        if (!empty($params['tabName'])) {
+            $this->queryBuilder->leftJoin('p.tab', 't')
+                ->andWhere('t.name LIKE :tab')
+                ->setParameter('tab', "%{$params['tabName']}%");
         }
 
         return $this->queryBuilder;

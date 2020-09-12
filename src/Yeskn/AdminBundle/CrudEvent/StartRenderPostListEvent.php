@@ -45,6 +45,7 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
                 $this->linkColumn($post->getAuthor()->getNickname(), 'member_home', [
                     'username' => $post->getAuthor()->getUsername()
                 ]),
+                $this->linkColumn($post->getTab()->getName(), 'post_list', ['tab' => $post->getTab()->getAlias()]),
                 $this->globalValue->ago($post->getCreatedAt()),
                 $this->globalValue->ago($post->getUpdatedAt()),
                 $post->getViews(),
@@ -53,7 +54,7 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
         }
 
         return [
-            'columns' => ['ID', '标题', '作者', '发布日期', '更新日期', '点击', '状态'],
+            'columns' => ['ID', '标题', '作者', '板块', '发布日期', '更新日期', '点击', '状态'],
             'column_width' => [0 => '5', 1 => 25, 6 => 8, 7 => 20],
             'list' => $result,
             'ids' => $ids,
