@@ -75,6 +75,7 @@ class UserController extends AbstractController
             'user' => $user,
             'online' => $online,
             'userActive' => $userActive,
+            'canEditNicknameDays' => $user->getAllowEditNicknameDays(),
             'notice_count' => $noticeCount,
             'message_count' => $messageCount
         ];
@@ -247,7 +248,11 @@ class UserController extends AbstractController
             $image->resize(100, 100)->save();
         }
 
-        $user->setNickname($request->get('nickname'));
+        if ($user->getNickname() != $request->get('nickname') && $user->getAllowEditNicknameDays() === 0) {
+            $user->setNickname($request->get('nickname'));
+            $user->setChangedNicknameAt(new \DateTime());
+        }
+
         $user->setRemark($request->get('remark'));
 
         if (!empty($avatarPath)) {

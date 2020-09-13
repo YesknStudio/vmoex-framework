@@ -33,7 +33,12 @@
                                             <div class="form-group">
                                                 <label for="nickname" class="col-sm-2 control-label">{{ '昵称'|trans }}</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" value="{{ app.user.nickname }}" class="form-control" id="nickname" name="nickname" placeholder="">
+                                                    <input type="text" value="{{ app.user.nickname }}" class="form-control" id="nickname"
+                                                           name="nickname"
+                                                           {{ canEditNicknameDays ? 'disabled' : '' }}>
+                                                    <span id="helpBlock" class="help-block">
+                                                        {{ canEditNicknameDays ? (canEditNicknameDays ~ '天后可修改昵称。') : canEditNicknameDays ~ '昵称每180天可修改一次，请谨慎修改。' }}
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">

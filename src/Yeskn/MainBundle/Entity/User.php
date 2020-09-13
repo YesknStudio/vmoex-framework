@@ -108,6 +108,12 @@ class User implements UserInterface
 
     /**
      * @var \DateTime
+     * @ORM\Column(name="changed_nickname_at", type="datetime", nullable=true)
+     */
+    private $changedNicknameAt;
+
+    /**
+     * @var \DateTime
      *
      * @ORM\Column(name="register_at", type="datetime")
      */
@@ -737,5 +743,33 @@ class User implements UserInterface
     public function setIsEmailVerified($isEmailVerified)
     {
         $this->isEmailVerified = $isEmailVerified;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getChangedNicknameAt(): ?\DateTime
+    {
+        return $this->changedNicknameAt;
+    }
+
+    /**
+     * @param \DateTime $changedNicknameAt
+     */
+    public function setChangedNicknameAt(\DateTime $changedNicknameAt): void
+    {
+        $this->changedNicknameAt = $changedNicknameAt;
+    }
+
+    public function getAllowEditNicknameDays()
+    {
+        if ($this->getChangedNicknameAt()) {
+            $dateDiff = $this->getChangedNicknameAt()->diff(new \DateTime());
+            if ($dateDiff && $dateDiff->invert === 0 && $dateDiff->days < 180) {
+                return 180 - $dateDiff->days;
+            }
+        }
+
+        return 0;
     }
 }
